@@ -1,0 +1,8 @@
+field,field_label,applicable_judgments,directional_judgments,harness_preferences,baseline_preferences,ties,adjusted_probability,probability_ci_low,probability_ci_high,converged
+current_meds,Active anticancer medications,160,135,132,3,25,0.9769927343806869,0.9105804562007213,0.9943845111297621,True
+stage,Stage,160,76,69,7,84,0.8941663249150463,0.7762638713088454,0.9536475914649117,True
+response,Treatment response,160,74,62,12,86,0.8168032065930583,0.7013346255369781,0.8943545073978298,True
+distant_met,Distant metastasis,160,28,23,5,132,0.7845841305200322,0.5504383525810363,0.9155004593386645,True
+genetic_results,Completed molecular or genetic results,160,44,34,10,116,0.7749168676268511,0.611391822115632,0.8828195160645329,True
+metastasis,Regional or overall metastasis,160,100,74,26,60,0.743959214193303,0.6587396843079764,0.8139094990458916,True
+type_receptor,Breast cancer type and receptors,80,38,24,14,42,0.6244111984297313,0.3857122372668263,0.8148745206852133,True

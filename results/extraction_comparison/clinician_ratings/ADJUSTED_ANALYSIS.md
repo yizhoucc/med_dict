@@ -23,6 +23,20 @@ The overall model was refitted four times after excluding one physician at a tim
 | Physician 03 | 594 | 477 | 117 | 40 | 80.01% (75.72%-83.70%) | +30.01 (+25.72 to +33.70) | 4.002 (3.119-5.136) | 1.2e-27 | Yes |
 | Physician 04 | 653 | 546 | 107 | 40 | 83.53% (79.37%-87.00%) | +33.53 (+29.37 to +37.00) | 5.073 (3.847-6.690) | 1.22e-30 | Yes |
 
+## Exploratory core-field model
+
+One joint exploratory GEE used the 495 directional core-field judgments. Field, physician, and cancer type were fixed effects; repeated judgments were clustered by note with an exchangeable working correlation. Field-specific probabilities were standardized over the physician and cancer distribution observed for that field. The breast type and receptor field applies only to breast-cancer notes. These estimates describe preference among directional judgments, not extraction accuracy. Ties were excluded. No pairwise field tests or multiplicity claims were made.
+
+| Core field | Applicable judgments | Harness | Baseline | Tie | Directional judgments | Adjusted probability (95% CI) |
+|---|---:|---:|---:|---:|---:|---:|
+| Active anticancer medications | 160 | 132 | 3 | 25 | 135 | 97.7% (91.1%-99.4%) |
+| Stage | 160 | 69 | 7 | 84 | 76 | 89.4% (77.6%-95.4%) |
+| Treatment response | 160 | 62 | 12 | 86 | 74 | 81.7% (70.1%-89.4%) |
+| Distant metastasis | 160 | 23 | 5 | 132 | 28 | 78.5% (55.0%-91.6%) |
+| Completed molecular or genetic results | 160 | 34 | 10 | 116 | 44 | 77.5% (61.1%-88.3%) |
+| Regional or overall metastasis | 160 | 74 | 26 | 60 | 100 | 74.4% (65.9%-81.4%) |
+| Breast cancer type and receptors | 80 | 24 | 14 | 42 | 38 | 62.4% (38.6%-81.5%) |
+
 The odds ratio compares the adjusted probability of a harness preference with the probability of a baseline preference among non-tie judgments. It is not an odds ratio for clinical correctness.
 
 ## Descriptive and tie-inclusive effects

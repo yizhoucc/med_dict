@@ -8,19 +8,15 @@
 <marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#D55E00"/></marker>
 </defs>
 <g font-family="Arial, Helvetica, sans-serif" fill="#222222">
-<rect x="20.0" y="20.0" width="795.0" height="900.0" rx="13" fill="#FAFBFC" stroke="#D7DEE3" stroke-width="1.5"/>
+<rect x="20.0" y="20.0" width="740.0" height="900.0" rx="13" fill="#FAFBFC" stroke="#D7DEE3" stroke-width="1.5"/>
 <circle cx="47.0" cy="48.0" r="17" fill="#263C4A"/>
 <text x="47.0" y="55.0" text-anchor="middle" font-size="20" font-weight="700" fill="white">A</text>
-<text x="75.0" y="55.0" text-anchor="start" font-size="21" font-weight="700" fill="#222222">Core-field preference profile</text>
-<rect x="835.0" y="20.0" width="645.0" height="430.0" rx="13" fill="#FAFBFC" stroke="#D7DEE3" stroke-width="1.5"/>
-<circle cx="862.0" cy="48.0" r="17" fill="#263C4A"/>
-<text x="862.0" y="55.0" text-anchor="middle" font-size="20" font-weight="700" fill="white">B</text>
-<text x="890.0" y="55.0" text-anchor="start" font-size="21" font-weight="700" fill="#222222">Adjusted preference probability</text>
-<rect x="835.0" y="470.0" width="645.0" height="450.0" rx="13" fill="#FAFBFC" stroke="#D7DEE3" stroke-width="1.5"/>
-<circle cx="862.0" cy="498.0" r="17" fill="#263C4A"/>
-<text x="862.0" y="505.0" text-anchor="middle" font-size="20" font-weight="700" fill="white">C</text>
-<text x="890.0" y="505.0" text-anchor="start" font-size="21" font-weight="700" fill="#222222">Pooled note-level margins</text>
-<text x="65.0" y="92.0" text-anchor="start" font-size="16" font-weight="400" fill="#5E6870">Fields sorted by normalized harness-minus-baseline margin</text>
+<text x="75.0" y="55.0" text-anchor="start" font-size="21" font-weight="700" fill="#222222">Core-field raw preference distribution</text>
+<rect x="780.0" y="20.0" width="700.0" height="900.0" rx="13" fill="#FAFBFC" stroke="#D7DEE3" stroke-width="1.5"/>
+<circle cx="807.0" cy="48.0" r="17" fill="#263C4A"/>
+<text x="807.0" y="55.0" text-anchor="middle" font-size="20" font-weight="700" fill="white">B</text>
+<text x="835.0" y="55.0" text-anchor="start" font-size="21" font-weight="700" fill="#222222">Core-field adjusted preference probability</text>
+<text x="65.0" y="92.0" text-anchor="start" font-size="16" font-weight="400" fill="#5E6870">Raw preference counts include ties</text>
 <rect x="300.0" y="112.0" width="18" height="13" rx="2" fill="#D55E00"/>
 <text x="325.0" y="124.0" text-anchor="start" font-size="16" font-weight="400" fill="#222222">Baseline</text>
 <rect x="415.0" y="112.0" width="18" height="13" rx="2" fill="#B8B8B8"/>
@@ -29,24 +25,12 @@
 <text x="555.0" y="124.0" text-anchor="start" font-size="16" font-weight="400" fill="#222222">Harness</text>
 <line x1="275.0" y1="145" x2="275.0" y2="795" stroke="#E6E6E6"/>
 <text x="275.0" y="824.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">100%</text>
-<line x1="310.0" y1="145" x2="310.0" y2="795" stroke="#E6E6E6"/>
-<text x="310.0" y="824.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">80%</text>
-<line x1="345.0" y1="145" x2="345.0" y2="795" stroke="#E6E6E6"/>
-<text x="345.0" y="824.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">60%</text>
-<line x1="380.0" y1="145" x2="380.0" y2="795" stroke="#E6E6E6"/>
-<text x="380.0" y="824.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">40%</text>
-<line x1="415.0" y1="145" x2="415.0" y2="795" stroke="#E6E6E6"/>
-<text x="415.0" y="824.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">20%</text>
+<line x1="362.5" y1="145" x2="362.5" y2="795" stroke="#E6E6E6"/>
+<text x="362.5" y="824.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">50%</text>
 <line x1="450.0" y1="145" x2="450.0" y2="795" stroke="#7A858D"/>
 <text x="450.0" y="824.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">0</text>
-<line x1="485.0" y1="145" x2="485.0" y2="795" stroke="#E6E6E6"/>
-<text x="485.0" y="824.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">20%</text>
-<line x1="520.0" y1="145" x2="520.0" y2="795" stroke="#E6E6E6"/>
-<text x="520.0" y="824.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">40%</text>
-<line x1="555.0" y1="145" x2="555.0" y2="795" stroke="#E6E6E6"/>
-<text x="555.0" y="824.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">60%</text>
-<line x1="590.0" y1="145" x2="590.0" y2="795" stroke="#E6E6E6"/>
-<text x="590.0" y="824.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">80%</text>
+<line x1="537.5" y1="145" x2="537.5" y2="795" stroke="#E6E6E6"/>
+<text x="537.5" y="824.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">50%</text>
 <line x1="625.0" y1="145" x2="625.0" y2="795" stroke="#E6E6E6"/>
 <text x="625.0" y="824.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">100%</text>
 <text x="338.0" y="862.0" text-anchor="middle" font-size="16" font-weight="400" fill="#D55E00">Baseline preferred</text>
@@ -75,14 +59,13 @@
 <text x="530.9" y="380.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">62</text>
 <text x="656.0" y="372.0" text-anchor="start" font-size="16" font-weight="400" fill="#222222">62 / 12 / 86</text>
 <text x="656.0" y="393.0" text-anchor="start" font-size="16" font-weight="400" fill="#5E6870">n=160; net +31.2%</text>
-<text x="250.0" y="470.0" text-anchor="end" font-size="16" font-weight="400" fill="#222222">Regional / overall metastasis</text>
-<rect x="388.8" y="443" width="28.4" height="42" fill="#D55E00"/>
-<rect x="417.2" y="443" width="65.6" height="42" fill="#B8B8B8"/>
-<rect x="482.8" y="443" width="80.9" height="42" fill="#0072B2"/>
-<text x="450.0" y="471.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">60</text>
-<text x="523.3" y="471.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">74</text>
-<text x="656.0" y="463.0" text-anchor="start" font-size="16" font-weight="400" fill="#222222">74 / 26 / 60</text>
-<text x="656.0" y="484.0" text-anchor="start" font-size="16" font-weight="400" fill="#5E6870">n=160; net +30.0%</text>
+<text x="250.0" y="470.0" text-anchor="end" font-size="16" font-weight="400" fill="#222222">Distant metastasis</text>
+<rect x="372.3" y="443" width="5.5" height="42" fill="#D55E00"/>
+<rect x="377.8" y="443" width="144.4" height="42" fill="#B8B8B8"/>
+<rect x="522.2" y="443" width="25.2" height="42" fill="#0072B2"/>
+<text x="450.0" y="471.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">132</text>
+<text x="656.0" y="463.0" text-anchor="start" font-size="16" font-weight="400" fill="#222222">23 / 5 / 132</text>
+<text x="656.0" y="484.0" text-anchor="start" font-size="16" font-weight="400" fill="#5E6870">n=160; net +11.2%</text>
 <text x="250.0" y="561.0" text-anchor="end" font-size="16" font-weight="400" fill="#222222">Molecular / genetic results</text>
 <rect x="375.6" y="534" width="10.9" height="42" fill="#D55E00"/>
 <rect x="386.6" y="534" width="126.9" height="42" fill="#B8B8B8"/>
@@ -90,117 +73,78 @@
 <text x="450.0" y="562.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">116</text>
 <text x="656.0" y="554.0" text-anchor="start" font-size="16" font-weight="400" fill="#222222">34 / 10 / 116</text>
 <text x="656.0" y="575.0" text-anchor="start" font-size="16" font-weight="400" fill="#5E6870">n=160; net +15.0%</text>
-<text x="250.0" y="652.0" text-anchor="end" font-size="16" font-weight="400" fill="#222222">Breast type / receptors</text>
-<rect x="373.4" y="625" width="30.6" height="42" fill="#D55E00"/>
-<rect x="404.1" y="625" width="91.9" height="42" fill="#B8B8B8"/>
-<rect x="495.9" y="625" width="52.5" height="42" fill="#0072B2"/>
-<text x="450.0" y="653.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">42</text>
-<text x="522.2" y="653.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">24</text>
-<text x="656.0" y="645.0" text-anchor="start" font-size="16" font-weight="400" fill="#222222">24 / 14 / 42</text>
-<text x="656.0" y="666.0" text-anchor="start" font-size="16" font-weight="400" fill="#5E6870">n=80; net +12.5%</text>
-<text x="250.0" y="743.0" text-anchor="end" font-size="16" font-weight="400" fill="#222222">Distant metastasis</text>
-<rect x="372.3" y="716" width="5.5" height="42" fill="#D55E00"/>
-<rect x="377.8" y="716" width="144.4" height="42" fill="#B8B8B8"/>
-<rect x="522.2" y="716" width="25.2" height="42" fill="#0072B2"/>
-<text x="450.0" y="744.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">132</text>
-<text x="656.0" y="736.0" text-anchor="start" font-size="16" font-weight="400" fill="#222222">23 / 5 / 132</text>
-<text x="656.0" y="757.0" text-anchor="start" font-size="16" font-weight="400" fill="#5E6870">n=160; net +11.2%</text>
-<text x="880.0" y="92.0" text-anchor="start" font-size="16" font-weight="400" fill="#5E6870">P(harness preference | directional judgment)</text>
-<line x1="1032.8" y1="130" x2="1032.8" y2="385" stroke="#59656D" stroke-dasharray="6 5"/>
-<text x="1032.8" y="417.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">50%</text>
-<line x1="1078.3" y1="130" x2="1078.3" y2="385" stroke="#E6E6E6" stroke-dasharray="0"/>
-<text x="1078.3" y="417.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">60%</text>
-<line x1="1123.9" y1="130" x2="1123.9" y2="385" stroke="#E6E6E6" stroke-dasharray="0"/>
-<text x="1123.9" y="417.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">70%</text>
-<line x1="1169.4" y1="130" x2="1169.4" y2="385" stroke="#E6E6E6" stroke-dasharray="0"/>
-<text x="1169.4" y="417.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">80%</text>
-<line x1="1215.0" y1="130" x2="1215.0" y2="385" stroke="#E6E6E6" stroke-dasharray="0"/>
-<text x="1215.0" y="417.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">90%</text>
-<text x="1355.0" y="135.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">Adjusted estimate</text>
-<text x="992.0" y="186.0" text-anchor="end" font-size="16" font-weight="700" fill="#222222">Overall</text>
-<line x1="1150.1" y1="180" x2="1186.0" y2="180" stroke="#0072B2" stroke-width="4"/>
-<line x1="1150.1" y1="171" x2="1150.1" y2="189" stroke="#0072B2" stroke-width="2"/>
-<line x1="1186.0" y1="171" x2="1186.0" y2="189" stroke="#0072B2" stroke-width="2"/>
-<circle cx="1169.4" cy="180" r="8" fill="#0072B2" stroke="white" stroke-width="2"/>
-<text x="1355.0" y="167.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">79.98% (75.75%-83.63%)</text>
-<text x="1355.0" y="191.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">Δ50% +29.98 pp</text>
-<text x="1355.0" y="214.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">(+25.75 to +33.63)</text>
-<text x="992.0" y="276.0" text-anchor="end" font-size="16" font-weight="400" fill="#222222">Breast cancer</text>
-<line x1="1151.3" y1="270" x2="1197.7" y2="270" stroke="#0072B2" stroke-width="4"/>
-<line x1="1151.3" y1="261" x2="1151.3" y2="279" stroke="#0072B2" stroke-width="2"/>
-<line x1="1197.7" y1="261" x2="1197.7" y2="279" stroke="#0072B2" stroke-width="2"/>
-<circle cx="1177.0" cy="270" r="8" fill="#0072B2" stroke="white" stroke-width="2"/>
-<text x="1355.0" y="257.0" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">81.66% (76.02%-86.21%)</text>
-<text x="1355.0" y="281.0" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">Δ50% +31.66 pp</text>
-<text x="1355.0" y="304.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">(+26.02 to +36.21)</text>
-<text x="992.0" y="366.0" text-anchor="end" font-size="16" font-weight="400" fill="#222222">PDAC</text>
-<line x1="1130.6" y1="360" x2="1185.9" y2="360" stroke="#0072B2" stroke-width="4"/>
-<line x1="1130.6" y1="351" x2="1130.6" y2="369" stroke="#0072B2" stroke-width="2"/>
-<line x1="1185.9" y1="351" x2="1185.9" y2="369" stroke="#0072B2" stroke-width="2"/>
-<circle cx="1161.0" cy="360" r="8" fill="#0072B2" stroke="white" stroke-width="2"/>
-<text x="1355.0" y="347.0" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">78.15% (71.47%-83.62%)</text>
-<text x="1355.0" y="371.0" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">Δ50% +28.15 pp</text>
-<text x="1355.0" y="394.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">(+21.47 to +33.62)</text>
-<text x="1014.0" y="162.0" text-anchor="start" font-size="16" font-weight="400" fill="#5E6870">Equal</text>
-<text x="880.0" y="542.0" text-anchor="start" font-size="16" font-weight="400" fill="#5E6870">Each dot is one note after pooling four physicians</text>
-<line x1="1000.0" y1="600" x2="1000.0" y2="855" stroke="#E6E6E6" stroke-dasharray="0"/>
-<text x="1000.0" y="883.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">-20%</text>
-<line x1="1087.0" y1="600" x2="1087.0" y2="855" stroke="#59656D" stroke-dasharray="6 5"/>
-<text x="1087.0" y="883.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">0%</text>
-<line x1="1174.0" y1="600" x2="1174.0" y2="855" stroke="#E6E6E6" stroke-dasharray="0"/>
-<text x="1174.0" y="883.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">20%</text>
-<line x1="1261.0" y1="600" x2="1261.0" y2="855" stroke="#E6E6E6" stroke-dasharray="0"/>
-<text x="1261.0" y="883.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">40%</text>
-<line x1="1348.0" y1="600" x2="1348.0" y2="855" stroke="#E6E6E6" stroke-dasharray="0"/>
-<text x="1348.0" y="883.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">60%</text>
-<line x1="1435.0" y1="600" x2="1435.0" y2="855" stroke="#E6E6E6" stroke-dasharray="0"/>
-<text x="1435.0" y="883.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">80%</text>
-<text x="978.0" y="670.0" text-anchor="end" font-size="16" font-weight="700" fill="#222222">Breast</text>
-<text x="1435.0" y="622.0" text-anchor="end" font-size="16" font-weight="700" fill="#0072B2">20/20 positive</text>
-<line x1="1000" y1="665" x2="1435" y2="665" stroke="#AEB7BD" stroke-width="2"/>
-<circle cx="1118.1" cy="665.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1125.8" cy="665.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1133.6" cy="665.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1141.4" cy="665.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1149.1" cy="665.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1164.7" cy="665.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1172.4" cy="653.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1172.4" cy="665.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1172.4" cy="677.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1180.2" cy="665.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1188.0" cy="659.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1188.0" cy="671.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1211.3" cy="665.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1234.6" cy="653.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1234.6" cy="665.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1234.6" cy="677.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1250.1" cy="665.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1273.4" cy="665.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1289.0" cy="665.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1304.5" cy="665.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<text x="978.0" y="795.0" text-anchor="end" font-size="16" font-weight="700" fill="#222222">PDAC</text>
-<text x="1435.0" y="747.0" text-anchor="end" font-size="16" font-weight="700" fill="#0072B2">19/20 positive; 1 negative</text>
-<line x1="1000" y1="790" x2="1435" y2="790" stroke="#AEB7BD" stroke-width="2"/>
-<circle cx="1078.6" cy="790.0" r="7" fill="#D55E00" stroke="white" stroke-width="1.5"/>
-<circle cx="1095.4" cy="790.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1128.8" cy="784.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1128.8" cy="796.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1145.6" cy="790.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1153.9" cy="790.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1170.7" cy="784.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1170.7" cy="796.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1179.0" cy="784.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1179.0" cy="796.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1187.4" cy="790.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1195.8" cy="784.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1195.8" cy="796.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1212.5" cy="790.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1220.8" cy="790.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1229.2" cy="790.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1245.9" cy="790.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1271.0" cy="790.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1279.4" cy="790.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<circle cx="1321.2" cy="790.0" r="7" fill="#0072B2" stroke="white" stroke-width="1.5"/>
-<text x="1218.0" y="912.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">Normalized note margin</text>
+<text x="250.0" y="652.0" text-anchor="end" font-size="16" font-weight="400" fill="#222222">Regional / overall metastasis</text>
+<rect x="388.8" y="625" width="28.4" height="42" fill="#D55E00"/>
+<rect x="417.2" y="625" width="65.6" height="42" fill="#B8B8B8"/>
+<rect x="482.8" y="625" width="80.9" height="42" fill="#0072B2"/>
+<text x="450.0" y="653.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">60</text>
+<text x="523.3" y="653.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">74</text>
+<text x="656.0" y="645.0" text-anchor="start" font-size="16" font-weight="400" fill="#222222">74 / 26 / 60</text>
+<text x="656.0" y="666.0" text-anchor="start" font-size="16" font-weight="400" fill="#5E6870">n=160; net +30.0%</text>
+<text x="250.0" y="743.0" text-anchor="end" font-size="16" font-weight="400" fill="#222222">Breast type / receptors</text>
+<rect x="373.4" y="716" width="30.6" height="42" fill="#D55E00"/>
+<rect x="404.1" y="716" width="91.9" height="42" fill="#B8B8B8"/>
+<rect x="495.9" y="716" width="52.5" height="42" fill="#0072B2"/>
+<text x="450.0" y="744.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">42</text>
+<text x="522.2" y="744.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">24</text>
+<text x="656.0" y="736.0" text-anchor="start" font-size="16" font-weight="400" fill="#222222">24 / 14 / 42</text>
+<text x="656.0" y="757.0" text-anchor="start" font-size="16" font-weight="400" fill="#5E6870">n=80; net +12.5%</text>
+<text x="825.0" y="92.0" text-anchor="start" font-size="16" font-weight="400" fill="#5E6870">P(harness preference | directional judgment)</text>
+<line x1="1080.0" y1="135" x2="1080.0" y2="767" stroke="#E6E6E6" stroke-dasharray="0"/>
+<text x="1080.0" y="797.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">30%</text>
+<line x1="1151.4" y1="135" x2="1151.4" y2="767" stroke="#59656D" stroke-dasharray="6 5"/>
+<text x="1151.4" y="797.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">50%</text>
+<line x1="1222.9" y1="135" x2="1222.9" y2="767" stroke="#E6E6E6" stroke-dasharray="0"/>
+<text x="1222.9" y="797.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">70%</text>
+<line x1="1294.3" y1="135" x2="1294.3" y2="767" stroke="#E6E6E6" stroke-dasharray="0"/>
+<text x="1294.3" y="797.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">90%</text>
+<line x1="1330.0" y1="135" x2="1330.0" y2="767" stroke="#E6E6E6" stroke-dasharray="0"/>
+<text x="1330.0" y="797.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">100%</text>
+<text x="1410.0" y="135.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">Adjusted estimate</text>
+<text x="1062.0" y="191.0" text-anchor="end" font-size="16" font-weight="400" fill="#222222">Active anticancer medications</text>
+<line x1="1298.1" y1="185" x2="1328.0" y2="185" stroke="#0072B2" stroke-width="4"/>
+<line x1="1298.1" y1="176" x2="1298.1" y2="194" stroke="#0072B2" stroke-width="2"/>
+<line x1="1328.0" y1="176" x2="1328.0" y2="194" stroke="#0072B2" stroke-width="2"/>
+<circle cx="1321.8" cy="185" r="8" fill="#0072B2" stroke="white" stroke-width="2"/>
+<text x="1410.0" y="191.0" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">97.7% (91.1%-99.4%)</text>
+<text x="1062.0" y="283.0" text-anchor="end" font-size="16" font-weight="400" fill="#222222">Stage</text>
+<line x1="1250.1" y1="277" x2="1313.4" y2="277" stroke="#0072B2" stroke-width="4"/>
+<line x1="1250.1" y1="268" x2="1250.1" y2="286" stroke="#0072B2" stroke-width="2"/>
+<line x1="1313.4" y1="268" x2="1313.4" y2="286" stroke="#0072B2" stroke-width="2"/>
+<circle cx="1292.2" cy="277" r="8" fill="#0072B2" stroke="white" stroke-width="2"/>
+<text x="1410.0" y="283.0" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">89.4% (77.6%-95.4%)</text>
+<text x="1062.0" y="375.0" text-anchor="end" font-size="16" font-weight="400" fill="#222222">Treatment response</text>
+<line x1="1223.3" y1="369" x2="1292.3" y2="369" stroke="#0072B2" stroke-width="4"/>
+<line x1="1223.3" y1="360" x2="1223.3" y2="378" stroke="#0072B2" stroke-width="2"/>
+<line x1="1292.3" y1="360" x2="1292.3" y2="378" stroke="#0072B2" stroke-width="2"/>
+<circle cx="1264.6" cy="369" r="8" fill="#0072B2" stroke="white" stroke-width="2"/>
+<text x="1410.0" y="375.0" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">81.7% (70.1%-89.4%)</text>
+<text x="1062.0" y="467.0" text-anchor="end" font-size="16" font-weight="400" fill="#222222">Distant metastasis</text>
+<line x1="1169.4" y1="461" x2="1299.8" y2="461" stroke="#0072B2" stroke-width="4"/>
+<line x1="1169.4" y1="452" x2="1169.4" y2="470" stroke="#0072B2" stroke-width="2"/>
+<line x1="1299.8" y1="452" x2="1299.8" y2="470" stroke="#0072B2" stroke-width="2"/>
+<circle cx="1253.1" cy="461" r="8" fill="#0072B2" stroke="white" stroke-width="2"/>
+<text x="1410.0" y="467.0" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">78.5% (55.0%-91.6%)</text>
+<text x="1062.0" y="559.0" text-anchor="end" font-size="16" font-weight="400" fill="#222222">Molecular / genetic results</text>
+<line x1="1191.2" y1="553" x2="1288.1" y2="553" stroke="#0072B2" stroke-width="4"/>
+<line x1="1191.2" y1="544" x2="1191.2" y2="562" stroke="#0072B2" stroke-width="2"/>
+<line x1="1288.1" y1="544" x2="1288.1" y2="562" stroke="#0072B2" stroke-width="2"/>
+<circle cx="1249.6" cy="553" r="8" fill="#0072B2" stroke="white" stroke-width="2"/>
+<text x="1410.0" y="559.0" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">77.5% (61.1%-88.3%)</text>
+<text x="1062.0" y="651.0" text-anchor="end" font-size="16" font-weight="400" fill="#222222">Regional / overall metastasis</text>
+<line x1="1208.1" y1="645" x2="1263.5" y2="645" stroke="#0072B2" stroke-width="4"/>
+<line x1="1208.1" y1="636" x2="1208.1" y2="654" stroke="#0072B2" stroke-width="2"/>
+<line x1="1263.5" y1="636" x2="1263.5" y2="654" stroke="#0072B2" stroke-width="2"/>
+<circle cx="1238.6" cy="645" r="8" fill="#0072B2" stroke="white" stroke-width="2"/>
+<text x="1410.0" y="651.0" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">74.4% (65.9%-81.4%)</text>
+<text x="1062.0" y="743.0" text-anchor="end" font-size="16" font-weight="400" fill="#222222">Breast type / receptors</text>
+<line x1="1110.6" y1="737" x2="1263.9" y2="737" stroke="#0072B2" stroke-width="4"/>
+<line x1="1110.6" y1="728" x2="1110.6" y2="746" stroke="#0072B2" stroke-width="2"/>
+<line x1="1263.9" y1="728" x2="1263.9" y2="746" stroke="#0072B2" stroke-width="2"/>
+<circle cx="1195.9" cy="737" r="8" fill="#0072B2" stroke="white" stroke-width="2"/>
+<text x="1410.0" y="743.0" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">62.4% (38.6%-81.5%)</text>
+<text x="1156.4" y="162.0" text-anchor="start" font-size="16" font-weight="400" fill="#5E6870">Equal preference</text>
+<text x="1110.0" y="860.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">Joint exploratory GEE with shared physician and cancer effects</text>
+<text x="1110.0" y="886.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">Ties excluded; preference is not accuracy</text>
 </g>
 </svg>

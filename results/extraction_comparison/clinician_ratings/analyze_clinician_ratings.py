@@ -16,11 +16,13 @@ from openpyxl import load_workbook
 from scipy.special import expit
 from scipy.stats import norm
 from statsmodels.genmod.cov_struct import Exchangeable
+from patsy import build_design_matrices
 
 
 HERE = Path(__file__).resolve().parent
 OUTPUT_CSV = HERE / "adjusted_gee_results.csv"
 LOO_OUTPUT_CSV = HERE / "leave_one_physician_out_gee.csv"
+CORE_FIELD_OUTPUT_CSV = HERE / "core_field_adjusted_gee.csv"
 OUTPUT_MD = HERE / "ADJUSTED_ANALYSIS.md"
 
 RATER_FILES = {
@@ -50,6 +52,16 @@ BREAST_FIELDS = [
     "recent_changes",
 ]
 PDAC_FIELDS = [field for field in BREAST_FIELDS if field != "type_receptor"]
+
+CORE_FIELD_LABELS = {
+    "current_meds": "Active anticancer medications",
+    "stage": "Stage",
+    "response": "Treatment response",
+    "distant_met": "Distant metastasis",
+    "genetic_results": "Completed molecular or genetic results",
+    "metastasis": "Regional or overall metastasis",
+    "type_receptor": "Breast cancer type and receptors",
+}
 
 
 @dataclass(frozen=True)
@@ -106,6 +118,21 @@ class LeaveOnePhysicianOutResult:
     p_value: float
     converged: bool
     iterations: int
+
+
+@dataclass(frozen=True)
+class CoreFieldGeeResult:
+    field: str
+    field_label: str
+    applicable_judgments: int
+    directional_judgments: int
+    harness_preferences: int
+    baseline_preferences: int
+    ties: int
+    adjusted_probability: float
+    probability_ci_low: float
+    probability_ci_high: float
+    converged: bool
 
 
 def read_ratings() -> pd.DataFrame:
@@ -345,6 +372,110 @@ def descriptive_results(ratings: pd.DataFrame) -> DescriptiveResult:
     )
 
 
+def core_field_gee_results(ratings: pd.DataFrame) -> list[CoreFieldGeeResult]:
+    """Fit one exploratory shared-effects GEE and standardize within each field."""
+
+    field_order = list(CORE_FIELD_LABELS)
+    core = ratings[ratings["field"].isin(field_order)].copy()
+    directional = core[core["score"].isin(["A", "B"])].copy()
+    directional["harness_preferred"] = (directional["score"] == "A").astype(int)
+    directional["field"] = pd.Categorical(
+        directional["field"], categories=field_order, ordered=True
+    )
+    if len(core) != 1040 or len(directional) != 495:
+        raise AssertionError(
+            f"Core-field counts changed: {len(core)} applicable and "
+            f"{len(directional)} directional."
+        )
+
+    formula = (
+        "harness_preferred ~ C(field, Sum) + C(evaluator, Sum) + C(cancer, Sum)"
+    )
+    model = smf.gee(
+        formula,
+        groups="cluster",
+        data=directional,
+        family=sm.families.Binomial(),
+        cov_struct=Exchangeable(),
+    )
+    fitted = model.fit(maxiter=200)
+    if not fitted.converged:
+        raise RuntimeError("Joint exploratory core-field GEE did not converge.")
+    if np.linalg.matrix_rank(model.exog) != model.exog.shape[1]:
+        raise AssertionError("Joint exploratory core-field GEE design is rank deficient.")
+
+    coefficients = fitted.params.to_numpy()
+    covariance = fitted.cov_params().to_numpy()
+    design_info = model.data.orig_exog.design_info
+    results: list[CoreFieldGeeResult] = []
+    for field in field_order:
+        observed = directional[directional["field"] == field].copy()
+        design = np.asarray(
+            build_design_matrices([design_info], observed, return_type="dataframe")[0]
+        )
+        probabilities = expit(design @ coefficients)
+        probability = float(probabilities.mean())
+        gradient = (
+            (probabilities * (1 - probabilities))[:, None] * design
+        ).mean(axis=0)
+        logit_gradient = gradient / (probability * (1 - probability))
+        logit_se = float(np.sqrt(logit_gradient @ covariance @ logit_gradient))
+        logit = math.log(probability / (1 - probability))
+        applicable = core[core["field"] == field]
+        results.append(
+            CoreFieldGeeResult(
+                field=field,
+                field_label=CORE_FIELD_LABELS[field],
+                applicable_judgments=len(applicable),
+                directional_judgments=len(observed),
+                harness_preferences=int((applicable["score"] == "A").sum()),
+                baseline_preferences=int((applicable["score"] == "B").sum()),
+                ties=int((applicable["score"] == "TIE").sum()),
+                adjusted_probability=probability,
+                probability_ci_low=float(expit(logit - 1.96 * logit_se)),
+                probability_ci_high=float(expit(logit + 1.96 * logit_se)),
+                converged=bool(fitted.converged),
+            )
+        )
+
+    expected_counts = {
+        "current_meds": (132, 3, 25),
+        "stage": (69, 7, 84),
+        "response": (62, 12, 86),
+        "distant_met": (23, 5, 132),
+        "genetic_results": (34, 10, 116),
+        "metastasis": (74, 26, 60),
+        "type_receptor": (24, 14, 42),
+    }
+    expected_probabilities = {
+        "current_meds": (0.977, 0.911, 0.994),
+        "stage": (0.894, 0.776, 0.954),
+        "response": (0.817, 0.701, 0.894),
+        "distant_met": (0.785, 0.550, 0.916),
+        "genetic_results": (0.775, 0.611, 0.883),
+        "metastasis": (0.744, 0.659, 0.814),
+        "type_receptor": (0.624, 0.386, 0.815),
+    }
+    for result in results:
+        assert (
+            result.harness_preferences,
+            result.baseline_preferences,
+            result.ties,
+        ) == expected_counts[result.field]
+        expected = expected_probabilities[result.field]
+        actual = (
+            result.adjusted_probability,
+            result.probability_ci_low,
+            result.probability_ci_high,
+        )
+        if any(abs(left - right) > 0.0007 for left, right in zip(actual, expected)):
+            raise AssertionError(
+                f"Unexpected standardized estimate for {result.field}: "
+                f"{actual}, expected approximately {expected}."
+            )
+    return results
+
+
 def two_sided_sign_p(positive: int, negative: int) -> float:
     total = positive + negative
     tail = min(positive, negative)
@@ -405,6 +536,7 @@ def write_results(
     descriptive: DescriptiveResult,
     sign_results: list[dict[str, object]],
     loo_results: list[LeaveOnePhysicianOutResult],
+    core_field_results: list[CoreFieldGeeResult],
 ) -> None:
     with OUTPUT_CSV.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(
@@ -424,6 +556,16 @@ def write_results(
         )
         writer.writeheader()
         for result in loo_results:
+            writer.writerow(result.__dict__)
+
+    with CORE_FIELD_OUTPUT_CSV.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=list(CoreFieldGeeResult.__annotations__),
+            lineterminator="\n",
+        )
+        writer.writeheader()
+        for result in core_field_results:
             writer.writerow(result.__dict__)
 
     lines = [
@@ -478,6 +620,26 @@ def write_results(
     lines.extend(
         [
             "",
+            "## Exploratory core-field model",
+            "",
+            "One joint exploratory GEE used the 495 directional core-field judgments. Field, physician, and cancer type were fixed effects; repeated judgments were clustered by note with an exchangeable working correlation. Field-specific probabilities were standardized over the physician and cancer distribution observed for that field. The breast type and receptor field applies only to breast-cancer notes. These estimates describe preference among directional judgments, not extraction accuracy. Ties were excluded. No pairwise field tests or multiplicity claims were made.",
+            "",
+            "| Core field | Applicable judgments | Harness | Baseline | Tie | Directional judgments | Adjusted probability (95% CI) |",
+            "|---|---:|---:|---:|---:|---:|---:|",
+        ]
+    )
+    for result in core_field_results:
+        lines.append(
+            f"| {result.field_label} | {result.applicable_judgments} | "
+            f"{result.harness_preferences} | {result.baseline_preferences} | "
+            f"{result.ties} | {result.directional_judgments} | "
+            f"{result.adjusted_probability:.1%} "
+            f"({result.probability_ci_low:.1%}-{result.probability_ci_high:.1%}) |"
+        )
+
+    lines.extend(
+        [
+            "",
             "The odds ratio compares the adjusted probability of a harness preference with the probability of a baseline preference among non-tie judgments. It is not an odds ratio for clinical correctness.",
             "",
             "## Descriptive and tie-inclusive effects",
@@ -516,13 +678,16 @@ def main() -> None:
     directional = ratings[ratings["score"].isin(["A", "B"])].copy()
     descriptive = descriptive_results(ratings)
     loo_results = leave_one_physician_out_results(ratings)
+    core_field_results = core_field_gee_results(ratings)
     gee_results = [
         fit_gee("Overall", directional),
         fit_gee("Breast cancer", directional[directional["cancer"] == "Breast cancer"]),
         fit_gee("PDAC", directional[directional["cancer"] == "PDAC"]),
     ]
     sign_results = note_sign_summaries(ratings)
-    write_results(gee_results, descriptive, sign_results, loo_results)
+    write_results(
+        gee_results, descriptive, sign_results, loo_results, core_field_results
+    )
     for result in gee_results:
         print(
             f"{result.scope}: adjusted probability {result.adjusted_probability:.2%} "
@@ -548,8 +713,14 @@ def main() -> None:
             f"({result.ci_low:.3f}-{result.ci_high:.3f}), "
             f"p={result.p_value:.3g}, converged={result.converged}"
         )
+    for result in core_field_results:
+        print(
+            f"{result.field_label}: {result.adjusted_probability:.1%} "
+            f"({result.probability_ci_low:.1%}-{result.probability_ci_high:.1%})"
+        )
     print(
-        f"Wrote {OUTPUT_CSV.name}, {LOO_OUTPUT_CSV.name}, and {OUTPUT_MD.name}"
+        f"Wrote {OUTPUT_CSV.name}, {LOO_OUTPUT_CSV.name}, "
+        f"{CORE_FIELD_OUTPUT_CSV.name}, and {OUTPUT_MD.name}"
     )
 
 

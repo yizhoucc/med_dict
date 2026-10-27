@@ -1,1327 +1,546 @@
 #!/usr/bin/env python3
-"""Render WORKSHOP_PAPER_DRAFT.md as a self-contained, readable HTML page.
+"""Build the English-only physician-authored manuscript HTML (version 1.0).
 
-Run from the repository root:
-    python3 render_workshop_draft.py
-
-The renderer uses the locally installed CommonMark ``cmark`` command, adds GFM-like
-table handling, and embeds available draft SVG plots as data URIs. No network
-access is required.
+The canonical Word extraction is the sole prose source. Technical tables,
+figures, captions, navigation, and supplementary analyses are inserted around
+the physician blocks and are explicitly marked with data-origin attributes.
 """
 
 from __future__ import annotations
 
 import base64
+import csv
 import html
+import importlib.util
+import json
 import re
-import shutil
 import subprocess
-from collections import Counter
+import sys
 from html.parser import HTMLParser
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent
-SOURCE = ROOT / "WORKSHOP_PAPER_DRAFT.md"
-OUTPUT = ROOT / "WORKSHOP_PAPER_DRAFT.html"
-FIGURE_DIR = ROOT / "results/extraction_comparison/clinician_ratings/draft_figures"
+SOURCE_DOCX = ROOT / "manuscript/doctor_drafts/202601023_Manuscript_JAMA.docx"
+CANONICAL_JSON = ROOT / "manuscript/doctor_drafts/202601023_Manuscript_JAMA.canonical.json"
+EXTRACTOR = ROOT / "manuscript/doctor_drafts/extract_physician_source.py"
+SOURCE_MD = ROOT / "WORKSHOP_PAPER_DRAFT.md"
+OUTPUT_HTML = ROOT / "WORKSHOP_PAPER_DRAFT.html"
+RATINGS_DIR = ROOT / "results/extraction_comparison/clinician_ratings"
+FIGURE_DIR = RATINGS_DIR / "draft_figures"
+EXPECTED_DOCX_SHA256 = "6a1ffc6809e66ad3861284274bdf001d110b4997bbdb053cdf666d4ef27e7066"
+EXPECTED_VISIBLE_BLOCK_SHA256 = "5adf3d6434992babecc631e584ff5ba925983bd5036a28995e90b48474c577e3"
 
-FIGURES = {
-    "1": (
-        FIGURE_DIR / "figure1_development_pathway_rough.svg",
-        "Physician-guided development, model-assisted adaptation, and extraction evaluation",
-    ),
-    "2": (FIGURE_DIR / "figure2_evaluator_distribution_rough.svg", "Physician preference by evaluation"),
-    "3": (
-        FIGURE_DIR / "figure3_interrater_matrix_rough.svg",
-        "Pairwise physician agreement in breast and pancreatic cancer",
-    ),
-    "4": (
-        FIGURE_DIR / "figure4_effect_profile.svg",
-        "Effect profile across fields, cancers, and notes",
-    ),
-    "5": (
-        FIGURE_DIR / "figure5_staged_ablation.svg",
-        "Blinded staged technical ablation overall and by cancer",
-    ),
-    "6": (
-        FIGURE_DIR / "figure6_clinical_handoff.svg",
-        "Conceptual physician-model complementarity across extraction tasks",
-    ),
+MAIN_FIGURES = {
+    "1": FIGURE_DIR / "figure1_development_pathway_rough.svg",
+    "2": FIGURE_DIR / "figure2_evaluator_distribution_rough.svg",
+    "3": FIGURE_DIR / "figure3_interrater_matrix_rough.svg",
+    "4": FIGURE_DIR / "figure4_effect_profile.svg",
+}
+SUPPLEMENTARY_FIGURES = {
+    "S1": FIGURE_DIR / "supplementary_figure_s1_note_margins.svg",
+    "S2": FIGURE_DIR / "supplementary_figure_s2_staged_ablation.svg",
 }
 
-SUPPLEMENTARY_FIGURES = {
-    "S1": (
-        FIGURE_DIR / "supplementary_figure_s1_note_margins.svg",
-        "Detailed note-level preference margins pooled across four physicians",
-    ),
+SECTION_HEADINGS = {
+    "P002": ("introduction", "Introduction"),
+    "P014": ("methods", "Methods"),
+    "P084": ("results", "Results"),
+    "P107": ("discussion", "Discussion"),
+}
+SUBHEADINGS = {
+    "Study Design",
+    "Dataset",
+    "Baseline model and model development",
+    "Inference Harness",
+    "Clinician-in-the-loop breast-cancer refinement",
+    "Model-assist pancreatic-cancer refinement",
+    "Clinical evaluation data collection and scoring rubric",
+    "Staged Technical ablation",
+    "Statistical analysis",
+    "Performance across Clinical Extraction Fields",
+}
+PLACEHOLDER_TEXTS = {
+    "Table 1",
+    "Table 2",
+    "Table 3 ",
+    "Figure 2 ",
+    "Figure 3",
+    "Figure 4 删掉4b,4c放在Supplement.",
 }
 
 
 CSS = r"""
-:root {
-  --ink: #17212b;
-  --muted: #5f6b76;
-  --navy: #123b5d;
-  --blue: #2b8cbe;
-  --blue-soft: #eaf5fb;
-  --orange: #d95f0e;
-  --paper: #ffffff;
-  --page: #edf1f5;
-  --line: #d8e0e7;
-  --violet: #6750a4;
-  --violet-soft: #f4f0fb;
-  --warning: #8a5a00;
-  --warning-soft: #fff7df;
-  --confirm: #a23b3b;
-  --confirm-soft: #fff1f0;
-  --suggest: #8a5a00;
-  --suggest-soft: #fff8e6;
-  --verified: #24613b;
-  --verified-soft: #edf8f0;
-}
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  margin: 0;
-  color: var(--ink);
-  background: var(--page);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  line-height: 1.62;
-}
-.layout {
-  display: grid;
-  grid-template-columns: 270px minmax(0, 920px);
-  gap: 28px;
-  width: min(1240px, calc(100% - 36px));
-  margin: 24px auto 70px;
-  align-items: start;
-}
-.review-checklist {
-  margin: 20px 0 30px;
-  padding: 18px 20px;
-  border: 1px solid #d7c8ee;
-  border-left: 5px solid var(--violet);
-  border-radius: 10px;
-  background: var(--violet-soft);
-}
-.review-checklist h2 {
-  margin: 0 0 10px;
-  color: #4f3b7d;
-  font-size: 1.08rem;
-}
-.review-checklist ul { margin: 0; padding-left: 1.4rem; }
-.review-checklist li { margin: 0.35rem 0; }
-.review-checklist .done { color: #24613b; }
-.review-checklist .open { color: #825600; }
-.chinese-version .author-confirmation-index {
-  margin: 24px 0 34px;
-  padding: 20px 22px;
-  border: 1px solid #c9d6e0;
-  border-left: 6px solid var(--navy);
-  border-radius: 11px;
-  background: #f7fafc;
-}
-.chinese-version .author-confirmation-index h2,
-.chinese-version .author-confirmation-index .author-confirmation-title {
-  margin: 0 0 8px;
-  padding: 0;
-  border: 0;
-  font-size: 1.3rem;
-  font-weight: 750;
-}
-.chinese-version .author-confirmation-index > p {
-  margin: 6px 0 14px;
-  color: var(--muted);
-}
-.chinese-version .author-confirmation-index ol { margin: 0; padding-left: 1.6rem; }
-.chinese-version .author-confirmation-index li { margin: 0.48rem 0; }
-.chinese-version .author-confirmation-index a {
-  color: var(--navy);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 2px;
-}
-.chinese-version .status-badge {
-  display: inline-block;
-  min-width: 5.8em;
-  margin-right: 0.45em;
-  padding: 1px 7px;
-  border: 1px solid currentColor;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 750;
-  line-height: 1.55;
-  text-align: center;
-  vertical-align: 0.08em;
-}
-.chinese-version .badge-critical { color: var(--confirm); background: var(--confirm-soft); }
-.chinese-version .badge-suggested { color: var(--suggest); background: var(--suggest-soft); }
-.chinese-version .badge-verified { color: var(--verified); background: var(--verified-soft); }
-.chinese-version .author-note {
-  width: 100%;
-  margin: 18px 0 24px;
-  padding: 15px 17px;
-  border: 1px solid #d7dee5;
-  border-left: 5px solid var(--navy);
-  border-radius: 9px;
-  background: #fbfcfd;
-  scroll-margin-top: 18px;
-  break-inside: avoid;
-}
-.chinese-version .author-note.severity-critical {
-  border-left-color: var(--confirm);
-  background: var(--confirm-soft);
-}
-.chinese-version .author-note.severity-suggested {
-  border-left-color: var(--suggest);
-  background: var(--suggest-soft);
-}
-.chinese-version .author-note.severity-verified {
-  border-left-color: var(--verified);
-  background: var(--verified-soft);
-}
-.chinese-version .author-note:target {
-  outline: 3px solid rgba(43, 140, 190, 0.28);
-  outline-offset: 3px;
-}
-.chinese-version .author-note h4 {
-  margin: 7px 0 8px;
-  color: #20394d;
-  font-size: 1rem;
-}
-.chinese-version .author-note p { margin: 6px 0; }
-.chinese-version .author-note .back-link {
-  display: inline-block;
-  margin-top: 5px;
-  color: #4a6071;
-  font-size: 0.8rem;
-}
-.toc {
-  position: sticky;
-  top: 18px;
-  max-height: calc(100vh - 36px);
-  overflow: auto;
-  padding: 18px 16px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.96);
-  box-shadow: 0 4px 18px rgba(20, 43, 64, 0.06);
-}
-.toc-title { margin: 0 0 10px; color: var(--navy); font-size: 15px; font-weight: 750; }
-.toc a { display: block; color: #34495a; text-decoration: none; padding: 4px 6px; border-radius: 6px; font-size: 12.5px; }
-.toc a:hover { color: var(--navy); background: var(--blue-soft); }
-.toc a.level-3 { padding-left: 18px; color: var(--muted); font-size: 11.5px; }
-.toc-actions { display: flex; gap: 8px; margin: 0 0 14px; }
-.toc button {
-  border: 1px solid #aab8c4;
-  border-radius: 7px;
-  background: white;
-  color: var(--navy);
-  padding: 6px 10px;
-  cursor: pointer;
-  font-weight: 650;
-}
-article {
-  min-width: 0;
-  padding: 46px 54px 70px;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  background: var(--paper);
-  box-shadow: 0 12px 35px rgba(20, 43, 64, 0.08);
-}
-h1 {
-  margin: 0 0 12px;
-  color: var(--navy);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 35px;
-  line-height: 1.18;
-  letter-spacing: -0.025em;
-}
-h2 {
-  margin: 40px 0 14px;
-  padding-bottom: 7px;
-  border-bottom: 2px solid #dce8f0;
-  color: var(--navy);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 25px;
-  line-height: 1.25;
-}
-h3 {
-  margin: 28px 0 10px;
-  color: #214f70;
-  font-size: 18px;
-  line-height: 1.3;
-}
-p { margin: 10px 0; }
-ul, ol { margin: 9px 0 14px; padding-left: 26px; }
-li { margin: 5px 0; }
-strong { color: #102f47; }
-em { color: #34495a; }
-code {
-  padding: 1px 5px;
-  border: 1px solid #dce4ea;
-  border-radius: 5px;
-  background: #f4f7f9;
-  color: #23465e;
-  font-family: "SFMono-Regular", Consolas, monospace;
-  font-size: 0.88em;
-}
-a { color: #176a9a; }
-.citation-link {
-  color: #125d89;
-  font-weight: 700;
-  text-decoration: none;
-}
-.citation-link:hover { text-decoration: underline; }
-.draft-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 16px 0 24px;
-}
-.chip {
-  padding: 5px 10px;
-  border-radius: 999px;
-  background: #e8f2f8;
-  color: var(--navy);
-  font-size: 12px;
-  font-weight: 700;
-}
-.render-note {
-  margin: 18px 0 26px;
-  padding: 12px 15px;
-  border-left: 4px solid var(--violet);
-  border-radius: 7px;
-  background: var(--violet-soft);
-  color: #433767;
-  font-size: 13px;
-}
-.language-nav {
-  display: flex;
-  gap: 10px;
-  margin: 0 0 22px;
-}
-.language-nav a {
-  padding: 5px 11px;
-  border: 1px solid #b8cad6;
-  border-radius: 999px;
-  background: #f7fbfd;
-  color: var(--navy);
-  font-size: 12px;
-  font-weight: 700;
-  text-decoration: none;
-}
-.language-break {
-  margin: 70px -20px 42px;
-  border-top: 4px solid var(--navy);
-  padding-top: 34px;
-}
-.abstract-section {
-  margin: 26px -18px 32px;
-  border: 1px solid #cfe0ec;
-  border-left: 5px solid var(--blue);
-  border-radius: 10px;
-  background: #f7fbfd;
-}
-.top-level-section {
-  margin: 34px 0 0;
-  scroll-margin-top: 18px;
-}
-.top-level-section > summary {
-  padding: 9px 4px 10px;
-  color: var(--navy);
-  cursor: pointer;
-}
-.top-level-section > summary::marker { color: #6a7f8f; }
-.top-level-section > summary:hover h2 { color: #176a9a; }
-.top-level-section > summary:focus-visible {
-  border-radius: 6px;
-  outline: 3px solid rgba(43, 140, 190, 0.32);
-  outline-offset: 3px;
-}
-.top-level-section > summary h2 {
-  display: inline;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  color: inherit;
-  font-size: 25px;
-}
-.section-state {
-  float: right;
-  margin: 7px 2px 0 14px;
-  color: #6b7882;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 0.72rem;
-  font-weight: 650;
-}
-.top-level-section:not([open]) > summary .section-state-open,
-.top-level-section[open] > summary .section-state-closed { display: none; }
-.main-section {
-  border-top: 1px solid #dce5eb;
-}
-.main-section[open] > summary {
-  border-bottom: 2px solid #dce8f0;
-}
-.main-section > .section-body { padding-top: 4px; }
-.abstract-section > summary { padding: 14px 18px 10px; }
-.abstract-section[open] > summary { border-bottom: 0; }
-.abstract-section > .section-body { padding: 0 18px 18px; }
-.appendix-section,
-.references-section,
-.auxiliary-section {
-  border: 1px solid #d5dee5;
-  border-radius: 9px;
-  background: #fafcfd;
-}
-.appendix-section > summary,
-.references-section > summary,
-.auxiliary-section > summary { padding: 12px 15px; }
-.appendix-section[open] > summary,
-.references-section[open] > summary,
-.auxiliary-section[open] > summary { border-bottom: 1px solid #dde5ea; }
-.appendix-section > .section-body,
-.references-section > .section-body,
-.auxiliary-section > .section-body { padding: 3px 16px 18px; }
-.references-section { color: #44515c; font-size: 13px; }
-.references-section > summary h2 { font-size: 22px; }
-.judge-appendix { padding-top: 0; }
-.chinese-review-meta {
-  margin: 18px 0 32px;
-  border: 1px solid #c9d6e0;
-  border-radius: 10px;
-  background: #f8fbfd;
-}
-.chinese-review-meta > summary {
-  padding: 14px 17px;
-  color: var(--navy);
-  cursor: pointer;
-  font-weight: 750;
-}
-.chinese-review-meta[open] > summary { border-bottom: 1px solid #d5e0e8; }
-.chinese-review-meta:not([open]) .details-label-open,
-.chinese-review-meta[open] .details-label-closed { display: none; }
-.chinese-review-meta-body { padding: 4px 18px 18px; }
-.chinese-review-meta .author-confirmation-index {
-  margin: 18px 0 0;
-  background: white;
-}
-.table-wrap {
-  width: 100%;
-  margin: 18px 0 24px;
-  overflow-x: auto;
-  border: 1px solid var(--line);
-  border-radius: 9px;
-}
-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-th, td { padding: 9px 11px; border-bottom: 1px solid #e4eaef; text-align: left; vertical-align: top; }
-th { background: #eef5f9; color: var(--navy); font-weight: 750; }
-tbody tr:nth-child(even) { background: #fafcfd; }
-tbody tr:last-child td { border-bottom: 0; }
-td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
-.manuscript-figure {
-  margin: 25px 0 8px;
-  padding: 14px;
-  border: 1px solid #cad7df;
-  border-radius: 10px;
-  background: #fbfdfe;
-  text-align: center;
-}
-.manuscript-figure img { display: block; width: 100%; height: auto; margin: 0 auto; }
-.supplementary-figure { background: #f8fafb; }
-.judge-metadata {
-  margin: 14px 0 18px;
-  padding: 13px 15px;
-  border: 1px solid #d7c8ee;
-  border-left: 5px solid var(--violet);
-  border-radius: 8px;
-  background: var(--violet-soft);
-}
-.judge-metadata p { margin: 0; }
-.prompt-stage {
-  margin: 10px 0;
-  border: 1px solid #d8e0e7;
-  border-radius: 8px;
-  background: #fbfcfd;
-}
-.prompt-stage > summary {
-  padding: 11px 14px;
-  color: #314a5d;
-  cursor: pointer;
-  font-size: 0.92rem;
-  font-weight: 720;
-}
-.prompt-stage[open] > summary { border-bottom: 1px solid #e1e7eb; }
-.prompt-stage .prompt-body { padding: 0 13px 13px; }
-.prompt-stage pre {
-  max-width: 100%;
-  margin: 12px 0 0;
-  padding: 13px 14px;
-  overflow-x: hidden;
-  border: 1px solid #e0e5e9;
-  border-radius: 7px;
-  background: white;
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  font-size: 0.78rem;
-  line-height: 1.48;
-}
-.prompt-stage pre code {
-  padding: 0;
-  border: 0;
-  background: transparent;
-  white-space: inherit;
-}
-.audit-artifacts {
-  margin: 16px 0 0;
-  padding: 10px 13px;
-  border-radius: 7px;
-  background: #f3f6f8;
-  font-size: 0.86rem;
-}
-.todo {
-  padding: 11px 14px;
-  border: 1px solid #eed48a;
-  border-radius: 8px;
-  background: var(--warning-soft);
-  color: var(--warning);
-  font-weight: 650;
-}
-.references-section li {
-  margin: 0 0 13px;
-  padding-left: 3px;
-  scroll-margin-top: 20px;
-}
-.references-section li:target {
-  padding: 8px 10px 8px 3px;
-  border-radius: 7px;
-  background: var(--blue-soft);
-}
-.reference-note {
-  display: block;
-  margin-top: 4px;
-  color: #5b6670;
-  line-height: 1.5;
-}
-.english-manuscript-details {
-  margin: 0 0 44px;
-  border: 1px solid #b9c9d6;
-  border-radius: 10px;
-  background: #f8fbfd;
-}
-.english-manuscript-details > summary {
-  padding: 15px 18px;
-  color: var(--navy);
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: 750;
-}
-.english-manuscript-details[open] > summary {
-  border-bottom: 1px solid #d5e0e8;
-}
-.english-manuscript-details:not([open]) .details-label-open,
-.english-manuscript-details[open] .details-label-closed {
-  display: none;
-}
-.english-manuscript-details > .english-version {
-  padding: 0 18px 20px;
-  background: white;
-}
-@media (max-width: 980px) {
-  .layout { display: block; width: min(920px, calc(100% - 22px)); margin-top: 11px; }
-  .toc { position: relative; top: 0; max-height: none; margin-bottom: 12px; }
-  .toc a { display: none; }
-  article { padding: 30px 24px 55px; }
-  h1 { font-size: 29px; }
-  .top-level-section > summary h2 { font-size: 22px; }
-  .section-state { margin-top: 5px; }
-  .abstract-section { margin-left: -8px; margin-right: -8px; }
-  .chinese-version .author-confirmation-index,
-  .chinese-version .author-note { width: 100%; }
-}
-@media print {
-  @page { size: letter; margin: 16mm; }
-  body { background: white; font-size: 10.5pt; }
-  .layout { display: block; width: auto; margin: 0; }
-  .toc { display: none; }
-  article { border: 0; box-shadow: none; padding: 0; }
-  h1 { font-size: 22pt; }
-  h2 { page-break-after: avoid; font-size: 16pt; }
-  h3 { page-break-after: avoid; font-size: 13pt; }
-  .manuscript-figure, .table-wrap { break-inside: avoid; }
-  .manuscript-figure img { max-height: 650px; object-fit: contain; }
-  .english-manuscript-details { margin: 0; border: 0; background: white; }
-  .english-manuscript-details > summary { display: none; }
-  .english-manuscript-details:not([open]) > .english-version {
-    display: block !important;
-  }
-  .top-level-section { margin: 22px 0 0; border: 0; background: white; }
-  .top-level-section > summary {
-    display: block;
-    padding: 0 0 7px;
-    border-bottom: 2px solid #dce8f0;
-    cursor: default;
-    list-style: none;
-    page-break-after: avoid;
-    break-after: avoid-page;
-  }
-  .top-level-section > summary::marker { content: ""; }
-  .top-level-section > summary::-webkit-details-marker { display: none; }
-  .top-level-section > summary h2 {
-    display: block;
-    margin: 0;
-    color: var(--navy);
-    font-size: 16pt;
-  }
-  .top-level-section > summary .section-state { display: none !important; }
-  .top-level-section:not([open]) > .section-body {
-    display: block !important;
-  }
-  .chinese-review-meta { margin: 0; border: 0; background: white; }
-  .chinese-review-meta > summary,
-  .prompt-stage > summary { display: none; }
-  .chinese-review-meta:not([open]) > .chinese-review-meta-body,
-  .prompt-stage:not([open]) > .prompt-body { display: block !important; }
-  .prompt-stage { border: 0; break-inside: auto; }
-  .prompt-stage .prompt-body { padding: 0; }
-  .chinese-version .author-confirmation-index,
-  .chinese-version .author-note { width: 100%; break-inside: avoid; }
-}
+:root{--ink:#1e2832;--muted:#65717c;--navy:#173f5f;--blue:#0072b2;--orange:#d55e00;--tie:#b8b8b8;--green:#009e73;--violet:#7a5fa8;--paper:#fff;--page:#eef2f5;--line:#d5dde4;--soft:#f6f8fa;--note:#fff8e6}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:var(--page);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.62}
+.layout{display:grid;grid-template-columns:270px minmax(0,940px);gap:28px;width:min(1260px,calc(100% - 36px));margin:24px auto 70px;align-items:start}.toc{position:sticky;top:18px;max-height:calc(100vh - 36px);overflow:auto;padding:18px 15px;border:1px solid var(--line);border-radius:12px;background:#fffffff5}.toc strong{display:block;margin-bottom:9px;color:var(--navy)}.toc a{display:block;padding:4px 6px;border-radius:5px;color:#3e5160;text-decoration:none;font-size:12.5px}.toc a:hover{background:#eaf4fa}.toc .sub{padding-left:18px;font-size:11.5px;color:var(--muted)}
+article{min-width:0;padding:45px 54px 68px;border:1px solid var(--line);border-radius:14px;background:var(--paper);box-shadow:0 12px 34px #142b4012}h1{margin:0;color:var(--navy);font-family:Georgia,"Times New Roman",serif;font-size:36px;line-height:1.18}h2,h3{color:var(--navy)}h3{margin:27px 0 9px;font-size:19px}.subtitle{margin:8px 0 20px;color:var(--muted)}
+details{border:0}summary{cursor:pointer}.metadata{margin:22px 0 28px;border:1px solid var(--line);border-radius:10px;background:var(--soft)}.metadata>summary,.fold>summary{padding:13px 16px;color:var(--navy);font-weight:750;list-style:none}.metadata>summary::-webkit-details-marker,.fold>summary::-webkit-details-marker{display:none}.metadata>summary::before,.fold>summary::before{content:"▸";display:inline-block;width:1.2em}.metadata[open]>summary::before,.fold[open]>summary::before{content:"▾"}.metadata-body{padding:0 18px 16px}.metadata-grid{display:grid;grid-template-columns:180px 1fr;gap:5px 14px;margin:10px 0}.technical-key{margin:14px 0 0;padding:10px 12px;border-left:4px solid var(--violet);background:#f4f0fa}.badge{display:inline-block;margin-right:6px;padding:1px 7px;border:1px solid var(--violet);border-radius:99px;color:#594477;background:#f4f0fa;font-size:11px;font-weight:750}
+.fold{margin:22px 0;border-top:1px solid var(--line)}.fold>summary{margin:0;padding:20px 0 10px;font-family:Georgia,"Times New Roman",serif;font-size:25px}.fold-body{padding:0 0 8px}.source-empty{height:0}.physician-paragraph{margin:11px 0}.physician-subheading{scroll-margin-top:15px}.source-highlight{padding:0 .06em;background:#fff0a6;color:inherit}.physician-editorial{margin:12px 0;padding:10px 13px;border-left:4px solid #d29b25;background:var(--note);color:#5c491d}.physician-editorial-label{display:block;margin-bottom:3px;color:#7b5a0a;font-size:11px;font-weight:750;text-transform:uppercase;letter-spacing:.04em}.technical-note{margin:12px 0;padding:9px 12px;border-left:4px solid var(--violet);background:#f6f2fb;color:#493c62;font-size:13px}.technical-note .badge{vertical-align:.08em}
+.table-wrap{margin:20px 0 28px;overflow-x:auto}.table-caption,.figure-caption{margin:0 0 8px;color:#314452;font-size:13px}.table-caption strong,.figure-caption strong{color:var(--navy)}table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:8px 9px;border:1px solid #d6dde3;vertical-align:top}th{background:#e9f1f6;color:#173f5f;text-align:left}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}tbody tr:nth-child(even){background:#fafbfc}.physician-native-table th{background:#eaf4ef;color:#18533f}
+.figure{margin:24px 0 30px}.figure img{display:block;width:100%;height:auto;border:1px solid #e0e5e9;background:white}.figure-caption{margin-top:9px}.comment{margin:13px 0;padding:12px 14px;border-left:4px solid var(--green);background:#f0f8f5}.comment-meta{font-size:12px;color:var(--muted)}.comment-text{margin:7px 0;white-space:pre-wrap}.comment-context{margin-top:7px;color:#4e5c67;font-size:12px}.references li{margin:8px 0}.version-list li{margin:6px 0}.source-hash{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;overflow-wrap:anywhere}
+@media(max-width:900px){.layout{display:block;width:min(100% - 18px,940px);margin:10px auto 40px}.toc{position:relative;top:auto;max-height:none;margin-bottom:12px}.toc a.sub{display:none}article{padding:30px 24px 48px}h1{font-size:30px}.metadata-grid{grid-template-columns:1fr}.table-wrap{margin-left:-8px;margin-right:-8px}.figure{margin-left:-8px;margin-right:-8px}}
+@media(max-width:440px){article{padding:24px 15px 40px}h1{font-size:27px}.fold>summary{font-size:22px}table{font-size:11px}th,td{padding:6px 5px}.figure-caption,.table-caption{padding:0 3px}}
+@media print{body{background:#fff}.layout{display:block;width:auto;margin:0}.toc,.metadata>summary,.fold>summary::before{display:none!important}article{padding:0;border:0;box-shadow:none}.metadata:not([open])>.metadata-body,.fold:not([open])>.fold-body{display:block!important}.fold>summary{display:block!important;padding:20px 0 8px;list-style:none}.figure,.table-wrap{break-inside:avoid}.physician-editorial,.technical-note{break-inside:avoid}}
+"""
+
+SCRIPT = r"""
+function revealTarget(target){if(!target)return;let p=target.parentElement;const chain=[];while(p){if(p.tagName==='DETAILS')chain.push(p);p=p.parentElement;}chain.reverse().forEach(d=>d.open=true);setTimeout(()=>target.scrollIntoView({block:'start'}),0)}
+document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;const id=decodeURIComponent(a.getAttribute('href').slice(1));revealTarget(document.getElementById(id))});
+window.addEventListener('hashchange',()=>revealTarget(document.getElementById(decodeURIComponent(location.hash.slice(1)))));window.addEventListener('DOMContentLoaded',()=>{if(location.hash)revealTarget(document.getElementById(decodeURIComponent(location.hash.slice(1))))});
 """
 
 
-def inline_markup(value: str) -> str:
-    """Render the small inline Markdown subset used inside tables."""
-    escaped = html.escape(value.strip())
-    code_tokens: list[str] = []
-
-    def protect_code(match: re.Match[str]) -> str:
-        code_tokens.append(f"<code>{match.group(1)}</code>")
-        return f"@@CODE{len(code_tokens) - 1}@@"
-
-    escaped = re.sub(r"`([^`]+)`", protect_code, escaped)
-    escaped = re.sub(
-        r"\[([^\]]+)\]\(([^)]+)\)",
-        lambda m: f'<a href="{m.group(2)}">{m.group(1)}</a>',
-        escaped,
-    )
-    escaped = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", escaped)
-    escaped = re.sub(r"(?<!\*)\*([^*]+)\*(?!\*)", r"<em>\1</em>", escaped)
-    for index, token in enumerate(code_tokens):
-        escaped = escaped.replace(f"@@CODE{index}@@", token)
-    return escaped
+def esc(value: object) -> str:
+    return html.escape(str(value), quote=True)
 
 
-def split_table_row(line: str) -> list[str]:
-    stripped = line.strip().strip("|")
-    return [cell.strip() for cell in stripped.split("|")]
+def markdown_source_text(value: str) -> str:
+    """Keep source trailing spaces visible without Git whitespace errors."""
+
+    trailing = len(value) - len(value.rstrip(" "))
+    return value.rstrip(" ") + "&#32;" * trailing
 
 
-def numeric_cell(value: str) -> bool:
-    stripped = value.strip().replace("**", "").replace("`", "")
-    return bool(re.fullmatch(r"[+\-−]?\d[\d,]*(?:\.\d+)?%?", stripped))
-
-
-def is_table_separator(line: str) -> bool:
-    cells = split_table_row(line)
-    return bool(cells) and all(re.fullmatch(r":?-{3,}:?", cell) for cell in cells)
-
-
-def convert_tables(markdown_text: str) -> str:
-    lines = markdown_text.splitlines()
-    output: list[str] = []
-    index = 0
-    while index < len(lines):
-        if (
-            index + 1 < len(lines)
-            and "|" in lines[index]
-            and is_table_separator(lines[index + 1])
-        ):
-            headers = split_table_row(lines[index])
-            index += 2
-            rows: list[list[str]] = []
-            while index < len(lines) and "|" in lines[index] and lines[index].strip():
-                rows.append(split_table_row(lines[index]))
-                index += 1
-            output.append('<div class="table-wrap"><table><thead><tr>')
-            output.extend(f"<th>{inline_markup(cell)}</th>" for cell in headers)
-            output.append("</tr></thead><tbody>")
-            for row in rows:
-                padded = row + [""] * max(0, len(headers) - len(row))
-                output.append("<tr>")
-                output.extend(
-                    f'<td class="num">{inline_markup(cell)}</td>'
-                    if numeric_cell(cell)
-                    else f"<td>{inline_markup(cell)}</td>"
-                    for cell in padded[: len(headers)]
-                )
-                output.append("</tr>")
-            output.append("</tbody></table></div>")
-            continue
-        output.append(lines[index])
-        index += 1
-    return "\n".join(output) + "\n"
-
-
-def run_cmark(markdown_text: str) -> str:
-    command = shutil.which("cmark")
-    if command is None:
-        fallback = Path("/Users/yizhoucc/Library/Python/3.9/bin/cmark")
-        if fallback.exists():
-            command = str(fallback)
-    if command is None:
-        raise RuntimeError("The CommonMark cmark command is required to render the draft.")
-    completed = subprocess.run(
-        [command],
-        input=markdown_text,
-        text=True,
-        capture_output=True,
+def load_canonical() -> dict[str, object]:
+    subprocess.run(
+        [sys.executable, str(EXTRACTOR), str(SOURCE_DOCX), "--output", str(CANONICAL_JSON), "--check"],
+        cwd=ROOT,
         check=True,
     )
-    return completed.stdout
+    data = json.loads(CANONICAL_JSON.read_text(encoding="utf-8"))
+    assert data["source_docx_sha256"] == EXPECTED_DOCX_SHA256
+    assert data["canonical_visible_block_sha256"] == EXPECTED_VISIBLE_BLOCK_SHA256
+    assert data["counts"] == {
+        "body_paragraphs": 127,
+        "nonempty_body_paragraphs": 62,
+        "native_tables": 2,
+        "images": 5,
+        "comments": 12,
+        "tracked_changes": 0,
+        "visible_words": 3335,
+    }
+    return data
 
 
-def format_prompt_appendices(body: str) -> str:
-    """Turn the general judge protocol into a compact native disclosure.
+def svg_data_uri(path: Path) -> str:
+    data = path.read_bytes()
+    if len(data) >= 209_715_200:
+        raise ValueError(f"Figure exceeds 200 MiB limit: {path}")
+    return "data:image/svg+xml;base64," + base64.b64encode(data).decode("ascii")
 
-    This runs before heading IDs and TOC construction, so prompt labels do not
-    appear as manuscript sections in the navigation. The ``pre`` contents are
-    moved without editing their text.
-    """
 
-    appendix_pattern = re.compile(
-        r"(<h2>(?:Appendix S1\. General blinded Codex judge protocol|"
-        r"附录 S1\. General blinded Codex judge protocol)</h2>)"
-        r"(.*?)"
-        r"(?=<h2>(?:Appendix S2\.[^<]*|附录 S2\.[^<]*|References|参考文献)</h2>)",
-        flags=re.S,
+def technical_note(text: str, *, anchor: str | None = None) -> str:
+    anchor_attr = f' id="{esc(anchor)}"' if anchor else ""
+    return (
+        f'<p class="technical-note" data-origin="technical-insert"{anchor_attr}>'
+        f'<span class="badge">Technical insert</span>{esc(text)}</p>'
     )
 
-    def format_appendix(match: re.Match[str]) -> str:
-        heading, content = match.groups()
-        first_prompt = content.find("<h3>")
-        if first_prompt < 0:
-            raise RuntimeError("Appendix S1 prompt headings were not found.")
-        metadata = content[:first_prompt].strip()
-        prompts_and_links = content[first_prompt:]
-        prompts_and_links = re.sub(
-            r"<h3>(.*?)</h3>\s*(<pre>.*?</pre>)",
-            lambda prompt: (
-                '<details class="prompt-stage"><summary>'
-                + prompt.group(1)
-                + '</summary><div class="prompt-body">'
-                + prompt.group(2)
-                + "</div></details>"
-            ),
-            prompts_and_links,
-            flags=re.S,
-        )
-        prompts_and_links = re.sub(
-            r"<p>(Audit artifacts?:|审计 artifacts?：)(.*?)</p>",
-            r'<p class="audit-artifacts"><strong>\1</strong>\2</p>',
-            prompts_and_links,
-            flags=re.S,
-        )
-        prompt_count = prompts_and_links.count('<details class="prompt-stage">')
-        if prompt_count != 1:
-            raise RuntimeError(
-                f"Expected one folded judge protocol in Appendix S1, found {prompt_count}."
-            )
+
+def render_physician_paragraph(paragraph: dict[str, object]) -> str:
+    block_id = str(paragraph["id"])
+    text = str(paragraph["raw_visible_text"])
+    attrs = f'id="{esc(block_id)}" data-origin="physician" data-source-block="{esc(block_id)}"'
+    rich_text = "".join(
+        f'<mark class="source-highlight">{esc(segment["text"])}</mark>'
+        if segment["highlighted"]
+        else esc(segment["text"])
+        for segment in paragraph.get("segments", [{"text": text, "highlighted": False}])
+    )
+    if not text:
+        return f'<div class="source-empty" {attrs}></div>'
+    if text in SUBHEADINGS:
+        slug = re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")
+        return f'<h3 class="physician-subheading" id="{slug}" data-origin="physician" data-source-block="{esc(block_id)}">{rich_text}</h3>'
+    if text in PLACEHOLDER_TEXTS or bool(paragraph.get("editorial_note")):
         return (
-            heading
-            + '<div class="judge-metadata">'
-            + metadata
-            + "</div>"
-            + prompts_and_links
+            '<aside class="physician-editorial">'
+            '<span class="physician-editorial-label">Physician source note</span>'
+            f'<span {attrs}>{rich_text}</span></aside>'
         )
-
-    formatted, count = appendix_pattern.subn(format_appendix, body)
-    if count != 2:
-        raise RuntimeError(f"Expected English and Chinese Appendix S1 sections, found {count}.")
-    return formatted
+    return f'<p class="physician-paragraph" {attrs}>{rich_text}</p>'
 
 
-def slugify(text: str) -> str:
-    plain = html.unescape(re.sub(r"<[^>]+>", "", text)).lower()
-    plain = re.sub(r"[_\W]+", "-", plain, flags=re.UNICODE).strip("-")
-    return plain or "section"
-
-
-def add_heading_ids(body: str) -> tuple[str, str]:
-    headings: list[tuple[int, str, str]] = []
-    seen: Counter[str] = Counter()
-
-    def replace(match: re.Match[str]) -> str:
-        level = int(match.group(1))
-        label = match.group(2)
-        slug = slugify(label)
-        seen[slug] += 1
-        if seen[slug] > 1:
-            slug = f"{slug}-{seen[slug]}"
-        headings.append((level, slug, re.sub(r"<[^>]+>", "", label)))
-        return f'<h{level} id="{slug}">{label}</h{level}>'
-
-    body = re.sub(r"<h([23])>(.*?)</h\1>", replace, body, flags=re.S)
-    toc_lines = [
-        '<nav class="toc">',
-        '<div class="toc-title">Workshop draft</div>',
-        '<div class="toc-actions">Use the browser print command to save a PDF.</div>',
+def render_native_table(table: dict[str, object], label: str, title: str) -> str:
+    rows = table["rows"]
+    parts = [
+        f'<div class="table-wrap" data-origin="technical-insert" id="{esc(label.lower().replace(" ", "-"))}">',
+        f'<p class="table-caption"><span class="badge">Technical insert</span><strong>{esc(label)}.</strong> {esc(title)}</p>',
+        '<table class="physician-native-table">',
     ]
-    for level, slug, label in headings:
-        toc_lines.append(f'<a class="level-{level}" href="#{slug}">{html.escape(label)}</a>')
-    toc_lines.append("</nav>")
-    return body, "\n".join(toc_lines)
+    for row_index, row in enumerate(rows):
+        parts.append("<thead><tr>" if row_index == 0 else "<tbody><tr>")
+        tag = "th" if row_index == 0 else "td"
+        for cell in row:
+            parts.append(
+                f'<{tag} data-origin="physician" data-source-block="{esc(cell["id"])}">'
+                f'{esc(cell["raw_visible_text"])}</{tag}>'
+            )
+        parts.append("</tr></thead>" if row_index == 0 else "</tr></tbody>")
+    parts.extend(["</table>", "</div>"])
+    return "".join(parts)
 
 
-def embed_svg(path: Path) -> str:
-    encoded = base64.b64encode(path.read_bytes()).decode("ascii")
-    return f"data:image/svg+xml;base64,{encoded}"
+def result_table(label: str, title: str, headers: list[str], rows: list[list[str]], *, table_id: str) -> str:
+    parts = [
+        f'<div class="table-wrap" data-origin="technical-insert" id="{table_id}">',
+        f'<p class="table-caption"><span class="badge">Technical insert</span><strong>{esc(label)}.</strong> {esc(title)}</p>',
+        "<table><thead><tr>",
+    ]
+    for index, header in enumerate(headers):
+        parts.append(f'<th class="{"num" if index else ""}">{esc(header)}</th>')
+    parts.append("</tr></thead><tbody>")
+    for row in rows:
+        parts.append("<tr>")
+        for index, value in enumerate(row):
+            parts.append(f'<td class="{"num" if index else ""}">{esc(value)}</td>')
+        parts.append("</tr>")
+    parts.extend(["</tbody></table></div>"])
+    return "".join(parts)
 
 
-def inject_figures(body: str) -> str:
-    for key, (path, title) in FIGURES.items():
-        marker = f'<div data-rough-figure="{key}"></div>'
-        if marker not in body or not path.exists():
-            continue
-        figure = f'''<figure class="manuscript-figure">
-<img src="{embed_svg(path)}" alt="{html.escape(title)}">
-</figure>'''
-        body = body.replace(marker, figure)
-    for key, (path, title) in SUPPLEMENTARY_FIGURES.items():
-        marker = f'<div data-supplementary-figure="{key}"></div>'
-        if marker not in body or not path.exists():
-            continue
-        figure = f'''<figure class="manuscript-figure supplementary-figure">
-<img src="{embed_svg(path)}" alt="{html.escape(title)}">
-</figure>'''
-        body = body.replace(marker, figure)
-    return body
-
-
-def link_citation_markers(text: str, reference_prefix: str) -> str:
-    """Link numeric citation groups such as [2] and [3,8] to reference entries."""
-
-    def replace(match: re.Match[str]) -> str:
-        numbers = [value.strip() for value in match.group(1).split(",")]
-        links = [
-            f'<a class="citation-link" href="#{reference_prefix}-{number}">{number}</a>'
-            for number in numbers
-        ]
-        return "[" + ",".join(links) + "]"
-
-    return re.sub(r"\[(\d+(?:\s*,\s*\d+)*)\]", replace, text)
-
-
-def add_reference_ids(reference_section: str, reference_prefix: str) -> tuple[str, int]:
-    """Assign stable anchors to the first ordered list in a reference section."""
-
-    list_match = re.search(r"<ol>(.*?)</ol>", reference_section, flags=re.S)
-    if list_match is None:
-        raise RuntimeError(f"Reference list not found for {reference_prefix}.")
-
-    count = 0
-
-    def replace_item(match: re.Match[str]) -> str:
-        nonlocal count
-        count += 1
-        return f'<li id="{reference_prefix}-{count}">{match.group(1)}</li>'
-
-    numbered_list = re.sub(r"<li>(.*?)</li>", replace_item, list_match.group(0), flags=re.S)
+def figure(number: str, title: str, caption: str, *, supplementary: bool = False) -> str:
+    path = SUPPLEMENTARY_FIGURES[number] if supplementary else MAIN_FIGURES[number]
+    label = f"Supplementary Figure {number}" if supplementary else f"Figure {number}"
+    attr = "data-supplementary-figure" if supplementary else "data-main-figure"
     return (
-        reference_section[: list_match.start()]
-        + numbered_list
-        + reference_section[list_match.end() :],
-        count,
+        f'<figure class="figure" id="figure-{number.lower()}" data-origin="technical-insert" {attr}="{number}">'
+        f'<img src="{svg_data_uri(path)}" alt="{esc(title)}">'
+        f'<figcaption class="figure-caption"><span class="badge">Technical insert</span>'
+        f'<strong>{esc(label)}.</strong> {esc(caption)}</figcaption></figure>'
     )
 
 
-def link_citations_and_references(body: str) -> tuple[str, tuple[int, int]]:
-    """Add language-specific reference anchors and citation hyperlinks."""
-
-    english_heading = '<h2 id="references">References</h2>'
-    chinese_marker = '<div class="language-break" id="chinese-version"></div>'
-    chinese_heading = '<h2 id="参考文献">参考文献</h2>'
-
-    english_reference_start = body.index(english_heading)
-    chinese_start = body.index(chinese_marker)
-    chinese_reference_start = body.index(chinese_heading, chinese_start)
-
-    english_body = link_citation_markers(body[:english_reference_start], "ref-en")
-    english_references, english_count = add_reference_ids(
-        body[english_reference_start:chinese_start], "ref-en"
-    )
-    chinese_body = link_citation_markers(
-        body[chinese_start:chinese_reference_start], "ref-zh"
-    )
-    chinese_references, chinese_count = add_reference_ids(
-        body[chinese_reference_start:], "ref-zh"
-    )
-    chinese_references = link_citation_markers(chinese_references, "ref-zh")
-
-    return (
-        english_body + english_references + chinese_body + chinese_references,
-        (english_count, chinese_count),
+def table_1() -> str:
+    return result_table(
+        "Table 1", "Physician preferences for breast-cancer extraction",
+        ["Physician", "Required judgments", "Harness", "Baseline", "Tie", "Harness share among directional judgments"],
+        [["01", "280", "84", "22", "174", "79.2%"], ["02", "280", "79", "8", "193", "90.8%"], ["03", "280", "119", "24", "137", "83.2%"], ["04", "280", "81", "26", "173", "75.7%"], ["All", "1,120", "363", "80", "677", "81.9%"]],
+        table_id="table-1",
     )
 
 
-def style_sections(body: str) -> str:
-    body = re.sub(
-        r"<p>(\[(?:FINAL|TODO|最终|投稿前)[^<]+\])</p>",
-        r'<p class="todo">\1</p>',
-        body,
+def table_2() -> str:
+    return result_table(
+        "Table 2", "Physician preferences for PDAC extraction",
+        ["Physician", "Required judgments", "Harness", "Baseline", "Tie", "Harness share among directional judgments"],
+        [["01", "260", "75", "14", "171", "84.3%"], ["02", "260", "86", "9", "165", "90.5%"], ["03", "260", "103", "30", "127", "77.4%"], ["04", "260", "72", "38", "150", "65.5%"], ["All", "1,040", "336", "91", "613", "78.7%"]],
+        table_id="table-2",
     )
-    return body
 
 
-def fold_top_level_sections(body: str) -> str:
-    """Wrap every manuscript h2 section in an accessible native disclosure."""
+def table_3() -> str:
+    return result_table(
+        "Table 3", "Adjusted probability of inference-harness preference among directional judgments",
+        ["Scope", "Directional judgments", "Harness", "Baseline", "Note clusters", "Adjusted probability (95% CI)", "Adjusted odds ratio (95% CI)", "P value"],
+        [["Overall", "870", "699", "171", "40", "79.98% (75.75%-83.63%)", "3.995 (3.124-5.110)", "2.67e-28"], ["Breast cancer", "443", "363", "80", "20", "81.66% (76.02%-86.21%)", "4.452 (3.169-6.253)", "7.04e-18"], ["PDAC", "427", "336", "91", "20", "78.15% (71.47%-83.62%)", "3.576 (2.505-5.105)", "2.30e-12"]],
+        table_id="table-3",
+    )
 
-    marker = '<div class="language-break" id="chinese-version"></div>'
-    english_body, chinese_body = body.split(marker, 1)
 
-    def fold_language(language_body: str, language: str) -> str:
-        headings = list(
-            re.finditer(r'<h2 id="([^"]+)">(.*?)</h2>', language_body, flags=re.S)
+def load_agreement_rows() -> list[list[str]]:
+    module_path = RATINGS_DIR / "plot_manuscript_figures.py"
+    spec = importlib.util.spec_from_file_location("manuscript_plots", module_path)
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    raters = module.load_raters()
+    names = list(raters)
+    rows: list[list[str]] = []
+    for cancer, prefix, fields in [("Breast cancer", "b", module.BREAST_FIELDS), ("PDAC", "p", module.PDAC_FIELDS)]:
+        for left in range(4):
+            for right in range(left + 1, 4):
+                agreement, kappa, count = module.pairwise_agreement(raters[names[left]], raters[names[right]], prefix, fields)
+                rows.append([cancer, f"Physician {left + 1} vs Physician {right + 1}", str(count), f"{agreement:.1%}", f"{kappa:.3f}"])
+    return rows
+
+
+def supplementary_table_1() -> str:
+    return result_table(
+        "Supplementary Table S1", "Pairwise exact agreement and Cohen's kappa",
+        ["Cancer", "Physician pair", "Shared judgments", "Exact agreement", "Cohen's kappa"],
+        load_agreement_rows(), table_id="supplementary-table-s1",
+    )
+
+
+def supplementary_table_2() -> str:
+    rows: list[list[str]] = []
+    with (RATINGS_DIR / "leave_one_physician_out_gee.csv").open(newline="", encoding="utf-8") as handle:
+        for row in csv.DictReader(handle):
+            rows.append([row["excluded_physician"], row["directional_judgments"], row["clusters"], f'{float(row["adjusted_probability"]):.2%} ({float(row["probability_ci_low"]):.2%}-{float(row["probability_ci_high"]):.2%})', f'{float(row["odds_ratio"]):.3f} ({float(row["ci_low"]):.3f}-{float(row["ci_high"]):.3f})', f'{float(row["p_value"]):.3g}'])
+    return result_table(
+        "Supplementary Table S2", "Leave-one-physician-out sensitivity analysis of the overall directional GEE",
+        ["Excluded physician", "Directional judgments", "Notes", "Adjusted probability (95% CI)", "Adjusted odds ratio (95% CI)", "P value"],
+        rows, table_id="supplementary-table-s2",
+    )
+
+
+def render_comments(data: dict[str, object]) -> str:
+    parts = []
+    for comment in data["comments"]:
+        comment_id = str(comment["id"])
+        parts.append(
+            f'<div class="comment" id="physician-comment-{esc(comment_id)}" data-origin="physician-comment" data-comment-id="{esc(comment_id)}">'
+            f'<div class="comment-meta">Comment {esc(comment_id)} · {esc(comment["author"])} · {esc(comment["date"])}</div>'
+            f'<div class="comment-text" data-origin="physician" data-comment-text-id="{esc(comment_id)}">{esc(comment["raw_visible_text"])}</div>'
+            f'<div class="comment-context"><strong>Anchor:</strong> <a href="#{esc(comment["anchor_paragraph_id"])}">{esc(comment["anchor_paragraph_id"])}</a><br>'
+            f'<strong>Selected text:</strong> {esc(comment["anchor_selected_text"])}<br>'
+            f'<strong>Paragraph context:</strong> {esc(comment["anchor_paragraph_context"])}</div></div>'
         )
-        if not headings:
-            raise RuntimeError(f"No top-level headings found for {language}.")
-
-        output = [language_body[: headings[0].start()]]
-        for index, heading in enumerate(headings):
-            end = headings[index + 1].start() if index + 1 < len(headings) else len(language_body)
-            section_id, heading_html = heading.groups()
-            label = html.unescape(re.sub(r"<[^>]+>", "", heading_html)).strip()
-            content = language_body[heading.end() : end]
-
-            is_main = label in {"Abstract", "摘要"} or bool(re.match(r"^\d+\.", label))
-            is_appendix = label.startswith("Appendix ") or label.startswith("附录 ")
-            is_references = label in {"References", "参考文献"}
-            is_version_history = label in {"Version history", "版本历史"}
-
-            if is_main:
-                kind = "main"
-                classes = ["top-level-section", "main-section"]
-                if label in {"Abstract", "摘要"}:
-                    classes.append("abstract-section")
-            elif is_appendix:
-                kind = "appendix"
-                classes = ["top-level-section", "appendix-section"]
-                if re.match(r"^(?:Appendix|附录) S1\.", label):
-                    classes.append("judge-appendix")
-            elif is_references:
-                kind = "references"
-                classes = ["top-level-section", "references-section"]
-            elif is_version_history:
-                kind = "auxiliary"
-                classes = [
-                    "top-level-section",
-                    "auxiliary-section",
-                    "version-history-section",
-                ]
-            else:
-                kind = "auxiliary"
-                classes = ["top-level-section", "auxiliary-section"]
-
-            open_attribute = " open" if is_main else ""
-            closed_label, open_label = (
-                ("Show", "Hide") if language == "en" else ("展开", "收起")
-            )
-            output.append(
-                f'<details class="{" ".join(classes)}" '
-                f'data-section-kind="{kind}" data-section-key="{section_id}"{open_attribute}>'
-                '<summary>'
-                f'<h2 id="{section_id}">{heading_html}'
-                f'<span class="section-state section-state-closed" aria-hidden="true">{closed_label}</span>'
-                f'<span class="section-state section-state-open" aria-hidden="true">{open_label}</span>'
-                '</h2></summary><div class="section-body">'
-                + content
-                + "</div></details>"
-            )
-        return "".join(output)
-
-    return fold_language(english_body, "en") + marker + fold_language(chinese_body, "zh")
+    return "".join(parts)
 
 
-ANCHOR_SCRIPT = r"""
-<script>
-(function () {
-  "use strict";
+def references() -> str:
+    entries = [
+        ("Sushil M, Kennedy VE, Mandair D, et al. CORAL: Expert-Curated Oncology Reports to Advance Language Model Inference. NEJM AI. 2024;1(4).", "https://doi.org/10.1056/AIdbp2300110"),
+        ("Wiest IC, Ferber D, Zhu J, et al. Privacy-preserving large language models for structured medical information retrieval. npj Digital Medicine. 2024;7:257.", "https://doi.org/10.1038/s41746-024-01233-2"),
+        ("Huang J, Yang DM, Rong R, et al. A critical assessment of using ChatGPT for extracting structured data from clinical notes. npj Digital Medicine. 2024;7:106.", "https://doi.org/10.1038/s41746-024-01079-8"),
+        ("Kong HJ. Managing Unstructured Big Data in Healthcare System. Healthcare Informatics Research. 2019;25(1):1.", "https://doi.org/10.4258/hir.2019.25.1.1"),
+        ("Rule A, Bedrick S, Chiang MF, Hribar MR. Length and Redundancy of Outpatient Progress Notes Across a Decade at an Academic Medical Center. JAMA Network Open. 2021;4(7):e2115334.", "https://doi.org/10.1001/jamanetworkopen.2021.15334"),
+        ("Hein D, Christie A, Holcomb M, et al. Iterative refinement and goal articulation to optimize large language models for clinical information extraction. npj Digital Medicine. 2025;8:301.", "https://doi.org/10.1038/s41746-025-01686-z"),
+    ]
+    return "<ol>" + "".join(f'<li>{esc(citation)} <a href="{esc(url)}">{esc(url)}</a></li>' for citation, url in entries) + "</ol>"
 
-  function targetFromHash(hash) {
-    if (!hash || hash.length < 2) return null;
-    var identifier = hash.slice(1);
-    try { identifier = decodeURIComponent(identifier); } catch (error) { /* use raw id */ }
-    return document.getElementById(identifier);
-  }
 
-  function openAncestorDetails(target) {
-    var ancestors = [];
-    for (var node = target.parentElement; node; node = node.parentElement) {
-      if (node.tagName === "DETAILS") ancestors.push(node);
+def technical_inserts_after(block_id: str) -> str:
+    inserts = {
+        "P030": technical_note("The physician source refers to Table 1. In this HTML, the component table is labeled Methods Table M1."),
+        "P038": figure("1", "Development, adaptation, and evaluation workflow", "Development, transfer, and evaluation pathway. Breast-cancer physician review informed the inference harness. The failure history and clinical rubric then supported author-controlled PDAC adaptation without target-domain physician review of outputs. Four physicians compared the final harness with the same-model single-prompt baseline on the 40-note holdout set."),
+        "P068": technical_note("The physician source refers to Table 2. In this HTML, the ablation-condition table is labeled Methods Table M2."),
+        "P082": technical_note("Exploratory core-field analysis used one joint population-averaged logistic GEE on 495 directional core judgments. Field, physician, and cancer type were fixed effects; repeated judgments were clustered by note with an exchangeable working correlation. Field-specific probabilities were standardized over the physician and cancer distribution observed for that field. Breast type and receptor status applied only to breast-cancer notes. Ties were excluded. These estimates describe preference rather than accuracy, and no pairwise field tests or multiplicity claims were made."),
+        "P085": technical_note("The physician source says 'Table1'. The cancer-specific results are separated into Tables 1 and 2 in this HTML.") + table_1() + table_2(),
+        "P087": figure("2", "Physician preference overview", "Physician preferences across eight physician-by-cancer evaluations. Panel A retains harness, baseline, and tie judgments. Panel B shows the harness share among directional judgments."),
+        "P092": table_3(),
+        "P095": figure("3", "Inter-physician agreement", "Pairwise exact agreement and Cohen's kappa among four physicians in breast cancer and PDAC. Each breast-cancer pair shared 280 judgments, and each PDAC pair shared 260 judgments."),
+        "P097": technical_note("The physician source refers to Figure 3 for the core-field results. In this HTML, Figure 3 presents inter-physician agreement and Figure 4 presents the core-field analysis.") + figure("4", "Core-field raw and adjusted preference estimates", "Core-field preference results. Panel A shows the tie-inclusive raw distribution for seven physician-prioritized fields. Panel B shows adjusted harness-preference probabilities with 95% confidence intervals from one joint exploratory GEE fitted to 495 directional core judgments. The model included field, physician, and cancer fixed effects, clustered repeated judgments by note with an exchangeable working correlation, and standardized each field over its observed physician and cancer distribution. Breast type and receptor status applied only to breast-cancer notes. Ties were excluded from Panel B. The estimates report preference, not accuracy. No pairwise field tests or multiplicity claims were made."),
+        "P100": technical_note("The note-level distribution and detailed note margins are reported in Supplementary Figure S1."),
+        "P117": technical_note("The staged ablation is reported as Supplementary Figure S2."),
     }
-    ancestors.reverse().forEach(function (details) { details.open = true; });
-  }
-
-  function revealTarget(target, moveFocus) {
-    if (!target) return;
-    openAncestorDetails(target);
-    if (moveFocus) {
-      if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
-      target.focus({ preventScroll: true });
-    }
-    window.requestAnimationFrame(function () {
-      target.scrollIntoView({ block: "start" });
-    });
-  }
-
-  function revealCurrentHash(moveFocus) {
-    revealTarget(targetFromHash(window.location.hash), moveFocus);
-  }
-
-  document.addEventListener("click", function (event) {
-    var link = event.target.closest('a[href^="#"]');
-    if (!link) return;
-    revealTarget(targetFromHash(link.getAttribute("href")), true);
-  }, true);
-  window.addEventListener("hashchange", function () { revealCurrentHash(true); });
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", function () { revealCurrentHash(true); });
-  } else {
-    revealCurrentHash(true);
-  }
-}());
-</script>
-"""
+    return inserts.get(block_id, "")
 
 
-def wrap_language_sections(body: str) -> str:
-    """Collapse English and the Chinese review metadata independently."""
-    marker = '<div class="language-break" id="chinese-version"></div>'
-    english_body, chinese_body = body.split(marker, 1)
-    title_end = chinese_body.index("</h1>") + len("</h1>")
-    abstract_start = chinese_body.index(
-        '<details class="top-level-section main-section abstract-section"',
-        title_end,
-    )
-    review_metadata = chinese_body[title_end:abstract_start]
-    chinese_body = (
-        chinese_body[:title_end]
-        + '<details class="chinese-review-meta"><summary>'
-        + '<span class="details-label-closed">草稿信息与作者确认（点击展开）</span>'
-        + '<span class="details-label-open">草稿信息与作者确认（点击收起）</span>'
-        + '</summary><div class="chinese-review-meta-body">'
-        + review_metadata
+def build_scientific_sections(data: dict[str, object]) -> tuple[str, str]:
+    paragraphs = {item["id"]: item for item in data["paragraphs"]}
+    tables = {item["id"]: item for item in data["tables"]}
+    front_blocks: list[str] = []
+    sections: list[str] = []
+    markdown: list[str] = []
+    current_parts: list[str] = []
+    current_md: list[str] = []
+    current_key = ""
+    current_title = ""
+
+    def flush() -> None:
+        nonlocal current_parts, current_md
+        if not current_key:
+            return
+        heading_id = next(key for key, value in SECTION_HEADINGS.items() if value[0] == current_key)
+        heading = paragraphs[heading_id]
+        heading_span = f'<span id="{heading_id}" data-origin="physician" data-source-block="{heading_id}">{esc(heading["raw_visible_text"])}</span>'
+        sections.append(f'<details class="fold main-section" id="section-{current_key}" open><summary>{heading_span}</summary><div class="fold-body">{"".join(current_parts)}</div></details>')
+        markdown.extend([f"## {current_title}", "", f'<!-- physician:{heading_id} -->', current_title, ""])
+        markdown.extend(current_md)
+        current_parts = []
+        current_md = []
+
+    for entry in data["body_sequence"]:
+        if entry["kind"] == "paragraph":
+            block_id = entry["id"]
+            paragraph = paragraphs[block_id]
+            if block_id in SECTION_HEADINGS:
+                flush()
+                current_key, current_title = SECTION_HEADINGS[block_id]
+                continue
+            rendered = render_physician_paragraph(paragraph)
+            if not current_key:
+                front_blocks.append(rendered)
+                continue
+            current_parts.append(rendered)
+            text = str(paragraph["raw_visible_text"])
+            current_md.extend([f'<!-- physician:{block_id} -->', markdown_source_text(text) if text else f'<!-- {block_id} empty -->', ""])
+            insert = technical_inserts_after(block_id)
+            if insert:
+                current_parts.append(insert)
+                current_md.extend([f'<!-- technical insert after {block_id} -->', ""])
+        elif entry["kind"] == "table":
+            table_id = entry["id"]
+            if table_id == "T1":
+                current_parts.append(render_native_table(tables[table_id], "Methods Table M1", "Inference harness components"))
+            elif table_id == "T2":
+                current_parts.append(render_native_table(tables[table_id], "Methods Table M2", "Staged technical ablation conditions"))
+            current_md.extend([f'<!-- physician native table:{table_id}; cells preserved in canonical JSON -->', ""])
+    flush()
+    return "".join(front_blocks + sections), "\n".join(markdown)
+
+
+def build_supplement() -> str:
+    return (
+        '<details class="fold supplement" id="supplementary-material"><summary>Supplementary material</summary><div class="fold-body">'
+        + supplementary_table_1()
+        + figure("S1", "Note-level preference margins", "Compact and detailed note-level normalized preference margins after pooling all four physicians within each cancer type. The margin is (harness preferences minus baseline preferences) divided by completed judgments for that note. All 20 breast-cancer notes and 19 of 20 PDAC notes had positive margins; one PDAC note had a negative margin. This is a supporting preference sensitivity analysis, not an accuracy estimate.", supplementary=True)
+        + figure("S2", "Staged technical ablation", "Blinded staged technical ablation across three cumulative transitions. A was the single-prompt baseline; B added decomposition and orchestration; C added semantic, faithfulness, and temporal verification; D added deterministic inline processing and the complete POST-hook layer. One non-physician Codex judge produced these secondary technical judgments. Exact two-sided sign tests exclude ties.", supplementary=True)
+        + supplementary_table_2()
         + "</div></details>"
-        + chinese_body[abstract_start:]
-    )
-    return (
-        '<details class="english-manuscript-details">'
-        '<summary>'
-        '<span class="details-label-closed">English manuscript (click to expand) / 英文稿（点击展开）</span>'
-        '<span class="details-label-open">English manuscript (click to collapse) / 英文稿（点击收起）</span>'
-        '</summary>'
-        '<section class="manuscript-language english-version" lang="en">'
-        + english_body
-        + '</section></details>'
-        + '<section class="manuscript-language chinese-version language-break" '
-        + 'id="chinese-version" lang="zh-CN">'
-        + chinese_body
-        + '</section>'
     )
 
 
-def render() -> str:
-    markdown_text = SOURCE.read_text(encoding="utf-8")
-    chinese_marker = '<div class="language-break" id="chinese-version"></div>'
-    if chinese_marker not in markdown_text:
-        raise RuntimeError("The bilingual draft is missing the Chinese-version marker.")
-    english_text, chinese_text = markdown_text.split(chinese_marker, 1)
-    paired_counts = {
-        "main figure markers": (
-            english_text.count('data-rough-figure="'),
-            chinese_text.count('data-rough-figure="'),
-        ),
-        "supplementary figure markers": (
-            english_text.count('data-supplementary-figure="'),
-            chinese_text.count('data-supplementary-figure="'),
-        ),
-    }
-    mismatched = {
-        label: counts for label, counts in paired_counts.items() if counts[0] != counts[1]
-    }
-    if mismatched:
-        raise RuntimeError(f"English and Chinese structures do not match: {mismatched}")
-    version_match = re.search(r"Version ([^\n]+)", markdown_text)
-    version = version_match.group(1) if version_match else "draft"
-    prepared = convert_tables(markdown_text)
-    body = run_cmark(prepared)
-    body = format_prompt_appendices(body)
-    body, toc = add_heading_ids(body)
-    body = inject_figures(body)
-    body, reference_counts = link_citations_and_references(body)
-    if reference_counts[0] != reference_counts[1]:
-        raise RuntimeError(
-            f"English and Chinese reference counts differ: {reference_counts}"
-        )
-    body = style_sections(body)
-    body = fold_top_level_sections(body)
-    body = body.replace(
-        "</h1>",
-        f'''</h1>
-<div class="draft-meta">
-  <span class="chip">Version {html.escape(version)}</span>
-  <span class="chip">4 physicians</span>
-  <span class="chip">2,160 required note-field judgments</span>
-  <span class="chip">120 blinded ablation pairs</span>
-  <span class="chip">HTML review copy</span>
-</div>
-<div class="render-note">The English text is kept close to submission prose. The Chinese section may retain collaborator notes. Figures are embedded as reproducible vector graphics.</div>''',
-        1,
-    )
-    body = body.replace(
-        '<div id="english-version"></div>',
-        '<div id="english-version"></div><div class="language-nav"><a href="#english-version">English</a><a href="#chinese-version">中文</a></div>',
-        1,
-    )
-    body = wrap_language_sections(body)
-    return f'''<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Workshop Paper Draft</title>
-  <style>{CSS}</style>
-</head>
-<body>
-  <div class="layout">
-    {toc}
-    <article>{body}</article>
-  </div>
-{ANCHOR_SCRIPT}
-</body>
-</html>
-'''
+def version_history() -> str:
+    entries = [
+        ("v1.0", "Rebuilt the English-only HTML from the physician Word manuscript as the sole prose source; added source-preservation checks, split cancer-specific result tables, updated Figure 4, and moved note-level and ablation results to the supplement."),
+        ("v0.25", "Added a leave-one-physician-out GEE sensitivity analysis."),
+        ("v0.24", "Restored the physician-authored point that fluent outputs can conceal extraction errors."),
+        ("v0.23", "Made manuscript sections collapsible and preserved complete print output."),
+        ("v0.22", "Consolidated the main result figures and moved detailed note-level results to the supplement."),
+        ("v0.21", "Clarified the staged ablation and standardized figure colors."),
+        ("v0.20", "Added probability-scale adjusted effects."),
+        ("v0.19", "Redrew the figure set and consolidated the judge protocol."),
+        ("v0.18", "Integrated four physicians across two cancers and revised the study framing."),
+        ("v0.17", "Added the initial multi-physician analysis and technical ablation."),
+    ]
+    return '<ul class="version-list">' + "".join(f'<li><strong>{esc(version)}:</strong> {esc(note)}</li>' for version, note in entries) + "</ul>"
 
 
-class BalancedHTMLParser(HTMLParser):
-    """Minimal structural check for the renderer's explicit HTML tags."""
+def toc() -> str:
+    links = [("#section-introduction", "Introduction", False), ("#section-methods", "Methods", False)]
+    for heading in ["Study Design", "Dataset", "Baseline model and model development", "Inference Harness", "Clinician-in-the-loop breast-cancer refinement", "Model-assist pancreatic-cancer refinement", "Clinical evaluation data collection and scoring rubric", "Staged Technical ablation", "Statistical analysis"]:
+        links.append(("#" + re.sub(r"[^a-z0-9]+", "-", heading.lower()).strip("-"), heading, True))
+    links.extend([("#section-results", "Results", False), ("#performance-across-clinical-extraction-fields", "Performance across Clinical Extraction Fields", True), ("#section-discussion", "Discussion", False), ("#supplementary-material", "Supplementary material", False), ("#references", "References", False), ("#physician-comments", "Physician comments", False), ("#version-history", "Version history", False)])
+    return '<nav class="toc"><strong>Contents</strong>' + "".join(f'<a class="{"sub" if sub else ""}" href="{href}">{esc(label)}</a>' for href, label, sub in links) + "</nav>"
 
-    VOID_TAGS = {
-        "area",
-        "base",
-        "br",
-        "col",
-        "embed",
-        "hr",
-        "img",
-        "input",
-        "link",
-        "meta",
-        "param",
-        "source",
-        "track",
-        "wbr",
-    }
 
+def build_html(data: dict[str, object]) -> tuple[str, str]:
+    sections, markdown_body = build_scientific_sections(data)
+    article = f"""
+<article>
+  <h1>Physician-authored manuscript draft</h1>
+  <p class="subtitle">English working manuscript · Version 1.0 · October 26, 2026</p>
+  <details class="metadata" id="draft-metadata">
+    <summary>Draft information and source provenance</summary>
+    <div class="metadata-body">
+      <div class="metadata-grid"><strong>Manuscript title</strong><span>[TODO]</span><strong>Authors</strong><span>[TODO]</span><strong>Affiliations</strong><span>[TODO]</span><strong>Target venue and format</strong><span>[TODO]</span><strong>Canonical source</strong><span>{esc(SOURCE_DOCX.name)}</span><strong>Source SHA-256</strong><span class="source-hash">{EXPECTED_DOCX_SHA256}</span><strong>Visible-block SHA-256</strong><span class="source-hash">{EXPECTED_VISIBLE_BLOCK_SHA256}</span></div>
+      <p>The scientific body text is reproduced verbatim from the canonical physician Word manuscript. Spelling, punctuation, capitalization, and inline editorial instructions are unchanged. Tables, figures, captions, cross-reference notes, supplementary analyses, navigation, and this interface are marked as technical inserts.</p>
+      <p class="technical-key"><span class="badge">Technical insert</span>This label identifies content added around the physician manuscript. It does not mark physician-authored prose.</p>
+    </div>
+  </details>
+  {sections}
+  {build_supplement()}
+  <details class="fold references" id="references"><summary>References</summary><div class="fold-body">{technical_note("This short list retains verified references directly connected to physician source comments. The Word comments remain preserved separately and are not treated as formal references.")}{references()}</div></details>
+  <details class="fold" id="physician-comments"><summary>Physician comments</summary><div class="fold-body">{render_comments(data)}</div></details>
+  <details class="fold" id="version-history"><summary>Version history</summary><div class="fold-body">{version_history()}</div></details>
+</article>
+"""
+    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v1.0</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
+    markdown = f"""<!-- GENERATED FILE. The canonical physician Word extraction is the prose authority. -->
+# Physician-authored manuscript draft
+
+English working manuscript. Version 1.0, October 26, 2026.
+
+Manuscript title: [TODO]<br>
+Authors: [TODO]<br>
+Affiliations: [TODO]<br>
+Target venue and format: [TODO]
+
+The physician-authored blocks below are copied verbatim from `{SOURCE_DOCX.name}`. Technical tables, figures, captions, and cross-reference notes are generated by `render_workshop_draft.py` and marked in the HTML with `data-origin="technical-insert"`.
+
+{markdown_body}
+
+## Supplementary material
+
+Generated technical content: Supplementary Table S1, Supplementary Figure S1, Supplementary Figure S2, and Supplementary Table S2.
+
+## Physician comments
+
+All 12 Word comments, including anchor text and paragraph context, are rendered in the HTML from the canonical JSON extraction.
+"""
+    return document, markdown
+
+
+class PreservationParser(HTMLParser):
     def __init__(self) -> None:
         super().__init__(convert_charrefs=True)
-        self.stack: list[str] = []
+        self.stack: list[tuple[str, str | None, str | None, list[str]]] = []
+        self.paragraphs: dict[str, str] = {}
+        self.paragraph_order: list[str] = []
+        self.cells: dict[str, str] = {}
+        self.cell_order: list[str] = []
+        self.comments: dict[str, str] = {}
+        self.ids: list[str] = []
+        self.hrefs: list[str] = []
+        self.main_figures: list[str] = []
+        self.supplementary_figures: list[str] = []
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
-        if tag not in self.VOID_TAGS:
-            self.stack.append(tag)
+        values = dict(attrs)
+        if values.get("id"): self.ids.append(str(values["id"]))
+        if values.get("href", "").startswith("#"): self.hrefs.append(str(values["href"])[1:])
+        if values.get("data-main-figure"): self.main_figures.append(str(values["data-main-figure"]))
+        if values.get("data-supplementary-figure"): self.supplementary_figures.append(str(values["data-supplementary-figure"]))
+        capture_type = None
+        capture_id = None
+        source_block = values.get("data-source-block")
+        if values.get("data-origin") == "physician" and source_block:
+            capture_type = "cell" if str(source_block).startswith("T") else "paragraph"
+            capture_id = str(source_block)
+        elif values.get("data-comment-text-id") is not None:
+            capture_type = "comment-text"
+            capture_id = str(values["data-comment-text-id"])
+        self.stack.append((tag, capture_type, capture_id, []))
 
     def handle_startendtag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
-        return
+        self.handle_starttag(tag, attrs); self.handle_endtag(tag)
+
+    def handle_data(self, data: str) -> None:
+        for _, capture_type, _, parts in self.stack:
+            if capture_type in {"paragraph", "cell", "comment-text"}: parts.append(data)
 
     def handle_endtag(self, tag: str) -> None:
-        if not self.stack or self.stack[-1] != tag:
-            current = self.stack[-1] if self.stack else "none"
-            raise RuntimeError(f"Unbalanced HTML: closing {tag} while {current} is open.")
-        self.stack.pop()
+        if not self.stack: return
+        open_tag, capture_type, capture_id, parts = self.stack.pop()
+        if open_tag != tag: return
+        if capture_type == "paragraph" and capture_id:
+            self.paragraphs[capture_id] = "".join(parts); self.paragraph_order.append(capture_id)
+        elif capture_type == "cell" and capture_id:
+            self.cells[capture_id] = "".join(parts); self.cell_order.append(capture_id)
+        elif capture_type == "comment-text" and capture_id: self.comments[capture_id] = "".join(parts)
+
+
+def validate(document: str, markdown: str, data: dict[str, object]) -> None:
+    parser = PreservationParser(); parser.feed(document)
+    expected_paragraphs = {item["id"]: item["raw_visible_text"] for item in data["paragraphs"]}
+    expected_cells = {cell["id"]: cell["raw_visible_text"] for table in data["tables"] for row in table["rows"] for cell in row}
+    expected_comments = {item["id"]: item["raw_visible_text"] for item in data["comments"]}
+    if parser.paragraphs != expected_paragraphs:
+        missing = sorted(set(expected_paragraphs) - set(parser.paragraphs)); changed = sorted(key for key in expected_paragraphs if parser.paragraphs.get(key) != expected_paragraphs[key])
+        raise AssertionError(f"Physician paragraphs changed: missing={missing}, changed={changed}")
+    if parser.paragraph_order != list(expected_paragraphs): raise AssertionError("Physician paragraph sequence changed")
+    if parser.cells != expected_cells: raise AssertionError("Physician native table cells changed")
+    if parser.cell_order != list(expected_cells): raise AssertionError("Physician native table-cell sequence changed")
+    if parser.comments != expected_comments: raise AssertionError("Physician comments changed")
+    if len(parser.ids) != len(set(parser.ids)): raise AssertionError("Duplicate HTML IDs")
+    missing_anchors = sorted(set(parser.hrefs) - set(parser.ids))
+    if missing_anchors: raise AssertionError(f"Missing internal anchors: {missing_anchors}")
+    if parser.main_figures != ["1", "2", "3", "4"]: raise AssertionError(f"Unexpected main figures: {parser.main_figures}")
+    if parser.supplementary_figures != ["S1", "S2"]: raise AssertionError(f"Unexpected supplementary figures: {parser.supplementary_figures}")
+    for label in ["Methods Table M1", "Methods Table M2", "Table 1", "Table 2", "Table 3", "Supplementary Table S1", "Supplementary Table S2"]:
+        if document.count(f"<strong>{label}.</strong>") != 1: raise AssertionError(f"Table label missing or duplicated: {label}")
+    if 'lang="zh"' in document or 'id="chinese-version"' in document: raise AssertionError("Chinese manuscript shell remains")
+    if "Difference from 50%" in document: raise AssertionError("Removed Difference from 50% column remains")
+    for stale in ["figure5_staged_ablation.svg", "figure6_clinical_handoff.svg", 'data-main-figure="5"', 'data-main-figure="6"']:
+        if stale in document: raise AssertionError(f"Retired main figure remains: {stale}")
+    if len(markdown.split()) < 3000: raise AssertionError("Generated Markdown is unexpectedly short")
+    if len(document.encode("utf-8")) >= 209_715_200: raise AssertionError("HTML exceeds 200 MiB")
 
 
 def main() -> None:
-    output = render()
-    OUTPUT.write_text(output, encoding="utf-8")
-    required = [
-        '<figure class="manuscript-figure">',
-        "table-wrap",
-        "data:image/svg+xml;base64",
-        "Cohen's kappa",
-        "2,160 required note-field judgments",
-        "Version 0.25, October 2026",
-        "79.98%",
-        "leave-one-physician-out analysis",
-        "Supplementary Table S1",
-        "tie-inclusive net preference margin",
-        "120 blinded ablation pairs",
-        'id="chinese-version"',
-        'class="manuscript-language english-version" lang="en"',
-        'class="manuscript-language chinese-version language-break"',
-        '<details class="english-manuscript-details">',
-        '<details class="chinese-review-meta">',
-        '<details class="prompt-stage">',
-        '<details class="top-level-section main-section"',
-        'data-section-kind="appendix"',
-        'data-section-kind="references"',
-        'data-section-kind="auxiliary"',
-        'English manuscript (click to expand)',
-        'English manuscript (click to collapse)',
-        '草稿信息与作者确认（点击展开）',
-        'id="author-confirmation-index"',
-        "参考文献",
-    ]
-    missing = [value for value in required if value not in output]
-    if missing:
-        raise RuntimeError(f"Rendered HTML is missing required content: {missing}")
-    if output.count('<figure class="manuscript-figure">') != 12:
-        raise RuntimeError("Expected six main figures in each language version.")
-    if output.count('<figure class="manuscript-figure supplementary-figure">') != 2:
-        raise RuntimeError("Expected one supplementary figure in each language version.")
-    if output.count('<details class="prompt-stage">') != 2:
-        raise RuntimeError("Expected one folded judge protocol in each language version.")
-    rendered_prompts = re.findall(
-        r'<details class="prompt-stage"><summary>.*?</summary>'
-        r'<div class="prompt-body"><pre><code[^>]*>(.*?)</code></pre></div></details>',
-        output,
-        flags=re.S,
-    )
-    if len(rendered_prompts) != 2 or rendered_prompts[0] != rendered_prompts[1]:
-        raise RuntimeError("Appendix S1 must preserve one identical judge prompt per language.")
-    for appendix_key in ("s1", "s2", "s3"):
-        appendix_headings = len(
-            re.findall(
-                rf'<h2 id="(?:appendix|附录)-{appendix_key}-[^"]+">',
-                output,
-            )
-        )
-        if appendix_headings != 2:
-            raise RuntimeError(
-                f"Expected independent English and Chinese Appendix {appendix_key.upper()} sections."
-            )
-    if re.search(r"\boncologists?\b", output, flags=re.I):
-        raise RuntimeError("Rendered study terminology must not use oncologist(s).")
-    clinician_count = len(re.findall(r"\bclinicians?\b", output, flags=re.I))
-    if clinician_count != 2:
-        raise RuntimeError(
-            "Clinician must occur only in the unchanged Corso reference title, once per language."
-        )
-    obsolete_judge_labels = [
-        "Initial 12-pair calibration instruction",
-        "Remaining 108-pair instruction",
-        "Minor progress-file correction",
-        "Final recalibration instruction",
-    ]
-    stale_labels = [label for label in obsolete_judge_labels if label in output]
-    if stale_labels:
-        raise RuntimeError(f"Rendered HTML retains obsolete judge-stage labels: {stale_labels}")
-    if output.count('<details class="chinese-review-meta">') != 1:
-        raise RuntimeError("Expected one folded Chinese draft-information block.")
-    if output.count("Clinical accuracy 与医学措辞") != 1:
-        raise RuntimeError("Expected one final physician-review reminder.")
-    if "供临床合作者审阅的问题" in output:
-        raise RuntimeError("The duplicate yellow clinical-review block must be removed.")
-    if '<aside class="author-note ' in output:
-        raise RuntimeError("The duplicate conclusion author note must be removed.")
-    details_start = output.index('<details class="english-manuscript-details">')
-    english_start = output.index('class="manuscript-language english-version"')
-    details_end = output.index('</section></details>', english_start) + len('</section></details>')
-    chinese_start = output.index('id="chinese-version"')
-    if not (details_start < english_start < details_end < chinese_start):
-        raise RuntimeError("English must be inside details and Chinese must remain outside it.")
-    details_tag = output[details_start : output.index('>', details_start) + 1]
-    if " open" in details_tag:
-        raise RuntimeError("The English manuscript details element must be closed by default.")
-    print_css = CSS.split("@media print {", 1)[1]
-    print_requirements = [
-        '.english-manuscript-details > summary { display: none; }',
-        '.top-level-section > summary {',
-        'display: block;',
-        'cursor: default;',
-        'list-style: none;',
-        'page-break-after: avoid;',
-        'break-after: avoid-page;',
-        '.top-level-section > summary::marker { content: ""; }',
-        '.top-level-section > summary::-webkit-details-marker { display: none; }',
-        '.top-level-section > summary h2 {',
-        '.top-level-section > summary .section-state { display: none !important; }',
-        '.top-level-section:not([open]) > .section-body',
-        '.chinese-review-meta > summary,',
-        '.prompt-stage > summary { display: none; }',
-        '.prompt-stage:not([open]) > .prompt-body { display: block !important; }',
-    ]
-    missing_print_rules = [rule for rule in print_requirements if rule not in print_css]
-    if missing_print_rules:
-        raise RuntimeError(f"Print CSS is incomplete: {missing_print_rules}")
-    if '.top-level-section > summary { display: none; }' in print_css:
-        raise RuntimeError("Print CSS must retain top-level summaries as static headings.")
-    if 'display: block !important;' not in output:
-        raise RuntimeError("Print CSS must expose closed disclosure content.")
-    if "onclick=" in output or output.count("<script>") != 1:
-        raise RuntimeError("The review copy must use one unobtrusive anchor script and no inline handlers.")
-    script_requirements = [
-        "openAncestorDetails",
-        'window.addEventListener("hashchange"',
-        'a[href^="#"]',
-        "target.scrollIntoView",
-    ]
-    missing_script_features = [value for value in script_requirements if value not in output]
-    if missing_script_features:
-        raise RuntimeError(f"Anchor disclosure script is incomplete: {missing_script_features}")
-
-    top_level_tags = re.findall(
-        r'<details class="([^"]*\btop-level-section\b[^"]*)" '
-        r'data-section-kind="([^"]+)" data-section-key="([^"]+)"( open)?>',
-        output,
-    )
-    if len(top_level_tags) != 24:
-        raise RuntimeError(
-            f"Expected 24 bilingual top-level disclosures, found {len(top_level_tags)}."
-        )
-    kind_counts = Counter(kind for _, kind, _, _ in top_level_tags)
-    if kind_counts != Counter({"main": 12, "appendix": 8, "references": 2, "auxiliary": 2}):
-        raise RuntimeError(f"Unexpected top-level disclosure classes: {kind_counts}")
-    for classes, kind, section_id, open_attribute in top_level_tags:
-        should_open = kind == "main"
-        if bool(open_attribute) != should_open:
-            raise RuntimeError(
-                f"Top-level section {section_id} has the wrong default disclosure state."
-            )
-        if kind == "references" and "appendix-section" in classes:
-            raise RuntimeError("References must remain independent from appendices.")
-    if output.count('<h2 id="') != len(top_level_tags):
-        raise RuntimeError("Every h2 must be the heading of one top-level disclosure.")
-
-    parser = BalancedHTMLParser()
-    parser.feed(output)
-    parser.close()
-    if parser.stack:
-        raise RuntimeError(f"Rendered HTML has unclosed tags: {parser.stack}")
-    element_ids = re.findall(r'\bid="([^"]+)"', output)
-    duplicate_ids = sorted({value for value in element_ids if element_ids.count(value) > 1})
-    if duplicate_ids:
-        raise RuntimeError(f"Rendered HTML contains duplicate IDs: {duplicate_ids}")
-    hrefs = re.findall(r'\bhref="([^"]+)"', output)
-    missing_anchors = sorted(
-        {href for href in hrefs if href.startswith("#") and href[1:] not in element_ids}
-    )
-    if missing_anchors:
-        raise RuntimeError(f"Rendered HTML contains missing anchors: {missing_anchors}")
-    local_targets = {
-        href
-        for href in hrefs
-        if not href.startswith("#") and "://" not in href and not href.startswith("mailto:")
-    }
-    missing_local_targets = sorted(
-        href for href in local_targets if not (ROOT / href).exists()
-    )
-    if missing_local_targets:
-        raise RuntimeError(
-            f"Rendered HTML contains missing local resources: {missing_local_targets}"
-        )
-    print(f"Wrote {OUTPUT.name} ({len(output):,} characters)")
+    data = load_canonical()
+    document, markdown = build_html(data)
+    validate(document, markdown, data)
+    SOURCE_MD.write_text(markdown, encoding="utf-8")
+    OUTPUT_HTML.write_text(document, encoding="utf-8")
+    print(f"Wrote {SOURCE_MD}")
+    print(f"Wrote {OUTPUT_HTML}")
+    print("Preserved 127 body paragraphs, 2 native tables, and 12 comments; rendered 4 main and 2 supplementary figures.")
 
 
 if __name__ == "__main__":
