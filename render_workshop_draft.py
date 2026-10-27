@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the English-only physician-authored manuscript HTML (version 1.2.2).
+"""Build the English-only physician-authored manuscript HTML (version 1.2.3).
 
 The canonical Word extraction is the sole prose source. Technical tables,
 figures, captions, navigation, and supplementary analyses are inserted around
@@ -129,7 +129,7 @@ function setCustomFold(fold,open){if(!fold||!fold.classList.contains('custom-fol
 function revealTarget(target){if(!target)return;if(target instanceof HTMLDetailsElement||target.tagName==='DETAILS')target.open=true;if(target.classList&&target.classList.contains('custom-fold'))setCustomFold(target,true);let p=target.parentElement;const chain=[];while(p){if(p.tagName==='DETAILS'||p.classList.contains('custom-fold'))chain.push(p);p=p.parentElement;}chain.reverse().forEach(d=>{if(d.tagName==='DETAILS')d.open=true;else setCustomFold(d,true)});if(!target.hasAttribute('tabindex'))target.setAttribute('tabindex','-1');target.focus({preventScroll:true});target.scrollIntoView({block:'start'})}
 document.addEventListener('click',e=>{const toggle=e.target.closest('.fold-toggle');if(toggle){const fold=toggle.closest('.custom-fold');setCustomFold(fold,!fold.classList.contains('is-expanded'));return}const a=e.target.closest('a[href^="#"]');if(!a)return;const id=decodeURIComponent(a.getAttribute('href').slice(1));revealTarget(document.getElementById(id))});
 window.addEventListener('hashchange',()=>revealTarget(document.getElementById(decodeURIComponent(location.hash.slice(1)))));window.addEventListener('DOMContentLoaded',()=>{if(location.hash)revealTarget(document.getElementById(decodeURIComponent(location.hash.slice(1))))});
-window.preparePrintExport=function(pageHeight=960){if(!Number.isFinite(pageHeight)||pageHeight<400)throw new Error('Invalid page height');document.querySelectorAll('.print-page-spacer').forEach(node=>node.remove());document.documentElement.classList.add('print-export');void document.documentElement.offsetHeight;const candidates=[...document.querySelectorAll('.figure,.table-wrap')].filter(node=>getComputedStyle(node).display!=='none');for(const node of candidates){const rect=node.getBoundingClientRect();const top=rect.top+window.scrollY;const offset=((top%pageHeight)+pageHeight)%pageHeight;if(rect.height<pageHeight&&offset>0&&offset+rect.height>pageHeight-.5){const spacer=document.createElement('div');spacer.className='print-page-spacer';spacer.setAttribute('aria-hidden','true');spacer.style.height=`${Math.ceil(pageHeight-offset)+1}px`;node.before(spacer);void spacer.offsetHeight}}const items=candidates.map(node=>{const rect=node.getBoundingClientRect();const top=rect.top+window.scrollY;const bottom=rect.bottom+window.scrollY;return{id:node.id,kind:node.classList.contains('figure')?'figure':'table',top,bottom,height:rect.height,crosses:Math.floor((top+.5)/pageHeight)!==Math.floor((bottom-.5)/pageHeight)}});return{pageHeight,documentHeight:document.documentElement.scrollHeight,supplementVisible:getComputedStyle(document.getElementById('supplement-body')).display!=='none',items,offenders:items.filter(item=>item.crosses).map(item=>item.id)}};
+window.preparePrintExport=function(pageHeight=960){if(!Number.isFinite(pageHeight)||pageHeight<400)throw new Error('Invalid page height');document.querySelectorAll('.print-page-spacer').forEach(node=>node.remove());document.documentElement.classList.add('print-export');void document.documentElement.offsetHeight;const candidates=[...document.querySelectorAll('.figure,.table-wrap')].filter(node=>getComputedStyle(node).display!=='none');for(const node of candidates){const rect=node.getBoundingClientRect();const top=rect.top+window.scrollY;const offset=((top%pageHeight)+pageHeight)%pageHeight;if(rect.height<pageHeight&&offset>0&&offset+rect.height>pageHeight-.5){const spacer=document.createElement('div');spacer.className='print-page-spacer';spacer.setAttribute('aria-hidden','true');spacer.style.height=`${Math.ceil(pageHeight-offset)+1}px`;node.before(spacer);void spacer.offsetHeight}}const items=candidates.map(node=>{const rect=node.getBoundingClientRect();const top=rect.top+window.scrollY;const bottom=rect.bottom+window.scrollY;return{id:node.id,kind:node.classList.contains('figure')?'figure':'table',top,bottom,height:rect.height,crosses:Math.floor((top+.5)/pageHeight)!==Math.floor((bottom-.5)/pageHeight)}});const printable=[...document.querySelectorAll('article>.main-section>.fold-body>*,#supplement-body>*')].filter(node=>!node.classList.contains('print-page-spacer')&&getComputedStyle(node).display!=='none');const contentBottom=Math.ceil(Math.max(0,...printable.map(node=>node.getBoundingClientRect().bottom+window.scrollY)));return{pageHeight,documentHeight:document.documentElement.scrollHeight,contentBottom,supplementVisible:getComputedStyle(document.getElementById('supplement-body')).display!=='none',items,offenders:items.filter(item=>item.crosses).map(item=>item.id)}};
 window.resetPrintExport=function(){document.querySelectorAll('.print-page-spacer').forEach(node=>node.remove());document.documentElement.classList.remove('print-export')};
 """
 
@@ -528,6 +528,7 @@ def build_supplement() -> str:
 
 def version_history() -> str:
     entries = [
+        ("v1.2.3", "2026-10-27", "Removed the empty trailing WebKit export page by ending capture at the last printable manuscript element, and added explicit failure cleanup with a post-write fault-injection test."),
         ("v1.2.2", "2026-10-27", "Replaced the supplementary native disclosure with an accessible custom fold so print media always contains the complete supplement, and added safe-boundary pagination preparation for bounded WebKit PDF verification."),
         ("v1.2.1", "2026-10-27", "Restricted print output to the clean manuscript and formal supplement, excluded author-only workspaces and comments from print, and added bounded WebKit print regression coverage."),
         ("v1.2", "2026-10-26", "Converted the review draft into a clean manuscript view, made the main tables sequential, corrected all approved table and figure cross-references, retained the 12 Word comments in a neutral end section, and restored the 26-entry author literature-review workspace."),
@@ -563,8 +564,8 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
     article = f"""
 <article>
   <h1 class="screen-only">Physician-authored manuscript draft</h1>
-  <p class="subtitle screen-only">English working manuscript · Version 1.2.2 · October 27, 2026</p>
-  <p class="current-change screen-only"><strong>Current change:</strong> the complete supplement now prints independently of its screen fold state, and bounded WebKit export uses safe figure and table page boundaries.</p>
+  <p class="subtitle screen-only">English working manuscript · Version 1.2.3 · October 27, 2026</p>
+  <p class="current-change screen-only"><strong>Current change:</strong> bounded WebKit export now ends at the final printable manuscript element and explicitly removes temporary output after every failure.</p>
   {sections}
   {build_supplement()}
   <details class="fold" id="physician-comments"><summary>Comments</summary><div class="fold-body">{render_comments(data)}</div></details>
@@ -572,13 +573,13 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
   {literature_workspace()}
 </article>
 """
-    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v1.2.2</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
+    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v1.2.3</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
     markdown = f"""<!-- GENERATED FILE. The canonical physician Word extraction is the prose authority. -->
 # Physician-authored manuscript draft
 
-English working manuscript. Version 1.2.2, October 27, 2026.
+English working manuscript. Version 1.2.3, October 27, 2026.
 
-Current change: the complete supplement now prints independently of its screen fold state, and bounded WebKit export uses safe figure and table page boundaries.
+Current change: bounded WebKit export now ends at the final printable manuscript element and explicitly removes temporary output after every failure.
 
 The canonical physician blocks below mirror `{SOURCE_DOCX.name}` for audit purposes. The clean HTML applies only the approved cross-reference and reporting edits while preserving all source blocks in its hidden audit representation.
 
@@ -705,7 +706,7 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
         "@media print", ".main-section:not([open])>.fold-body,.supplement>.fold-body{display:block!important}",
         ".toc,.screen-only,#physician-comments,#version-history,#literature-workspace,.source-audit,.source-empty,.figure-screen{display:none!important}",
         ".figure .figure-print{display:block!important;width:100%;max-height:8.4in;object-fit:contain;border:0}",
-        "window.preparePrintExport=function(pageHeight=960)", "offenders:items.filter(item=>item.crosses)",
+        "window.preparePrintExport=function(pageHeight=960)", "contentBottom=Math.ceil", "offenders:items.filter(item=>item.crosses)",
     ]
     if any(rule not in document for rule in print_requirements):
         raise AssertionError("Print view does not isolate and constrain the clean manuscript")
@@ -727,8 +728,8 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     if parser.comment_anchor_ids != expected_comment_anchors: raise AssertionError("Comment anchors are incomplete")
     if parser.comment_backlinks != [f"#comment-anchor-{item['id']}" for item in data["comments"]]: raise AssertionError("Comment backlinks are incomplete")
     if 'id="draft-metadata"' in document or "Draft information and source provenance" in document: raise AssertionError("Removed draft-information block remains")
-    if "Version 1.2.2 · October 27, 2026" not in document or "draft v1.2.2" not in document: raise AssertionError("Version 1.2.2 metadata is missing")
-    if document.count('class="version-entry"') != 14 or any(f'id="version-{item}"' not in document for item in ["1-2-2", "1-2-1", "1-2", "1-1", "1-0", "0-25", "0-24", "0-23", "0-22", "0-21", "0-20", "0-19", "0-18", "0-17"]):
+    if "Version 1.2.3 · October 27, 2026" not in document or "draft v1.2.3" not in document: raise AssertionError("Version 1.2.3 metadata is missing")
+    if document.count('class="version-entry"') != 15 or any(f'id="version-{item}"' not in document for item in ["1-2-3", "1-2-2", "1-2-1", "1-2", "1-1", "1-0", "0-25", "0-24", "0-23", "0-22", "0-21", "0-20", "0-19", "0-18", "0-17"]):
         raise AssertionError("Nested version history is incomplete")
     if 'lang="zh"' in document or 'id="chinese-version"' in document: raise AssertionError("Chinese manuscript shell remains")
     visible_text_lower = parser.visible_text.lower()

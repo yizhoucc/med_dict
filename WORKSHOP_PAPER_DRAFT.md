@@ -1,9 +1,9 @@
 <!-- GENERATED FILE. The canonical physician Word extraction is the prose authority. -->
 # Physician-authored manuscript draft
 
-English working manuscript. Version 1.2.2, October 27, 2026.
+English working manuscript. Version 1.2.3, October 27, 2026.
 
-Current change: the complete supplement now prints independently of its screen fold state, and bounded WebKit export uses safe figure and table page boundaries.
+Current change: bounded WebKit export now ends at the final printable manuscript element and explicitly removes temporary output after every failure.
 
 The canonical physician blocks below mirror `202601023_Manuscript_JAMA.docx` for audit purposes. The clean HTML applies only the approved cross-reference and reporting edits while preserving all source blocks in its hidden audit representation.
 

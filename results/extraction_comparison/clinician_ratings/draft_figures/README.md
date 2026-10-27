@@ -1,6 +1,6 @@
 # Workshop manuscript figures
 
-These vector figures use one publication layout and fixed semantic color system across the English-only version 1.2.2 draft. Figures 2-4 use the four current physician datasets; Bolun's breast and PDAC ratings are stored in separate source workbooks. Patient-letter findings and the final test-set LLM audit are not reported as manuscript results.
+These vector figures use one publication layout and fixed semantic color system across the English-only version 1.2.3 draft. Figures 2-4 use the four current physician datasets; Bolun's breast and PDAC ratings are stored in separate source workbooks. Patient-letter findings and the final test-set LLM audit are not reported as manuscript results.
 
 Supplementary Figure S2 reads the locked counts in `../../../staged_ablation_annotated_20261001_093433/JUDGE_CODEX_DECODED_ANALYSIS.md`. The same script generates four main figures and two supplementary figures.
 
@@ -42,4 +42,7 @@ HTML's `preparePrintExport()` function therefore inserts transient, print-only
 spacers before any figure or table that would cross one of those test
 boundaries. It does not alter the screen document or normal Safari print
 layout, and the verifier requires all six figures and eight tables to remain
-within a single test page before it creates the PDF.
+within a single test page before it creates the PDF. Capture ends at the last
+visible manuscript or supplementary element rather than the document box, so
+trailing article padding cannot create an empty final page. A post-write fault
+injection also verifies that every failure path removes its temporary PDF.

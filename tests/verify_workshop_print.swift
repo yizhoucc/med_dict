@@ -14,7 +14,8 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
     let webView: WKWebView
     let outputURL: URL
     let outputDocument = PDFDocument()
-    var documentHeight: CGFloat = 0
+    var captureBottom: CGFloat = 0
+    var sourceDocumentHeight: CGFloat = 0
     var pageCount = 0
     var nextPage = 0
     var capturedBytes = 0
@@ -31,8 +32,13 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
     }
 
     func fail(_ message: String) {
+        cleanupOutput()
         failure = message
         done = true
+    }
+
+    func cleanupOutput() {
+        try? FileManager.default.removeItem(at: outputURL)
     }
 
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
@@ -89,7 +95,8 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
             if let error = error { self.fail(error.localizedDescription); return }
             guard let report = value as? [String: Any],
                   let visible = report["supplementVisible"] as? Bool, visible,
-                  let height = report["documentHeight"] as? Double,
+                  let documentHeight = report["documentHeight"] as? Double,
+                  let contentBottom = report["contentBottom"] as? Double,
                   let items = report["items"] as? [[String: Any]],
                   let offenders = report["offenders"] as? [String] else {
                 self.fail("Invalid print-preparation report"); return
@@ -101,9 +108,15 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
             let expectedTables: Set<String> = ["table-1", "table-2", "table-3", "table-4", "table-5", "supplementary-table-s1", "supplementary-table-s2", "supplementary-table-s3"]
             guard figureIDs == expectedFigures else { self.fail("Unexpected print figures: \(figureIDs)"); return }
             guard tableIDs == expectedTables else { self.fail("Unexpected print tables: \(tableIDs)"); return }
-            self.documentHeight = CGFloat(height)
-            self.pageCount = Int(ceil(self.documentHeight / pageHeight))
+            guard contentBottom > 0, contentBottom <= documentHeight + 1 else {
+                self.fail("Invalid printable content boundary: \(contentBottom)/\(documentHeight)"); return
+            }
+            self.captureBottom = CGFloat(contentBottom)
+            self.sourceDocumentHeight = CGFloat(documentHeight)
+            self.pageCount = Int(ceil(self.captureBottom / pageHeight))
             guard (12...20).contains(self.pageCount) else { self.fail("Unexpected page count: \(self.pageCount)"); return }
+            let finalPageHeight = self.captureBottom - CGFloat(self.pageCount - 1) * pageHeight
+            guard finalPageHeight >= 80 else { self.fail("Trailing page is effectively empty: \(finalPageHeight) px"); return }
             self.captureNextPage()
         }
     }
@@ -111,7 +124,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
     func captureNextPage() {
         if nextPage >= pageCount { finishPDF(); return }
         let y = CGFloat(nextPage) * pageHeight
-        let height = min(pageHeight, documentHeight - y)
+        let height = min(pageHeight, captureBottom - y)
         let configuration = WKPDFConfiguration()
         configuration.rect = CGRect(x: 0, y: y, width: pageWidth, height: height)
         webView.createPDF(configuration: configuration) { result in
@@ -142,9 +155,13 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
         }
         do {
             try data.write(to: outputURL, options: .atomic)
+            if ProcessInfo.processInfo.environment["MED_DICT_PRINT_FAULT_AFTER_WRITE"] == "1" {
+                fail("Injected post-write validation failure")
+                return
+            }
             let decoded = PDFDocument(url: outputURL)
             guard decoded?.pageCount == pageCount else { fail("Written PDF page count changed"); return }
-            print("WK_PRINT_OK pages=\(pageCount) bytes=\(data.count) height=\(Int(documentHeight)) figures=6 tables=8")
+            print("WK_PRINT_OK pages=\(pageCount) bytes=\(data.count) contentBottom=\(Int(captureBottom)) documentHeight=\(Int(sourceDocumentHeight)) figures=6 tables=8")
             done = true
         } catch {
             fail(error.localizedDescription)
@@ -158,9 +175,9 @@ guard FileManager.default.fileExists(atPath: inputURL.path) else {
     fputs("Run this verifier from the project root\n", stderr)
     exit(2)
 }
-let outputURL = URL(fileURLWithPath: "/private/tmp/med_dict_workshop_print_\(ProcessInfo.processInfo.processIdentifier).pdf")
+let configuredOutputPath = ProcessInfo.processInfo.environment["MED_DICT_PRINT_OUTPUT_PATH"]
+let outputURL = URL(fileURLWithPath: configuredOutputPath ?? "/private/tmp/med_dict_workshop_print_\(ProcessInfo.processInfo.processIdentifier).pdf")
 try? FileManager.default.removeItem(at: outputURL)
-defer { try? FileManager.default.removeItem(at: outputURL) }
 let application = NSApplication.shared
 application.setActivationPolicy(.prohibited)
 let verifier = PrintVerifier(outputURL: outputURL)
@@ -169,5 +186,10 @@ let deadline = Date().addingTimeInterval(180)
 while !verifier.done && Date() < deadline {
     RunLoop.main.run(mode: .default, before: Date().addingTimeInterval(0.05))
 }
-if !verifier.done { fputs("WK print verification timed out\n", stderr); exit(3) }
-if let failure = verifier.failure { fputs("WK print verification failed: \(failure)\n", stderr); exit(1) }
+if !verifier.done { verifier.fail("WK print verification timed out") }
+if let failure = verifier.failure {
+    verifier.cleanupOutput()
+    fputs("WK print verification failed: \(failure)\n", stderr)
+    exit(failure == "WK print verification timed out" ? 3 : 1)
+}
+verifier.cleanupOutput()
