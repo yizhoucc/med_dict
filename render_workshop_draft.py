@@ -85,7 +85,7 @@ details{border:0}summary{cursor:pointer}.metadata{margin:22px 0 28px;border:1px 
 """
 
 SCRIPT = r"""
-function revealTarget(target){if(!target)return;let p=target.parentElement;const chain=[];while(p){if(p.tagName==='DETAILS')chain.push(p);p=p.parentElement;}chain.reverse().forEach(d=>d.open=true);setTimeout(()=>target.scrollIntoView({block:'start'}),0)}
+function revealTarget(target){if(!target)return;if(target instanceof HTMLDetailsElement||target.tagName==='DETAILS')target.open=true;let p=target.parentElement;const chain=[];while(p){if(p.tagName==='DETAILS')chain.push(p);p=p.parentElement;}chain.reverse().forEach(d=>d.open=true);setTimeout(()=>{if(!target.hasAttribute('tabindex'))target.setAttribute('tabindex','-1');target.focus({preventScroll:true});target.scrollIntoView({block:'start'});},0)}
 document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;const id=decodeURIComponent(a.getAttribute('href').slice(1));revealTarget(document.getElementById(id))});
 window.addEventListener('hashchange',()=>revealTarget(document.getElementById(decodeURIComponent(location.hash.slice(1)))));window.addEventListener('DOMContentLoaded',()=>{if(location.hash)revealTarget(document.getElementById(decodeURIComponent(location.hash.slice(1))))});
 """
@@ -258,21 +258,38 @@ def load_agreement_rows() -> list[list[str]]:
 
 def supplementary_table_1() -> str:
     return result_table(
-        "Supplementary Table S1", "Pairwise exact agreement and Cohen's kappa",
-        ["Cancer", "Physician pair", "Shared judgments", "Exact agreement", "Cohen's kappa"],
-        load_agreement_rows(), table_id="supplementary-table-s1",
+        "Supplementary Table S1", "Core fields used in the primary clinical comparison",
+        ["Core field", "Applicability", "Rating field", "Evaluation definition"],
+        [
+            ["Active anticancer medications", "Breast cancer and PDAC", "Current_Medications.current_meds", "Anticancer drugs currently being taken or administered; supportive or home medications, completed or stopped drugs, and planned-only drugs are excluded."],
+            ["Stage", "Breast cancer and PDAC", "Cancer_Diagnosis.Stage_of_Cancer", "Cancer stage, TNM, or resectability status, retaining original and current time context when both are documented."],
+            ["Distant metastasis", "Breast cancer and PDAC", "Cancer_Diagnosis.Distant Metastasis", "Presence, absence, sites, and certainty of distant spread; regional nodes are not counted as distant metastasis."],
+            ["Regional or overall metastasis", "Breast cancer and PDAC", "Cancer_Diagnosis.Metastasis", "Regional nodal and distant involvement, with the site and certainty of each supported finding."],
+            ["Treatment response", "Breast cancer and PDAC", "Response_Assessment.response_assessment", "Response to the current or most recently completed anticancer treatment, linked to the applicable regimen and supporting evidence."],
+            ["Breast cancer type and receptors", "Breast cancer only", "Cancer_Diagnosis.Type_of_Cancer", "Breast histology and the individual ER, PR, and HER2 results when documented."],
+            ["Completed molecular or genetic results", "Breast cancer and PDAC", "Genetic_Testing_Results.genetic_testing_results", "Completed germline, somatic, or other molecular results; pending or merely ordered tests are excluded."],
+        ],
+        table_id="supplementary-table-s1",
     )
 
 
 def supplementary_table_2() -> str:
+    return result_table(
+        "Supplementary Table S2", "Pairwise exact agreement and Cohen's kappa",
+        ["Cancer", "Physician pair", "Shared judgments", "Exact agreement", "Cohen's kappa"],
+        load_agreement_rows(), table_id="supplementary-table-s2",
+    )
+
+
+def supplementary_table_3() -> str:
     rows: list[list[str]] = []
     with (RATINGS_DIR / "leave_one_physician_out_gee.csv").open(newline="", encoding="utf-8") as handle:
         for row in csv.DictReader(handle):
             rows.append([row["excluded_physician"], row["directional_judgments"], row["clusters"], f'{float(row["adjusted_probability"]):.2%} ({float(row["probability_ci_low"]):.2%}-{float(row["probability_ci_high"]):.2%})', f'{float(row["odds_ratio"]):.3f} ({float(row["ci_low"]):.3f}-{float(row["ci_high"]):.3f})', f'{float(row["p_value"]):.3g}'])
     return result_table(
-        "Supplementary Table S2", "Leave-one-physician-out sensitivity analysis of the overall directional GEE",
+        "Supplementary Table S3", "Leave-one-physician-out sensitivity analysis of the overall directional GEE",
         ["Excluded physician", "Directional judgments", "Notes", "Adjusted probability (95% CI)", "Adjusted odds ratio (95% CI)", "P value"],
-        rows, table_id="supplementary-table-s2",
+        rows, table_id="supplementary-table-s3",
     )
 
 
@@ -300,13 +317,14 @@ def references() -> str:
         ("Rule A, Bedrick S, Chiang MF, Hribar MR. Length and Redundancy of Outpatient Progress Notes Across a Decade at an Academic Medical Center. JAMA Network Open. 2021;4(7):e2115334.", "https://doi.org/10.1001/jamanetworkopen.2021.15334"),
         ("Hein D, Christie A, Holcomb M, et al. Iterative refinement and goal articulation to optimize large language models for clinical information extraction. npj Digital Medicine. 2025;8:301.", "https://doi.org/10.1038/s41746-025-01686-z"),
     ]
-    return "<ol>" + "".join(f'<li>{esc(citation)} <a href="{esc(url)}">{esc(url)}</a></li>' for citation, url in entries) + "</ol>"
+    return '<ol data-origin="technical-insert">' + "".join(f'<li>{esc(citation)} <a href="{esc(url)}">{esc(url)}</a></li>' for citation, url in entries) + "</ol>"
 
 
 def technical_inserts_after(block_id: str) -> str:
     inserts = {
         "P030": technical_note("The physician source refers to Table 1. In this HTML, the component table is labeled Methods Table M1."),
         "P038": figure("1", "Development, adaptation, and evaluation workflow", "Development, transfer, and evaluation pathway. Breast-cancer physician review informed the inference harness. The failure history and clinical rubric then supported author-controlled PDAC adaptation without target-domain physician review of outputs. Four physicians compared the final harness with the same-model single-prompt baseline on the 40-note holdout set."),
+        "P063": technical_note("The evaluated core fields are defined in Supplementary Table S1."),
         "P068": technical_note("The physician source refers to Table 2. In this HTML, the ablation-condition table is labeled Methods Table M2."),
         "P082": technical_note("Exploratory core-field analysis used one joint population-averaged logistic GEE on 495 directional core judgments. Field, physician, and cancer type were fixed effects; repeated judgments were clustered by note with an exchangeable working correlation. Field-specific probabilities were standardized over the physician and cancer distribution observed for that field. Breast type and receptor status applied only to breast-cancer notes. Ties were excluded. These estimates describe preference rather than accuracy, and no pairwise field tests or multiplicity claims were made."),
         "P085": technical_note("The physician source says 'Table1'. The cancer-specific results are separated into Tables 1 and 2 in this HTML.") + table_1() + table_2(),
@@ -355,6 +373,7 @@ def build_scientific_sections(data: dict[str, object]) -> tuple[str, str]:
             rendered = render_physician_paragraph(paragraph)
             if not current_key:
                 front_blocks.append(rendered)
+                markdown.extend([f'<!-- physician:{block_id} -->', markdown_source_text(str(paragraph["raw_visible_text"])) if paragraph["raw_visible_text"] else f'<!-- {block_id} empty -->', ""])
                 continue
             current_parts.append(rendered)
             text = str(paragraph["raw_visible_text"])
@@ -378,9 +397,10 @@ def build_supplement() -> str:
     return (
         '<details class="fold supplement" id="supplementary-material"><summary>Supplementary material</summary><div class="fold-body">'
         + supplementary_table_1()
+        + supplementary_table_2()
         + figure("S1", "Note-level preference margins", "Compact and detailed note-level normalized preference margins after pooling all four physicians within each cancer type. The margin is (harness preferences minus baseline preferences) divided by completed judgments for that note. All 20 breast-cancer notes and 19 of 20 PDAC notes had positive margins; one PDAC note had a negative margin. This is a supporting preference sensitivity analysis, not an accuracy estimate.", supplementary=True)
         + figure("S2", "Staged technical ablation", "Blinded staged technical ablation across three cumulative transitions. A was the single-prompt baseline; B added decomposition and orchestration; C added semantic, faithfulness, and temporal verification; D added deterministic inline processing and the complete POST-hook layer. One non-physician Codex judge produced these secondary technical judgments. Exact two-sided sign tests exclude ties.", supplementary=True)
-        + supplementary_table_2()
+        + supplementary_table_3()
         + "</div></details>"
     )
 
@@ -425,7 +445,7 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
   </details>
   {sections}
   {build_supplement()}
-  <details class="fold references" id="references"><summary>References</summary><div class="fold-body">{technical_note("This short list retains verified references directly connected to physician source comments. The Word comments remain preserved separately and are not treated as formal references.")}{references()}</div></details>
+  <details class="fold references" id="references" data-origin="technical-insert"><summary>References</summary><div class="fold-body">{technical_note("This short list retains verified references directly connected to physician source comments. The Word comments remain preserved separately and are not treated as formal references.")}{references()}</div></details>
   <details class="fold" id="physician-comments"><summary>Physician comments</summary><div class="fold-body">{render_comments(data)}</div></details>
   <details class="fold" id="version-history"><summary>Version history</summary><div class="fold-body">{version_history()}</div></details>
 </article>
@@ -447,7 +467,7 @@ The physician-authored blocks below are copied verbatim from `{SOURCE_DOCX.name}
 
 ## Supplementary material
 
-Generated technical content: Supplementary Table S1, Supplementary Figure S1, Supplementary Figure S2, and Supplementary Table S2.
+Generated technical content: Supplementary Tables S1-S3 and Supplementary Figures S1-S2.
 
 ## Physician comments
 
@@ -517,13 +537,23 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     if parser.cells != expected_cells: raise AssertionError("Physician native table cells changed")
     if parser.cell_order != list(expected_cells): raise AssertionError("Physician native table-cell sequence changed")
     if parser.comments != expected_comments: raise AssertionError("Physician comments changed")
+    markdown_physician_ids = re.findall(r"<!-- physician:(P\d{3}) -->", markdown)
+    expected_markdown_ids = list(expected_paragraphs)
+    if markdown_physician_ids != expected_markdown_ids:
+        raise AssertionError(f"Generated Markdown physician sequence changed: expected {len(expected_markdown_ids)}, found {len(markdown_physician_ids)}")
     if len(parser.ids) != len(set(parser.ids)): raise AssertionError("Duplicate HTML IDs")
     missing_anchors = sorted(set(parser.hrefs) - set(parser.ids))
     if missing_anchors: raise AssertionError(f"Missing internal anchors: {missing_anchors}")
     if parser.main_figures != ["1", "2", "3", "4"]: raise AssertionError(f"Unexpected main figures: {parser.main_figures}")
     if parser.supplementary_figures != ["S1", "S2"]: raise AssertionError(f"Unexpected supplementary figures: {parser.supplementary_figures}")
-    for label in ["Methods Table M1", "Methods Table M2", "Table 1", "Table 2", "Table 3", "Supplementary Table S1", "Supplementary Table S2"]:
+    for label in ["Methods Table M1", "Methods Table M2", "Table 1", "Table 2", "Table 3", "Supplementary Table S1", "Supplementary Table S2", "Supplementary Table S3"]:
         if document.count(f"<strong>{label}.</strong>") != 1: raise AssertionError(f"Table label missing or duplicated: {label}")
+    if '<details class="fold references" id="references" data-origin="technical-insert">' not in document or '<ol data-origin="technical-insert">' not in document:
+        raise AssertionError("References provenance marker is missing")
+    if document.count("The evaluated core fields are defined in Supplementary Table S1.") != 1:
+        raise AssertionError("Supplementary Table S1 cross-reference is missing")
+    if "if(target instanceof HTMLDetailsElement||target.tagName==='DETAILS')target.open=true" not in document or "target.focus({preventScroll:true})" not in document:
+        raise AssertionError("Closed-details target reveal behavior is missing")
     if 'lang="zh"' in document or 'id="chinese-version"' in document: raise AssertionError("Chinese manuscript shell remains")
     if "Difference from 50%" in document: raise AssertionError("Removed Difference from 50% column remains")
     for stale in ["figure5_staged_ablation.svg", "figure6_clinical_handoff.svg", 'data-main-figure="5"', 'data-main-figure="6"']:
@@ -540,7 +570,7 @@ def main() -> None:
     OUTPUT_HTML.write_text(document, encoding="utf-8")
     print(f"Wrote {SOURCE_MD}")
     print(f"Wrote {OUTPUT_HTML}")
-    print("Preserved 127 body paragraphs, 2 native tables, and 12 comments; rendered 4 main and 2 supplementary figures.")
+    print("Preserved 162/162 physician text blocks (127 paragraphs and 35 native-table cells) and 12/12 comments; rendered 4 main and 2 supplementary figures.")
 
 
 if __name__ == "__main__":
