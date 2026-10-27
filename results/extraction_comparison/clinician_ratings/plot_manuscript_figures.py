@@ -543,41 +543,16 @@ def note_margins(rows: list[dict[str, str]], prefix: str, fields: list[str]) -> 
     return {sample: (net[sample], totals[sample]) for sample in net}
 
 
-def draw_margin_panel(out: list[str], x0: int, y0: int, width: int, title: str, margins: dict[str, tuple[int, int]], summary: str) -> None:
-    ordered = sorted(margins.items(), key=lambda item: item[1][0] / item[1][1])
-    left, right, top, row_gap = x0 + 100, x0 + width - 35, y0 + 75, 31
-    xmin, xmax = -0.2, 0.8
-    text(out, x0 + 20, y0 + 27, title, 19, weight=700)
-    text(out, x0 + width - 20, y0 + 27, summary, 14, anchor="end", weight=700, fill=PL)
-    for tick in [-0.2, 0.0, 0.2, 0.4, 0.6, 0.8]:
-        x = left + (tick - xmin) / (xmax - xmin) * (right - left)
-        stroke = "#737E86" if tick == 0 else GRID
-        out.append(f'<line x1="{x:.1f}" y1="{top - 22}" x2="{x:.1f}" y2="{top + 19 * row_gap + 16}" stroke="{stroke}"/>')
-        text(out, x, top + 19 * row_gap + 40, f"{tick:.0%}", 11, anchor="middle", fill=MUTED)
-    zero_x = left + (0 - xmin) / (xmax - xmin) * (right - left)
-    for index, (label, (net, total)) in enumerate(ordered):
-        value = net / total
-        y = top + index * row_gap
-        x = left + (value - xmin) / (xmax - xmin) * (right - left)
-        text(out, left - 13, y + 5, label, 12, anchor="end")
-        color = PL if value > 0 else BL if value < 0 else TIE
-        out.append(f'<line x1="{zero_x:.1f}" y1="{y}" x2="{x:.1f}" y2="{y}" stroke="{color}" stroke-width="3"/>')
-        out.append(f'<circle cx="{x:.1f}" cy="{y}" r="6.5" fill="{color}" stroke="white" stroke-width="1.5"/>')
-    text(out, x0 + width / 2, top + 19 * row_gap + 67, "Normalized margin: (harness preferences - baseline preferences) / completed judgments", 12, anchor="middle", fill=MUTED)
-
-
 def plot_supplementary_note_margins(raters: dict[str, list[dict[str, str]]]) -> None:
     all_rows = [row for rows in raters.values() for row in rows]
     breast = note_margins(all_rows, "b", BREAST_FIELDS)
     pdac = note_margins(all_rows, "p", PDAC_FIELDS)
-    width, height = 1500, 1160
+    width, height = 1500, 360
     out = svg_start(width, height)
-    panel(out, 25, 20, 1450, 285, "A", "Compact note-level distribution")
+    round_rect(out, 25, 20, 1450, 315, fill=PANEL_FILL, stroke=PANEL_STROKE, radius=13)
+    text(out, 60, 62, "Note-level preference-margin distribution", 21, weight=700)
+    text(out, 1440, 62, "Pooled across four physicians", 14, anchor="end", fill=MUTED)
     draw_compact_note_distribution(out, 75, 95, 1350, breast, pdac)
-    panel(out, 25, 325, 710, 810, "B", "Breast cancer note detail")
-    panel(out, 765, 325, 710, 810, "C", "PDAC note detail")
-    draw_margin_panel(out, 35, 373, 680, "Notes ranked by preference margin", breast, "20/20 positive")
-    draw_margin_panel(out, 775, 373, 680, "Notes ranked by preference margin", pdac, "19/20 positive; 1 negative")
     svg_end(out, OUTPUT / "supplementary_figure_s1_note_margins.svg")
 
 
@@ -653,44 +628,6 @@ def draw_core_field_probability(out: list[str]) -> None:
     text(out, xpos(0.5) + 5, 162, "Equal preference", 12, fill=MUTED)
     text(out, 1110, 860, "Joint exploratory GEE with shared physician and cancer effects", 13, anchor="middle", fill=MUTED)
     text(out, 1110, 886, "Ties excluded; preference is not accuracy", 13, anchor="middle", fill=MUTED)
-
-
-def draw_note_margin_distribution(
-    out: list[str], raters: dict[str, list[dict[str, str]]]
-) -> None:
-    all_rows = [row for rows in raters.values() for row in rows]
-    groups = [
-        ("Breast", note_margins(all_rows, "b", BREAST_FIELDS), "20/20 positive"),
-        ("PDAC", note_margins(all_rows, "p", PDAC_FIELDS), "19/20 positive; 1 negative"),
-    ]
-    left, right, xmin, xmax = 1000, 1435, -0.2, 0.8
-    top, bottom = 600, 855
-    for tick in [-0.2, 0.0, 0.2, 0.4, 0.6, 0.8]:
-        x = left + (tick - xmin) / (xmax - xmin) * (right - left)
-        stroke = "#59656D" if tick == 0 else GRID
-        dash = "6 5" if tick == 0 else "0"
-        out.append(f'<line x1="{x:.1f}" y1="{top}" x2="{x:.1f}" y2="{bottom}" stroke="{stroke}" stroke-dasharray="{dash}"/>')
-        text(out, x, 883, f"{tick:.0%}", 12, anchor="middle", fill=MUTED)
-    for group_index, (label, margins, summary) in enumerate(groups):
-        y = 665 + group_index * 125
-        values = [net / total for net, total in margins.values()]
-        frequencies = Counter(values)
-        used: Counter[float] = Counter()
-        text(out, left - 22, y + 5, label, 15, anchor="end", weight=700)
-        text(out, right, y - 43, summary, 13, anchor="end", weight=700, fill=PL)
-        out.append(f'<line x1="{left}" y1="{y}" x2="{right}" y2="{y}" stroke="#AEB7BD" stroke-width="2"/>')
-        for value in sorted(values):
-            rank = used[value]
-            count = frequencies[value]
-            used[value] += 1
-            jitter = (rank - (count - 1) / 2) * 12
-            x = left + (value - xmin) / (xmax - xmin) * (right - left)
-            color = PL if value > 0 else BL if value < 0 else TIE
-            out.append(
-                f'<circle cx="{x:.1f}" cy="{y + jitter:.1f}" r="7" fill="{color}" '
-                'stroke="white" stroke-width="1.5"/>'
-            )
-    text(out, 1218, 912, "Normalized note margin", 13, anchor="middle", fill=MUTED)
 
 
 def plot_effect_profile(raters: dict[str, list[dict[str, str]]]) -> None:
