@@ -1,6 +1,6 @@
 # Workshop manuscript figures
 
-These vector figures use one publication layout and fixed semantic color system across the English-only version 1.2.3 draft. Figures 2-4 use the four current physician datasets; Bolun's breast and PDAC ratings are stored in separate source workbooks. Patient-letter findings and the final test-set LLM audit are not reported as manuscript results.
+These vector figures use one publication layout and fixed semantic color system across the English-only version 1.3 draft. Figures 2-4 use the four current physician datasets; Bolun's breast and PDAC ratings are stored in separate source workbooks. Patient-letter findings and the final test-set LLM audit are not reported as manuscript results.
 
 Supplementary Figure S2 reads the locked counts in `../../../staged_ablation_annotated_20261001_093433/JUDGE_CODEX_DECODED_ANALYSIS.md`. The same script generates four main figures and two supplementary figures.
 

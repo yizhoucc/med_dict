@@ -52,6 +52,11 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           const body = document.getElementById('supplement-body');
           const button = supplement?.querySelector(':scope > .fold-toggle');
           if (!supplement || !body || !button) return 'missing custom supplement fold';
+          const highlights = [...document.querySelectorAll('mark.revision-highlight')];
+          if (highlights.length !== 3) return `unexpected revision-highlight count: ${highlights.length}`;
+          if (highlights.some(node => ['transparent', 'rgba(0, 0, 0, 0)'].includes(getComputedStyle(node).backgroundColor))) {
+            return 'revision highlight is not visible on screen';
+          }
           const visible = () => getComputedStyle(body).display !== 'none';
           if (!supplement.classList.contains('is-collapsed') || visible() || button.getAttribute('aria-expanded') !== 'false') {
             return 'supplement was not initially collapsed';
@@ -97,11 +102,17 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
                   let visible = report["supplementVisible"] as? Bool, visible,
                   let documentHeight = report["documentHeight"] as? Double,
                   let contentBottom = report["contentBottom"] as? Double,
+                  let highlightCount = report["revisionHighlightCount"] as? Int,
+                  let highlightBackgrounds = report["revisionHighlightBackgrounds"] as? [String],
                   let items = report["items"] as? [[String: Any]],
                   let offenders = report["offenders"] as? [String] else {
                 self.fail("Invalid print-preparation report"); return
             }
             guard offenders.isEmpty else { self.fail("Page-boundary offenders: \(offenders)"); return }
+            guard highlightCount == 3,
+                  highlightBackgrounds.allSatisfy({ $0 == "transparent" || $0 == "rgba(0, 0, 0, 0)" }) else {
+                self.fail("Revision highlights retained screen background in print export: \(highlightBackgrounds)"); return
+            }
             let figureIDs = Set(items.filter { ($0["kind"] as? String) == "figure" }.compactMap { $0["id"] as? String })
             let tableIDs = Set(items.filter { ($0["kind"] as? String) == "table" }.compactMap { $0["id"] as? String })
             let expectedFigures: Set<String> = ["figure-1", "figure-2", "figure-3", "figure-4", "figure-s1", "figure-s2"]
