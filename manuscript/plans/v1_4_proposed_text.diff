@@ -1,0 +1,122 @@
+DO NOT APPLY
+
+This is a non-executable review diff. It uses proposal-only pseudo-paths and omits real repository paths, line numbers, and patch metadata. The content has not been applied to any manuscript, renderer, data file, or analysis.
+
+--- proposal/current-visible-text
++++ proposal/v1.4-visible-text
+
+@@ Introduction / P004-P012 @@
+- P004 begins: "Recent years have witnessed increased use of large language models (LLMs) in clinical language tasks..."
+- P006 begins: "Although EHRs contain structured fields, it is estimated that 80% of clinical data exist in unstructured form..."
+- P008 begins: "Currently, LLMs can assist with this task, but the output does not ensure that the extracted information is fully faithful..."
+- P010 begins: "Local open-weight models are smaller, and their performance varies with model size."
+- P012 begins: "We use the term inference harness to describe the execution workflow surrounding an LLM..."
++ P004: Large language models (LLMs) are increasingly used for clinical documentation, patient communication, and other language tasks. Many such applications begin by extracting relevant facts from electronic health record (EHR) notes before those facts can be summarized or reused. Reliable note extraction is therefore a practical requirement for applying LLMs to oncology care and research.
++ P006: Although EHRs contain structured fields, much clinically relevant information appears in free-text narratives (Kong, 2019; Wiest et al., 2024). Oncology notes often combine diagnoses, prior and planned treatments, test results, and changing disease status across sections and time points. Uncertainty, copied-forward text, and redundant documentation make the current clinical state difficult to separate from historical information. Outpatient notes have also become longer and more redundant over time, in part because of templates and copied text (Rule et al., 2021).
++ P008: LLMs can extract information from these notes, but fluent output may omit facts, confuse timelines, or add plausible statements that the note does not support. Commercial models have shown variable performance on clinical extraction tasks. Their use can also raise privacy and governance questions when protected health information is sent to externally hosted services. Local deployment keeps note processing within the institution, but it does not by itself prevent extraction errors.
++ P010: Extraction performance depends on both the model and the workflow used at inference. Fine-tuning can adapt a model to a clinical task, but it requires suitable training data and additional development. Prompt design, task decomposition, verification, and deterministic clinical rules offer another route that does not change model weights. Prior work has used iterative prompt refinement and clinical review to improve structured extraction (Huang et al., 2024; Hein et al., 2025). Less is known about how to convert recurring expert feedback into a reproducible inference workflow for complex oncology notes.
++ P012: We use the term inference harness for the workflow that surrounds a frozen LLM: the sequence of extraction steps, verification checks, and clinical rules applied at inference. We developed a locally deployable harness for oncology-note extraction, refined it first on breast-cancer notes with physician input, and then adapted it to pancreatic ductal adenocarcinoma notes through model-assisted review without physician review of pancreatic outputs. We compared the final harness with a single-prompt baseline using the same underlying model and field definitions, with system identities masked during physician evaluation. We also conducted an exploratory staged technical ablation to examine how successive harness components changed output quality.
+
+@@ Methods, Study Design / P017 @@
+- The study comprised two development stages followed by an independent clinical evaluation. During breast-cancer development, a physician coauthor and the model-development investigators iteratively reviewed extraction outputs, identified recurring errors, and revised the inference harness. The framework was then adapted to pancreatic cancer using model-assisted review, without clinician review of pancreatic-cancer outputs. The model-assisted review used the error categories and clinical distinctions established during breast-cancer development to identify potential errors and propose revisions, which the investigators assessed and regression-tested.
++ The study had two development stages, followed by an independent clinical evaluation. Stage 1 used physician-guided review of breast-cancer outputs. Stage 2 adapted the harness to pancreatic ductal adenocarcinoma without physician review of pancreatic outputs, using model-assisted review and investigator-directed regression testing.
++
++ During Stage 1, a physician author and the model-development investigators reviewed selected breast-cancer outputs, identified recurring error patterns, and revised prompts, verification logic, or clinical rules. Revisions were retained only after regression testing. The number of breast-cancer notes processed and reviewed remains subject to author confirmation.
++
++ During Stage 2, no physician reviewed pancreatic-cancer outputs. ChatGPT organized error categories and clinical distinctions established during Stage 1 into a structured rubric. A rubric-guided Qwen reviewer compared pipeline outputs with the source notes. Investigators assessed the flagged issues, selected revisions, and retained changes only after regression testing.
+
+@@ Methods, Study Design / P019 @@
+- The final harness was compared with a single-prompt baseline using the same frozen model and field schema on 40 expert-annotated CORAL notes. Four physicians completed system-label-masked A/B evaluations across both cancer types. A secondary technical ablation compared four stages of inference-harness development using blinded LLM review.
++ The final harness was compared with a single-prompt baseline using the same frozen model and field schema on 40 CORAL benchmark notes: 20 breast-cancer notes and 20 pancreatic-cancer notes. Four physicians completed system-identity-masked field-level evaluations.
++
++ We separately conducted an exploratory staged technical ablation of four cumulative harness configurations using a blinded OpenAI LLM judge.
+
+@@ Methods, Dataset / P022, Candidate A recommended pending provenance review @@
+- We used the CORAL dataset, a PhysioNet dataset of 40 deidentified medical oncology notes obtained from the University of California, San Francisco. The development pool contains 100 breast-cancer and 100 pancreatic-cancer notes without expert annotation. The untouched holdout test set contains 20 expert-annotated notes for each cancer type. Access requires the PhysioNet credentialing and data-use process described by the dataset authors.
++ CANDIDATE A, FACT-CONSERVATIVE: We used CORAL, a PhysioNet dataset of deidentified medical oncology notes from the University of California, San Francisco. The available development pool contained 100 unannotated breast-cancer notes and 100 unannotated pancreatic-cancer notes. The benchmark comprised 20 expert-annotated breast-cancer notes and 20 expert-annotated pancreatic-cancer notes. The existing CORAL annotations were not provided to the model, shown in the physician-evaluation interface, or used to calculate the primary physician-preference endpoint. Use of the benchmark note texts during development requires the provenance disclosure described in Limitations.
+
+@@ Methods, Dataset / P022, Candidate B only with author-supplied dated evidence @@
+- We used the CORAL dataset, a PhysioNet dataset of 40 deidentified medical oncology notes obtained from the University of California, San Francisco. The development pool contains 100 breast-cancer and 100 pancreatic-cancer notes without expert annotation. The untouched holdout test set contains 20 expert-annotated notes for each cancer type. Access requires the PhysioNet credentialing and data-use process described by the dataset authors.
++ CANDIDATE B, HOLDOUT CLAIM REQUIRES EVIDENCE: We used CORAL, a PhysioNet dataset of deidentified medical oncology notes from the University of California, San Francisco. Development used 100 unannotated breast-cancer notes and 100 unannotated pancreatic-cancer notes. A separate holdout set contained 20 expert-annotated breast-cancer notes and 20 expert-annotated pancreatic-cancer notes. Neither the holdout note texts nor their annotations were viewed or used for development, error analysis, prompt revision, rule development, or regression testing before the harness was frozen. The annotations were not shown in the physician-evaluation interface and were not used to calculate the primary physician-preference endpoint.
++
++ REVIEW CONDITION: Candidate B must not be used unless dated run manifests, review records, and the harness freeze commit establish every claim in the paragraph.
+
+@@ Data availability or Supplementary Methods / moved from P022 @@
+- Access requires the PhysioNet credentialing and data-use process described by the dataset authors.
++ CORAL access is governed by the PhysioNet credentialing and data-use process specified by the dataset authors.
+
+@@ Methods, Baseline model and model development / P025 @@
+- We used Qwen2.5-32B-Instruct-AWQ served locally through vLLM. The baseline model made one model call per note and returned the complete target schema. In the clinician review, the baseline model and the harness model used the same field definitions and output contract.
++ We used Qwen2.5-32B-Instruct-AWQ served locally through vLLM. For each note, the baseline sent the complete note to the model in a single prompt and requested the full target schema in one response. This definition concerns the study's application-level model request and does not make a claim about lower-level server execution. The baseline and harness used the same field definitions and output contract in the physician evaluation.
+
+@@ Methods, Inference Harness / P028 @@
+- The harness extracted clinical information in multiple steps because different fields required different clinical context and reasoning. First, field-specific prompts independently identified the visit context, cancer diagnosis, laboratory results, objective findings, active medications, and recent treatment changes. Information extracted in earlier steps was then used to guide subsequent assessments. For example, cancer stage and metastatic status provide context for treatment intent, while current therapy and clinical findings provide context for treatment response. Plan fields were extracted primarily from the Assessment and Plan section. The harness first used deterministic patterns to identify this section. If the section could not be identified, the model made up to three attempts to locate and reproduce the relevant text, with each attempt checked against the original note. If all attempts failed, the system omitted plan-specific extraction rather than generate information not present in the source note.
++ The harness divided extraction into steps so that each field could use the relevant clinical context, reasoning process, and validation logic. It first identified relevant note sections, including Assessment and Plan, and then used field-specific prompts to extract visit context, cancer diagnosis, laboratory results, objective findings, active medications, and treatment changes. Selected earlier results informed dependent fields. For example, stage and metastatic status informed treatment intent, while current therapy and clinical findings informed treatment response. Plan fields were extracted from a source-supported Assessment and Plan section. Deterministic patterns located that section when possible. If they failed, the model made up to three attempts to identify and reproduce it, and each candidate was checked against the note. If the system could not identify sufficient source-supported text after those attempts, it omitted the plan fields rather than infer them.
+
+@@ Methods, Inference Harness / P030-P036 @@
+- Each model output passes through five verification stages. The first two address structural errors through JSON formatting repair and schema validation. The remaining three assess clinical content: semantic alignment, a faithfulness check, and temporal filtering. These verification stages ensure that the extracted information is complete, clinically relevant, and consistent with the source note. See Table 1.
+- JSON formatting repair when parsing fails.
+- Schema validation to detect incorrect or leaked keys.
+- Specificity and semantic alignment checks to identify vague or off-task answers.
+- Faithfulness trimming to remove clearly unsupported or contradictory content while retaining supported information.
+- Temporal filtering to remove completed or historical events from future-plan fields.
++ Outputs then passed through structural checks for JSON and schema validity, followed by checks for semantic alignment, source faithfulness, and temporal consistency. Operational definitions for all five gates are provided in Supplementary Methods.
+
+@@ Supplementary Methods, five verification gates / moved from P032-P036 @@
++ Gate 1 repaired JSON formatting only when parsing failed.
++ Gate 2 checked the output schema for incorrect or leaked keys.
++ Gate 3 checked specificity and semantic alignment to identify vague or off-task answers.
++ Gate 4 removed clearly unsupported or contradictory content while retaining supported information.
++ Gate 5 removed completed or historical events from future-plan fields.
+
+@@ Supplementary Methods, hypothetical insufficient-stage example / new @@
++ Hypothetical example: a note may describe suspicious distant lesions or palliative treatment without documenting enough confirmed information to assign a formal cancer stage under the extraction rules. The system should return `not stated` or leave the stage field empty rather than infer a stage from incomplete evidence. This example is illustrative and does not describe a CORAL patient.
+
+@@ Methods, Clinician-in-the-loop breast-cancer refinement / P057 @@
+- Breast-cancer development used all 100 development notes. Early and targeted iterations used smaller subsets to shorten the feedback cycle, while major and final runs covered all 100 notes to detect less frequent errors and check for regression. A physician reviewed selected outputs, and the investigator compared flagged outputs with the complete source note, grouped recurring errors, and translated them into general changes to prompts, verification logic, or deterministic rules. This physician author did not participate in the final evaluation.
++ The number of breast-cancer development notes processed and reviewed requires author confirmation. A physician reviewed selected outputs, and the investigators compared flagged outputs with the source note, grouped recurring errors, and translated them into general changes to prompts, verification logic, or deterministic rules.
++
++ REVIEW NOTE: Remove evaluator-independence wording here. State it once in the Clinical evaluation subsection.
+
+@@ Methods, Model-assisted pancreatic-cancer refinement / P060-P061 @@
+- The harness developed from breast-cancer notes was further adapted to pancreatic cancer using 100 additional pancreatic-cancer notes. No clinician reviewed pancreatic-cancer outputs during this stage. Instead, an external LLM (ChatGPT) was used to organize the clinical error categories that were found during breast-cancer development into a structured review rubric. The Qwen pipeline generated structured outputs, and a rubric-guided Qwen reviewer compared these outputs with the full pancreatic notes to identify potential errors and areas for improvement. Investigators reviewed the errors, implemented selected revisions to prompts, clinical rules, or workflow logic, and kept those changes only after regression testing.
++ The breast-cancer harness was adapted to pancreatic ductal adenocarcinoma using 100 pancreatic-cancer development notes, without physician review of pancreatic outputs. ChatGPT organized the error categories and clinical distinctions established during breast-cancer development into a structured rubric. A rubric-guided Qwen reviewer compared pipeline outputs with the full source notes and flagged potential errors. Investigators assessed those flags, selected revisions to prompts, clinical rules, or workflow logic, and retained changes only after regression testing.
+
+@@ Methods, Clinical evaluation data collection and scoring rubric / P063 @@
+- The clinical evaluation presented the source note and two structured outputs through a system-label-masked A/B interface. Evaluators selected A better, B better, or tie for each field. They were blinded to the identities of the systems. The physician who participated in the human-in-the-loop development was not one of the final evaluators. Before evaluating the test set, the authors designated seven core fields as clinically important for understanding disease status and current management. See Supplementary Table S1.
++ The clinical evaluation presented each source note with two structured outputs. For each field, evaluators selected A better, B better, or tie. The implementation used a fixed display order, with the harness shown as A and the baseline as B, while evaluators were not told the system identities. Source excerpts were available only as part of the harness output when present, so the evaluation compared the complete outputs of the two systems. The physician who participated in Stage 1 development was not among the four evaluators. Before evaluation, the authors designated seven fields as clinically important for understanding disease status and current management. Full interface details are provided in Supplementary Methods and the seven fields are listed in Supplementary Table S1.
+
+@@ Methods, subsection title / P066 @@
+- Staged Technical ablation
++ Exploratory staged technical ablation
+
+@@ Methods, exploratory staged technical ablation / P067 @@
+- We ran a secondary technical ablation on the same 20 breast-cancer and 20 pancreatic-cancer benchmark notes. All four conditions used Qwen2.5-32B-Instruct-AWQ, greedy decoding, and the same 31-field output contract. Attribution, tool calling, and letter generation were disabled.
++ We conducted an exploratory staged technical ablation on 20 breast-cancer and 20 pancreatic-cancer benchmark notes. All four conditions used Qwen2.5-32B-Instruct-AWQ, greedy decoding, and the same 31-field output contract. Attribution, tool calling, and letter generation were disabled.
+
+@@ Methods, exploratory staged technical ablation / P073 @@
+- We compared adjacent configurations (A vs B, B vs C, and C vs D), yielding 120 paired comparisons across 40 notes. An AI judge (Codex) was given only the source note and the two outputs. The judge had no access to the project code, development history, prior evaluations, or system identities. The judge was instructed to prioritize source faithfulness, then completeness, and to use TIE when differences were minor or offsetting.
++ We compared adjacent configurations (A vs B, B vs C, and C vs D), yielding 120 paired comparisons across 40 notes. A single blinded OpenAI LLM judge received only the source note and the two outputs. The judge had no access to project code, development history, prior evaluations, or system identities. It was instructed to prioritize source faithfulness, then completeness, and to use TIE when differences were minor or offsetting. Exact judge configuration and instructions are provided in Supplementary Methods.
+
+@@ Supplementary Methods, model roles / new @@
++ ChatGPT role in PDAC development: organized breast-derived error categories and clinical distinctions into a structured review rubric.
++ Qwen role in PDAC development: used the rubric to compare pipeline outputs with full pancreatic source notes and flag potential errors for investigator review.
++ Ablation judge: Codex, model `gpt-5.6-sol`, reasoning effort `xhigh`, service tier `default`. The judge reviewed blinded adjacent-configuration pairs.
+
+@@ Supplementary Methods, physician evaluation interface / new @@
++ The interface used a fixed position mapping: A displayed the inference-harness output and B displayed the single-prompt baseline. Evaluators were not shown these identities. Source attribution was available only in the harness output when present. The evaluation therefore compared the complete system outputs rather than isolating attribution as a component.
+
+@@ Discussion, Limitations / P119 @@
+- This study has several limitations. First, our primary outcome was physician preference rather than absolute extraction accuracy. A tie could indicate that both systems produced acceptable outputs or that both contained errors. Although physician ratings consistently favored the harness, the evaluation included only four physicians and 40 clinical notes from two cancer types within a single-source dataset. However, these were real clinical notes rather than synthetic cases or model-generated narratives. They contain repeated, copied-forward information, uncertain findings, treatment plans, or even typographical errors that make the extraction task challenging. Nevertheless, further studies are needed to investigate whether the results can be generalized to other cancer types or language models. Second, the exploratory ablation was evaluated by a single non-physician LLM judge and compared cumulative stages rather than individual components. Therefore, it could not determine the independent contribution of each verification step or clinical rule.
++ This study has several limitations. The primary outcome was physician preference rather than absolute extraction accuracy, and a tie could mean that both outputs were acceptable or that both contained errors. The evaluation included four physicians and 40 notes from two cancer types in one source dataset. The development status of the 40 benchmark note texts requires explicit provenance reporting because project records indicate that the texts may have informed error analysis even though the expert annotations were not used in the primary endpoint. The evaluation interface also used fixed A/B positions, and source attribution was available only in the harness output. These features may have allowed evaluators to infer a recurring pattern or may have influenced preference, but the direction and magnitude of any effect cannot be determined. Both systems used the same base-model family, so the results do not establish generalization to other model families. Finally, the exploratory staged technical ablation used one non-physician LLM judge and compared cumulative stages. It therefore could not determine the independent contribution of each verification step or clinical rule.
+
+@@ Screen-only version history / proposal only @@
+- Current change: conservative grammar edits, verified author-year citations, and three highlighted methods or limitation clarifications.
+- Version history: top-level disclosure is closed, and all entries are closed.
++ Version history: top-level disclosure remains closed on ordinary page load.
++ When opened, `v1.4, Current change` is expanded and lists the approved scientific changes.
++ Older versions remain individually collapsed and can be opened one at a time.
++ A direct URL fragment opens only its targeted version entry.
++ Version history remains excluded from the print manuscript.
+
+END OF NON-EXECUTABLE REVIEW DIFF
