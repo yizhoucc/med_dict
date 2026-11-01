@@ -94,8 +94,12 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           }
           for (const [id, level] of [['P008', 'light'], ['P067', 'medium'], ['P010', 'strong']]) {
             const node = document.querySelector(`[data-review-block-id="${id}"]`);
+            const swatch = document.querySelector(`.revision-swatch.revision-${level}`);
             if (node?.dataset.reviewImportance !== level || !node.classList.contains(`revision-${level}`)) {
               return `importance sample mismatch: ${id}`;
+            }
+            if (!swatch || getComputedStyle(node).backgroundColor !== getComputedStyle(swatch).backgroundColor) {
+              return `highlight and legend swatch color differ: ${id}`;
             }
           }
           const ablationPurpose = document.querySelector('[data-review-block-id="P067"]');
@@ -192,7 +196,43 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
     }
 
     func preparePrintExport() {
-        webView.evaluateJavaScript("window.preparePrintExport(960)") { value, error in
+        let printExportChecks = #"""
+        (() => {
+          const report = window.preparePrintExport(960);
+          const highlights = [...document.querySelectorAll('[data-review-changed-from="v1.3"]')];
+          report.revisionHighlightPrintStyles = highlights.map(node => {
+            const style = getComputedStyle(node);
+            return {
+              id: node.dataset.reviewBlockId || '',
+              importance: node.dataset.reviewImportance || '',
+              backgroundColor: style.backgroundColor,
+              outlineStyle: style.outlineStyle,
+              outlineWidth: style.outlineWidth,
+              outlineColor: style.outlineColor,
+            };
+          });
+          const printReviewRules = [];
+          for (const sheet of document.styleSheets) {
+            for (const rule of [...(sheet.cssRules || [])]) {
+              if (!(rule instanceof CSSMediaRule) || rule.conditionText !== 'print') continue;
+              for (const nested of [...rule.cssRules]) {
+                if (nested.selectorText?.includes('.revision-highlight') && nested.selectorText.includes('.revision-strong')) {
+                  printReviewRules.push({
+                    selector: nested.selectorText,
+                    backgroundColor: nested.style.getPropertyValue('background-color'),
+                    backgroundPriority: nested.style.getPropertyPriority('background-color'),
+                    outline: nested.style.getPropertyValue('outline'),
+                    outlinePriority: nested.style.getPropertyPriority('outline'),
+                  });
+                }
+              }
+            }
+          }
+          report.printReviewRules = printReviewRules;
+          return report;
+        })()
+        """#
+        webView.evaluateJavaScript(printExportChecks) { value, error in
             if let error = error { self.fail(error.localizedDescription); return }
             guard let report = value as? [String: Any],
                   let visible = report["supplementVisible"] as? Bool, visible,
@@ -200,6 +240,8 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
                   let contentBottom = report["contentBottom"] as? Double,
                   let highlightCount = report["revisionHighlightCount"] as? Int,
                   let highlightBackgrounds = report["revisionHighlightBackgrounds"] as? [String],
+                  let highlightPrintStyles = report["revisionHighlightPrintStyles"] as? [[String: Any]],
+                  let printReviewRules = report["printReviewRules"] as? [[String: Any]],
                   let items = report["items"] as? [[String: Any]],
                   let offenders = report["offenders"] as? [String] else {
                 self.fail("Invalid print-preparation report"); return
@@ -208,6 +250,30 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
             guard highlightCount == 44,
                   highlightBackgrounds.allSatisfy({ $0 == "transparent" || $0 == "rgba(0, 0, 0, 0)" }) else {
                 self.fail("Revision highlights retained screen background in print export: \(highlightBackgrounds)"); return
+            }
+            let validLevels: Set<String> = ["light", "medium", "strong"]
+            guard highlightPrintStyles.count == 44,
+                  highlightPrintStyles.allSatisfy({ style in
+                      let background = style["backgroundColor"] as? String ?? ""
+                      let outlineStyle = style["outlineStyle"] as? String ?? ""
+                      let outlineWidth = style["outlineWidth"] as? String ?? ""
+                      let importance = style["importance"] as? String ?? ""
+                      return (background == "transparent" || background == "rgba(0, 0, 0, 0)") &&
+                             (outlineStyle == "none" || outlineWidth == "0px") &&
+                             validLevels.contains(importance)
+                  }) else {
+                self.fail("Print export retained a highlight background or outline: \(highlightPrintStyles)"); return
+            }
+            guard let figureCaptionStyle = highlightPrintStyles.first(where: { ($0["id"] as? String) == "figure-s2::caption" }),
+                  (figureCaptionStyle["outlineStyle"] as? String) == "none" || (figureCaptionStyle["outlineWidth"] as? String) == "0px" else {
+                self.fail("Highlighted figure caption retained an outline in print export"); return
+            }
+            guard printReviewRules.count == 1,
+                  (printReviewRules[0]["backgroundColor"] as? String) == "transparent",
+                  (printReviewRules[0]["backgroundPriority"] as? String) == "important",
+                  ["0px", "none"].contains(printReviewRules[0]["outline"] as? String ?? ""),
+                  (printReviewRules[0]["outlinePriority"] as? String) == "important" else {
+                self.fail("Print media rule does not clear all highlight backgrounds and outlines: \(printReviewRules)"); return
             }
             let figureIDs = Set(items.filter { ($0["kind"] as? String) == "figure" }.compactMap { $0["id"] as? String })
             let tableIDs = Set(items.filter { ($0["kind"] as? String) == "table" }.compactMap { $0["id"] as? String })
