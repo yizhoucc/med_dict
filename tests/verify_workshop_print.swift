@@ -56,7 +56,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           const button = supplement?.querySelector(':scope > .fold-toggle');
           if (!supplement || !body || !button) return 'missing custom supplement fold';
           const highlights = [...document.querySelectorAll('[data-review-changed-from="v1.3"]')];
-          if (highlights.length !== 43) return `unexpected revision-highlight count: ${highlights.length}`;
+          if (highlights.length !== 44) return `unexpected revision-highlight count: ${highlights.length}`;
           if (highlights.some(node => ['transparent', 'rgba(0, 0, 0, 0)'].includes(getComputedStyle(node).backgroundColor))) {
             return 'revision highlight is not visible on screen';
           }
@@ -64,7 +64,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           if (legend !== 'Complete block-level redline against v1.3: every visible manuscript block with changed wording is highlighted. Deletions are recorded in the version diff.') {
             return `unexpected review legend: ${legend}`;
           }
-          const changedSample = ['P004', 'P010', 'P017', 'P025', 'P066', 'P067', 'T2R1C2', 'table-2::caption', 'supplement-data-access', 'P119'];
+          const changedSample = ['P004', 'P010', 'P017', 'P025', 'P066', 'P067', 'T2R1C2', 'table-2::caption', 'supplement-data-access', 'P117', 'P119'];
           for (const id of changedSample) {
             const node = document.querySelector(`[data-review-block-id="${id}"]`);
             if (!node || node.getAttribute('data-review-changed-from') !== 'v1.3' || !node.classList.contains('revision-highlight')) {
@@ -185,7 +185,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
                 self.fail("Invalid print-preparation report"); return
             }
             guard offenders.isEmpty else { self.fail("Page-boundary offenders: \(offenders)"); return }
-            guard highlightCount == 43,
+            guard highlightCount == 44,
                   highlightBackgrounds.allSatisfy({ $0 == "transparent" || $0 == "rgba(0, 0, 0, 0)" }) else {
                 self.fail("Revision highlights retained screen background in print export: \(highlightBackgrounds)"); return
             }

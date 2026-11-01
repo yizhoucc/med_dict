@@ -4,6 +4,8 @@ Baseline: visible manuscript in commit `de4fff87eae0dc00f4c4eb65ec2274a3c7108cd8
 
 The HTML shows current changed and new blocks in yellow. It does not restore deleted text. The following nine v1.3 blocks are absent as standalone blocks in v1.5 because their content was removed, consolidated, or moved.
 
+The redline scope includes the revised Discussion paragraphs P117 and P119. P117 is highlighted because its opening changed from "Our ablation analysis" in v1.3 to "The ablation study" in v1.5.
+
 | Stable block ID | Visible v1.3 text | v1.5 disposition |
 |---|---|---|
 | `P032` | JSON formatting repair when parsing fails. | Consolidated into the main Methods summary and the ordered gate definitions in Supplementary Methods. |

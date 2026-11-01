@@ -64,6 +64,16 @@ def main() -> None:
     assert state["changed"] == state["highlighted"]
     assert not [block_id for block_id in state["highlighted"] if block_id not in state["scoped_current"]]
     assert not [block_id for block_id in state["changed"] if state["current"][block_id].section == "results"]
+    assert len(state["scoped_current"]) == 342
+    assert len(state["changed"]) == len(state["highlighted"]) == 44
+    assert state["section_counts"] == {
+        "discussion": 2,
+        "introduction": 5,
+        "methods": 15,
+        "supplementary-material": 1,
+        "supplementary-methods": 21,
+    }
+    assert "P117" in state["changed"] == state["highlighted"]
 
     metrics = introduction_diff_metrics()
     inserted_or_replaced = metrics["inserted_words"] + metrics["replacement_words"]

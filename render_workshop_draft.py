@@ -546,7 +546,7 @@ def review_block_in_scope(block: ReviewBlock | dict[str, object]) -> bool:
     block_id = str(block.block_id if isinstance(block, ReviewBlock) else block.get("block_id", ""))
     return (
         section in {"introduction", "methods", "supplementary-methods"}
-        or block_id in {"P119", "revision-model-family-limitation"}
+        or block_id in {"P117", "P119", "revision-model-family-limitation"}
         or kind in {"heading", "cell", "caption"}
     )
 
@@ -1127,7 +1127,7 @@ def build_supplement() -> str:
 
 def version_history() -> str:
     entries = [
-        ("v1.5", "2026-10-31", "Current change", "Clarified the five-paragraph Introduction and added a complete block-level redline against the v1.3 visible manuscript. Every visible manuscript block with changed wording is highlighted; deletions are recorded in the version diff."),
+        ("v1.5", "2026-10-31", "Current change", "Clarified the five-paragraph Introduction and added a complete block-level redline against the v1.3 visible manuscript, including the revised ablation discussion. Every visible manuscript block with changed wording is highlighted; deletions are recorded in the version diff."),
         ("v1.4.1", "2026-10-31", "Simplified the A/B interface and ablation-study wording, defined the ablation purpose as examining output-quality changes across successive harness configurations, and aligned the baseline condition with the application-level inference-request definition."),
         ("v1.4", "2026-10-31", "Reorganized the five-paragraph Introduction while retaining the physician's language, clarified the two-stage Methods and holdout design, moved gate and interface details to Supplementary Methods, and added the corresponding evaluation limitation."),
         ("v1.3", "2026-10-30", "Applied conservative grammar and punctuation edits, added direct verified author-year citations, retained two outstanding physician comments, and highlighted three new methods or limitation clarifications for review."),

@@ -7,7 +7,7 @@ Status: **implemented on 2026-10-31**.
 - Clarified the five Introduction paragraphs while retaining the physician draft's structure and language.
 - Added the study focus to P004; consolidated note complexity and current clinical context in P006; separated reliability from privacy and governance in P008; corrected the descriptions of fine-tuning and inference-time methods in P010; and stated the study objective once in P012.
 - Implemented a complete block-level review redline against the visible v1.3 manuscript at commit `de4fff87eae0dc00f4c4eb65ec2274a3c7108cd8`.
-- Applied the comparison to Introduction, Methods, Supplementary Methods, all changed manuscript or supplement headings, table cells and captions, figure captions, and the P119 limitation. Results wording, data, figures, and statistics were not changed.
+- Applied the comparison to Introduction, Methods, Supplementary Methods, all changed manuscript or supplement headings, table cells and captions, figure captions, and the revised Discussion paragraphs P117 and P119. Results wording, data, figures, and statistics were not changed.
 - Recorded deleted or consolidated v1.3 blocks in `v1_5_version_diff.md`; deleted wording is not inserted back into the manuscript.
 - Updated the screen-only version interface to v1.5. The outer history stays closed, v1.5 is open after the parent is opened, and v1.4.1 and older entries stay closed.
 

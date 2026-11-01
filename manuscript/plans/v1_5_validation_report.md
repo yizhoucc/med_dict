@@ -15,9 +15,9 @@ Validation date: 2026-10-31.
 - Baseline HTML SHA-256: `db7b8fb330cce451383bc9741e616aa17f6bc87d5b3da3afdf39a309d6ecbb47`.
 - Baseline visible blocks: **341**.
 - Current visible blocks: **354**.
-- In-scope current blocks: **341**.
-- Changed or new current blocks: **43**.
-- Highlighted current blocks: **43**.
+- In-scope current blocks: **342**.
+- Changed or new current blocks: **44**.
+- Highlighted current blocks: **44**.
 - Deleted standalone baseline blocks: **9**.
 - Assertion result: changed block set equals highlighted block set. No unchanged block is highlighted, and no orphan review marker exists.
 
@@ -29,7 +29,7 @@ Changed and highlighted block counts by current section:
 | Methods | 15 |
 | Supplementary Methods | 21 |
 | Supplementary material figure caption | 1 |
-| Discussion limitation | 1 |
+| Discussion | 2 |
 
 The nine deleted standalone blocks and their current disposition are listed in `v1_5_version_diff.md`.
 
@@ -42,5 +42,5 @@ The nine deleted standalone blocks and their current disposition are listed in `
 - Results visible-block SHA-256 at v1.4.1 and v1.5: `8c05de43c1eaa3fda1f1429af90a1cf181d9a54330ddba3fc8ff62888659eb0c` in both versions.
 - Cross-references, unique IDs, external citation safety attributes, and baseline metadata assertions pass in the renderer.
 - `tests/validate_workshop_v15.py` checks the baseline, changed/highlighted equality, Introduction diff metric, and exact Results hash.
-- `tests/verify_workshop_print.swift` samples ten changed blocks and five unchanged blocks in a real WKWebView, checks the legend and version-history hash behavior, and verifies that print retains the text while removing the yellow background.
+- `tests/verify_workshop_print.swift` samples eleven changed blocks, including P117 and P119, and five unchanged blocks in a real WKWebView. It checks the legend and version-history hash behavior and verifies that print retains the text while removing the yellow background.
 - Real WKWebView result: **14 pages, 1,266,224 bytes**, with all 6 figures and 8 tables bounded within pages. Post-write fault injection left no PDF behind.
