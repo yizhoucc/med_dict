@@ -685,7 +685,7 @@ def draw_count_cell(
     out: list[str], x: float, y: float, width: float, label: str, count: int, *, color: str, fill: str
 ) -> None:
     round_rect(out, x, y, width, 92, fill=fill, stroke=color, radius=9, stroke_width=2)
-    text(out, x + width / 2, y + 31, label, 17, anchor="middle", weight=700, fill=color if color != TIE else NEUTRAL)
+    text(out, x + width / 2, y + 31, label, 20, anchor="middle", weight=700, fill=color if color != TIE else NEUTRAL)
     text(out, x + width / 2, y + 70, str(count), 30, anchor="middle", weight=700)
 
 
@@ -697,9 +697,9 @@ def draw_ablation_comparison(
     second_letter, second_name, second_color, second_soft = second
     first_count, second_count, ties = counts
     round_rect(out, x, y, 450, 330, fill=PANEL_FILL, stroke=PANEL_STROKE, radius=12, stroke_width=1.5)
-    text(out, x + 225, y + 37, f"{first_letter}  {first_name}", 19, anchor="middle", weight=700, fill=first_color)
-    text(out, x + 225, y + 63, "versus", 16, anchor="middle", fill=MUTED)
-    text(out, x + 225, y + 91, f"{second_letter}  {second_name}", 19, anchor="middle", weight=700, fill=second_color)
+    text(out, x + 225, y + 37, f"{first_letter}  {first_name}", 21, anchor="middle", weight=700, fill=first_color)
+    text(out, x + 225, y + 64, "versus", 19, anchor="middle", fill=MUTED)
+    text(out, x + 225, y + 93, f"{second_letter}  {second_name}", 21, anchor="middle", weight=700, fill=second_color)
     cell_y = y + 120
     draw_count_cell(out, x + 24, cell_y, 122, first_letter, first_count, color=first_color, fill=first_soft)
     draw_count_cell(out, x + 164, cell_y, 122, second_letter, second_count, color=second_color, fill=second_soft)
@@ -724,7 +724,7 @@ def plot_staged_ablation() -> None:
         raise ValueError("Staged ablation overall counts changed")
     if {key: pvalues[key] for key in expected_overall} != {"A→B": 1.0, "B→C": 0.0000105, "C→D": 0.736}:
         raise ValueError("Staged ablation overall P values changed")
-    width, height = 1500, 1040
+    width, height = 1500, 1120
     out = svg_start(width, height)
     configurations = [
         ("A", "One prompt baseline", BL, BASELINE_SOFT),
@@ -739,37 +739,40 @@ def plot_staged_ablation() -> None:
         round_rect(out, x, 55, 325, 145, fill=soft, stroke=color, radius=12, stroke_width=2)
         out.append(f'<circle cx="{x + 32:.1f}" cy="{87:.1f}" r="20" fill="{color}"/>')
         text(out, x + 32, 94, letter, 19, anchor="middle", weight=700, fill="white" if index != 2 else TEXT)
-        text(out, x + 62, 94, name, 19, weight=700)
-        text(out, x + 22, 130, "Cumulative contents", 16, fill=MUTED)
+        text(out, x + 62, 94, name, 20, weight=700)
+        text(out, x + 22, 130, "Cumulative contents", 19, fill=MUTED)
         draw_cumulative_stack(out, x + 22, 150, 281, index)
         if index:
             arrow(out, stage_xs[index - 1] + 325, 127, x, 127, color=NEUTRAL)
 
     transition_xs = [40, 525, 1010]
     transitions = [
-        ("A", "B", ["Replace one prompt with field decomposition", "Cross field routing", "Bounded Assessment and Plan retry", "G1/G2 safeguards"]),
+        ("A", "B", ["Replace one prompt with", "Field decomposition and cross field routing", "Bounded Assessment and Plan retry", "G1/G2 safeguards"]),
         ("B", "C", ["Add G3-G5 verification bundle", "Semantic   •   Source support   •   Temporal"]),
         ("C", "D", ["Add deterministic inline processing", "and complete POST hooks"]),
     ]
     for x, (start, end, lines) in zip(transition_xs, transitions):
-        round_rect(out, x, 230, 450, 155, fill="white", stroke=PANEL_STROKE, radius=11)
-        text(out, x + 28, 269, start, 18, anchor="middle", weight=700)
-        text(out, x + 422, 269, end, 18, anchor="middle", weight=700)
+        round_rect(out, x, 230, 450, 190, fill="white", stroke=PANEL_STROKE, radius=11)
+        text(out, x + 28, 269, start, 21, anchor="middle", weight=700)
+        text(out, x + 422, 269, end, 21, anchor="middle", weight=700)
         arrow(out, x + 52, 263, x + 398, 263, color=PL)
-        multiline(out, x + 225, 297, lines, 17, anchor="middle", weight_first=True, leading=1.24)
+        transition_start = 325 - (len(lines) - 1) * 12.5
+        multiline(out, x + 225, transition_start, lines, 21, anchor="middle", weight_first=True, leading=1.2)
 
-    text(out, 40, 435, "Adjacent comparisons of cumulative configurations", 23, weight=700)
-    text(out, 40, 465, "Counts are shown as first configuration, second configuration, and ties. N = 40 notes per comparison.", 17, fill=MUTED)
+    text(out, 40, 470, "Adjacent comparisons of cumulative configurations", 23, weight=700)
+    text(out, 40, 503, "Counts are shown as first configuration, second configuration, and ties. N = 40 notes per comparison.", 20, fill=MUTED)
     comparison_specs = [
         ("A→B", configurations[0], configurations[1], "P = 1.000"),
         ("B→C", configurations[1], configurations[2], "P = 1.05 × 10⁻⁵"),
         ("C→D", configurations[2], configurations[3], "P = .736"),
     ]
     for x, (key, first, second, pvalue) in zip(transition_xs, comparison_specs):
-        draw_ablation_comparison(out, x, 490, first, second, data[key]["Overall"], pvalue)
+        draw_ablation_comparison(out, x, 530, first, second, data[key]["Overall"], pvalue)
 
-    text(out, 750, 865, "Adjacent comparisons of cumulative configurations. Ties are displayed but excluded from two sided exact sign tests.", 16, anchor="middle", fill=MUTED)
-    text(out, 750, 895, "The three overall P values are unadjusted. One blinded nonphysician LLM judge evaluated all comparisons.", 16, anchor="middle", fill=MUTED)
+    text(out, 750, 910, "Adjacent comparisons of cumulative configurations.", 21, anchor="middle", fill=MUTED)
+    text(out, 750, 943, "Ties are displayed but excluded from two sided exact sign tests.", 21, anchor="middle", fill=MUTED)
+    text(out, 750, 976, "The three overall P values are unadjusted.", 21, anchor="middle", fill=MUTED)
+    text(out, 750, 1009, "One blinded nonphysician LLM judge evaluated all comparisons.", 21, anchor="middle", fill=MUTED)
     svg_end(out, OUTPUT / "supplementary_figure_s2_staged_ablation.svg")
 
 

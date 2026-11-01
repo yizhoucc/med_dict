@@ -1,6 +1,6 @@
 # Workshop manuscript figures
 
-These vector figures use one publication layout and fixed semantic color system across the English-only version 1.4.1 draft. Figures 2-4 use the four current physician datasets; Bolun's breast and PDAC ratings are stored in separate source workbooks. Patient-letter findings and the final test-set LLM audit are not reported as manuscript results.
+These vector figures use one publication layout and fixed semantic color system across the English-only version 1.7.0 draft. Figures 2-4 use the four current physician datasets; Bolun's breast and PDAC ratings are stored in separate source workbooks. Patient-letter findings and the final test-set LLM audit are not reported as manuscript results.
 
 Supplementary Figure S2 reads the locked counts in `../../../staged_ablation_annotated_20261001_093433/JUDGE_CODEX_DECODED_ANALYSIS.md`. The same script generates four main figures and two supplementary figures.
 
@@ -24,7 +24,7 @@ Files:
 - `figure3_interrater_matrix_rough.svg`: paired exact agreement and Cohen's kappa for all four physicians, shown separately for breast cancer and PDAC.
 - `figure4_effect_profile.svg`: two-panel core-field result. Panel A retains raw harness, baseline, and tie counts. Panel B shows field-specific adjusted probabilities from one joint exploratory GEE.
 - `supplementary_figure_s1_note_margins.svg`: the compact note-level harness-minus-baseline margin distribution previously drafted as main-figure Panel C. The prior detailed breast and PDAC note panels are not retained.
-- `supplementary_figure_s2_staged_ablation.svg`: A-D configuration strip and adjacent-configuration ablation results overall and by cancer.
+- `supplementary_figure_s2_staged_ablation.svg`: ordered cumulative A through D configurations, the change introduced at each transition, and three pooled adjacent comparisons across the same 40 notes. Each comparison reports wins for both named configurations, ties, and the overall exact sign test P value.
 
 The `rough` suffix remains only on the three unchanged legacy paths. The content is regenerated from source data and the locked ablation summary whenever physician exports or analysis specifications change. Across all figures, blue identifies the harness, orange the baseline, gray ties or neutral elements, green physicians, and purple LLM review.
 

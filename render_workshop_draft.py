@@ -60,7 +60,7 @@ PRINT_FIGURES = {
 }
 PRINT_FIGURE_DIMENSIONS = {
     "1": (1500, 1180), "2": (1500, 720), "3": (1500, 760),
-    "4": (1500, 940), "S1": (1500, 360), "S2": (1500, 1040),
+    "4": (1500, 940), "S1": (1500, 360), "S2": (1500, 1120),
 }
 EXPECTED_FIGURE_SHA256 = {
     "figure1_development_pathway_rough.svg": "597ef83181cbb4c080c236f8c2568ad11320cf2bc7627766f43a95f146349b15",
@@ -68,13 +68,13 @@ EXPECTED_FIGURE_SHA256 = {
     "figure3_interrater_matrix_rough.svg": "55d0e996a3d4622e44a6a4581c56983b8fbfe4828f4f081e4f079a7779806a54",
     "figure4_effect_profile.svg": "1245d80c1f06333233fded624f3c6fa573b0c1bf574faee903a82bdda84cfa03",
     "supplementary_figure_s1_note_margins.svg": "ac9998447b8fb77c9bf6a53cbfbc459542fe07a6f10d53e3041d40648dad84d0",
-    "supplementary_figure_s2_staged_ablation.svg": "2fb1cf135076eb80ec5825d49806a8c8c193a436836700c08c4f922f15ae9ea5",
+    "supplementary_figure_s2_staged_ablation.svg": "dce5d30b3f595f855cf3b57935ddd89eae25e1df5a49357f511115d3e50b047e",
     "figure1_development_pathway_print.png": "8ca61a861af3a78f870a58defa94bb2d54d8d09bd5c7c84802d780daed473b2b",
     "figure2_evaluator_distribution_print.png": "7bdc48f3eff05f26d1f272a5afbb454fdad9c5d8b1679407945592af0027e372",
     "figure3_interrater_matrix_print.png": "f09f4a215ce9699358b785603f1ca33a87333b6b28178acd7acda07f84d12fcb",
     "figure4_effect_profile_print.png": "afabeb331e0189f21b685112201ce491030adb0e7023205d1a460171c1321183",
     "supplementary_figure_s1_note_margins_print.png": "85b0096242ef36193477048fc46cd85637807b29cdb65a34d18e49f63133cd5b",
-    "supplementary_figure_s2_staged_ablation_print.png": "9cfd8f180fe9ccb2ead0e66fec90f75b3d088a621024abccf107a8104bf9941e",
+    "supplementary_figure_s2_staged_ablation_print.png": "3ffb43b96b400d0cd0fe43ef1afd450d10ea0dc32d4222ad160ea6d54cee1fb1",
 }
 
 SECTION_HEADINGS = {
@@ -1940,8 +1940,8 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
         "Decomposed extraction",
         "Verified extraction",
         "Full inference harness",
-        "Replace one prompt with field decomposition",
-        "Cross field routing",
+        "Replace one prompt with",
+        "Field decomposition and cross field routing",
         "Bounded Assessment and Plan retry",
         "G1/G2 safeguards",
         "Add G3-G5 verification bundle",
@@ -1955,6 +1955,24 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     ]
     if any(phrase not in s2_svg for phrase in required_s2_text):
         raise AssertionError("Supplementary Figure S2 is missing required configuration, transition, result, or judge text")
+    readable_s2_text = [
+        "Replace one prompt with",
+        "Field decomposition and cross field routing",
+        "Bounded Assessment and Plan retry",
+        "G1/G2 safeguards",
+        "Add G3-G5 verification bundle",
+        "Semantic   •   Source support   •   Temporal",
+        "Add deterministic inline processing",
+        "and complete POST hooks",
+        "Adjacent comparisons of cumulative configurations.",
+        "Ties are displayed but excluded from two sided exact sign tests.",
+        "The three overall P values are unadjusted.",
+        "One blinded nonphysician LLM judge evaluated all comparisons.",
+    ]
+    for phrase in readable_s2_text:
+        label = re.search(rf'<text[^>]*font-size="(\d+)"[^>]*>{re.escape(html.escape(phrase))}</text>', s2_svg)
+        if not label or int(label.group(1)) < 21:
+            raise AssertionError(f"Supplementary Figure S2 label is too small: {phrase}")
     if any(phrase in s2_svg for phrase in ["Clear overall verification gain", "Earlier condition", "Condition with added layer", "later-stage share"]):
         raise AssertionError("Supplementary Figure S2 retains obsolete or conclusion-weighted labels")
     if '<section class="fold supplement custom-fold is-collapsed" id="supplementary-material" data-origin="technical-insert">' not in document:
