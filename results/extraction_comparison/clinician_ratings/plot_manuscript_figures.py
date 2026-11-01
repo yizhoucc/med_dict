@@ -48,6 +48,10 @@ PANEL_FILL = "#FAFBFC"
 PANEL_STROKE = "#D7DEE3"
 HARNESS_SOFT = "#E7F2F8"
 BASELINE_SOFT = "#FBECE5"
+STAGE_B = "#E69F00"
+STAGE_B_SOFT = "#FFF3D6"
+STAGE_C = "#56B4E9"
+STAGE_C_SOFT = "#E4F4FB"
 PHYSICIAN_SOFT = "#E6F5F0"
 LLM_SOFT = "#F0ECF5"
 NEUTRAL_SOFT = "#F0F2F3"
@@ -665,66 +669,107 @@ def load_ablation_counts() -> tuple[dict[str, dict[str, tuple[int, int, int]]], 
     return data, pvalues
 
 
-def draw_diverging_counts(out: list[str], x0: float, y: float, width: float, counts: tuple[int, int, int], *, total: int) -> None:
-    earlier, later, ties = counts
-    center = x0 + width / 2
-    scale = width / 2 / total
-    left_edge = center - (earlier + ties / 2) * scale
-    out.append(f'<rect x="{left_edge:.1f}" y="{y}" width="{earlier * scale:.1f}" height="34" fill="{NEUTRAL}"/>')
-    out.append(f'<rect x="{center - ties / 2 * scale:.1f}" y="{y}" width="{ties * scale:.1f}" height="34" fill="{TIE}"/>')
-    out.append(f'<rect x="{center + ties / 2 * scale:.1f}" y="{y}" width="{later * scale:.1f}" height="34" fill="{PL}"/>')
-    if earlier:
-        text(out, left_edge + earlier * scale / 2, y + 23 if earlier * scale > 28 else y - 5, str(earlier), 12, anchor="middle", weight=700, fill="white" if earlier * scale > 28 else NEUTRAL)
-    if ties:
-        text(out, center, y + 23 if ties * scale > 25 else y - 5, str(ties), 12, anchor="middle", weight=700)
-    if later:
-        text(out, center + ties / 2 * scale + later * scale / 2, y + 23 if later * scale > 28 else y - 5, str(later), 12, anchor="middle", weight=700, fill="white" if later * scale > 28 else PL)
+def draw_cumulative_stack(out: list[str], x: float, y: float, width: float, stage_index: int) -> None:
+    colors = [BL, STAGE_B, STAGE_C, PL]
+    labels = ["A", "B", "C", "D"]
+    segment_width = width / (stage_index + 1)
+    for index in range(stage_index + 1):
+        out.append(
+            f'<rect x="{x + index * segment_width:.1f}" y="{y:.1f}" width="{segment_width:.1f}" '
+            f'height="25" fill="{colors[index]}" stroke="white" stroke-width="2"/>'
+        )
+        text(out, x + (index + 0.5) * segment_width, y + 18, labels[index], 16, anchor="middle", weight=700, fill="white" if index != 2 else TEXT)
+
+
+def draw_count_cell(
+    out: list[str], x: float, y: float, width: float, label: str, count: int, *, color: str, fill: str
+) -> None:
+    round_rect(out, x, y, width, 92, fill=fill, stroke=color, radius=9, stroke_width=2)
+    text(out, x + width / 2, y + 31, label, 17, anchor="middle", weight=700, fill=color if color != TIE else NEUTRAL)
+    text(out, x + width / 2, y + 70, str(count), 30, anchor="middle", weight=700)
+
+
+def draw_ablation_comparison(
+    out: list[str], x: float, y: float, first: tuple[str, str, str, str], second: tuple[str, str, str, str],
+    counts: tuple[int, int, int], pvalue: str,
+) -> None:
+    first_letter, first_name, first_color, first_soft = first
+    second_letter, second_name, second_color, second_soft = second
+    first_count, second_count, ties = counts
+    round_rect(out, x, y, 450, 330, fill=PANEL_FILL, stroke=PANEL_STROKE, radius=12, stroke_width=1.5)
+    text(out, x + 225, y + 37, f"{first_letter}  {first_name}", 19, anchor="middle", weight=700, fill=first_color)
+    text(out, x + 225, y + 63, "versus", 16, anchor="middle", fill=MUTED)
+    text(out, x + 225, y + 91, f"{second_letter}  {second_name}", 19, anchor="middle", weight=700, fill=second_color)
+    cell_y = y + 120
+    draw_count_cell(out, x + 24, cell_y, 122, first_letter, first_count, color=first_color, fill=first_soft)
+    draw_count_cell(out, x + 164, cell_y, 122, second_letter, second_count, color=second_color, fill=second_soft)
+    draw_count_cell(out, x + 304, cell_y, 122, "Tie", ties, color=TIE, fill=NEUTRAL_SOFT)
+    bar_x, bar_y, bar_width = x + 24, y + 236, 402
+    cursor = bar_x
+    for count, color in [(first_count, first_color), (second_count, second_color), (ties, TIE)]:
+        segment = bar_width * count / 40
+        out.append(f'<rect x="{cursor:.1f}" y="{bar_y:.1f}" width="{segment:.1f}" height="22" fill="{color}"/>')
+        cursor += segment
+    text(out, x + 225, y + 296, pvalue, 20, anchor="middle", weight=700)
 
 
 def plot_staged_ablation() -> None:
     data, pvalues = load_ablation_counts()
-    width, height = 1500, 760
-    out = svg_start(width, height)
-    stages = [
-        ["A", "Single prompt"],
-        ["B", "Decomposition +", "orchestration"],
-        ["C", "Verification", "gates"],
-        ["D", "Deterministic", "rules"],
-    ]
-    stage_xs = [110, 460, 810, 1160]
-    for index, stage in enumerate(stages):
-        x = stage_xs[index]
-        box(out, x, 35, 230, 76, stage, fill=HARNESS_SOFT if index else BASELINE_SOFT, stroke=PL if index else BL, size=14)
-        if index:
-            arrow(out, stage_xs[index - 1] + 230, 73, x, 73, color=PL)
-    text(out, 750, 143, "Each panel tests whether one added layer improves the immediately preceding condition", 15, anchor="middle", fill=MUTED)
-    legend(out, 500, 178, [(NEUTRAL, "Earlier condition"), (TIE, "Tie"), (PL, "Condition with added layer")], gap=190)
-    stage_keys = ["A→B", "B→C", "C→D"]
-    added_layers = {
-        "A→B": "+ decomposition and orchestration",
-        "B→C": "+ verification gates",
-        "C→D": "+ deterministic rules",
+    expected_overall = {
+        "A→B": (17, 17, 6),
+        "B→C": (2, 24, 14),
+        "C→D": (19, 16, 5),
     }
-    panel_xs = [35, 520, 1005]
-    for key, px in zip(stage_keys, panel_xs):
-        round_rect(out, px, 205, 460, 455, fill=PANEL_FILL, stroke=PL if key == "B→C" else PANEL_STROKE, radius=12, stroke_width=2.2 if key == "B→C" else 1.5)
-        text(out, px + 25, 242, key.replace("→", " → "), 20, weight=700)
-        text(out, px + 25, 270, added_layers[key], 16, weight=700 if key == "B→C" else 400, fill=PL if key == "B→C" else MUTED)
-        text(out, px + 435, 240, f"overall p={pvalues[key]:.6g}", 13, anchor="end", weight=700 if key == "B→C" else 400, fill=PL if key == "B→C" else MUTED)
-        for row_index, scope in enumerate(("Overall", "Breast", "PDAC")):
-            y = 315 + row_index * 95
-            counts = data[key][scope]
-            total = 40 if scope == "Overall" else 20
-            text(out, px + 25, y + 23, scope, 14, weight=700 if scope == "Overall" else 400)
-            draw_diverging_counts(out, px + 105, y, 320, counts, total=total)
-            directional = counts[0] + counts[1]
-            later_share = counts[1] / directional if directional else 0.5
-            text(out, px + 265, y + 58, f"later-stage share among non-ties: {later_share:.1%}", 11, anchor="middle", fill=MUTED)
-        if key == "B→C":
-            round_rect(out, px + 85, 600, 290, 35, fill=HARNESS_SOFT, stroke=PL, radius=17)
-            text(out, px + 230, 623, "Clear overall verification gain", 13, anchor="middle", weight=700, fill=PL)
-    text(out, 750, 705, "One blinded non-physician Codex judge", 14, anchor="middle", weight=700, fill=LLM)
-    text(out, 750, 732, "Exact two-sided sign tests exclude ties; overall p values are unadjusted", 12, anchor="middle", fill=MUTED)
+    if {key: data[key]["Overall"] for key in expected_overall} != expected_overall:
+        raise ValueError("Staged ablation overall counts changed")
+    if {key: pvalues[key] for key in expected_overall} != {"A→B": 1.0, "B→C": 0.0000105, "C→D": 0.736}:
+        raise ValueError("Staged ablation overall P values changed")
+    width, height = 1500, 1040
+    out = svg_start(width, height)
+    configurations = [
+        ("A", "One prompt baseline", BL, BASELINE_SOFT),
+        ("B", "Decomposed extraction", STAGE_B, STAGE_B_SOFT),
+        ("C", "Verified extraction", STAGE_C, STAGE_C_SOFT),
+        ("D", "Full inference harness", PL, HARNESS_SOFT),
+    ]
+    text(out, 40, 35, "Ordered cumulative configurations", 23, weight=700)
+    stage_xs = [40, 405, 770, 1135]
+    for index, (letter, name, color, soft) in enumerate(configurations):
+        x = stage_xs[index]
+        round_rect(out, x, 55, 325, 145, fill=soft, stroke=color, radius=12, stroke_width=2)
+        out.append(f'<circle cx="{x + 32:.1f}" cy="{87:.1f}" r="20" fill="{color}"/>')
+        text(out, x + 32, 94, letter, 19, anchor="middle", weight=700, fill="white" if index != 2 else TEXT)
+        text(out, x + 62, 94, name, 19, weight=700)
+        text(out, x + 22, 130, "Cumulative contents", 16, fill=MUTED)
+        draw_cumulative_stack(out, x + 22, 150, 281, index)
+        if index:
+            arrow(out, stage_xs[index - 1] + 325, 127, x, 127, color=NEUTRAL)
+
+    transition_xs = [40, 525, 1010]
+    transitions = [
+        ("A", "B", ["Replace one prompt with field decomposition", "Cross field routing", "Bounded Assessment and Plan retry", "G1/G2 safeguards"]),
+        ("B", "C", ["Add G3-G5 verification bundle", "Semantic   •   Source support   •   Temporal"]),
+        ("C", "D", ["Add deterministic inline processing", "and complete POST hooks"]),
+    ]
+    for x, (start, end, lines) in zip(transition_xs, transitions):
+        round_rect(out, x, 230, 450, 155, fill="white", stroke=PANEL_STROKE, radius=11)
+        text(out, x + 28, 269, start, 18, anchor="middle", weight=700)
+        text(out, x + 422, 269, end, 18, anchor="middle", weight=700)
+        arrow(out, x + 52, 263, x + 398, 263, color=PL)
+        multiline(out, x + 225, 297, lines, 17, anchor="middle", weight_first=True, leading=1.24)
+
+    text(out, 40, 435, "Adjacent comparisons of cumulative configurations", 23, weight=700)
+    text(out, 40, 465, "Counts are shown as first configuration, second configuration, and ties. N = 40 notes per comparison.", 17, fill=MUTED)
+    comparison_specs = [
+        ("A→B", configurations[0], configurations[1], "P = 1.000"),
+        ("B→C", configurations[1], configurations[2], "P = 1.05 × 10⁻⁵"),
+        ("C→D", configurations[2], configurations[3], "P = .736"),
+    ]
+    for x, (key, first, second, pvalue) in zip(transition_xs, comparison_specs):
+        draw_ablation_comparison(out, x, 490, first, second, data[key]["Overall"], pvalue)
+
+    text(out, 750, 865, "Adjacent comparisons of cumulative configurations. Ties are displayed but excluded from two sided exact sign tests.", 16, anchor="middle", fill=MUTED)
+    text(out, 750, 895, "The three overall P values are unadjusted. One blinded nonphysician LLM judge evaluated all comparisons.", 16, anchor="middle", fill=MUTED)
     svg_end(out, OUTPUT / "supplementary_figure_s2_staged_ablation.svg")
 
 

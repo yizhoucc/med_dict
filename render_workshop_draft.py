@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the English-only physician-authored manuscript HTML (version 1.6.7).
+"""Build the English-only physician-authored manuscript HTML (version 1.7.0).
 
 The canonical Word extraction is the sole prose source. Technical tables,
 figures, captions, navigation, and supplementary analyses are inserted around
@@ -60,7 +60,7 @@ PRINT_FIGURES = {
 }
 PRINT_FIGURE_DIMENSIONS = {
     "1": (1500, 1180), "2": (1500, 720), "3": (1500, 760),
-    "4": (1500, 940), "S1": (1500, 360), "S2": (1500, 760),
+    "4": (1500, 940), "S1": (1500, 360), "S2": (1500, 1040),
 }
 EXPECTED_FIGURE_SHA256 = {
     "figure1_development_pathway_rough.svg": "597ef83181cbb4c080c236f8c2568ad11320cf2bc7627766f43a95f146349b15",
@@ -68,13 +68,13 @@ EXPECTED_FIGURE_SHA256 = {
     "figure3_interrater_matrix_rough.svg": "55d0e996a3d4622e44a6a4581c56983b8fbfe4828f4f081e4f079a7779806a54",
     "figure4_effect_profile.svg": "1245d80c1f06333233fded624f3c6fa573b0c1bf574faee903a82bdda84cfa03",
     "supplementary_figure_s1_note_margins.svg": "ac9998447b8fb77c9bf6a53cbfbc459542fe07a6f10d53e3041d40648dad84d0",
-    "supplementary_figure_s2_staged_ablation.svg": "13333a831115c39a2571cf16d3f3dce0234d1b6dbe08bbb96fe06d915f7850df",
+    "supplementary_figure_s2_staged_ablation.svg": "2fb1cf135076eb80ec5825d49806a8c8c193a436836700c08c4f922f15ae9ea5",
     "figure1_development_pathway_print.png": "8ca61a861af3a78f870a58defa94bb2d54d8d09bd5c7c84802d780daed473b2b",
     "figure2_evaluator_distribution_print.png": "7bdc48f3eff05f26d1f272a5afbb454fdad9c5d8b1679407945592af0027e372",
     "figure3_interrater_matrix_print.png": "f09f4a215ce9699358b785603f1ca33a87333b6b28178acd7acda07f84d12fcb",
     "figure4_effect_profile_print.png": "afabeb331e0189f21b685112201ce491030adb0e7023205d1a460171c1321183",
     "supplementary_figure_s1_note_margins_print.png": "85b0096242ef36193477048fc46cd85637807b29cdb65a34d18e49f63133cd5b",
-    "supplementary_figure_s2_staged_ablation_print.png": "5e0545aa353427368c51a86083bda7766e108de010617e47ec9603c2d3630691",
+    "supplementary_figure_s2_staged_ablation_print.png": "9cfd8f180fe9ccb2ead0e66fec90f75b3d088a621024abccf107a8104bf9941e",
 }
 
 SECTION_HEADINGS = {
@@ -271,6 +271,8 @@ EXPECTED_V166_VISIBLE_BLOCK_TEXT_EXCLUDING_COMMENT_UI_SHA256 = "2f4621fc82992f17
 EXPECTED_V169_VISIBLE_BLOCK_TEXT_EXCLUDING_COMMENT_UI_P115_AND_P119_SHA256 = "c0125ea6e341601385d5a3470bcccc689e71ab5dff821ec9af530f72c3bf4683"
 EXPECTED_V169_P115_TEXT_SHA256 = "3a22b7ee66b45a5d055465a30b166c77def06ed9777f5a87cec51f45df666bfa"
 EXPECTED_V168_P119_TEXT_SHA256 = "48e181d7895d85bb9a304d52d3974e7b838a246c55363b07c68aeb85a6fd17f8"
+EXPECTED_V170_VISIBLE_MANUSCRIPT_TEXT_SHA256 = "37ecc23a891d779e6ef417c5cefe154f949b60e43a85cc68f2033e3d62d03ea2"
+EXPECTED_V170_S2_CAPTION_SHA256 = "7067db040ddefe91dbb579edc6391528e9e87d02282cac5a47cde04530286e30"
 
 
 def apply_results_discussion_overlay(block_id: str, canonical_text: str) -> str:
@@ -1563,6 +1565,7 @@ def build_supplement() -> str:
 
 def version_history() -> str:
     entries = [
+        ("v1.7.0", "2026-11-01", "Figure S2 redesign", "Redrew Supplementary Figure S2 to show the cumulative A through D configurations, the change introduced at each transition, and three equally formatted adjacent comparisons. Manuscript text and the figure caption are unchanged."),
         ("v1.6.9", "2026-11-01", "Temporal control description", "Revised P115 to describe the prompt, structured context, semantic and source support checks, and the limit on attributing physician preference to temporal controls alone. Comment 13 is resolved."),
         ("v1.6.8", "2026-11-01", "Evaluation limitation", "Removed the separate Limitations heading and clarified that the observed physician preference applies to the complete outputs as presented. The revised text separates the observed direction from uncertainty in effect size and causal attribution."),
         ("v1.6.7", "2026-11-01", "Limitations presentation", "Added a main manuscript Limitations heading and highlighted only five approved P119 design limitation phrases for focused review. The limitation text is unchanged."),
@@ -1602,7 +1605,7 @@ def version_history() -> str:
         else:
             version, date, note = entry
             label = ""
-        current = version == "v1.6.9"
+        current = version == "v1.7.0"
         open_attr = " open" if current else ""
         summary = f"{version} · {label} · {date}" if label else f"{version} · {date}"
         rendered.append(
@@ -1625,7 +1628,7 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
     article = f"""
 <article>
   <h1 class="screen-only">Physician-authored manuscript draft</h1>
-  <p class="subtitle screen-only">English working manuscript · Version 1.6.9 · November 1, 2026</p>
+  <p class="subtitle screen-only">English working manuscript · Version 1.7.0 · November 1, 2026</p>
   <details class="fold" id="version-history"><summary>Version history</summary><div class="fold-body">{version_history()}</div></details>
   {sections}
   {build_supplement()}
@@ -1633,14 +1636,14 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
   {literature_workspace()}
 </article>
 """
-    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v1.6.9</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
+    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v1.7.0</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
     document = apply_review_block_metadata(document)
     markdown = f"""<!-- GENERATED FILE. The canonical physician Word extraction is the prose authority. -->
 # Physician-authored manuscript draft
 
-English working manuscript. Version 1.6.9, November 1, 2026.
+English working manuscript. Version 1.7.0, November 1, 2026.
 
-Current change: revised P115 to describe the temporal controls used in the prompt, structured context, and downstream checks, and to state that the physician ratings do not isolate their contribution. Comment 13 is resolved.
+Current change: redrew Supplementary Figure S2 to show the cumulative configurations, the change introduced at each transition, and the three adjacent comparisons in one consistent layout. Manuscript text and the figure caption are unchanged.
 
 The canonical physician blocks below mirror `{SOURCE_DOCX.name}` for audit purposes. The clean HTML applies only the approved cross-reference and reporting edits while preserving all source blocks in its hidden audit representation.
 
@@ -1930,6 +1933,30 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
         actual_hash = hashlib.sha256(figure_path.read_bytes()).hexdigest()
         if not expected_hash or actual_hash != expected_hash:
             raise AssertionError(f"Figure resource changed: {figure_path.name}")
+    s2_svg = SUPPLEMENTARY_FIGURES["S2"].read_text(encoding="utf-8")
+    required_s2_text = [
+        "Ordered cumulative configurations",
+        "One prompt baseline",
+        "Decomposed extraction",
+        "Verified extraction",
+        "Full inference harness",
+        "Replace one prompt with field decomposition",
+        "Cross field routing",
+        "Bounded Assessment and Plan retry",
+        "G1/G2 safeguards",
+        "Add G3-G5 verification bundle",
+        "Semantic   •   Source support   •   Temporal",
+        "Add deterministic inline processing",
+        "and complete POST hooks",
+        "P = 1.000",
+        "P = 1.05 × 10⁻⁵",
+        "P = .736",
+        "One blinded nonphysician LLM judge evaluated all comparisons.",
+    ]
+    if any(phrase not in s2_svg for phrase in required_s2_text):
+        raise AssertionError("Supplementary Figure S2 is missing required configuration, transition, result, or judge text")
+    if any(phrase in s2_svg for phrase in ["Clear overall verification gain", "Earlier condition", "Condition with added layer", "later-stage share"]):
+        raise AssertionError("Supplementary Figure S2 retains obsolete or conclusion-weighted labels")
     if '<section class="fold supplement custom-fold is-collapsed" id="supplementary-material" data-origin="technical-insert">' not in document:
         raise AssertionError("Accessible default-closed supplementary fold is missing")
     if '<button class="fold-toggle" type="button" aria-expanded="false" aria-controls="supplement-body">' not in document:
@@ -2054,14 +2081,14 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     ]:
         if f'id="{revision_id}"' not in document: raise AssertionError(f"Clarification is missing: {revision_id}")
     if 'id="draft-metadata"' in document or "Draft information and source provenance" in document: raise AssertionError("Removed draft-information block remains")
-    if "Version 1.6.9 · November 1, 2026" not in document or "draft v1.6.9" not in document: raise AssertionError("Version 1.6.9 metadata is missing")
-    if document.count('class="version-entry"') != 31 or any(f'id="version-{item}"' not in document for item in ["1-6-9", "1-6-8", "1-6-7", "1-6-6", "1-6-5", "1-6-4", "1-6-3", "1-6-2", "1-6-1", "1-6", "1-5-2", "1-5-1", "1-5", "1-4-1", "1-4", "1-3", "1-2-3", "1-2-2", "1-2-1", "1-2", "1-1", "1-0", "0-25", "0-24", "0-23", "0-22", "0-21", "0-20", "0-19", "0-18", "0-17"]):
+    if "Version 1.7.0 · November 1, 2026" not in document or "draft v1.7.0" not in document: raise AssertionError("Version 1.7.0 metadata is missing")
+    if document.count('class="version-entry"') != 32 or any(f'id="version-{item}"' not in document for item in ["1-7-0", "1-6-9", "1-6-8", "1-6-7", "1-6-6", "1-6-5", "1-6-4", "1-6-3", "1-6-2", "1-6-1", "1-6", "1-5-2", "1-5-1", "1-5", "1-4-1", "1-4", "1-3", "1-2-3", "1-2-2", "1-2-1", "1-2", "1-1", "1-0", "0-25", "0-24", "0-23", "0-22", "0-21", "0-20", "0-19", "0-18", "0-17"]):
         raise AssertionError("Nested version history is incomplete")
-    if not re.search(r'<details class="version-entry" id="version-1-6-9"[^>]* open>', document):
-        raise AssertionError("Current v1.6.9 history entry is not expanded inside the closed parent")
-    if any(re.search(rf'<details class="version-entry" id="version-{item}"[^>]* open>', document) for item in ["1-6-8", "1-6-7", "1-6-6", "1-6-5", "1-6-4", "1-6-3", "1-6-2", "1-6-1", "1-6", "1-5-2", "1-5-1", "1-5", "1-4-1", "1-4", "1-3"]):
+    if not re.search(r'<details class="version-entry" id="version-1-7-0"[^>]* open>', document):
+        raise AssertionError("Current v1.7.0 history entry is not expanded inside the closed parent")
+    if any(re.search(rf'<details class="version-entry" id="version-{item}"[^>]* open>', document) for item in ["1-6-9", "1-6-8", "1-6-7", "1-6-6", "1-6-5", "1-6-4", "1-6-3", "1-6-2", "1-6-1", "1-6", "1-5-2", "1-5-1", "1-5", "1-4-1", "1-4", "1-3"]):
         raise AssertionError("Prior version-history entries must be closed")
-    if "v1.6.9 · Temporal control description · 2026-11-01" not in document:
+    if "v1.7.0 · Figure S2 redesign · 2026-11-01" not in document:
         raise AssertionError("Current version-history label is missing")
     if "querySelectorAll('#version-history .version-entry').forEach(entry=>entry.open=entry===target)" not in document:
         raise AssertionError("Version-history deep links do not isolate the targeted entry")
@@ -2071,6 +2098,13 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
         r'<sup class="comment-anchor".*?</sup>', "", document, flags=re.S
     )
     blocks_without_comment_ui = collect_review_blocks(document_without_comment_ui)
+    visible_manuscript_text = "\n".join(
+        f"{block_id}\t{block.text}" for block_id, block in blocks_without_comment_ui.items()
+    )
+    if hashlib.sha256(visible_manuscript_text.encode("utf-8")).hexdigest() != EXPECTED_V170_VISIBLE_MANUSCRIPT_TEXT_SHA256:
+        raise AssertionError("Visible manuscript text changed during the Figure S2 redesign")
+    if hashlib.sha256(blocks_without_comment_ui["figure-s2::caption"].text.encode("utf-8")).hexdigest() != EXPECTED_V170_S2_CAPTION_SHA256:
+        raise AssertionError("Supplementary Figure S2 caption changed")
     visible_text_without_comment_ui = "\n".join(
         f"{block_id}\t{block.text}"
         for block_id, block in blocks_without_comment_ui.items()

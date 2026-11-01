@@ -1,9 +1,9 @@
 <!-- GENERATED FILE. The canonical physician Word extraction is the prose authority. -->
 # Physician-authored manuscript draft
 
-English working manuscript. Version 1.6.9, November 1, 2026.
+English working manuscript. Version 1.7.0, November 1, 2026.
 
-Current change: revised P115 to describe the temporal controls used in the prompt, structured context, and downstream checks, and to state that the physician ratings do not isolate their contribution. Comment 13 is resolved.
+Current change: redrew Supplementary Figure S2 to show the cumulative configurations, the change introduced at each transition, and the three adjacent comparisons in one consistent layout. Manuscript text and the figure caption are unchanged.
 
 The canonical physician blocks below mirror `202601023_Manuscript_JAMA.docx` for audit purposes. The clean HTML applies only the approved cross-reference and reporting edits while preserving all source blocks in its hidden audit representation.
 

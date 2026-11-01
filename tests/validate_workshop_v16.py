@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deterministic v1.6.9 manuscript and manual focus checks."""
+"""Deterministic v1.7.0 manuscript, Figure S2, and manual focus checks."""
 
 from __future__ import annotations
 
@@ -160,6 +160,11 @@ def main() -> None:
         r'<sup class="comment-anchor".*?</sup>', "", document, flags=re.S
     )
     blocks_without_comment_ui = renderer.collect_review_blocks(document_without_comment_ui)
+    visible_manuscript_text = "\n".join(
+        f"{block_id}\t{block.text}" for block_id, block in blocks_without_comment_ui.items()
+    )
+    assert hashlib.sha256(visible_manuscript_text.encode("utf-8")).hexdigest() == renderer.EXPECTED_V170_VISIBLE_MANUSCRIPT_TEXT_SHA256
+    assert hashlib.sha256(blocks_without_comment_ui["figure-s2::caption"].text.encode("utf-8")).hexdigest() == renderer.EXPECTED_V170_S2_CAPTION_SHA256
     visible_text_without_comment_ui = "\n".join(
         f"{block_id}\t{block.text}"
         for block_id, block in blocks_without_comment_ui.items()
@@ -211,11 +216,11 @@ def main() -> None:
     ) in document
     assert "Outstanding physician comments (0)" in document
     assert document.count('data-literature-entry=') == 30
-    assert "Version 1.6.9 · November 1, 2026" in document
-    assert "draft v1.6.9" in document
+    assert "Version 1.7.0 · November 1, 2026" in document
+    assert "draft v1.7.0" in document
 
     print(
-        "V169_OK "
+        "V170_OK "
         f"canonical=127+35+12 visible_blocks={len(blocks)} changed={len(state['changed'])} "
         f"focus_spans={len(rows)} focus_blocks={len(expected_focus_blocks)} results_sha256="
         f"{hashlib.sha256(results_text.encode('utf-8')).hexdigest()}"
