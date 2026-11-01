@@ -61,4 +61,3 @@ The pre-change highlight sources were:
   word-level marks; citations and comment markers are outside yellow spans.
 - WebKit print test: 14 pages, 1,273,698 bytes, 6 figures, 8 tables, no retained
   review background, and no temporary PDF after the injected failure path.
-
