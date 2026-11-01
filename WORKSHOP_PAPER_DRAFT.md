@@ -1,9 +1,9 @@
 <!-- GENERATED FILE. The canonical physician Word extraction is the prose authority. -->
 # Physician-authored manuscript draft
 
-English working manuscript. Version 1.6.1, October 31, 2026.
+English working manuscript. Version 1.6.2, November 1, 2026.
 
-Current change: separated the Huang and Hein study descriptions and narrowed five complete sentence highlights to short review phrases without changing Results.
+Current change: removed an adjacent focus phrase that made the system identity sentence appear fully highlighted and strengthened the DOM level review check.
 
 The canonical physician blocks below mirror `202601023_Manuscript_JAMA.docx` for audit purposes. The clean HTML applies only the approved cross-reference and reporting edits while preserving all source blocks in its hidden audit representation.
 

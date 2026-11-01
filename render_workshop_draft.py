@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the English-only physician-authored manuscript HTML (version 1.6.1).
+"""Build the English-only physician-authored manuscript HTML (version 1.6.2).
 
 The canonical Word extraction is the sole prose source. Technical tables,
 figures, captions, navigation, and supplementary analyses are inserted around
@@ -177,7 +177,7 @@ MANUAL_FOCUS_PHRASES = {
     ],
     "P060": ["No physician reviewed pancreatic cancer outputs"],
     "P061": ["modifications specific to pancreatic cancer"],
-    "P063": ["System identities", "were not disclosed"],
+    "P063": ["System identities"],
     "P073": ["judge model and settings"],
     "P119": [
         "fixed A/B display order",
@@ -1357,7 +1357,8 @@ def build_supplement() -> str:
 
 def version_history() -> str:
     entries = [
-        ("v1.6.1", "2026-10-31", "Current change", "Separated the Huang and Hein study descriptions to preserve their distinct methods, narrowed five complete sentence highlights to short review phrases, and retained the 24 browser comment revisions without changing Results."),
+        ("v1.6.2", "2026-11-01", "Current change", "Removed the adjacent second focus phrase in the system identity sentence and added a DOM aware check that rejects adjacent focus spans when their combined visual coverage forms a complete sentence."),
+        ("v1.6.1", "2026-10-31", "Literature framing", "Separated the Huang and Hein study descriptions to preserve their distinct methods, narrowed five complete sentence highlights to short review phrases, and retained the 24 browser comment revisions without changing Results."),
         ("v1.6", "2026-10-31", "Browser comments", "Resolved 24 browser review comments. Reworked the Introduction and Study Design, clarified the holdout, baseline, plan branch, evaluation interface, and ablation judge, replaced broad revision coloring with a small set of manual focus phrases, and completed a language audit for unnecessary hyphens and colons."),
         ("v1.5.2", "2026-10-31", "Word level review", "Replaced whole-block yellow review backgrounds with token-level highlights. Only inserted or replaced words and selected key phrases in wholly new passages are colored; manuscript wording, statistics, links, numbering, and comments are unchanged."),
         ("v1.5.1", "2026-10-31", "Added light, medium, and strong review highlights to show the importance of the 44 wording changes already identified against v1.3. Manuscript wording and Results are unchanged; deletions remain in the version diff."),
@@ -1388,7 +1389,7 @@ def version_history() -> str:
         else:
             version, date, note = entry
             label = ""
-        current = version == "v1.6.1"
+        current = version == "v1.6.2"
         open_attr = " open" if current else ""
         summary = f"{version} · {label} · {date}" if label else f"{version} · {date}"
         rendered.append(
@@ -1411,7 +1412,7 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
     article = f"""
 <article>
   <h1 class="screen-only">Physician-authored manuscript draft</h1>
-  <p class="subtitle screen-only">English working manuscript · Version 1.6.1 · October 31, 2026</p>
+  <p class="subtitle screen-only">English working manuscript · Version 1.6.2 · November 1, 2026</p>
   <details class="fold" id="version-history"><summary>Version history</summary><div class="fold-body">{version_history()}</div></details>
   {sections}
   {build_supplement()}
@@ -1419,14 +1420,14 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
   {literature_workspace()}
 </article>
 """
-    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v1.6.1</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
+    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v1.6.2</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
     document = apply_review_block_metadata(document)
     markdown = f"""<!-- GENERATED FILE. The canonical physician Word extraction is the prose authority. -->
 # Physician-authored manuscript draft
 
-English working manuscript. Version 1.6.1, October 31, 2026.
+English working manuscript. Version 1.6.2, November 1, 2026.
 
-Current change: separated the Huang and Hein study descriptions and narrowed five complete sentence highlights to short review phrases without changing Results.
+Current change: removed an adjacent focus phrase that made the system identity sentence appear fully highlighted and strengthened the DOM level review check.
 
 The canonical physician blocks below mirror `{SOURCE_DOCX.name}` for audit purposes. The clean HTML applies only the approved cross-reference and reporting edits while preserving all source blocks in its hidden audit representation.
 
@@ -1526,6 +1527,107 @@ class PreservationParser(HTMLParser):
     @property
     def visible_text(self) -> str:
         return " ".join("".join(self.visible_parts).split())
+
+
+class FocusCoverageParser(HTMLParser):
+    """Map focus spans to their DOM text offsets inside each review block."""
+
+    VOID_TAGS = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"}
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.active_id: str | None = None
+        self.parts: list[str] = []
+        self.length = 0
+        self.ranges: list[tuple[int, int]] = []
+        self.stack: list[tuple[str, bool, int | None]] = []
+        self.blocks: dict[str, tuple[str, list[tuple[int, int]]]] = {}
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        values = dict(attrs)
+        starts_block = values.get("data-review-block-id") is not None
+        if starts_block:
+            if self.active_id is not None:
+                raise AssertionError("Nested review blocks are not supported by the focus coverage audit")
+            self.active_id = str(values["data-review-block-id"])
+            self.parts = []
+            self.length = 0
+            self.ranges = []
+        starts_focus = self.active_id is not None and "focus-highlight" in str(values.get("class", "")).split()
+        focus_start = self.length if starts_focus else None
+        if tag not in self.VOID_TAGS:
+            self.stack.append((tag, starts_block, focus_start))
+
+    def handle_startendtag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        self.handle_starttag(tag, attrs)
+        if tag not in self.VOID_TAGS:
+            self.handle_endtag(tag)
+
+    def handle_data(self, data: str) -> None:
+        if self.active_id is not None:
+            self.parts.append(data)
+            self.length += len(data)
+
+    def handle_endtag(self, tag: str) -> None:
+        if self.active_id is None:
+            return
+        for index in range(len(self.stack) - 1, -1, -1):
+            if self.stack[index][0] != tag:
+                continue
+            closing = self.stack[index:]
+            del self.stack[index:]
+            for _, starts_block, focus_start in reversed(closing):
+                if focus_start is not None:
+                    self.ranges.append((focus_start, self.length))
+                if starts_block:
+                    if self.active_id in self.blocks:
+                        raise AssertionError(f"Duplicate focus coverage block: {self.active_id}")
+                    self.blocks[self.active_id] = ("".join(self.parts), sorted(self.ranges))
+                    self.active_id = None
+                    self.parts = []
+                    self.length = 0
+                    self.ranges = []
+            return
+
+
+def sentence_sized_focus_runs(document: str) -> list[str]:
+    """Return blocks where adjacent focus spans visually cover a full sentence."""
+
+    parser = FocusCoverageParser()
+    parser.feed(document)
+    offenders: list[str] = []
+    for block_id, (text, ranges) in parser.blocks.items():
+        if not ranges:
+            continue
+        merged: list[list[int]] = []
+        for start, end in ranges:
+            if merged and not any(character.isalnum() for character in text[merged[-1][1]:start]):
+                merged[-1][1] = end
+            else:
+                merged.append([start, end])
+        sentence_start = 0
+        sentence_cores: list[tuple[int, int]] = []
+        for boundary in re.finditer(r"[.!?](?=\s|$)", text):
+            core_start = sentence_start
+            core_end = boundary.start()
+            while core_start < core_end and text[core_start].isspace():
+                core_start += 1
+            while core_end > core_start and text[core_end - 1].isspace():
+                core_end -= 1
+            if core_start < core_end:
+                sentence_cores.append((core_start, core_end))
+            sentence_start = boundary.end()
+        core_start = sentence_start
+        core_end = len(text)
+        while core_start < core_end and text[core_start].isspace():
+            core_start += 1
+        while core_end > core_start and text[core_end - 1].isspace():
+            core_end -= 1
+        if core_start < core_end:
+            sentence_cores.append((core_start, core_end))
+        if any(run_start == core_start and run_end == core_end for run_start, run_end in merged for core_start, core_end in sentence_cores):
+            offenders.append(block_id)
+    return offenders
 
 
 def validate(document: str, markdown: str, data: dict[str, object]) -> None:
@@ -1650,7 +1752,7 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
         "outputs can vary", "checking every field in every output can approach the cost of manual extraction",
         "privacy and governance concerns", "local models can still produce unstable or incorrect extractions",
         "without physician review", "No physician reviewed pancreatic cancer outputs",
-        "System identities", "were not disclosed", "judge model and settings",
+        "System identities", "judge model and settings",
         "not provided to the models", "not used during harness development",
         "not used to calculate the primary physician preference endpoint",
         "A displayed the inference harness output", "B displayed the one prompt baseline",
@@ -1681,14 +1783,14 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     ]:
         if f'id="{revision_id}"' not in document: raise AssertionError(f"Clarification is missing: {revision_id}")
     if 'id="draft-metadata"' in document or "Draft information and source provenance" in document: raise AssertionError("Removed draft-information block remains")
-    if "Version 1.6.1 · October 31, 2026" not in document or "draft v1.6.1" not in document: raise AssertionError("Version 1.6.1 metadata is missing")
-    if document.count('class="version-entry"') != 23 or any(f'id="version-{item}"' not in document for item in ["1-6-1", "1-6", "1-5-2", "1-5-1", "1-5", "1-4-1", "1-4", "1-3", "1-2-3", "1-2-2", "1-2-1", "1-2", "1-1", "1-0", "0-25", "0-24", "0-23", "0-22", "0-21", "0-20", "0-19", "0-18", "0-17"]):
+    if "Version 1.6.2 · November 1, 2026" not in document or "draft v1.6.2" not in document: raise AssertionError("Version 1.6.2 metadata is missing")
+    if document.count('class="version-entry"') != 24 or any(f'id="version-{item}"' not in document for item in ["1-6-2", "1-6-1", "1-6", "1-5-2", "1-5-1", "1-5", "1-4-1", "1-4", "1-3", "1-2-3", "1-2-2", "1-2-1", "1-2", "1-1", "1-0", "0-25", "0-24", "0-23", "0-22", "0-21", "0-20", "0-19", "0-18", "0-17"]):
         raise AssertionError("Nested version history is incomplete")
-    if not re.search(r'<details class="version-entry" id="version-1-6-1"[^>]* open>', document):
-        raise AssertionError("Current v1.6.1 history entry is not expanded inside the closed parent")
-    if any(re.search(rf'<details class="version-entry" id="version-{item}"[^>]* open>', document) for item in ["1-6", "1-5-2", "1-5-1", "1-5", "1-4-1", "1-4", "1-3"]):
+    if not re.search(r'<details class="version-entry" id="version-1-6-2"[^>]* open>', document):
+        raise AssertionError("Current v1.6.2 history entry is not expanded inside the closed parent")
+    if any(re.search(rf'<details class="version-entry" id="version-{item}"[^>]* open>', document) for item in ["1-6-1", "1-6", "1-5-2", "1-5-1", "1-5", "1-4-1", "1-4", "1-3"]):
         raise AssertionError("Prior version-history entries must be closed")
-    if "v1.6.1 · Current change · 2026-10-31" not in document:
+    if "v1.6.2 · Current change · 2026-11-01" not in document:
         raise AssertionError("Current version-history label is missing")
     if "querySelectorAll('#version-history .version-entry').forEach(entry=>entry.open=entry===target)" not in document:
         raise AssertionError("Version-history deep links do not isolate the targeted entry")
@@ -1705,6 +1807,9 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
         }
         if focused_text.strip().rstrip(".!?").strip() in sentences:
             raise AssertionError(f"A focus highlight covers a complete sentence: {block_id}")
+    combined_sentence_offenders = sentence_sized_focus_runs(document)
+    if combined_sentence_offenders:
+        raise AssertionError(f"Adjacent focus spans visually cover a complete sentence: {combined_sentence_offenders}")
     manuscript_text = " ".join(block.text for block in manuscript_blocks.values())
     visible_text_lower = manuscript_text.lower()
     if "—" in manuscript_text or "–" in manuscript_text: raise AssertionError("Visible manuscript contains an em or en dash")

@@ -1,11 +1,11 @@
-# v1.6.1 browser comment resolution and validation
+# v1.6.2 browser comment resolution and validation
 
-Date: 2026-10-31
+Date: 2026-11-01
 
 ## Comment resolution
 
 1. Removed the revision legend, its swatches, and the light, medium, and strong
-   review styles. The page now uses 39 manually selected focus spans in 14
+   review styles. The page now uses 38 manually selected focus spans in 14
    blocks. Complete change metadata remains separate from visible color.
 2. Replaced P004 with the requested plain statement of the extraction task.
    Only `focuses on that extraction task` receives visible focus.
@@ -73,6 +73,14 @@ Date: 2026-10-31
   P017, P060, P063, and P073. No focus span now covers a complete sentence.
 - Retained all 24 browser comment resolutions and the unchanged Results hash.
 
+## v1.6.2 adjacent focus correction
+
+- P063 now highlights only `System identities`; `were not disclosed` remains on
+  a white background, so the sentence no longer appears fully highlighted.
+- The renderer, deterministic test, and WebKit screen check now merge focus
+  spans separated only by whitespace or punctuation and reject any merged run
+  that covers a complete sentence.
+
 ## Hyphen audit
 
 No ordinary prose compound with a hyphen remains in the visible manuscript.
@@ -91,7 +99,7 @@ workspace, which is outside the manuscript body.
 - Canonical physician audit: 127 paragraphs, 35 native table cells, and 12 Word
   comments preserved exactly.
 - Visible page: 354 stable blocks, 66 blocks changed from the v1.3 audit
-  baseline, and 39 manual focus spans across 14 blocks.
+  baseline, and 38 manual focus spans across 14 blocks.
 - Comments and literature: 12 canonical comments, 2 visible unresolved
   comments, and 30 literature entries preserved.
 - Introduction: P004, P006, P008, P010, and P012 reviewed individually. No
@@ -102,6 +110,6 @@ workspace, which is outside the manuscript body.
   `.venv`.
 - Results regression: 120 Results blocks with SHA-256
   `e8a0a9844ffa51292752c4aff018e489a31acd1027ae630f70024694efe1d5e6`.
-- WebKit screen and print: 14 pages, 1,270,713 bytes, 6 figures, 8 tables, no
+- WebKit screen and print: 14 pages, 1,270,698 bytes, 6 figures, 8 tables, no
   figure or table split across a page boundary, no focus background in print,
   and no temporary PDF after the injected failure path.

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deterministic v1.6.1 manuscript, audit, and manual-focus checks."""
+"""Deterministic v1.6.2 manuscript, audit, and manual-focus checks."""
 
 from __future__ import annotations
 
@@ -60,7 +60,7 @@ def main() -> None:
     }
 
     rows = focus_spans(document)
-    assert len(rows) == 39
+    assert len(rows) == 38
     assert len({row[0] for row in rows}) == 14
     assert max(len(row[1]) for row in rows) == 79
     assert not [row for row in rows if "external-citation" in row[2] or "comment-anchor" in row[2]]
@@ -85,7 +85,6 @@ def main() -> None:
         "without physician review",
         "No physician reviewed pancreatic cancer outputs",
         "System identities",
-        "were not disclosed",
         "judge model and settings",
         "not provided to the models",
         "not used during harness development",
@@ -116,6 +115,13 @@ def main() -> None:
             if sentence.strip()
         }
         assert focused_text.strip().rstrip(".!?").strip() not in sentences
+    assert renderer.sentence_sized_focus_runs(document) == []
+    synthetic_adjacent_sentence = (
+        '<p data-review-block-id="synthetic">'
+        '<span class="focus-highlight">System identities</span> '
+        '<span class="focus-highlight">were not disclosed</span>.</p>'
+    )
+    assert renderer.sentence_sized_focus_runs(synthetic_adjacent_sentence) == ["synthetic"]
     assert len(blocks) == 354
     results_text = "\n".join(
         f"{block_id}\t{block.text}" for block_id, block in blocks.items() if block.section == "results"
@@ -125,11 +131,11 @@ def main() -> None:
 
     assert document.count('data-comment-text-id=') == 12
     assert document.count('data-literature-entry=') == 30
-    assert "Version 1.6.1 · October 31, 2026" in document
-    assert "draft v1.6.1" in document
+    assert "Version 1.6.2 · November 1, 2026" in document
+    assert "draft v1.6.2" in document
 
     print(
-        "V161_OK "
+        "V162_OK "
         f"canonical=127+35+12 visible_blocks={len(blocks)} changed={len(state['changed'])} "
         f"focus_spans={len(rows)} focus_blocks={len(expected_focus_blocks)} results_sha256="
         f"{hashlib.sha256(results_text.encode('utf-8')).hexdigest()}"

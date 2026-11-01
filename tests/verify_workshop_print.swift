@@ -58,7 +58,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           const changedBlocks = [...document.querySelectorAll('[data-review-changed-from="v1.3"]')];
           const highlights = [...document.querySelectorAll('.focus-highlight')];
           if (changedBlocks.length !== 66) return `unexpected changed-block count: ${changedBlocks.length}`;
-          if (highlights.length !== 39) return `unexpected manual-focus count: ${highlights.length}`;
+          if (highlights.length !== 38) return `unexpected manual-focus count: ${highlights.length}`;
           if (document.querySelector('.revision-legend,.revision-swatch,.revision-light,.revision-medium,.revision-strong')) {
             return 'obsolete revision legend or importance styling remains';
           }
@@ -108,7 +108,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
             'checking every field in every output can approach the cost of manual extraction',
             'privacy and governance concerns', 'local models can still produce unstable or incorrect extractions',
             'without physician review', 'No physician reviewed pancreatic cancer outputs',
-            'System identities', 'were not disclosed', 'judge model and settings',
+            'System identities', 'judge model and settings',
             'not provided to the models', 'not used during harness development',
             'not used to calculate the primary physician preference endpoint',
             'A displayed the inference harness output', 'B displayed the one prompt baseline',
@@ -122,6 +122,41 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
             const block = document.querySelector(`[data-review-block-id="${highlight.dataset.reviewFor}"]`);
             const sentences = block?.textContent.trim().split(/(?<=[.!?])\s+/).map(text => text.replace(/[.!?]+$/, '').trim()) || [];
             if (sentences.includes(highlight.textContent.trim().replace(/[.!?]+$/, '').trim())) return `complete sentence is highlighted: ${highlight.dataset.reviewFor}`;
+          }
+          for (const block of new Set(highlights.map(node => node.closest('[data-review-block-id]')))) {
+            if (!block) return 'a focus span lacks its review block';
+            const text = block.textContent;
+            const ranges = [...block.querySelectorAll('.focus-highlight')].map(span => {
+              const prefix = document.createRange();
+              prefix.selectNodeContents(block);
+              prefix.setEndBefore(span);
+              const start = prefix.toString().length;
+              return [start, start + span.textContent.length];
+            }).sort((left, right) => left[0] - right[0]);
+            const merged = [];
+            for (const range of ranges) {
+              const prior = merged[merged.length - 1];
+              if (prior && !/[\p{L}\p{N}]/u.test(text.slice(prior[1], range[0]))) prior[1] = range[1];
+              else merged.push([...range]);
+            }
+            const sentences = [];
+            let sentenceStart = 0;
+            for (const boundary of text.matchAll(/[.!?](?=\s|$)/g)) {
+              let start = sentenceStart;
+              let end = boundary.index;
+              while (start < end && /\s/.test(text[start])) start += 1;
+              while (end > start && /\s/.test(text[end - 1])) end -= 1;
+              if (start < end) sentences.push([start, end]);
+              sentenceStart = boundary.index + boundary[0].length;
+            }
+            let start = sentenceStart;
+            let end = text.length;
+            while (start < end && /\s/.test(text[start])) start += 1;
+            while (end > start && /\s/.test(text[end - 1])) end -= 1;
+            if (start < end) sentences.push([start, end]);
+            if (merged.some(run => sentences.some(sentence => run[0] === sentence[0] && run[1] === sentence[1]))) {
+              return `adjacent highlights visually cover a complete sentence: ${block.dataset.reviewBlockId}`;
+            }
           }
           if (document.querySelector('.focus-highlight[data-review-for^="figure-"]')) return 'a figure caption is highlighted';
           const visible = () => getComputedStyle(body).display !== 'none';
@@ -142,7 +177,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           if (!visible() || document.activeElement?.id !== 'figure-s1') return 'nested supplement link did not reveal and focus';
           button.click();
           const history = document.getElementById('version-history');
-          const current = document.getElementById('version-1-6-1');
+          const current = document.getElementById('version-1-6-2');
           const older = [...history.querySelectorAll('.version-entry')].filter(node => node !== current);
           if (history.open || !current?.open || older.some(node => node.open)) return 'unexpected initial version-history state';
           window.__workshopVersionHashState = 'waiting';
@@ -183,7 +218,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
         let checks = #"""
         (() => {
           const history = document.getElementById('version-history');
-          const current = document.getElementById('version-1-6-1');
+          const current = document.getElementById('version-1-6-2');
           const prior = document.getElementById('version-1-4-1');
           const older = [...history.querySelectorAll('.version-entry')].filter(node => node !== current);
           if (location.hash !== '#version-1-4-1' || !history.open || current.open || !prior.open || older.some(node => node !== prior && node.open) || document.activeElement !== prior) {
@@ -261,11 +296,11 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
                 self.fail("Invalid print-preparation report"); return
             }
             guard offenders.isEmpty else { self.fail("Page-boundary offenders: \(offenders)"); return }
-            guard highlightCount == 39,
+            guard highlightCount == 38,
                   highlightBackgrounds.allSatisfy({ $0 == "transparent" || $0 == "rgba(0, 0, 0, 0)" }) else {
                 self.fail("Revision highlights retained screen background in print export: \(highlightBackgrounds)"); return
             }
-            guard highlightPrintStyles.count == 39,
+            guard highlightPrintStyles.count == 38,
                   highlightPrintStyles.allSatisfy({ style in
                       let background = style["backgroundColor"] as? String ?? ""
                       let outlineStyle = style["outlineStyle"] as? String ?? ""
