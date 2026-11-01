@@ -1,9 +1,9 @@
 <!-- GENERATED FILE. The canonical physician Word extraction is the prose authority. -->
 # Physician-authored manuscript draft
 
-English working manuscript. Version 1.7.0, November 1, 2026.
+English working manuscript. Version 1.8.0, November 1, 2026.
 
-Current change: redrew Supplementary Figure S2 to show the cumulative configurations, the change introduced at each transition, and the three adjacent comparisons in one consistent layout. Manuscript text and the figure caption are unchanged.
+Current change: reorganized the physician authored Results under five descriptive headings, removed repeated summary sentences, added the staged technical ablation results, and moved one note level interpretation to the Discussion. The canonical physician source, tables, figures, captions, and data are unchanged.
 
 The canonical physician blocks below mirror `202601023_Manuscript_JAMA.docx` for audit purposes. The clean HTML applies only the approved cross-reference and reporting edits while preserving all source blocks in its hidden audit representation.
 

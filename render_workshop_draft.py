@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the English-only physician-authored manuscript HTML (version 1.7.0).
+"""Build the English-only physician-authored manuscript HTML (version 1.8.0).
 
 The canonical Word extraction is the sole prose source. Technical tables,
 figures, captions, navigation, and supplementary analyses are inserted around
@@ -95,7 +95,7 @@ SUBHEADINGS = {
     "Statistical analysis",
     "Performance across Clinical Extraction Fields",
 }
-HIDDEN_SOURCE_BLOCKS = {"P032", "P033", "P034", "P035", "P036", "P050", "P071", "P089", "P091", "P094", "P099", "P105"}
+HIDDEN_SOURCE_BLOCKS = {"P032", "P033", "P034", "P035", "P036", "P050", "P071", "P089", "P091", "P094", "P099", "P100", "P105"}
 OUTSTANDING_COMMENT_IDS: set[str] = set()
 RESOLVED_COMMENT_LITERATURE_MAP = {
     "0": 21, "1": 3, "2": 22, "3": 10, "4": 23,
@@ -159,11 +159,15 @@ class SectionOverlay:
 
 SECTION_OVERLAY_CATEGORIES = {
     "terminology", "hyphen-only", "number-format", "cross-reference", "citation",
-    "user-approved-limitation", "user-approved-temporal-controls",
+    "user-approved-limitation", "user-approved-temporal-controls", "user-approved-results",
 }
 RESULTS_DISCUSSION_OVERLAYS: dict[str, tuple[SectionOverlay, ...]] = {
     "P085": (
-        SectionOverlay("number-format", "completed 2160 comparisons", "completed 2,160 comparisons"),
+        SectionOverlay(
+            "user-approved-results",
+            "All 4 physicians evaluated both cancer types and completed 2160 comparisons.",
+            "All four physicians evaluated both cancer types.",
+        ),
         SectionOverlay("terminology", "required note-field judgments", "required judgments for each note and field"),
         SectionOverlay("cross-reference", ", see Table1.", ". See Table 3, Table 4, and Figure 2."),
         SectionOverlay("hyphen-only", "note-cluster robust 95% CI", "note cluster robust 95% CI"),
@@ -182,15 +186,35 @@ RESULTS_DISCUSSION_OVERLAYS: dict[str, tuple[SectionOverlay, ...]] = {
         SectionOverlay("number-format", "p <0.05", "p < 0.05"),
         SectionOverlay("cross-reference", ", see Table 3.", ". See Table 5."),
     ),
-    "P097": (
-        SectionOverlay("cross-reference", "(Figure 3).", "(Figure 4)."),
+    "P095": (
+        SectionOverlay(
+            "user-approved-results",
+            "Results remained consistent when each physician was excluded individually.",
+            "When each physician was excluded individually, adjusted probabilities of harness preference ranged from 77.08% to 83.53% (Supplementary Table S3).",
+        ),
     ),
-    "P100": (
-        SectionOverlay("terminology", "evaluator-by-cancer", "physician and cancer type"),
-        SectionOverlay("cross-reference", "(Figure 4).", "(Supplementary Figure S1)."),
+    "P096": (
+        SectionOverlay(
+            "user-approved-results",
+            "Performance across Clinical Extraction Fields",
+            "Performance across clinical extraction fields",
+        ),
+    ),
+    "P097": (
+        SectionOverlay(
+            "user-approved-results",
+            "Next, we analyzed which questions have the most influence on the results.",
+            "We examined physician preferences across the seven prespecified clinical extraction fields.",
+        ),
+        SectionOverlay("cross-reference", "(Figure 3).", "(Figure 4)."),
     ),
     "P109": (
         SectionOverlay("terminology", "single-prompt", "one prompt"),
+        SectionOverlay(
+            "user-approved-results",
+            "These findings suggest that a structured inference harness can improve the clinical quality of extracted information without additional model training.",
+            "These findings suggest that a structured inference harness can improve the clinical quality of extracted information without additional model training. The note level findings also suggest that the observed preference was not driven by a small number of clinical notes.",
+        ),
     ),
     "P111": (
         SectionOverlay("terminology", "free-text", "free text", 2),
@@ -264,6 +288,16 @@ F7_SECTION_BASELINE = {
         "text_sha256": "628d07037caf487000bb27b068fccc0cbd398d1d9cae74422daba48635aa31a0",
     },
 }
+EXPECTED_V180_SECTION_LOCKS = {
+    "introduction": {
+        "markup_sha256": "e3bc110b6a12c7dec1e69a2dc17dfa666ad7fdfe8c5d90df8565fd766341561c",
+        "text_sha256": F7_SECTION_BASELINE["introduction"]["text_sha256"],
+    },
+    "methods": {
+        "markup_sha256": "4f8637414fafe5e1cf0188a7e549d979b09abe749137880aca54b669de49c218",
+        "text_sha256": F7_SECTION_BASELINE["methods"]["text_sha256"],
+    },
+}
 EXPECTED_V164_RESULTS_SHA256 = "5aceff6ac9b1f9a78abf8bc322c19556a32cc0ba722359b7656e987b226965b3"
 EXPECTED_V164_RESULTS_NUMERIC_SHA256 = "2966552230c8eb68c13797418d36abf7abdd1e8269f753f5f49bf91a74aec5b4"
 EXPECTED_F7_V164_SEMANTIC_RESULTS_NUMERIC_SHA256 = "c63c2e9083b71313e519062257189f27373673692ddce5d1bab0e4a3e743ddd5"
@@ -273,6 +307,15 @@ EXPECTED_V169_P115_TEXT_SHA256 = "3a22b7ee66b45a5d055465a30b166c77def06ed9777f5a
 EXPECTED_V168_P119_TEXT_SHA256 = "48e181d7895d85bb9a304d52d3974e7b838a246c55363b07c68aeb85a6fd17f8"
 EXPECTED_V170_VISIBLE_MANUSCRIPT_TEXT_SHA256 = "37ecc23a891d779e6ef417c5cefe154f949b60e43a85cc68f2033e3d62d03ea2"
 EXPECTED_V170_S2_CAPTION_SHA256 = "7067db040ddefe91dbb579edc6391528e9e87d02282cac5a47cde04530286e30"
+EXPECTED_V180_VISIBLE_MANUSCRIPT_TEXT_SHA256 = "5644fe92777d233763e6c96a97ead22cbd890da13fc9153c7c12201a6a3c6b09"
+EXPECTED_V180_RESULTS_SHA256 = "cec2aa88b4196bf2c361b3989d690080fc59c4281d479983f52452e9c55cfb12"
+EXPECTED_V180_RESULTS_NUMERIC_SHA256 = "98d8ce9841980bdad3ea6a703797174301378b6b53998faea6b60db909fb969c"
+EXPECTED_V180_SEMANTIC_RESULTS_NUMERIC_SHA256 = "2ec3cfac95007d68000c6fd584eb8cadc27d07db27f113f4d2aa443c7c1c9594"
+EXPECTED_V180_RESULTS_DISPLAY_SHA256 = "a600fc71cf7cc90e98d05d8abc4c1fc1f3305ab124731cf140f6a7301b17d57d"
+EXPECTED_V180_DISCUSSION_EXCLUDING_P109_SHA256 = "697fdf89480c77f30bbe17a8b290483d80896d09ccfb532fecd8740c133aa732"
+EXPECTED_V180_SUPPLEMENT_SHA256 = "13492a199535133aacb87d878627d78653f454eac04c31c8c37de78f35bb7bf4"
+EXPECTED_V180_P109_TEXT_SHA256 = "ef2a49bc6b7e82351ce18b84d7474fe1f537822b17aa3ee9996b05dafe7030f3"
+EXPECTED_CANONICAL_SHA256 = "e6efe8f8f775a5e2d85d122011823cb83b62869a66e0585a41dbcd94afc4d72d"
 
 
 def apply_results_discussion_overlay(block_id: str, canonical_text: str) -> str:
@@ -333,6 +376,19 @@ MANUAL_FOCUS_PHRASES = {
     "P061": ["modifications specific to pancreatic cancer"],
     "P063": ["System identities"],
     "P073": ["judge model and settings"],
+    "P085": [
+        "four physicians evaluated both cancer types",
+        "required judgments for each note and field",
+    ],
+    "P095": [
+        "adjusted probabilities of harness preference ranged from 77.08% to 83.53%",
+    ],
+    "P097": [
+        "across the seven prespecified clinical extraction fields",
+    ],
+    "P109": [
+        "not driven by a small number of clinical notes",
+    ],
     "P115": [
         "distinguish evidence recorded before and after a regimen change",
         "complete note together with structured context",
@@ -349,7 +405,49 @@ MANUAL_FOCUS_PHRASES = {
         "cannot separate the effects",
         "size of the preference difference",
     ],
+    "technical-ablation-results": [
+        "120 adjacent comparisons across the same 40 notes",
+        "single nonphysician LLM judge",
+        "defined in Table 2",
+        "17 preferences for each, 6 ties, and P = 1.000",
+        "24 preferences for verified extraction, 2 for decomposed extraction, 14 ties, and P = 1.05 × 10⁻⁵",
+        "19 preferences for verified extraction, 16 for the full inference harness, 5 ties, and P = .736",
+        "unadjusted two sided exact sign tests",
+    ],
 }
+
+FOCUS_REVIEW_METADATA: dict[tuple[str, str], tuple[str, str]] = {
+    ("P085", "four physicians evaluated both cancer types"): (
+        "light",
+        "Original: “All 4 physicians evaluated both cancer types and completed 2160 comparisons.”",
+    ),
+    ("P085", "required judgments for each note and field"): (
+        "light",
+        "Original: “required note-field judgments”",
+    ),
+    ("P095", "adjusted probabilities of harness preference ranged from 77.08% to 83.53%"): (
+        "medium",
+        "Original: “Results remained consistent when each physician was excluded individually.”",
+    ),
+    ("P097", "across the seven prespecified clinical extraction fields"): (
+        "light",
+        "Original: “which questions have the most influence on the results”",
+    ),
+    ("P109", "not driven by a small number of clinical notes"): (
+        "light",
+        "Original P100: “These findings were consistent with the primary analysis and suggest that the observed advantage was not driven by a small number of clinical notes (Figure 4).”",
+    ),
+}
+for _ablation_phrase in MANUAL_FOCUS_PHRASES["technical-ablation-results"]:
+    _ablation_intensity = (
+        "strong"
+        if _ablation_phrase.startswith(("17 preferences", "24 preferences", "19 preferences"))
+        else "medium"
+    )
+    FOCUS_REVIEW_METADATA[("technical-ablation-results", _ablation_phrase)] = (
+        _ablation_intensity,
+        "Added in v1.8.0",
+    )
 
 SUBSTANTIVE_REVISED_IDS = {
     "P004", "P008", "P010", "P012", "P017", "P019", "P022", "P025", "P028", "P030", "P057", "P060",
@@ -419,7 +517,7 @@ CSS = r"""
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:var(--page);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.62}
 .layout{display:grid;grid-template-columns:270px minmax(0,940px);gap:28px;width:min(1260px,calc(100% - 36px));margin:24px auto 70px;align-items:start}.toc{position:sticky;top:18px;max-height:calc(100vh - 36px);overflow:auto;padding:18px 15px;border:1px solid var(--line);border-radius:12px;background:#fffffff5}.toc strong{display:block;margin-bottom:9px;color:var(--navy)}.toc a{display:block;padding:4px 6px;border-radius:5px;color:#3e5160;text-decoration:none;font-size:12.5px}.toc a:hover{background:#eaf4fa}.toc .sub{padding-left:18px;font-size:11.5px;color:var(--muted)}
 article{min-width:0;padding:45px 54px 68px;border:1px solid var(--line);border-radius:14px;background:var(--paper);box-shadow:0 12px 34px #142b4012}h1{margin:0;color:var(--navy);font-family:Georgia,"Times New Roman",serif;font-size:36px;line-height:1.18}h2,h3{color:var(--navy)}h3{margin:27px 0 9px;font-size:19px}.subtitle{margin:8px 0 20px;color:var(--muted)}
-.focus-highlight{color:inherit;background:rgba(255,193,7,.28);border-radius:2px;-webkit-box-decoration-break:clone;box-decoration-break:clone;cursor:help}.review-block{background:transparent}.citation.external-citation{background:transparent}.revision-paragraph{margin-top:9px}.supplement-methods h4{margin:18px 0 5px;color:#30485a;font-size:15px}.supplement-methods ol{margin:7px 0 14px;padding-left:24px}.supplement-methods li{margin:5px 0}
+.focus-highlight{color:inherit;background:rgba(255,193,7,.28);border-radius:2px;-webkit-box-decoration-break:clone;box-decoration-break:clone;cursor:help}.focus-highlight[data-review-intensity="light"]{background:rgba(255,213,79,.22)}.focus-highlight[data-review-intensity="medium"]{background:rgba(255,193,7,.34)}.focus-highlight[data-review-intensity="strong"]{background:rgba(255,152,0,.46)}.review-block{background:transparent}.citation.external-citation{background:transparent}.revision-paragraph{margin-top:9px}.supplement-methods h4{margin:18px 0 5px;color:#30485a;font-size:15px}.supplement-methods ol{margin:7px 0 14px;padding-left:24px}.supplement-methods li{margin:5px 0}
 details{border:0}summary{cursor:pointer}.fold>summary,.fold-toggle{padding:13px 16px;color:var(--navy);font-weight:750;list-style:none}.fold>summary::-webkit-details-marker,.version-entry>summary::-webkit-details-marker{display:none}.fold>summary::before,.fold-toggle::before,.version-entry>summary::before{content:"▸";display:inline-block;width:1.2em}.fold[open]>summary::before,.custom-fold.is-expanded>.fold-toggle::before,.version-entry[open]>summary::before{content:"▾"}.current-change{margin:14px 0 20px;padding:10px 13px;border-left:4px solid var(--blue);background:#eef7fb;color:#264b61;font-size:13px}.version-entry{margin:8px 0;border:1px solid var(--line);border-radius:7px;background:#fafbfc}.version-entry>summary{padding:9px 11px;color:#30485a;font-weight:700;list-style:none}.version-entry-body{padding:0 13px 10px;color:#4b5964;font-size:13px}.version-entry-body p{margin:5px 0}
 .fold{margin:22px 0;border-top:1px solid var(--line)}.fold>summary,.fold-toggle{margin:0;padding:20px 0 10px;font-family:Georgia,"Times New Roman",serif;font-size:25px}.fold-toggle{display:block;width:100%;border:0;background:transparent;text-align:left;cursor:pointer}.custom-fold.is-collapsed>.fold-body{display:none}.custom-fold.is-expanded>.fold-body{display:block}.fold-body{padding:0 0 8px}.source-empty,.source-audit{display:none!important}.physician-paragraph,.manuscript-paragraph{margin:11px 0}.physician-subheading{scroll-margin-top:15px}.xref,.citation,.comment-anchor a{color:var(--blue);text-decoration:none}.xref:hover,.citation:hover,.comment-anchor a:hover{text-decoration:underline}.comment-anchor{margin-left:.18em;font-size:.72em;vertical-align:super}.comment-anchor a{font-weight:650}.comment-backlink{display:inline-block;margin-top:7px;font-size:12px}.print-page-spacer{display:none}
 .table-wrap{margin:20px 0 28px;overflow-x:auto}.table-caption,.figure-caption{margin:0 0 8px;color:#314452;font-size:13px}.table-caption strong,.figure-caption strong{color:var(--navy)}table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:8px 9px;border:1px solid #d6dde3;vertical-align:top}th{background:#e9f1f6;color:#173f5f;text-align:left}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}tbody tr:nth-child(even){background:#fafbfc}.physician-native-table th{background:#eaf4ef;color:#18533f}
@@ -648,10 +746,12 @@ def _stable_review_block_id(node: _ReviewNode, ordered_candidates: list[_ReviewN
     explicit = node.attrs.get("data-review-block-id")
     if explicit:
         return str(explicit)
+    html_id = node.attrs.get("id")
+    if node.attrs.get("data-origin") == "technical-insert" and html_id:
+        return str(html_id)
     source_block = _source_block_for(node)
     if source_block:
         return source_block
-    html_id = node.attrs.get("id")
     if html_id:
         return str(html_id)
     if node.tag in {"th", "td"}:
@@ -909,6 +1009,13 @@ def manuscript_paragraph(text: str, *, paragraph_id: str | None = None) -> str:
     return f'<p class="manuscript-paragraph" data-origin="technical-insert"{id_attr}>{link_crossrefs(text)}</p>'
 
 
+def technical_subheading(text: str, heading_id: str) -> str:
+    return (
+        f'<h3 class="physician-subheading" id="{esc(heading_id)}" '
+        f'data-origin="technical-insert">{esc(text)}</h3>'
+    )
+
+
 def revision_paragraph(text: str, *, paragraph_id: str) -> str:
     return (
         f'<p class="manuscript-paragraph revision-paragraph" data-origin="technical-insert" id="{esc(paragraph_id)}">'
@@ -941,6 +1048,7 @@ def _review_tokens(text: str) -> list[dict[str, object]]:
             "highlight": False,
             "title": "",
             "change": "",
+            "intensity": "medium",
         })
     if "".join(str(token["raw"]) for token in tokens) != text:
         raise AssertionError(f"Review tokenizer did not preserve text: {text[:80]!r}")
@@ -956,6 +1064,7 @@ def _mark_focus_phrases(
     tokens: list[dict[str, object]],
     text: str,
     phrases: list[str],
+    block_id: str,
 ) -> None:
     for phrase in phrases:
         cursor = 0
@@ -971,8 +1080,13 @@ def _mark_focus_phrases(
                     continue
                 if int(token["start"]) < end and int(token["end"]) > start:
                     token["highlight"] = True
-                    token["title"] = f'Focus for review: “{phrase}”'
+                    intensity, title = FOCUS_REVIEW_METADATA.get(
+                        (block_id, phrase),
+                        ("medium", f'Focus for review: “{phrase}”'),
+                    )
+                    token["title"] = title
                     token["change"] = "focus"
+                    token["intensity"] = intensity
             cursor = end
         if not found:
             raise AssertionError(f"Review focus phrase is missing: {phrase!r}")
@@ -989,17 +1103,18 @@ def _render_review_tokens(tokens: list[dict[str, object]], block_id: str) -> str
             continue
         title = str(token["title"])
         change = str(token["change"])
+        intensity = str(token["intensity"])
         run = [token]
         index += 1
         while index < len(tokens):
             candidate = tokens[index]
-            if bool(candidate["highlight"]) and str(candidate["title"]) == title and str(candidate["change"]) == change:
+            if bool(candidate["highlight"]) and str(candidate["title"]) == title and str(candidate["change"]) == change and str(candidate["intensity"]) == intensity:
                 run.append(candidate)
                 index += 1
                 continue
             if bool(candidate["space"]) and index + 1 < len(tokens):
                 following = tokens[index + 1]
-                if bool(following["highlight"]) and str(following["title"]) == title and str(following["change"]) == change:
+                if bool(following["highlight"]) and str(following["title"]) == title and str(following["change"]) == change and str(following["intensity"]) == intensity:
                     run.extend([candidate, following])
                     index += 2
                     continue
@@ -1019,7 +1134,8 @@ def _render_review_tokens(tokens: list[dict[str, object]], block_id: str) -> str
             parts.append(link_crossrefs(leading))
             attrs = (
                 f'class="focus-highlight" data-review-for="{esc(block_id)}" '
-                f'data-review-change="{esc(change)}" title="{esc(title)}" '
+                f'data-review-change="{esc(change)}" data-review-intensity="{esc(intensity)}" '
+                f'title="{esc(title)}" '
                 f'aria-label="{esc(title)}"'
             )
             parts.append(f'<span {attrs}>{link_crossrefs(core)}</span>')
@@ -1056,7 +1172,7 @@ def word_diff_text(original: str, revised: str, *, block_id: str) -> tuple[str, 
         new_text = " ".join(new_values[new_start:new_end])
         if operation in {"delete", "replace"} and old_text:
             deleted.append(old_text)
-    _mark_focus_phrases(new_tokens, revised, focus_phrases)
+    _mark_focus_phrases(new_tokens, revised, focus_phrases, block_id)
     return _render_review_tokens(new_tokens, block_id), deleted
 
 
@@ -1064,7 +1180,7 @@ def highlighted_text(text: str, phrases: list[str], *, block_id: str) -> str:
     """Highlight only selected key phrases in wholly generated text."""
 
     tokens = _review_tokens(text)
-    _mark_focus_phrases(tokens, text, phrases)
+    _mark_focus_phrases(tokens, text, phrases, block_id)
     return _render_review_tokens(tokens, block_id)
 
 
@@ -1384,14 +1500,25 @@ def technical_inserts_after(block_id: str) -> str:
         "P085": table_3() + table_4(),
         "P087": figure("2", "Physician preference overview", "Physician preferences across eight combinations of physician and cancer type. Panel A retains harness, baseline, and tie judgments. Panel B shows the harness share among directional judgments."),
         "P092": table_5(),
-        "P095": manuscript_paragraph("In the leave one physician out sensitivity analysis, adjusted probabilities of harness preference ranged from 77.08% to 83.53% (Supplementary Table S3).", paragraph_id="loo-results") + manuscript_paragraph("Pairwise exact agreement ranged from 73.1% to 82.9%, with Cohen's kappa ranging from 0.511 to 0.646 (Figure 3 and Supplementary Table S2).", paragraph_id="agreement-results") + figure("3", "Agreement among physicians", "Pairwise exact agreement and Cohen's kappa among four physicians in breast cancer and PDAC. Each breast cancer pair shared 280 judgments, and each PDAC pair shared 260 judgments."),
-        "P097": figure("4", "Raw and adjusted preference estimates for core fields", "Preference results for core fields. Panel A retains the raw distribution with ties for seven fields prioritized by physicians. Panel B shows adjusted probabilities of harness preference for each core field with 95% confidence intervals from one joint exploratory GEE fitted to 495 directional judgments. The model included field, physician, and cancer fixed effects, clustered repeated judgments by note with an exchangeable working correlation, and standardized each field over its observed physician and cancer distribution. Breast type and receptor status applied only to breast cancer notes. Ties were excluded from Panel B. The estimates report preference, not accuracy. No pairwise field tests or multiplicity claims were made."),
+        "P095": manuscript_paragraph("Pairwise exact agreement ranged from 73.1% to 82.9%, with Cohen's kappa ranging from 0.511 to 0.646 (Figure 3 and Supplementary Table S2).", paragraph_id="agreement-results") + figure("3", "Agreement among physicians", "Pairwise exact agreement and Cohen's kappa among four physicians in breast cancer and PDAC. Each breast cancer pair shared 280 judgments, and each PDAC pair shared 260 judgments."),
+        "P097": figure("4", "Raw and adjusted preference estimates for core fields", "Preference results for core fields. Panel A retains the raw distribution with ties for seven fields prioritized by physicians. Panel B shows adjusted probabilities of harness preference for each core field with 95% confidence intervals from one joint exploratory GEE fitted to 495 directional judgments. The model included field, physician, and cancer fixed effects, clustered repeated judgments by note with an exchangeable working correlation, and standardized each field over its observed physician and cancer distribution. Breast type and receptor status applied only to breast cancer notes. Ties were excluded from Panel B. The estimates report preference, not accuracy. No pairwise field tests or multiplicity claims were made.")
+        + technical_subheading("Technical ablation", "technical-ablation")
+        + revision_inline_paragraph(
+            "A separate technical ablation comprised 120 adjacent comparisons across the same 40 notes. A single nonphysician LLM judge, blinded to configuration identity, evaluated the comparisons. The four configurations are defined in Table 2. The one prompt versus decomposed comparison yielded 17 preferences for each, 6 ties, and P = 1.000. With verification added, the result was 24 preferences for verified extraction, 2 for decomposed extraction, 14 ties, and P = 1.05 × 10⁻⁵. After deterministic inline processing and the complete POST hooks were added, the result was 19 preferences for verified extraction, 16 for the full inference harness, 5 ties, and P = .736. The three unadjusted two sided exact sign tests excluded ties. See Supplementary Figure S2.",
+            paragraph_id="technical-ablation-results",
+            phrases=MANUAL_FOCUS_PHRASES["technical-ablation-results"],
+        ),
     }
     return inserts.get(block_id, "")
 
 
 def technical_inserts_before(block_id: str) -> str:
-    return ""
+    inserts = {
+        "P085": technical_subheading("Overall physician preference", "overall-physician-preference"),
+        "P092": technical_subheading("Adjusted preference estimates", "adjusted-preference-estimates"),
+        "P095": technical_subheading("Sensitivity and physician agreement", "sensitivity-and-physician-agreement"),
+    }
+    return inserts.get(block_id, "")
 
 
 def build_scientific_sections(data: dict[str, object]) -> tuple[str, str]:
@@ -1565,6 +1692,7 @@ def build_supplement() -> str:
 
 def version_history() -> str:
     entries = [
+        ("v1.8.0", "2026-11-01", "Physician source first Results", "Reorganized the physician authored Results under five descriptive headings, removed repeated summary sentences, added the staged technical ablation results, and moved one note level interpretation to the Discussion. The canonical physician source, tables, figures, captions, and data are unchanged."),
         ("v1.7.0", "2026-11-01", "Figure S2 redesign", "Redrew Supplementary Figure S2 to show the cumulative A through D configurations, the change introduced at each transition, and three equally formatted adjacent comparisons. Manuscript text and the figure caption are unchanged."),
         ("v1.6.9", "2026-11-01", "Temporal control description", "Revised P115 to describe the prompt, structured context, semantic and source support checks, and the limit on attributing physician preference to temporal controls alone. Comment 13 is resolved."),
         ("v1.6.8", "2026-11-01", "Evaluation limitation", "Removed the separate Limitations heading and clarified that the observed physician preference applies to the complete outputs as presented. The revised text separates the observed direction from uncertainty in effect size and causal attribution."),
@@ -1605,7 +1733,7 @@ def version_history() -> str:
         else:
             version, date, note = entry
             label = ""
-        current = version == "v1.7.0"
+        current = version == "v1.8.0"
         open_attr = " open" if current else ""
         summary = f"{version} · {label} · {date}" if label else f"{version} · {date}"
         rendered.append(
@@ -1619,7 +1747,10 @@ def toc() -> str:
     links = [("#section-introduction", "Introduction", False), ("#section-methods", "Methods", False)]
     for heading in ["Study Design", "Dataset", "Baseline model and model development", "Inference Harness", "Breast cancer development with physician review", "PDAC adaptation with feedback from language models", "Clinical evaluation data collection and scoring rubric", "Ablation study", "Statistical analysis"]:
         links.append(("#" + re.sub(r"[^a-z0-9]+", "-", heading.lower()).strip("-"), heading, True))
-    links.extend([("#section-results", "Results", False), ("#performance-across-clinical-extraction-fields", "Performance across clinical extraction fields", True), ("#section-discussion", "Discussion", False), ("#supplementary-material", "Supplementary material", False), ("#physician-comments", "Outstanding physician comments (0)", False), ("#version-history", "Version history", False), ("#literature-workspace", "Literature-review workspace", False)])
+    links.append(("#section-results", "Results", False))
+    for heading in ["Overall physician preference", "Adjusted preference estimates", "Sensitivity and physician agreement", "Performance across clinical extraction fields", "Technical ablation"]:
+        links.append(("#" + re.sub(r"[^a-z0-9]+", "-", heading.lower()).strip("-"), heading, True))
+    links.extend([("#section-discussion", "Discussion", False), ("#supplementary-material", "Supplementary material", False), ("#physician-comments", "Outstanding physician comments (0)", False), ("#version-history", "Version history", False), ("#literature-workspace", "Literature-review workspace", False)])
     return '<nav class="toc" data-origin="technical-insert"><strong>Contents</strong>' + "".join(f'<a class="{"sub" if sub else ""}" href="{href}" data-origin="technical-insert">{esc(label)}</a>' for href, label, sub in links) + "</nav>"
 
 
@@ -1628,7 +1759,7 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
     article = f"""
 <article>
   <h1 class="screen-only">Physician-authored manuscript draft</h1>
-  <p class="subtitle screen-only">English working manuscript · Version 1.7.0 · November 1, 2026</p>
+  <p class="subtitle screen-only">English working manuscript · Version 1.8.0 · November 1, 2026</p>
   <details class="fold" id="version-history"><summary>Version history</summary><div class="fold-body">{version_history()}</div></details>
   {sections}
   {build_supplement()}
@@ -1636,14 +1767,14 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
   {literature_workspace()}
 </article>
 """
-    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v1.7.0</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
+    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v1.8.0</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
     document = apply_review_block_metadata(document)
     markdown = f"""<!-- GENERATED FILE. The canonical physician Word extraction is the prose authority. -->
 # Physician-authored manuscript draft
 
-English working manuscript. Version 1.7.0, November 1, 2026.
+English working manuscript. Version 1.8.0, November 1, 2026.
 
-Current change: redrew Supplementary Figure S2 to show the cumulative configurations, the change introduced at each transition, and the three adjacent comparisons in one consistent layout. Manuscript text and the figure caption are unchanged.
+Current change: reorganized the physician authored Results under five descriptive headings, removed repeated summary sentences, added the staged technical ablation results, and moved one note level interpretation to the Discussion. The canonical physician source, tables, figures, captions, and data are unchanged.
 
 The canonical physician blocks below mirror `{SOURCE_DOCX.name}` for audit purposes. The clean HTML applies only the approved cross-reference and reporting edits while preserving all source blocks in its hidden audit representation.
 
@@ -1884,6 +2015,8 @@ def overlay_display_text(text: str) -> str:
 
 
 def validate(document: str, markdown: str, data: dict[str, object]) -> None:
+    if hashlib.sha256(CANONICAL_JSON.read_bytes()).hexdigest() != EXPECTED_CANONICAL_SHA256:
+        raise AssertionError("Canonical physician JSON changed")
     parser = PreservationParser(); parser.feed(document)
     expected_paragraphs = {item["id"]: item["raw_visible_text"] for item in data["paragraphs"]}
     expected_cells = {cell["id"]: cell["raw_visible_text"] for table in data["tables"] for row in table["rows"] for cell in row}
@@ -2055,6 +2188,9 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
             raise AssertionError(f"Citation or comment marker is inside a yellow span: {block_id}")
         if not re.search(r'title="[^"]+"', attrs) or not re.search(r'aria-label="[^"]+"', attrs):
             raise AssertionError(f"A review span lacks hover or accessibility metadata: {block_id}")
+        intensity_match = re.search(r'data-review-intensity="([^"]+)"', attrs)
+        if not intensity_match or intensity_match.group(1) not in {"light", "medium", "strong"}:
+            raise AssertionError(f"A review span lacks a valid review intensity: {block_id}")
         span_blocks.add(block_id)
         span_texts.add(text)
         span_records.append((block_id, text))
@@ -2075,6 +2211,10 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
         "A displayed the inference harness output", "B displayed the one prompt baseline",
         "blinded to system identities", "Source attribution was available only with the harness output",
         "complete output packages",
+        "adjusted probabilities of harness preference ranged from 77.08% to 83.53%",
+        "17 preferences for each, 6 ties, and P = 1.000",
+        "24 preferences for verified extraction, 2 for decomposed extraction, 14 ties, and P = 1.05 × 10⁻⁵",
+        "19 preferences for verified extraction, 16 for the full inference harness, 5 ties, and P = .736",
     ]:
         if required_phrase not in span_texts:
             raise AssertionError(f"Required focused review phrase is missing: {required_phrase}")
@@ -2099,14 +2239,14 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     ]:
         if f'id="{revision_id}"' not in document: raise AssertionError(f"Clarification is missing: {revision_id}")
     if 'id="draft-metadata"' in document or "Draft information and source provenance" in document: raise AssertionError("Removed draft-information block remains")
-    if "Version 1.7.0 · November 1, 2026" not in document or "draft v1.7.0" not in document: raise AssertionError("Version 1.7.0 metadata is missing")
-    if document.count('class="version-entry"') != 32 or any(f'id="version-{item}"' not in document for item in ["1-7-0", "1-6-9", "1-6-8", "1-6-7", "1-6-6", "1-6-5", "1-6-4", "1-6-3", "1-6-2", "1-6-1", "1-6", "1-5-2", "1-5-1", "1-5", "1-4-1", "1-4", "1-3", "1-2-3", "1-2-2", "1-2-1", "1-2", "1-1", "1-0", "0-25", "0-24", "0-23", "0-22", "0-21", "0-20", "0-19", "0-18", "0-17"]):
+    if "Version 1.8.0 · November 1, 2026" not in document or "draft v1.8.0" not in document: raise AssertionError("Version 1.8.0 metadata is missing")
+    if document.count('class="version-entry"') != 33 or any(f'id="version-{item}"' not in document for item in ["1-8-0", "1-7-0", "1-6-9", "1-6-8", "1-6-7", "1-6-6", "1-6-5", "1-6-4", "1-6-3", "1-6-2", "1-6-1", "1-6", "1-5-2", "1-5-1", "1-5", "1-4-1", "1-4", "1-3", "1-2-3", "1-2-2", "1-2-1", "1-2", "1-1", "1-0", "0-25", "0-24", "0-23", "0-22", "0-21", "0-20", "0-19", "0-18", "0-17"]):
         raise AssertionError("Nested version history is incomplete")
-    if not re.search(r'<details class="version-entry" id="version-1-7-0"[^>]* open>', document):
-        raise AssertionError("Current v1.7.0 history entry is not expanded inside the closed parent")
-    if any(re.search(rf'<details class="version-entry" id="version-{item}"[^>]* open>', document) for item in ["1-6-9", "1-6-8", "1-6-7", "1-6-6", "1-6-5", "1-6-4", "1-6-3", "1-6-2", "1-6-1", "1-6", "1-5-2", "1-5-1", "1-5", "1-4-1", "1-4", "1-3"]):
+    if not re.search(r'<details class="version-entry" id="version-1-8-0"[^>]* open>', document):
+        raise AssertionError("Current v1.8.0 history entry is not expanded inside the closed parent")
+    if any(re.search(rf'<details class="version-entry" id="version-{item}"[^>]* open>', document) for item in ["1-7-0", "1-6-9", "1-6-8", "1-6-7", "1-6-6", "1-6-5", "1-6-4", "1-6-3", "1-6-2", "1-6-1", "1-6", "1-5-2", "1-5-1", "1-5", "1-4-1", "1-4", "1-3"]):
         raise AssertionError("Prior version-history entries must be closed")
-    if "v1.7.0 · Figure S2 redesign · 2026-11-01" not in document:
+    if "v1.8.0 · Physician source first Results · 2026-11-01" not in document:
         raise AssertionError("Current version-history label is missing")
     if "querySelectorAll('#version-history .version-entry').forEach(entry=>entry.open=entry===target)" not in document:
         raise AssertionError("Version-history deep links do not isolate the targeted entry")
@@ -2119,39 +2259,52 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     visible_manuscript_text = "\n".join(
         f"{block_id}\t{block.text}" for block_id, block in blocks_without_comment_ui.items()
     )
-    if hashlib.sha256(visible_manuscript_text.encode("utf-8")).hexdigest() != EXPECTED_V170_VISIBLE_MANUSCRIPT_TEXT_SHA256:
-        raise AssertionError("Visible manuscript text changed during the Figure S2 redesign")
+    if hashlib.sha256(visible_manuscript_text.encode("utf-8")).hexdigest() != EXPECTED_V180_VISIBLE_MANUSCRIPT_TEXT_SHA256:
+        raise AssertionError("Visible manuscript text differs from the approved v1.8.0 Results structure")
     if hashlib.sha256(blocks_without_comment_ui["figure-s2::caption"].text.encode("utf-8")).hexdigest() != EXPECTED_V170_S2_CAPTION_SHA256:
         raise AssertionError("Supplementary Figure S2 caption changed")
-    visible_text_without_comment_ui = "\n".join(
+    results_displays = "\n".join(
         f"{block_id}\t{block.text}"
         for block_id, block in blocks_without_comment_ui.items()
-        if block_id not in {"limitations", "P115", "P119"}
+        if block.section == "results" and (block_id.startswith("table-") or block_id.startswith("figure-"))
     )
-    if (
-        hashlib.sha256(visible_text_without_comment_ui.encode("utf-8")).hexdigest()
-        != EXPECTED_V169_VISIBLE_BLOCK_TEXT_EXCLUDING_COMMENT_UI_P115_AND_P119_SHA256
-    ):
-        raise AssertionError("Visible manuscript block text changed outside comment UI, P115, and P119")
+    if hashlib.sha256(results_displays.encode("utf-8")).hexdigest() != EXPECTED_V180_RESULTS_DISPLAY_SHA256:
+        raise AssertionError("A Results table, figure, caption, or data value changed")
+    discussion_except_p109 = "\n".join(
+        f"{block_id}\t{block.text}"
+        for block_id, block in blocks_without_comment_ui.items()
+        if block.section == "discussion" and block_id != "P109"
+    )
+    if hashlib.sha256(discussion_except_p109.encode("utf-8")).hexdigest() != EXPECTED_V180_DISCUSSION_EXCLUDING_P109_SHA256:
+        raise AssertionError("Discussion changed outside the approved P109 move")
+    supplement_text = "\n".join(
+        f"{block_id}\t{block.text}"
+        for block_id, block in blocks_without_comment_ui.items()
+        if block.section in {"supplementary-material", "supplementary-methods"}
+    )
+    if hashlib.sha256(supplement_text.encode("utf-8")).hexdigest() != EXPECTED_V180_SUPPLEMENT_SHA256:
+        raise AssertionError("References or supplementary material changed")
     for section, next_section in [("introduction", "methods"), ("methods", "results")]:
         markup_hash = hashlib.sha256(section_markup(document, section, next_section).encode("utf-8")).hexdigest()
         text_hash = hashlib.sha256(section_block_text(document, section).encode("utf-8")).hexdigest()
-        if markup_hash != F7_SECTION_BASELINE[section]["markup_sha256"] or text_hash != F7_SECTION_BASELINE[section]["text_sha256"]:
-            raise AssertionError(f"{section.title()} changed from commit f7b0f34d")
+        if markup_hash != EXPECTED_V180_SECTION_LOCKS[section]["markup_sha256"] or text_hash != EXPECTED_V180_SECTION_LOCKS[section]["text_sha256"]:
+            raise AssertionError(f"{section.title()} changed outside the v1.8.0 review metadata update")
     results_discussion_focus = {
         block_id for block_id, _ in span_records
         if re.fullmatch(r"P\d{3}", block_id) and 84 <= int(block_id[1:]) <= 119
     }
     p119_focus = [text for block_id, text in span_records if block_id == "P119"]
     p115_focus = [text for block_id, text in span_records if block_id == "P115"]
-    if results_discussion_focus != {"P115", "P119"} or p115_focus != MANUAL_FOCUS_PHRASES["P115"] or p119_focus != MANUAL_FOCUS_PHRASES["P119"]:
-        raise AssertionError("Results or Discussion focus differs from the selected P115 and P119 phrases")
+    if results_discussion_focus != {"P085", "P095", "P097", "P109", "P115", "P119"} or p115_focus != MANUAL_FOCUS_PHRASES["P115"] or p119_focus != MANUAL_FOCUS_PHRASES["P119"]:
+        raise AssertionError("Results or Discussion focus differs from the selected phrase level review marks")
     if re.search(r'<h3[^>]*id="limitations"[^>]*>Limitations</h3>', document):
         raise AssertionError("Removed Limitations heading remains")
     if 'href="#limitations"' in document:
         raise AssertionError("Removed Limitations link remains")
     if hashlib.sha256(rendered_physician_prose(document, "P119").encode("utf-8")).hexdigest() != EXPECTED_V168_P119_TEXT_SHA256:
         raise AssertionError("P119 differs from the approved v1.6.8 wording")
+    if hashlib.sha256(rendered_physician_prose(document, "P109").encode("utf-8")).hexdigest() != EXPECTED_V180_P109_TEXT_SHA256:
+        raise AssertionError("P109 differs from the approved v1.8.0 moved interpretation")
     for paragraph in data["paragraphs"]:
         block_id = str(paragraph["id"])
         if not re.fullmatch(r"P\d{3}", block_id) or not 84 <= int(block_id[1:]) <= 119:
@@ -2166,14 +2319,14 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     results_text = "\n".join(
         f"{block_id}\t{block.text}" for block_id, block in manuscript_blocks.items() if block.section == "results"
     )
-    if hashlib.sha256(results_text.encode("utf-8")).hexdigest() != EXPECTED_V164_RESULTS_SHA256:
-        raise AssertionError("Visible v1.6.4 Results hash changed")
+    if hashlib.sha256(results_text.encode("utf-8")).hexdigest() != EXPECTED_V180_RESULTS_SHA256:
+        raise AssertionError("Visible v1.8.0 Results hash changed")
     result_numbers = re.findall(
         r"(?<![A-Za-z])(?:[+-]?\d[\d,]*(?:\.\d+)?%?|[+-]?\d+(?:\.\d+)?e-\d+)",
         results_text,
         flags=re.I,
     )
-    if hashlib.sha256("\n".join(result_numbers).encode("utf-8")).hexdigest() != EXPECTED_V164_RESULTS_NUMERIC_SHA256:
+    if hashlib.sha256("\n".join(result_numbers).encode("utf-8")).hexdigest() != EXPECTED_V180_RESULTS_NUMERIC_SHA256:
         raise AssertionError("Authoritative Results number sequence changed")
     semantic_results_text = re.sub(r"\bseven\b", "7", results_text, flags=re.I)
     semantic_result_numbers = re.findall(
@@ -2183,7 +2336,7 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     )
     if (
         hashlib.sha256("\n".join(semantic_result_numbers).encode("utf-8")).hexdigest()
-        != EXPECTED_F7_V164_SEMANTIC_RESULTS_NUMERIC_SHA256
+        != EXPECTED_V180_SEMANTIC_RESULTS_NUMERIC_SHA256
     ):
         raise AssertionError("Semantic Results number sequence differs from commit f7b0f34d")
     for block_id, focused_text in span_records:
@@ -2223,7 +2376,8 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     for obsolete in ["author-queries", "review-marker", "source-highlight", "physician-editorial", "technical-note", "class=\"badge\""]:
         if obsolete in document: raise AssertionError(f"Removed review UI remains: {obsolete}")
     for source_block in HIDDEN_SOURCE_BLOCKS:
-        if f'data-source-block="{source_block}"' not in document or f'id="{source_block}"' in document:
+        visible_id = re.search(rf'(?<![\w-])id="{re.escape(source_block)}"', document)
+        if f'data-source-block="{source_block}"' not in document or visible_id:
             raise AssertionError(f"Hidden source placeholder audit is incomplete: {source_block}")
     if not GRAMMAR_REVISED_IDS.issubset(REVISED_PARAGRAPHS): raise AssertionError("Grammar revision registry is incomplete")
     citation_token = re.compile(r"\s*\[\[cite:[a-z_]+\]\]")
@@ -2268,19 +2422,16 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     required_crossrefs = {
         "P030": "#table-1", "P063": "#supplementary-table-s1", "P068": "#table-2",
         "P085": "#table-3", "P086": "#figure-s1", "P092": "#table-5",
-        "P097": "#figure-4", "P100": "#figure-s1", "P117": "#figure-s2",
+        "P095": "#supplementary-table-s3", "P097": "#figure-4", "P117": "#figure-s2",
     }
     for paragraph_id, href in required_crossrefs.items():
         match = re.search(rf'id="{paragraph_id}"[^>]*>(.*?)</p>', document, flags=re.S)
         if not match or f'href="{href}"' not in match.group(1): raise AssertionError(f"Cross-reference missing from {paragraph_id}: {href}")
     if 'href="#table-4"' not in re.search(r'id="P085"[^>]*>(.*?)</p>', document, flags=re.S).group(1) or 'href="#figure-2"' not in re.search(r'id="P085"[^>]*>(.*?)</p>', document, flags=re.S).group(1):
         raise AssertionError("P085 does not cite Tables 3-4 and Figure 2")
-    loo_match = re.search(r'id="loo-results"[^>]*>(.*?)</p>', document, flags=re.S)
-    if not loo_match or 'href="#supplementary-table-s3"' not in loo_match.group(1):
-        raise AssertionError("Independent LOO result or its Supplementary Table S3 link is missing")
     p095_match = re.search(r'id="P095"[^>]*>(.*?)</p>', document, flags=re.S)
-    if not p095_match or "77.08%" in p095_match.group(1) or "83.53%" in p095_match.group(1):
-        raise AssertionError("LOO range remains mixed into physician P095")
+    if not p095_match or "77.08%" not in p095_match.group(1) or "83.53%" not in p095_match.group(1) or 'href="#supplementary-table-s3"' not in p095_match.group(1):
+        raise AssertionError("Consolidated LOO range or its Supplementary Table S3 link is missing from P095")
     if 'href="#figure-3"' not in document or 'href="#supplementary-table-s2"' not in document: raise AssertionError("Agreement Results cross-references are missing")
     p115_html = re.search(r'id="P115"[^>]*>(.*?)</p>', document, flags=re.S)
     p117_html = re.search(r'id="P117"[^>]*>(.*?)</p>', document, flags=re.S)

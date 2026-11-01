@@ -57,8 +57,8 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           if (!supplement || !body || !button) return 'missing custom supplement fold';
           const changedBlocks = [...document.querySelectorAll('[data-review-changed-from="v1.3"]')];
           const highlights = [...document.querySelectorAll('.focus-highlight')];
-          if (changedBlocks.length !== 68) return `unexpected changed-block count: ${changedBlocks.length}`;
-          if (highlights.length !== 45) return `unexpected manual-focus count: ${highlights.length}`;
+          if (changedBlocks.length !== 71) return `unexpected changed-block count: ${changedBlocks.length}`;
+          if (highlights.length !== 57) return `unexpected manual-focus count: ${highlights.length}`;
           if (document.querySelector('.revision-legend,.revision-swatch,.revision-light,.revision-medium,.revision-strong')) {
             return 'obsolete revision legend or importance styling remains';
           }
@@ -71,6 +71,12 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           if (highlights.some(node => node.textContent.trim().length === 0 || node.textContent.trim().length > 180)) {
             return 'word-level highlight has an invalid text length';
           }
+          if (highlights.some(node => !['light', 'medium', 'strong'].includes(node.dataset.reviewIntensity || ''))) {
+            return 'word-level highlight lacks a valid review intensity';
+          }
+          if (highlights.filter(node => node.dataset.reviewIntensity === 'light').length !== 4) return 'unexpected light review count';
+          const strongHighlights = highlights.filter(node => node.dataset.reviewIntensity === 'strong');
+          if (strongHighlights.length !== 3 || strongHighlights.some(node => node.dataset.reviewFor !== 'technical-ablation-results')) return 'strong review marks are not limited to the three key ablation results';
           if ([...document.querySelectorAll('.external-citation,.comment-anchor')].some(node => node.closest('.focus-highlight'))) {
             return 'citation link or comment marker is inside a yellow span';
           }
@@ -120,22 +126,33 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
             'support the complete workflow', 'temporal controls alone',
             'complete harness output as presented', 'harness was always displayed as A',
             'source attribution appeared only with the harness', 'both the direction and magnitude',
-            'cannot separate the effects', 'size of the preference difference'
+            'cannot separate the effects', 'size of the preference difference',
+            'four physicians evaluated both cancer types', 'required judgments for each note and field',
+            'adjusted probabilities of harness preference ranged from 77.08% to 83.53%',
+            'across the seven prespecified clinical extraction fields',
+            'not driven by a small number of clinical notes',
+            '17 preferences for each, 6 ties, and P = 1.000',
+            '24 preferences for verified extraction, 2 for decomposed extraction, 14 ties, and P = 1.05 × 10⁻⁵',
+            '19 preferences for verified extraction, 16 for the full inference harness, 5 ties, and P = .736'
           ];
           const highlightedText = new Set(highlights.map(node => node.textContent.trim()));
           if (requiredFocusedText.some(text => !highlightedText.has(text))) return 'a focused Methods or limitation phrase is missing';
           const resultsDiscussionHighlights = highlights.filter(node => {
-            const block = node.closest('[data-review-block-id]');
-            const id = block?.dataset.reviewBlockId || '';
+            const id = node.dataset.reviewFor || '';
             return /^P\d{3}$/.test(id) && Number(id.slice(1)) >= 84 && Number(id.slice(1)) <= 119;
           });
           const expectedP115Highlights = ['distinguish evidence recorded before and after a regimen change', 'complete note together with structured context', 'semantic and source support checks', 'independent contribution difficult to isolate', 'support the complete workflow', 'temporal controls alone'];
           const expectedP119Highlights = ['complete harness output as presented', 'harness was always displayed as A', 'source attribution appeared only with the harness', 'both the direction and magnitude', 'cannot separate the effects', 'size of the preference difference'];
           const expectedDiscussionHighlights = [
+            ['P085', 'four physicians evaluated both cancer types'],
+            ['P085', 'required judgments for each note and field'],
+            ['P095', 'adjusted probabilities of harness preference ranged from 77.08% to 83.53%'],
+            ['P097', 'across the seven prespecified clinical extraction fields'],
+            ['P109', 'not driven by a small number of clinical notes'],
             ...expectedP115Highlights.map(text => ['P115', text]),
             ...expectedP119Highlights.map(text => ['P119', text]),
           ];
-          if (resultsDiscussionHighlights.length !== 12 || resultsDiscussionHighlights.some((node,index) => node.dataset.reviewFor !== expectedDiscussionHighlights[index][0] || node.textContent.trim() !== expectedDiscussionHighlights[index][1])) return `Results or Discussion focus differs from the selected P115 and P119 phrases: ${resultsDiscussionHighlights.map(node => `${node.dataset.reviewFor}:${node.textContent.trim()}`).join(' | ')}`;
+          if (resultsDiscussionHighlights.length !== 17 || resultsDiscussionHighlights.some((node,index) => node.dataset.reviewFor !== expectedDiscussionHighlights[index][0] || node.textContent.trim() !== expectedDiscussionHighlights[index][1])) return `Results or Discussion focus differs from the selected phrases: ${resultsDiscussionHighlights.map(node => `${node.dataset.reviewFor}:${node.textContent.trim()}`).join(' | ')}`;
           const comment13 = document.getElementById('comment-anchor-13');
           const comment14 = document.getElementById('comment-anchor-14');
           if (comment13 || document.getElementById('physician-comment-13')) return 'resolved comment 13 remains visible';
@@ -145,13 +162,21 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           if (resolved13?.dataset.resolutionBasis !== 'P115 revised to describe the prompt, structured context, semantic and source support checks, and the component attribution boundary.') return 'comment 13 resolution evidence is missing';
           if (resolved14?.dataset.resolutionBasis !== 'Breast ER/PR/HER2 rules verified in prompt, breast-only routing, hooks, and tests.') return 'comment 14 resolution evidence is missing';
           if (document.querySelectorAll('#physician-comments .comment').length !== 0) return 'resolved comments remain in the outstanding list';
-          if (!document.getElementById('loo-results')?.querySelector('a[href="#supplementary-table-s3"]')) return 'independent LOO result is missing';
+          if (document.getElementById('loo-results')) return 'obsolete separate LOO result remains';
+          const p095 = document.getElementById('P095');
+          if (!p095?.querySelector('a[href="#supplementary-table-s3"]') || !p095.textContent.includes('77.08%') || !p095.textContent.includes('83.53%')) return 'consolidated LOO result is missing';
+          for (const id of ['overall-physician-preference', 'adjusted-preference-estimates', 'sensitivity-and-physician-agreement', 'performance-across-clinical-extraction-fields', 'technical-ablation']) {
+            if (!document.getElementById(id) || document.getElementById(id).querySelector('.focus-highlight')) return `Results heading is missing or highlighted: ${id}`;
+          }
+          const technicalAblation = document.getElementById('technical-ablation-results');
+          if (!technicalAblation || !technicalAblation.textContent.includes('120 adjacent comparisons') || !technicalAblation.textContent.includes('P = 1.05 × 10⁻⁵')) return 'technical ablation Results are incomplete';
+          const focusBlock = highlight => document.querySelector(`[data-review-block-id="${highlight.dataset.reviewFor}"]`) || document.getElementById(highlight.dataset.reviewFor);
           for (const highlight of highlights) {
-            const block = document.querySelector(`[data-review-block-id="${highlight.dataset.reviewFor}"]`);
+            const block = focusBlock(highlight);
             const sentences = block?.textContent.trim().split(/(?<=[.!?])\s+/).map(text => text.replace(/[.!?]+$/, '').trim()) || [];
             if (sentences.includes(highlight.textContent.trim().replace(/[.!?]+$/, '').trim())) return `complete sentence is highlighted: ${highlight.dataset.reviewFor}`;
           }
-          for (const block of new Set(highlights.map(node => node.closest('[data-review-block-id]')))) {
+          for (const block of new Set(highlights.map(focusBlock))) {
             if (!block) return 'a focus span lacks its review block';
             const text = block.textContent;
             const ranges = [...block.querySelectorAll('.focus-highlight')].map(span => {
@@ -209,7 +234,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           if (!visible() || document.activeElement?.id !== 'figure-s1') return 'nested supplement link did not reveal and focus';
           button.click();
           const history = document.getElementById('version-history');
-          const current = document.getElementById('version-1-7-0');
+          const current = document.getElementById('version-1-8-0');
           const older = [...history.querySelectorAll('.version-entry')].filter(node => node !== current);
           if (history.open || !current?.open || older.some(node => node.open)) return 'unexpected initial version-history state';
           window.__workshopVersionHashState = 'waiting';
@@ -250,7 +275,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
         let checks = #"""
         (() => {
           const history = document.getElementById('version-history');
-          const current = document.getElementById('version-1-7-0');
+          const current = document.getElementById('version-1-8-0');
           const prior = document.getElementById('version-1-4-1');
           const older = [...history.querySelectorAll('.version-entry')].filter(node => node !== current);
           if (location.hash !== '#version-1-4-1' || !history.open || current.open || !prior.open || older.some(node => node !== prior && node.open) || document.activeElement !== prior) {
@@ -337,11 +362,11 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
             }
             guard offenders.isEmpty else { self.fail("Page-boundary offenders: \(offenders)"); return }
             guard limitationPrintContent else { self.fail("P119 limitation text is missing from print export"); return }
-            guard highlightCount == 45,
+            guard highlightCount == 57,
                   highlightBackgrounds.allSatisfy({ $0 == "transparent" || $0 == "rgba(0, 0, 0, 0)" }) else {
                 self.fail("Revision highlights retained screen background in print export: \(highlightBackgrounds)"); return
             }
-            guard highlightPrintStyles.count == 45,
+            guard highlightPrintStyles.count == 57,
                   highlightPrintStyles.allSatisfy({ style in
                       let background = style["backgroundColor"] as? String ?? ""
                       let outlineStyle = style["outlineStyle"] as? String ?? ""
