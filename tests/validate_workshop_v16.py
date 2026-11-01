@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deterministic v1.6.6 manuscript, comment-resolution, and manual-focus checks."""
+"""Deterministic v1.6.7 manuscript, Limitations navigation, and manual-focus checks."""
 
 from __future__ import annotations
 
@@ -49,9 +49,9 @@ def main() -> None:
 
     state = renderer.review_redline_state(document)
     assert state["changed"] == state["highlighted"]
-    assert len(state["changed"]) == 67
+    assert len(state["changed"]) == 68
     assert state["section_counts"] == {
-        "discussion": 2,
+        "discussion": 3,
         "introduction": 5,
         "methods": 29,
         "results": 6,
@@ -60,8 +60,8 @@ def main() -> None:
     }
 
     rows = focus_spans(document)
-    assert len(rows) == 33
-    assert len({row[0] for row in rows}) == 13
+    assert len(rows) == 38
+    assert len({row[0] for row in rows}) == 14
     assert max(len(row[1]) for row in rows) == 79
     assert not [row for row in rows if "external-citation" in row[2] or "comment-anchor" in row[2]]
     assert not re.findall(
@@ -94,6 +94,11 @@ def main() -> None:
         "blinded to system identities",
         "Source attribution was available only with the harness output",
         "complete output packages",
+        "fixed A/B display order",
+        "source attribution only in the harness output",
+        "direction and magnitude",
+        "same base model family",
+        "generalization across model families",
     }.issubset(focus_text)
 
     for paragraph_id in ["P004", "P008", "P010", "P012"]:
@@ -109,9 +114,12 @@ def main() -> None:
     for section, next_section in [("introduction", "methods"), ("methods", "results")]:
         assert hashlib.sha256(renderer.section_markup(document, section, next_section).encode()).hexdigest() == renderer.F7_SECTION_BASELINE[section]["markup_sha256"]
         assert hashlib.sha256(renderer.section_block_text(document, section).encode()).hexdigest() == renderer.F7_SECTION_BASELINE[section]["text_sha256"]
-    assert not [
+    results_discussion_rows = [
         row for row in rows
         if re.fullmatch(r"P\d{3}", row[0]) and 84 <= int(row[0][1:]) <= 119
+    ]
+    assert [(row[0], row[1]) for row in results_discussion_rows] == [
+        ("P119", phrase) for phrase in renderer.MANUAL_FOCUS_PHRASES["P119"]
     ]
     for block_id, focused_text, _ in rows:
         sentences = {
@@ -127,7 +135,10 @@ def main() -> None:
         '<span class="focus-highlight">were not disclosed</span>.</p>'
     )
     assert renderer.sentence_sized_focus_runs(synthetic_adjacent_sentence) == ["synthetic"]
-    assert len(blocks) == 355
+    assert len(blocks) == 356
+    assert blocks["limitations"].text == "Limitations"
+    assert blocks["limitations"].section == "discussion"
+    assert '<a class="sub" href="#limitations" data-origin="technical-insert">Limitations</a>' in document
     results_text = "\n".join(
         f"{block_id}\t{block.text}" for block_id, block in blocks.items() if block.section == "results"
     )
@@ -143,13 +154,16 @@ def main() -> None:
     )
     blocks_without_comment_ui = renderer.collect_review_blocks(document_without_comment_ui)
     visible_text_without_comment_ui = "\n".join(
-        f"{block_id}\t{block.text}" for block_id, block in blocks_without_comment_ui.items()
+        f"{block_id}\t{block.text}"
+        for block_id, block in blocks_without_comment_ui.items()
+        if block_id != "limitations"
     )
     assert (
         hashlib.sha256(visible_text_without_comment_ui.encode("utf-8")).hexdigest()
         == renderer.EXPECTED_V166_VISIBLE_BLOCK_TEXT_EXCLUDING_COMMENT_UI_SHA256
     )
     p119_text = renderer.rendered_physician_prose(document, "P119")
+    assert hashlib.sha256(p119_text.encode("utf-8")).hexdigest() == renderer.EXPECTED_V167_P119_TEXT_SHA256
     assert all(phrase in p119_text for phrase in [
         "fixed A/B display order",
         "source attribution only in the harness output",
@@ -171,11 +185,11 @@ def main() -> None:
     ) in document
     assert "Outstanding physician comments (1)" in document
     assert document.count('data-literature-entry=') == 30
-    assert "Version 1.6.6 · November 1, 2026" in document
-    assert "draft v1.6.6" in document
+    assert "Version 1.6.7 · November 1, 2026" in document
+    assert "draft v1.6.7" in document
 
     print(
-        "V166_OK "
+        "V167_OK "
         f"canonical=127+35+12 visible_blocks={len(blocks)} changed={len(state['changed'])} "
         f"focus_spans={len(rows)} focus_blocks={len(expected_focus_blocks)} results_sha256="
         f"{hashlib.sha256(results_text.encode('utf-8')).hexdigest()}"

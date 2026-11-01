@@ -57,8 +57,8 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           if (!supplement || !body || !button) return 'missing custom supplement fold';
           const changedBlocks = [...document.querySelectorAll('[data-review-changed-from="v1.3"]')];
           const highlights = [...document.querySelectorAll('.focus-highlight')];
-          if (changedBlocks.length !== 67) return `unexpected changed-block count: ${changedBlocks.length}`;
-          if (highlights.length !== 33) return `unexpected manual-focus count: ${highlights.length}`;
+          if (changedBlocks.length !== 68) return `unexpected changed-block count: ${changedBlocks.length}`;
+          if (highlights.length !== 38) return `unexpected manual-focus count: ${highlights.length}`;
           if (document.querySelector('.revision-legend,.revision-swatch,.revision-light,.revision-medium,.revision-strong')) {
             return 'obsolete revision legend or importance styling remains';
           }
@@ -113,15 +113,20 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
             'not used to calculate the primary physician preference endpoint',
             'A displayed the inference harness output', 'B displayed the one prompt baseline',
             'blinded to system identities', 'Source attribution was available only with the harness output',
-            'complete output packages'
+            'complete output packages',
+            'fixed A/B display order', 'source attribution only in the harness output',
+            'direction and magnitude', 'same base model family',
+            'generalization across model families'
           ];
           const highlightedText = new Set(highlights.map(node => node.textContent.trim()));
           if (requiredFocusedText.some(text => !highlightedText.has(text))) return 'a focused Methods or limitation phrase is missing';
-          if (highlights.some(node => {
+          const resultsDiscussionHighlights = highlights.filter(node => {
             const block = node.closest('[data-review-block-id]');
             const id = block?.dataset.reviewBlockId || '';
             return /^P\d{3}$/.test(id) && Number(id.slice(1)) >= 84 && Number(id.slice(1)) <= 119;
-          })) return 'Results or Discussion contains a visible review focus';
+          });
+          const expectedP119Highlights = ['fixed A/B display order', 'source attribution only in the harness output', 'direction and magnitude', 'same base model family', 'generalization across model families'];
+          if (resultsDiscussionHighlights.length !== 5 || resultsDiscussionHighlights.some((node,index) => node.dataset.reviewFor !== 'P119' || node.textContent.trim() !== expectedP119Highlights[index])) return 'Results or Discussion focus differs from the approved P119 phrases';
           const comment13 = document.getElementById('comment-anchor-13');
           const comment14 = document.getElementById('comment-anchor-14');
           const comment13Target = 'We addressed this issue by incorporating treatment history and temporal context into the extraction process and adding verification steps to align treatment responses with the appropriate regimen.';
@@ -176,6 +181,12 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           if (!supplement.classList.contains('is-collapsed') || visible() || button.getAttribute('aria-expanded') !== 'false') {
             return 'supplement was not initially collapsed';
           }
+          const discussion = document.getElementById('section-discussion');
+          const limitations = document.getElementById('limitations');
+          const limitationsLink = document.querySelector('.toc a[href="#limitations"]');
+          discussion.open = false;
+          limitationsLink?.click();
+          if (!discussion.open || document.activeElement !== limitations || limitations?.textContent !== 'Limitations') return 'Limitations TOC link did not expand Discussion and focus heading';
           button.click();
           if (!supplement.classList.contains('is-expanded') || !visible() || button.getAttribute('aria-expanded') !== 'true') {
             return 'supplement button did not expand';
@@ -190,7 +201,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           if (!visible() || document.activeElement?.id !== 'figure-s1') return 'nested supplement link did not reveal and focus';
           button.click();
           const history = document.getElementById('version-history');
-          const current = document.getElementById('version-1-6-6');
+          const current = document.getElementById('version-1-6-7');
           const older = [...history.querySelectorAll('.version-entry')].filter(node => node !== current);
           if (history.open || !current?.open || older.some(node => node.open)) return 'unexpected initial version-history state';
           window.__workshopVersionHashState = 'waiting';
@@ -231,7 +242,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
         let checks = #"""
         (() => {
           const history = document.getElementById('version-history');
-          const current = document.getElementById('version-1-6-6');
+          const current = document.getElementById('version-1-6-7');
           const prior = document.getElementById('version-1-4-1');
           const older = [...history.querySelectorAll('.version-entry')].filter(node => node !== current);
           if (location.hash !== '#version-1-4-1' || !history.open || current.open || !prior.open || older.some(node => node !== prior && node.open) || document.activeElement !== prior) {
@@ -291,6 +302,15 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
             }
           }
           report.printReviewRules = printReviewRules;
+          const limitations = document.getElementById('limitations');
+          const p119 = document.getElementById('P119');
+          report.limitationsPrintContent = Boolean(
+            limitations && p119 &&
+            getComputedStyle(limitations).display !== 'none' &&
+            getComputedStyle(p119).display !== 'none' &&
+            limitations.textContent === 'Limitations' &&
+            p119.textContent.includes('fixed A/B display order')
+          );
           return report;
         })()
         """#
@@ -304,16 +324,18 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
                   let highlightBackgrounds = report["revisionHighlightBackgrounds"] as? [String],
                   let highlightPrintStyles = report["revisionHighlightPrintStyles"] as? [[String: Any]],
                   let printReviewRules = report["printReviewRules"] as? [[String: Any]],
+                  let limitationsPrintContent = report["limitationsPrintContent"] as? Bool,
                   let items = report["items"] as? [[String: Any]],
                   let offenders = report["offenders"] as? [String] else {
                 self.fail("Invalid print-preparation report"); return
             }
             guard offenders.isEmpty else { self.fail("Page-boundary offenders: \(offenders)"); return }
-            guard highlightCount == 33,
+            guard limitationsPrintContent else { self.fail("Limitations heading or P119 is missing from print export"); return }
+            guard highlightCount == 38,
                   highlightBackgrounds.allSatisfy({ $0 == "transparent" || $0 == "rgba(0, 0, 0, 0)" }) else {
                 self.fail("Revision highlights retained screen background in print export: \(highlightBackgrounds)"); return
             }
-            guard highlightPrintStyles.count == 33,
+            guard highlightPrintStyles.count == 38,
                   highlightPrintStyles.allSatisfy({ style in
                       let background = style["backgroundColor"] as? String ?? ""
                       let outlineStyle = style["outlineStyle"] as? String ?? ""
@@ -375,7 +397,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
         guard let data = outputDocument.dataRepresentation() else { fail("Could not encode combined PDF"); return }
         guard data.count < resultCapBytes else { fail("Regression PDF exceeded 10 MiB"); return }
         let text = outputDocument.string ?? ""
-        for required in ["Introduction", "Supplementary Methods", "Supplementary Table S1", "Supplementary Table S2", "Supplementary Table S3", "Supplementary Figure S1", "Supplementary Figure S2"] {
+        for required in ["Introduction", "Limitations", "Supplementary Methods", "Supplementary Table S1", "Supplementary Table S2", "Supplementary Table S3", "Supplementary Figure S1", "Supplementary Figure S2"] {
             guard text.contains(required) else { fail("Missing printed content: \(required)"); return }
         }
         for excluded in ["Author literature-review workspace", "Back to comment anchor", "Version history", "Draft relevance:"] {
