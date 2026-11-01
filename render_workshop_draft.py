@@ -107,7 +107,7 @@ REVISED_PARAGRAPHS = {
     "P060": "The harness developed from breast-cancer notes was further adapted to pancreatic ductal adenocarcinoma using 100 additional pancreatic-cancer notes. No physician reviewed pancreatic-cancer outputs during this stage. ChatGPT organized the clinical error categories and clinical distinctions established during breast-cancer development into a structured review rubric. The Qwen pipeline generated structured outputs, and a rubric-guided Qwen reviewer compared them with the full pancreatic source notes and flagged potential errors. Investigators assessed the flags, implemented selected revisions to prompts, clinical rules, or workflow logic, and retained changes only after regression testing. ",
     "P061": "The adaptation retained the core framework while introducing pancreatic-cancer-specific modifications, particularly for disease terminology, treatment regimens, and post-processing rules. The framework thus preserved its core approach to error detection and correction while accommodating differences between the two cancer types.",
     "P063": "The clinical evaluation presented the source note and two structured outputs through an A/B test interface. The four evaluators selected A better, B better, or tie for each field. The physician who participated in Stage 1 development was not one of the four evaluators. Before evaluating the holdout set, the authors designated seven core fields as clinically important for understanding disease status and current management. Full interface implementation details are provided in Supplementary Methods. See Supplementary Table S1.",
-    "P067": "We conducted an ablation study on the same 20 breast-cancer and 20 pancreatic-cancer holdout notes to examine how successive harness components contributed to the observed improvement. All four conditions used Qwen2.5-32B-Instruct-AWQ, greedy decoding, and the same 31-field output contract. Attribution, tool calling, and letter generation were disabled. ",
+    "P067": "We conducted an ablation study on the same 20 breast-cancer and 20 pancreatic-cancer holdout notes to examine how output quality changed across successive harness configurations. All four conditions used Qwen2.5-32B-Instruct-AWQ, greedy decoding, and the same 31-field output contract. Attribution, tool calling, and letter generation were disabled. ",
     "P068": "See Table 2 for the 4 conditions.",
     "P073": "We compared adjacent configurations (A vs B, B vs C, and C vs D), yielding 120 paired comparisons across 40 notes. A single blinded OpenAI LLM judge was given only the source note and the two outputs. The judge had no access to the project code, development history, prior evaluations, or system identities. The judge was instructed to prioritize source faithfulness, then completeness, and to use TIE when differences were minor or offsetting. We compared adjacent configurations using two-sided exact sign tests, excluding ties. Exact judge configuration is provided in Supplementary Methods.",
     "P076": "For the physician evaluation, interrater agreement was assessed pairwise using exact agreement and Cohen's κ for each evaluator pair. Results from the 8 completed clinician-by-cancer evaluations were summarized separately. Pooled counts were reported descriptively and were not treated as independent field-level observations.",
@@ -147,7 +147,7 @@ REVISION_HIGHLIGHTS = {
         "the system omitted the value rather than guess",
     ],
     "P063": ["A/B test interface", "Full interface implementation details are provided in Supplementary Methods."],
-    "P067": ["to examine how successive harness components contributed to the observed improvement"],
+    "P067": ["to examine how output quality changed across successive harness configurations"],
     "P073": ["A single blinded OpenAI LLM judge", "Exact judge configuration is provided in Supplementary Methods."],
     "P119": [
         "The fixed A/B display order and the availability of source attribution only with the harness output may have allowed evaluators to infer a recurring pattern or may have influenced ratings.",
@@ -789,7 +789,7 @@ def build_supplement() -> str:
 
 def version_history() -> str:
     entries = [
-        ("v1.4.1", "2026-10-31", "Current change", "Simplified the A/B interface wording, renamed the ablation study consistently, stated its purpose, and aligned the baseline condition with the application-level inference-request definition."),
+        ("v1.4.1", "2026-10-31", "Current change", "Simplified the A/B interface and ablation-study wording, defined the ablation purpose as examining output-quality changes across successive harness configurations, and aligned the baseline condition with the application-level inference-request definition."),
         ("v1.4", "2026-10-31", "Reorganized the five-paragraph Introduction while retaining the physician's language, clarified the two-stage Methods and holdout design, moved gate and interface details to Supplementary Methods, and added the corresponding evaluation limitation."),
         ("v1.3", "2026-10-30", "Applied conservative grammar and punctuation edits, added direct verified author-year citations, retained two outstanding physician comments, and highlighted three new methods or limitation clarifications for review."),
         ("v1.2.3", "2026-10-27", "Removed the empty trailing WebKit export page by ending capture at the last printable manuscript element, and added explicit failure cleanup with a post-write fault-injection test."),
@@ -853,7 +853,7 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
 
 English working manuscript. Version 1.4.1, October 31, 2026.
 
-Current change: A/B interface and ablation-study wording simplified and standardized; the baseline condition now uses the application-level inference-request definition.
+Current change: A/B interface and ablation-study wording simplified and standardized; the ablation study now examines output-quality changes across successive harness configurations; the baseline condition uses the application-level inference-request definition.
 
 The canonical physician blocks below mirror `{SOURCE_DOCX.name}` for audit purposes. The clean HTML applies only the approved cross-reference and reporting edits while preserving all source blocks in its hidden audit representation.
 
@@ -1101,9 +1101,14 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
         "staged technical ablation",
         "exploratory ablation",
         "one model call per note",
+        "to examine how successive harness components contributed to the observed improvement",
     ]:
         if obsolete_wording in visible_text_lower:
             raise AssertionError(f"Obsolete visible wording remains: {obsolete_wording}")
+    revised_ablation_purpose = "to examine how output quality changed across successive harness configurations"
+    p067_match = re.search(r'id="P067"[^>]*>(.*?)</p>', document, flags=re.S)
+    if not p067_match or p067_match.group(1).count(f'<mark class="revision-highlight">{revised_ablation_purpose}</mark>') != 1:
+        raise AssertionError("Revised ablation purpose is missing or not highlighted in P067")
     if len(markdown.split()) < 3000: raise AssertionError("Generated Markdown is unexpectedly short")
     if len(document.encode("utf-8")) >= 209_715_200: raise AssertionError("HTML exceeds 200 MiB")
 

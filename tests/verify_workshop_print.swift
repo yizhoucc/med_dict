@@ -60,6 +60,13 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           if (highlights.some(node => ['transparent', 'rgba(0, 0, 0, 0)'].includes(getComputedStyle(node).backgroundColor))) {
             return 'revision highlight is not visible on screen';
           }
+          const ablationPurpose = document.querySelector('#P067 mark.revision-highlight');
+          if (ablationPurpose?.textContent !== 'to examine how output quality changed across successive harness configurations') {
+            return 'revised ablation purpose is missing or not highlighted';
+          }
+          if (document.body.innerText.includes('to examine how successive harness components contributed to the observed improvement')) {
+            return 'obsolete ablation-purpose wording remains visible';
+          }
           const visible = () => getComputedStyle(body).display !== 'none';
           if (!supplement.classList.contains('is-collapsed') || visible() || button.getAttribute('aria-expanded') !== 'false') {
             return 'supplement was not initially collapsed';
