@@ -225,7 +225,7 @@ RESULTS_DISCUSSION_OVERLAYS: dict[str, tuple[SectionOverlay, ...]] = {
         SectionOverlay(
             "user-approved-limitation",
             "language models. Second,",
-            "language models. The fixed A/B display order and the availability of source attribution only in the harness output may have influenced physician ratings. As a result, the direction and magnitude of any effect from this asymmetry could not be isolated. Second,",
+            "language models. The observed preference consistently favored the complete harness output as presented in both cancer types and sensitivity analyses. The harness was always displayed as A and the baseline as B, and source attribution appeared only with the harness. These presentation features could have affected both the direction and magnitude of physician preference. The current design cannot show whether the direction would remain the same with randomized placement or equal source attribution. It also cannot separate the effects of extraction quality, the surrounding workflow, source attribution, and display position. The size of the preference difference and the contribution of each factor therefore remain uncertain. Second,",
         ),
         SectionOverlay(
             "user-approved-limitation",
@@ -254,7 +254,8 @@ EXPECTED_V164_RESULTS_SHA256 = "5aceff6ac9b1f9a78abf8bc322c19556a32cc0ba722359b7
 EXPECTED_V164_RESULTS_NUMERIC_SHA256 = "2966552230c8eb68c13797418d36abf7abdd1e8269f753f5f49bf91a74aec5b4"
 EXPECTED_F7_V164_SEMANTIC_RESULTS_NUMERIC_SHA256 = "c63c2e9083b71313e519062257189f27373673692ddce5d1bab0e4a3e743ddd5"
 EXPECTED_V166_VISIBLE_BLOCK_TEXT_EXCLUDING_COMMENT_UI_SHA256 = "2f4621fc82992f179bf1b437ac6ede273f084d5c797993b4aa6d1669b6146f7f"
-EXPECTED_V167_P119_TEXT_SHA256 = "0b6b9d289adf6a6dd13d9dffd8a67d0686e684fd207d88cb5d0342436dab28fb"
+EXPECTED_V168_VISIBLE_BLOCK_TEXT_EXCLUDING_COMMENT_UI_AND_P119_SHA256 = "7233ab11c6d1defa941c0a775172e081ba8517b49af236d29d6e874e7797f80d"
+EXPECTED_V168_P119_TEXT_SHA256 = "48e181d7895d85bb9a304d52d3974e7b838a246c55363b07c68aeb85a6fd17f8"
 
 
 def apply_results_discussion_overlay(block_id: str, canonical_text: str) -> str:
@@ -316,11 +317,12 @@ MANUAL_FOCUS_PHRASES = {
     "P063": ["System identities"],
     "P073": ["judge model and settings"],
     "P119": [
-        "fixed A/B display order",
-        "source attribution only in the harness output",
-        "direction and magnitude",
-        "same base model family",
-        "generalization across model families",
+        "complete harness output as presented",
+        "harness was always displayed as A",
+        "source attribution appeared only with the harness",
+        "both the direction and magnitude",
+        "cannot separate the effects",
+        "size of the preference difference",
     ],
 }
 
@@ -1364,8 +1366,6 @@ def technical_inserts_after(block_id: str) -> str:
 
 
 def technical_inserts_before(block_id: str) -> str:
-    if block_id == "P119":
-        return '<h3 id="limitations" class="physician-subheading" data-origin="technical-insert">Limitations</h3>'
     return ""
 
 
@@ -1407,7 +1407,6 @@ def build_scientific_sections(data: dict[str, object]) -> tuple[str, str]:
             insert_before = technical_inserts_before(block_id)
             if insert_before and current_key:
                 current_parts.append(insert_before)
-                current_md.extend(["### Limitations", ""])
             rendered = render_physician_paragraph(paragraph, comment_ids_by_paragraph.get(block_id, []))
             if not current_key:
                 front_blocks.append(rendered)
@@ -1541,7 +1540,8 @@ def build_supplement() -> str:
 
 def version_history() -> str:
     entries = [
-        ("v1.6.7", "2026-11-01", "Current change", "Added a main manuscript Limitations heading and highlighted only five approved P119 design limitation phrases for focused review. The limitation text is unchanged."),
+        ("v1.6.8", "2026-11-01", "Evaluation limitation", "Removed the separate Limitations heading and clarified that the observed physician preference applies to the complete outputs as presented. The revised text separates the observed direction from uncertainty in effect size and causal attribution."),
+        ("v1.6.7", "2026-11-01", "Limitations presentation", "Added a main manuscript Limitations heading and highlighted only five approved P119 design limitation phrases for focused review. The limitation text is unchanged."),
         ("v1.6.6", "2026-11-01", "Comment 14 resolution", "Closed physician Comment 14 after verifying breast ER, PR, and HER2 rules in the prompt, breast-only routing, hooks, and tests. Comment 13 remains open."),
         ("v1.6.5", "2026-11-01", "Approved evaluation limitations", "Restored five user approved evaluation design limitations in P119 without changing the remaining physician prose or adding review highlights."),
         ("v1.6.4", "2026-11-01", "Canonical Results wording", "Restored the canonical Results confidence interval wording with only hyphen normalization and restored the canonical capitalization of the clinical extraction fields heading."),
@@ -1578,7 +1578,7 @@ def version_history() -> str:
         else:
             version, date, note = entry
             label = ""
-        current = version == "v1.6.7"
+        current = version == "v1.6.8"
         open_attr = " open" if current else ""
         summary = f"{version} · {label} · {date}" if label else f"{version} · {date}"
         rendered.append(
@@ -1592,7 +1592,7 @@ def toc() -> str:
     links = [("#section-introduction", "Introduction", False), ("#section-methods", "Methods", False)]
     for heading in ["Study Design", "Dataset", "Baseline model and model development", "Inference Harness", "Breast cancer development with physician review", "PDAC adaptation with feedback from language models", "Clinical evaluation data collection and scoring rubric", "Ablation study", "Statistical analysis"]:
         links.append(("#" + re.sub(r"[^a-z0-9]+", "-", heading.lower()).strip("-"), heading, True))
-    links.extend([("#section-results", "Results", False), ("#performance-across-clinical-extraction-fields", "Performance across clinical extraction fields", True), ("#section-discussion", "Discussion", False), ("#limitations", "Limitations", True), ("#supplementary-material", "Supplementary material", False), ("#physician-comments", "Outstanding physician comments (1)", False), ("#version-history", "Version history", False), ("#literature-workspace", "Literature-review workspace", False)])
+    links.extend([("#section-results", "Results", False), ("#performance-across-clinical-extraction-fields", "Performance across clinical extraction fields", True), ("#section-discussion", "Discussion", False), ("#supplementary-material", "Supplementary material", False), ("#physician-comments", "Outstanding physician comments (1)", False), ("#version-history", "Version history", False), ("#literature-workspace", "Literature-review workspace", False)])
     return '<nav class="toc" data-origin="technical-insert"><strong>Contents</strong>' + "".join(f'<a class="{"sub" if sub else ""}" href="{href}" data-origin="technical-insert">{esc(label)}</a>' for href, label, sub in links) + "</nav>"
 
 
@@ -1601,7 +1601,7 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
     article = f"""
 <article>
   <h1 class="screen-only">Physician-authored manuscript draft</h1>
-  <p class="subtitle screen-only">English working manuscript · Version 1.6.7 · November 1, 2026</p>
+  <p class="subtitle screen-only">English working manuscript · Version 1.6.8 · November 1, 2026</p>
   <details class="fold" id="version-history"><summary>Version history</summary><div class="fold-body">{version_history()}</div></details>
   {sections}
   {build_supplement()}
@@ -1609,14 +1609,14 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
   {literature_workspace()}
 </article>
 """
-    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v1.6.7</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
+    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v1.6.8</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
     document = apply_review_block_metadata(document)
     markdown = f"""<!-- GENERATED FILE. The canonical physician Word extraction is the prose authority. -->
 # Physician-authored manuscript draft
 
-English working manuscript. Version 1.6.7, November 1, 2026.
+English working manuscript. Version 1.6.8, November 1, 2026.
 
-Current change: added a main manuscript Limitations heading and highlighted only five approved P119 design limitation phrases for focused review. The limitation text is unchanged.
+Current change: removed the separate Limitations heading and clarified the interpretation of physician preference under the tested presentation. The revised wording separates the observed direction from uncertainty in effect size and causal attribution.
 
 The canonical physician blocks below mirror `{SOURCE_DOCX.name}` for audit purposes. The clean HTML applies only the approved cross-reference and reporting edits while preserving all source blocks in its hidden audit representation.
 
@@ -2024,14 +2024,14 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     ]:
         if f'id="{revision_id}"' not in document: raise AssertionError(f"Clarification is missing: {revision_id}")
     if 'id="draft-metadata"' in document or "Draft information and source provenance" in document: raise AssertionError("Removed draft-information block remains")
-    if "Version 1.6.7 · November 1, 2026" not in document or "draft v1.6.7" not in document: raise AssertionError("Version 1.6.7 metadata is missing")
-    if document.count('class="version-entry"') != 29 or any(f'id="version-{item}"' not in document for item in ["1-6-7", "1-6-6", "1-6-5", "1-6-4", "1-6-3", "1-6-2", "1-6-1", "1-6", "1-5-2", "1-5-1", "1-5", "1-4-1", "1-4", "1-3", "1-2-3", "1-2-2", "1-2-1", "1-2", "1-1", "1-0", "0-25", "0-24", "0-23", "0-22", "0-21", "0-20", "0-19", "0-18", "0-17"]):
+    if "Version 1.6.8 · November 1, 2026" not in document or "draft v1.6.8" not in document: raise AssertionError("Version 1.6.8 metadata is missing")
+    if document.count('class="version-entry"') != 30 or any(f'id="version-{item}"' not in document for item in ["1-6-8", "1-6-7", "1-6-6", "1-6-5", "1-6-4", "1-6-3", "1-6-2", "1-6-1", "1-6", "1-5-2", "1-5-1", "1-5", "1-4-1", "1-4", "1-3", "1-2-3", "1-2-2", "1-2-1", "1-2", "1-1", "1-0", "0-25", "0-24", "0-23", "0-22", "0-21", "0-20", "0-19", "0-18", "0-17"]):
         raise AssertionError("Nested version history is incomplete")
-    if not re.search(r'<details class="version-entry" id="version-1-6-7"[^>]* open>', document):
-        raise AssertionError("Current v1.6.7 history entry is not expanded inside the closed parent")
-    if any(re.search(rf'<details class="version-entry" id="version-{item}"[^>]* open>', document) for item in ["1-6-6", "1-6-5", "1-6-4", "1-6-3", "1-6-2", "1-6-1", "1-6", "1-5-2", "1-5-1", "1-5", "1-4-1", "1-4", "1-3"]):
+    if not re.search(r'<details class="version-entry" id="version-1-6-8"[^>]* open>', document):
+        raise AssertionError("Current v1.6.8 history entry is not expanded inside the closed parent")
+    if any(re.search(rf'<details class="version-entry" id="version-{item}"[^>]* open>', document) for item in ["1-6-7", "1-6-6", "1-6-5", "1-6-4", "1-6-3", "1-6-2", "1-6-1", "1-6", "1-5-2", "1-5-1", "1-5", "1-4-1", "1-4", "1-3"]):
         raise AssertionError("Prior version-history entries must be closed")
-    if "v1.6.7 · Current change · 2026-11-01" not in document:
+    if "v1.6.8 · Evaluation limitation · 2026-11-01" not in document:
         raise AssertionError("Current version-history label is missing")
     if "querySelectorAll('#version-history .version-entry').forEach(entry=>entry.open=entry===target)" not in document:
         raise AssertionError("Version-history deep links do not isolate the targeted entry")
@@ -2044,13 +2044,13 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     visible_text_without_comment_ui = "\n".join(
         f"{block_id}\t{block.text}"
         for block_id, block in blocks_without_comment_ui.items()
-        if block_id != "limitations"
+        if block_id not in {"limitations", "P119"}
     )
     if (
         hashlib.sha256(visible_text_without_comment_ui.encode("utf-8")).hexdigest()
-        != EXPECTED_V166_VISIBLE_BLOCK_TEXT_EXCLUDING_COMMENT_UI_SHA256
+        != EXPECTED_V168_VISIBLE_BLOCK_TEXT_EXCLUDING_COMMENT_UI_AND_P119_SHA256
     ):
-        raise AssertionError("Visible manuscript block text changed outside comment UI")
+        raise AssertionError("Visible manuscript block text changed outside comment UI and P119")
     for section, next_section in [("introduction", "methods"), ("methods", "results")]:
         markup_hash = hashlib.sha256(section_markup(document, section, next_section).encode("utf-8")).hexdigest()
         text_hash = hashlib.sha256(section_block_text(document, section).encode("utf-8")).hexdigest()
@@ -2062,13 +2062,13 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     }
     p119_focus = [text for block_id, text in span_records if block_id == "P119"]
     if results_discussion_focus != {"P119"} or p119_focus != MANUAL_FOCUS_PHRASES["P119"]:
-        raise AssertionError("Results or Discussion focus differs from the five approved P119 phrases")
-    if not re.search(r'<h3[^>]*id="limitations"[^>]*>Limitations</h3>', document):
-        raise AssertionError("Main manuscript Limitations heading is missing")
-    if '<a class="sub" href="#limitations" data-origin="technical-insert">Limitations</a>' not in document:
-        raise AssertionError("Limitations TOC link is missing")
-    if hashlib.sha256(rendered_physician_prose(document, "P119").encode("utf-8")).hexdigest() != EXPECTED_V167_P119_TEXT_SHA256:
-        raise AssertionError("P119 wording changed while adding the Limitations presentation")
+        raise AssertionError("Results or Discussion focus differs from the selected P119 phrases")
+    if re.search(r'<h3[^>]*id="limitations"[^>]*>Limitations</h3>', document):
+        raise AssertionError("Removed Limitations heading remains")
+    if 'href="#limitations"' in document:
+        raise AssertionError("Removed Limitations link remains")
+    if hashlib.sha256(rendered_physician_prose(document, "P119").encode("utf-8")).hexdigest() != EXPECTED_V168_P119_TEXT_SHA256:
+        raise AssertionError("P119 differs from the approved v1.6.8 wording")
     for paragraph in data["paragraphs"]:
         block_id = str(paragraph["id"])
         if not re.fullmatch(r"P\d{3}", block_id) or not 84 <= int(block_id[1:]) <= 119:
@@ -2218,9 +2218,14 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     if not p119_html or EXTERNAL_CITATIONS["williams"][1] in p119_html.group(1):
         raise AssertionError("Williams citation remains attached to P119")
     approved_added_limitations = [
-        "fixed A/B display order",
-        "source attribution only in the harness output",
-        "direction and magnitude of any effect from this asymmetry could not be isolated",
+        "primary outcome was physician preference rather than absolute extraction accuracy",
+        "complete harness output as presented in both cancer types and sensitivity analyses",
+        "harness was always displayed as A and the baseline as B",
+        "source attribution appeared only with the harness",
+        "affected both the direction and magnitude of physician preference",
+        "cannot show whether the direction would remain the same with randomized placement or equal source attribution",
+        "cannot separate the effects of extraction quality, the surrounding workflow, source attribution, and display position",
+        "size of the preference difference and the contribution of each factor therefore remain uncertain",
         "same base model family",
         "generalization across model families was not assessed",
     ]
