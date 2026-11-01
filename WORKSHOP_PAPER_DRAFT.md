@@ -1,9 +1,9 @@
 <!-- GENERATED FILE. The canonical physician Word extraction is the prose authority. -->
 # Physician-authored manuscript draft
 
-English working manuscript. Version 1.6.4, November 1, 2026.
+English working manuscript. Version 1.6.5, November 1, 2026.
 
-Current change: restored the canonical Results confidence interval wording with only hyphen normalization and restored the canonical capitalization of the clinical extraction fields heading.
+Current change: restored five user approved evaluation design limitations in P119 without changing the remaining physician prose or adding review highlights.
 
 The canonical physician blocks below mirror `202601023_Manuscript_JAMA.docx` for audit purposes. The clean HTML applies only the approved cross-reference and reporting edits while preserving all source blocks in its hidden audit representation.
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deterministic v1.6.4 manuscript, section-revert, and manual-focus checks."""
+"""Deterministic v1.6.5 manuscript, section-revert, and manual-focus checks."""
 
 from __future__ import annotations
 
@@ -138,14 +138,29 @@ def main() -> None:
         "(note cluster robust 95% CI 76.14% to 83.96%)."
     )
     assert renderer.rendered_physician_prose(document, "P096") == "Performance across Clinical Extraction Fields"
+    non_p119_text = "\n".join(
+        f"{block_id}\t{block.text}" for block_id, block in blocks.items() if block_id != "P119"
+    )
+    assert hashlib.sha256(non_p119_text.encode("utf-8")).hexdigest() == renderer.EXPECTED_V165_NON_P119_BLOCKS_SHA256
+    p119_text = renderer.rendered_physician_prose(document, "P119")
+    assert all(phrase in p119_text for phrase in [
+        "fixed A/B display order",
+        "source attribution only in the harness output",
+        "direction and magnitude of any effect from this asymmetry could not be isolated",
+        "same base model family",
+        "generalization across model families was not assessed",
+    ])
+    assert renderer.EXTERNAL_CITATIONS["williams"][1] not in re.search(
+        r'id="P119"[^>]*>(.*?)</p>', document, flags=re.S
+    ).group(1)
 
     assert document.count('data-comment-text-id=') == 12
     assert document.count('data-literature-entry=') == 30
-    assert "Version 1.6.4 · November 1, 2026" in document
-    assert "draft v1.6.4" in document
+    assert "Version 1.6.5 · November 1, 2026" in document
+    assert "draft v1.6.5" in document
 
     print(
-        "V164_OK "
+        "V165_OK "
         f"canonical=127+35+12 visible_blocks={len(blocks)} changed={len(state['changed'])} "
         f"focus_spans={len(rows)} focus_blocks={len(expected_focus_blocks)} results_sha256="
         f"{hashlib.sha256(results_text.encode('utf-8')).hexdigest()}"
