@@ -55,14 +55,32 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           const body = document.getElementById('supplement-body');
           const button = supplement?.querySelector(':scope > .fold-toggle');
           if (!supplement || !body || !button) return 'missing custom supplement fold';
-          const highlights = [...document.querySelectorAll('mark.revision-highlight')];
-          if (highlights.length !== 31) return `unexpected revision-highlight count: ${highlights.length}`;
+          const highlights = [...document.querySelectorAll('[data-review-changed-from="v1.3"]')];
+          if (highlights.length !== 43) return `unexpected revision-highlight count: ${highlights.length}`;
           if (highlights.some(node => ['transparent', 'rgba(0, 0, 0, 0)'].includes(getComputedStyle(node).backgroundColor))) {
             return 'revision highlight is not visible on screen';
           }
-          const ablationPurpose = document.querySelector('#P067 mark.revision-highlight');
-          if (ablationPurpose?.textContent !== 'to examine how output quality changed across successive harness configurations') {
-            return 'revised ablation purpose is missing or not highlighted';
+          const legend = document.querySelector('.revision-legend')?.textContent.trim();
+          if (legend !== 'Complete block-level redline against v1.3: every visible manuscript block with changed wording is highlighted. Deletions are recorded in the version diff.') {
+            return `unexpected review legend: ${legend}`;
+          }
+          const changedSample = ['P004', 'P010', 'P017', 'P025', 'P066', 'P067', 'T2R1C2', 'table-2::caption', 'supplement-data-access', 'P119'];
+          for (const id of changedSample) {
+            const node = document.querySelector(`[data-review-block-id="${id}"]`);
+            if (!node || node.getAttribute('data-review-changed-from') !== 'v1.3' || !node.classList.contains('revision-highlight')) {
+              return `changed sample is not fully highlighted: ${id}`;
+            }
+          }
+          const unchangedSample = ['P002', 'P014', 'P016', 'T1R1C1', 'figure-1::caption'];
+          for (const id of unchangedSample) {
+            const node = document.querySelector(`[data-review-block-id="${id}"]`);
+            if (!node || node.hasAttribute('data-review-changed-from') || node.classList.contains('revision-highlight')) {
+              return `unchanged sample is highlighted: ${id}`;
+            }
+          }
+          const ablationPurpose = document.querySelector('[data-review-block-id="P067"]');
+          if (!ablationPurpose?.textContent.includes('to examine how output quality changed across successive harness configurations')) {
+            return 'revised ablation purpose is missing from the highlighted block';
           }
           if (document.body.innerText.includes('to examine how successive harness components contributed to the observed improvement')) {
             return 'obsolete ablation-purpose wording remains visible';
@@ -85,7 +103,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           if (!visible() || document.activeElement?.id !== 'figure-s1') return 'nested supplement link did not reveal and focus';
           button.click();
           const history = document.getElementById('version-history');
-          const current = document.getElementById('version-1-4-1');
+          const current = document.getElementById('version-1-5');
           const older = [...history.querySelectorAll('.version-entry')].filter(node => node !== current);
           if (history.open || !current?.open || older.some(node => node.open)) return 'unexpected initial version-history state';
           window.__workshopVersionHashState = 'waiting';
@@ -94,7 +112,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
               window.__workshopVersionHashState = 'settled';
             }, 0);
           }, {once: true});
-          setTimeout(() => { location.hash='#version-1-4'; }, 0);
+          setTimeout(() => { location.hash='#version-1-4-1'; }, 0);
           return 'waiting-for-version-hash';
         })()
         """#
@@ -126,10 +144,10 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
         let checks = #"""
         (() => {
           const history = document.getElementById('version-history');
-          const current = document.getElementById('version-1-4-1');
-          const prior = document.getElementById('version-1-4');
+          const current = document.getElementById('version-1-5');
+          const prior = document.getElementById('version-1-4-1');
           const older = [...history.querySelectorAll('.version-entry')].filter(node => node !== current);
-          if (location.hash !== '#version-1-4' || !history.open || current.open || !prior.open || older.some(node => node !== prior && node.open) || document.activeElement !== prior) {
+          if (location.hash !== '#version-1-4-1' || !history.open || current.open || !prior.open || older.some(node => node !== prior && node.open) || document.activeElement !== prior) {
             return 'version hash navigation did not isolate and focus prior entry';
           }
           for (const id of ['physician-comments', 'version-history', 'literature-workspace']) {
@@ -167,7 +185,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
                 self.fail("Invalid print-preparation report"); return
             }
             guard offenders.isEmpty else { self.fail("Page-boundary offenders: \(offenders)"); return }
-            guard highlightCount == 31,
+            guard highlightCount == 43,
                   highlightBackgrounds.allSatisfy({ $0 == "transparent" || $0 == "rgba(0, 0, 0, 0)" }) else {
                 self.fail("Revision highlights retained screen background in print export: \(highlightBackgrounds)"); return
             }
