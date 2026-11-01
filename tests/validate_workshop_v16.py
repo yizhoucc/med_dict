@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deterministic v1.6.8 manuscript and manual focus checks."""
+"""Deterministic v1.6.9 manuscript and manual focus checks."""
 
 from __future__ import annotations
 
@@ -49,9 +49,9 @@ def main() -> None:
 
     state = renderer.review_redline_state(document)
     assert state["changed"] == state["highlighted"]
-    assert len(state["changed"]) == 67
+    assert len(state["changed"]) == 68
     assert state["section_counts"] == {
-        "discussion": 2,
+        "discussion": 3,
         "introduction": 5,
         "methods": 29,
         "results": 6,
@@ -60,8 +60,8 @@ def main() -> None:
     }
 
     rows = focus_spans(document)
-    assert len(rows) == 39
-    assert len({row[0] for row in rows}) == 14
+    assert len(rows) == 45
+    assert len({row[0] for row in rows}) == 15
     assert max(len(row[1]) for row in rows) == 79
     assert not [row for row in rows if "external-citation" in row[2] or "comment-anchor" in row[2]]
     assert not re.findall(
@@ -94,6 +94,12 @@ def main() -> None:
         "blinded to system identities",
         "Source attribution was available only with the harness output",
         "complete output packages",
+        "distinguish evidence recorded before and after a regimen change",
+        "complete note together with structured context",
+        "semantic and source support checks",
+        "independent contribution difficult to isolate",
+        "support the complete workflow",
+        "temporal controls alone",
         "complete harness output as presented",
         "harness was always displayed as A",
         "source attribution appeared only with the harness",
@@ -119,9 +125,10 @@ def main() -> None:
         row for row in rows
         if re.fullmatch(r"P\d{3}", row[0]) and 84 <= int(row[0][1:]) <= 119
     ]
-    assert [(row[0], row[1]) for row in results_discussion_rows] == [
-        ("P119", phrase) for phrase in renderer.MANUAL_FOCUS_PHRASES["P119"]
-    ]
+    assert [(row[0], row[1]) for row in results_discussion_rows] == (
+        [("P115", phrase) for phrase in renderer.MANUAL_FOCUS_PHRASES["P115"]]
+        + [("P119", phrase) for phrase in renderer.MANUAL_FOCUS_PHRASES["P119"]]
+    )
     for block_id, focused_text, _ in rows:
         sentences = {
             sentence.strip().rstrip(".!?").strip()
@@ -156,12 +163,22 @@ def main() -> None:
     visible_text_without_comment_ui = "\n".join(
         f"{block_id}\t{block.text}"
         for block_id, block in blocks_without_comment_ui.items()
-        if block_id not in {"limitations", "P119"}
+        if block_id not in {"limitations", "P115", "P119"}
     )
     assert (
         hashlib.sha256(visible_text_without_comment_ui.encode("utf-8")).hexdigest()
-        == renderer.EXPECTED_V168_VISIBLE_BLOCK_TEXT_EXCLUDING_COMMENT_UI_AND_P119_SHA256
+        == renderer.EXPECTED_V169_VISIBLE_BLOCK_TEXT_EXCLUDING_COMMENT_UI_P115_AND_P119_SHA256
     )
+    p115_text = renderer.rendered_physician_prose(document, "P115")
+    assert hashlib.sha256(p115_text.encode("utf-8")).hexdigest() == renderer.EXPECTED_V169_P115_TEXT_SHA256
+    assert all(phrase in p115_text for phrase in [
+        "distinguish evidence recorded before and after a regimen change",
+        "complete note together with structured context on current medications and recent treatment changes",
+        "semantic and source support checks",
+        "independent contribution difficult to isolate",
+        "support the complete workflow but do not determine how much of the observed preference came from the temporal controls alone",
+    ])
+    assert "G5" not in p115_text and "temporal gate" not in p115_text.lower()
     p119_text = renderer.rendered_physician_prose(document, "P119")
     assert hashlib.sha256(p119_text.encode("utf-8")).hexdigest() == renderer.EXPECTED_V168_P119_TEXT_SHA256
     assert all(phrase in p119_text for phrase in [
@@ -181,20 +198,24 @@ def main() -> None:
     ).group(1)
 
     assert document.count('data-comment-text-id=') == 12
-    assert document.count('data-comment-id=') == 1
-    assert 'data-comment-id="13"' in document and 'comment-anchor-13' in document
+    assert document.count('data-comment-id=') == 0
+    assert 'data-comment-id="13"' not in document and 'comment-anchor-13' not in document
     assert 'data-comment-id="14"' not in document and 'comment-anchor-14' not in document
+    assert (
+        'data-comment-text-id="13" data-status="resolved" '
+        f'data-resolution-basis="{renderer.COMMENT_13_RESOLUTION_BASIS}"'
+    ) in document
     assert (
         'data-comment-text-id="14" data-status="resolved" '
         f'data-resolution-basis="{renderer.COMMENT_14_RESOLUTION_BASIS}"'
     ) in document
-    assert "Outstanding physician comments (1)" in document
+    assert "Outstanding physician comments (0)" in document
     assert document.count('data-literature-entry=') == 30
-    assert "Version 1.6.8 · November 1, 2026" in document
-    assert "draft v1.6.8" in document
+    assert "Version 1.6.9 · November 1, 2026" in document
+    assert "draft v1.6.9" in document
 
     print(
-        "V168_OK "
+        "V169_OK "
         f"canonical=127+35+12 visible_blocks={len(blocks)} changed={len(state['changed'])} "
         f"focus_spans={len(rows)} focus_blocks={len(expected_focus_blocks)} results_sha256="
         f"{hashlib.sha256(results_text.encode('utf-8')).hexdigest()}"

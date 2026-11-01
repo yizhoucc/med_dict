@@ -96,12 +96,13 @@ SUBHEADINGS = {
     "Performance across Clinical Extraction Fields",
 }
 HIDDEN_SOURCE_BLOCKS = {"P032", "P033", "P034", "P035", "P036", "P050", "P071", "P089", "P091", "P094", "P099", "P105"}
-OUTSTANDING_COMMENT_IDS = {"13"}
+OUTSTANDING_COMMENT_IDS: set[str] = set()
 RESOLVED_COMMENT_LITERATURE_MAP = {
     "0": 21, "1": 3, "2": 22, "3": 10, "4": 23,
     "8": 2, "9": 27, "10": 28, "11": 29, "12": 30,
 }
 COMMENT_14_RESOLUTION_BASIS = "Breast ER/PR/HER2 rules verified in prompt, breast-only routing, hooks, and tests."
+COMMENT_13_RESOLUTION_BASIS = "P115 revised to describe the prompt, structured context, semantic and source support checks, and the component attribution boundary."
 COMMENT_RESOLUTION_REGISTRY: dict[str, dict[str, object]] = {
     comment_id: {"status": "resolved", "literature_entry": literature_entry}
     for comment_id, literature_entry in RESOLVED_COMMENT_LITERATURE_MAP.items()
@@ -109,6 +110,10 @@ COMMENT_RESOLUTION_REGISTRY: dict[str, dict[str, object]] = {
 COMMENT_RESOLUTION_REGISTRY["14"] = {
     "status": "resolved",
     "basis": COMMENT_14_RESOLUTION_BASIS,
+}
+COMMENT_RESOLUTION_REGISTRY["13"] = {
+    "status": "resolved",
+    "basis": COMMENT_13_RESOLUTION_BASIS,
 }
 
 REVISED_HEADINGS = {
@@ -154,7 +159,7 @@ class SectionOverlay:
 
 SECTION_OVERLAY_CATEGORIES = {
     "terminology", "hyphen-only", "number-format", "cross-reference", "citation",
-    "user-approved-limitation",
+    "user-approved-limitation", "user-approved-temporal-controls",
 }
 RESULTS_DISCUSSION_OVERLAYS: dict[str, tuple[SectionOverlay, ...]] = {
     "P085": (
@@ -212,6 +217,16 @@ RESULTS_DISCUSSION_OVERLAYS: dict[str, tuple[SectionOverlay, ...]] = {
             "as reported by prior studies ([[cite:kruse]]; [[cite:kougia]]).",
         ),
         SectionOverlay("terminology", "physician evaluators", "physicians"),
+        SectionOverlay(
+            "user-approved-temporal-controls",
+            "We addressed this issue by incorporating treatment history and temporal context into the extraction process and adding verification steps to align treatment responses with the appropriate regimen.",
+            "To reduce this risk, we first revised the prompt to instruct the model to distinguish evidence recorded before and after a regimen change. Beyond the prompt, the response extraction step used the complete note together with structured context on current medications and recent treatment changes. The extracted response then underwent semantic and source support checks.",
+        ),
+        SectionOverlay(
+            "user-approved-temporal-controls",
+            "The physicians preferred the harness than the baseline, suggesting that temporal checks could help reduce these errors.",
+            "These temporal controls were embedded across the prompt, structured context, and downstream checks, which made their independent contribution difficult to isolate. The physician ratings therefore support the complete workflow but do not determine how much of the observed preference came from the temporal controls alone.",
+        ),
     ),
     "P117": (
         SectionOverlay("cross-reference", "(Supplementary Figure X).", "(Supplementary Figure S2)."),
@@ -236,7 +251,6 @@ RESULTS_DISCUSSION_OVERLAYS: dict[str, tuple[SectionOverlay, ...]] = {
 }
 
 POSITIONED_COMMENT_ANCHORS = {
-    ("P115", "13"): "We addressed this issue by incorporating treatment history and temporal context into the extraction process and adding verification steps to align treatment responses with the appropriate regimen.",
     ("P117", "14"): "For example, some rules developed for breast cancer were specific to estrogen receptor (ER), progesterone receptor (PR), and HER2 status, which are used to classify breast cancer subtypes but are not applicable to PDAC.",
 }
 
@@ -254,7 +268,8 @@ EXPECTED_V164_RESULTS_SHA256 = "5aceff6ac9b1f9a78abf8bc322c19556a32cc0ba722359b7
 EXPECTED_V164_RESULTS_NUMERIC_SHA256 = "2966552230c8eb68c13797418d36abf7abdd1e8269f753f5f49bf91a74aec5b4"
 EXPECTED_F7_V164_SEMANTIC_RESULTS_NUMERIC_SHA256 = "c63c2e9083b71313e519062257189f27373673692ddce5d1bab0e4a3e743ddd5"
 EXPECTED_V166_VISIBLE_BLOCK_TEXT_EXCLUDING_COMMENT_UI_SHA256 = "2f4621fc82992f179bf1b437ac6ede273f084d5c797993b4aa6d1669b6146f7f"
-EXPECTED_V168_VISIBLE_BLOCK_TEXT_EXCLUDING_COMMENT_UI_AND_P119_SHA256 = "7233ab11c6d1defa941c0a775172e081ba8517b49af236d29d6e874e7797f80d"
+EXPECTED_V169_VISIBLE_BLOCK_TEXT_EXCLUDING_COMMENT_UI_P115_AND_P119_SHA256 = "c0125ea6e341601385d5a3470bcccc689e71ab5dff821ec9af530f72c3bf4683"
+EXPECTED_V169_P115_TEXT_SHA256 = "3a22b7ee66b45a5d055465a30b166c77def06ed9777f5a87cec51f45df666bfa"
 EXPECTED_V168_P119_TEXT_SHA256 = "48e181d7895d85bb9a304d52d3974e7b838a246c55363b07c68aeb85a6fd17f8"
 
 
@@ -316,6 +331,14 @@ MANUAL_FOCUS_PHRASES = {
     "P061": ["modifications specific to pancreatic cancer"],
     "P063": ["System identities"],
     "P073": ["judge model and settings"],
+    "P115": [
+        "distinguish evidence recorded before and after a regimen change",
+        "complete note together with structured context",
+        "semantic and source support checks",
+        "independent contribution difficult to isolate",
+        "support the complete workflow",
+        "temporal controls alone",
+    ],
     "P119": [
         "complete harness output as presented",
         "harness was always displayed as A",
@@ -714,7 +737,7 @@ def review_block_in_scope(block: ReviewBlock | dict[str, object]) -> bool:
     block_id = str(block.block_id if isinstance(block, ReviewBlock) else block.get("block_id", ""))
     return (
         section in {"introduction", "methods", "supplementary-methods"}
-        or block_id in {"P117", "P119", "revision-model-family-limitation"}
+        or block_id in {"P115", "P117", "P119", "revision-model-family-limitation"}
         or kind in {"heading", "cell", "caption"}
     )
 
@@ -1540,6 +1563,7 @@ def build_supplement() -> str:
 
 def version_history() -> str:
     entries = [
+        ("v1.6.9", "2026-11-01", "Temporal control description", "Revised P115 to describe the prompt, structured context, semantic and source support checks, and the limit on attributing physician preference to temporal controls alone. Comment 13 is resolved."),
         ("v1.6.8", "2026-11-01", "Evaluation limitation", "Removed the separate Limitations heading and clarified that the observed physician preference applies to the complete outputs as presented. The revised text separates the observed direction from uncertainty in effect size and causal attribution."),
         ("v1.6.7", "2026-11-01", "Limitations presentation", "Added a main manuscript Limitations heading and highlighted only five approved P119 design limitation phrases for focused review. The limitation text is unchanged."),
         ("v1.6.6", "2026-11-01", "Comment 14 resolution", "Closed physician Comment 14 after verifying breast ER, PR, and HER2 rules in the prompt, breast-only routing, hooks, and tests. Comment 13 remains open."),
@@ -1578,7 +1602,7 @@ def version_history() -> str:
         else:
             version, date, note = entry
             label = ""
-        current = version == "v1.6.8"
+        current = version == "v1.6.9"
         open_attr = " open" if current else ""
         summary = f"{version} · {label} · {date}" if label else f"{version} · {date}"
         rendered.append(
@@ -1592,7 +1616,7 @@ def toc() -> str:
     links = [("#section-introduction", "Introduction", False), ("#section-methods", "Methods", False)]
     for heading in ["Study Design", "Dataset", "Baseline model and model development", "Inference Harness", "Breast cancer development with physician review", "PDAC adaptation with feedback from language models", "Clinical evaluation data collection and scoring rubric", "Ablation study", "Statistical analysis"]:
         links.append(("#" + re.sub(r"[^a-z0-9]+", "-", heading.lower()).strip("-"), heading, True))
-    links.extend([("#section-results", "Results", False), ("#performance-across-clinical-extraction-fields", "Performance across clinical extraction fields", True), ("#section-discussion", "Discussion", False), ("#supplementary-material", "Supplementary material", False), ("#physician-comments", "Outstanding physician comments (1)", False), ("#version-history", "Version history", False), ("#literature-workspace", "Literature-review workspace", False)])
+    links.extend([("#section-results", "Results", False), ("#performance-across-clinical-extraction-fields", "Performance across clinical extraction fields", True), ("#section-discussion", "Discussion", False), ("#supplementary-material", "Supplementary material", False), ("#physician-comments", "Outstanding physician comments (0)", False), ("#version-history", "Version history", False), ("#literature-workspace", "Literature-review workspace", False)])
     return '<nav class="toc" data-origin="technical-insert"><strong>Contents</strong>' + "".join(f'<a class="{"sub" if sub else ""}" href="{href}" data-origin="technical-insert">{esc(label)}</a>' for href, label, sub in links) + "</nav>"
 
 
@@ -1601,22 +1625,22 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
     article = f"""
 <article>
   <h1 class="screen-only">Physician-authored manuscript draft</h1>
-  <p class="subtitle screen-only">English working manuscript · Version 1.6.8 · November 1, 2026</p>
+  <p class="subtitle screen-only">English working manuscript · Version 1.6.9 · November 1, 2026</p>
   <details class="fold" id="version-history"><summary>Version history</summary><div class="fold-body">{version_history()}</div></details>
   {sections}
   {build_supplement()}
-  <details class="fold" id="physician-comments"><summary>Outstanding physician comments (1)</summary><div class="fold-body">{render_comments(data)}</div></details>
+  <details class="fold" id="physician-comments"><summary>Outstanding physician comments (0)</summary><div class="fold-body">{render_comments(data)}</div></details>
   {literature_workspace()}
 </article>
 """
-    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v1.6.8</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
+    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v1.6.9</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
     document = apply_review_block_metadata(document)
     markdown = f"""<!-- GENERATED FILE. The canonical physician Word extraction is the prose authority. -->
 # Physician-authored manuscript draft
 
-English working manuscript. Version 1.6.8, November 1, 2026.
+English working manuscript. Version 1.6.9, November 1, 2026.
 
-Current change: removed the separate Limitations heading and clarified the interpretation of physician preference under the tested presentation. The revised wording separates the observed direction from uncertainty in effect size and causal attribution.
+Current change: revised P115 to describe the temporal controls used in the prompt, structured context, and downstream checks, and to state that the physician ratings do not isolate their contribution. Comment 13 is resolved.
 
 The canonical physician blocks below mirror `{SOURCE_DOCX.name}` for audit purposes. The clean HTML applies only the approved cross-reference and reporting edits while preserving all source blocks in its hidden audit representation.
 
@@ -1628,7 +1652,7 @@ Generated technical content: Supplementary Tables S1-S3 and Supplementary Figure
 
 ## Outstanding physician comments
 
-The canonical extraction retains all 12 Word comments. The HTML displays the 1 unresolved comment and keeps the 11 resolved comments only in its hidden audit representation.
+The canonical extraction retains all 12 Word comments. The HTML keeps all 12 resolved comments in its hidden audit representation.
 
 ## Author literature-review workspace
 
@@ -1917,8 +1941,8 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     expected_comment_anchors = [f"comment-anchor-{item['id']}" for item in data["comments"] if str(item["id"]) in OUTSTANDING_COMMENT_IDS]
     if parser.comment_anchor_ids != expected_comment_anchors: raise AssertionError("Comment anchors are incomplete")
     if parser.comment_backlinks != [f"#comment-anchor-{item['id']}" for item in data["comments"] if str(item["id"]) in OUTSTANDING_COMMENT_IDS]: raise AssertionError("Comment backlinks are incomplete")
-    if parser.visible_comment_ids != ["13"]: raise AssertionError(f"Unexpected visible physician comments: {parser.visible_comment_ids}")
-    if "Outstanding physician comments (1)" not in document: raise AssertionError("Outstanding-comment heading is missing")
+    if parser.visible_comment_ids: raise AssertionError(f"Unexpected visible physician comments: {parser.visible_comment_ids}")
+    if "Outstanding physician comments (0)" not in document: raise AssertionError("Outstanding-comment heading is missing")
     if set(COMMENT_RESOLUTION_REGISTRY) != {
         str(item["id"]) for item in data["comments"] if str(item["id"]) not in OUTSTANDING_COMMENT_IDS
     }:
@@ -1932,6 +1956,12 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     )
     if comment_14_marker not in document:
         raise AssertionError("Resolved Comment 14 evidence is missing from the hidden audit")
+    comment_13_marker = (
+        'data-comment-text-id="13" data-status="resolved" '
+        f'data-resolution-basis="{esc(COMMENT_13_RESOLUTION_BASIS)}"'
+    )
+    if comment_13_marker not in document:
+        raise AssertionError("Resolved Comment 13 evidence is missing from the hidden audit")
     redline = review_redline_state(document)
     changed = redline["changed"]
     highlighted = redline["highlighted"]
@@ -2024,14 +2054,14 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     ]:
         if f'id="{revision_id}"' not in document: raise AssertionError(f"Clarification is missing: {revision_id}")
     if 'id="draft-metadata"' in document or "Draft information and source provenance" in document: raise AssertionError("Removed draft-information block remains")
-    if "Version 1.6.8 · November 1, 2026" not in document or "draft v1.6.8" not in document: raise AssertionError("Version 1.6.8 metadata is missing")
-    if document.count('class="version-entry"') != 30 or any(f'id="version-{item}"' not in document for item in ["1-6-8", "1-6-7", "1-6-6", "1-6-5", "1-6-4", "1-6-3", "1-6-2", "1-6-1", "1-6", "1-5-2", "1-5-1", "1-5", "1-4-1", "1-4", "1-3", "1-2-3", "1-2-2", "1-2-1", "1-2", "1-1", "1-0", "0-25", "0-24", "0-23", "0-22", "0-21", "0-20", "0-19", "0-18", "0-17"]):
+    if "Version 1.6.9 · November 1, 2026" not in document or "draft v1.6.9" not in document: raise AssertionError("Version 1.6.9 metadata is missing")
+    if document.count('class="version-entry"') != 31 or any(f'id="version-{item}"' not in document for item in ["1-6-9", "1-6-8", "1-6-7", "1-6-6", "1-6-5", "1-6-4", "1-6-3", "1-6-2", "1-6-1", "1-6", "1-5-2", "1-5-1", "1-5", "1-4-1", "1-4", "1-3", "1-2-3", "1-2-2", "1-2-1", "1-2", "1-1", "1-0", "0-25", "0-24", "0-23", "0-22", "0-21", "0-20", "0-19", "0-18", "0-17"]):
         raise AssertionError("Nested version history is incomplete")
-    if not re.search(r'<details class="version-entry" id="version-1-6-8"[^>]* open>', document):
-        raise AssertionError("Current v1.6.8 history entry is not expanded inside the closed parent")
-    if any(re.search(rf'<details class="version-entry" id="version-{item}"[^>]* open>', document) for item in ["1-6-7", "1-6-6", "1-6-5", "1-6-4", "1-6-3", "1-6-2", "1-6-1", "1-6", "1-5-2", "1-5-1", "1-5", "1-4-1", "1-4", "1-3"]):
+    if not re.search(r'<details class="version-entry" id="version-1-6-9"[^>]* open>', document):
+        raise AssertionError("Current v1.6.9 history entry is not expanded inside the closed parent")
+    if any(re.search(rf'<details class="version-entry" id="version-{item}"[^>]* open>', document) for item in ["1-6-8", "1-6-7", "1-6-6", "1-6-5", "1-6-4", "1-6-3", "1-6-2", "1-6-1", "1-6", "1-5-2", "1-5-1", "1-5", "1-4-1", "1-4", "1-3"]):
         raise AssertionError("Prior version-history entries must be closed")
-    if "v1.6.8 · Evaluation limitation · 2026-11-01" not in document:
+    if "v1.6.9 · Temporal control description · 2026-11-01" not in document:
         raise AssertionError("Current version-history label is missing")
     if "querySelectorAll('#version-history .version-entry').forEach(entry=>entry.open=entry===target)" not in document:
         raise AssertionError("Version-history deep links do not isolate the targeted entry")
@@ -2044,13 +2074,13 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     visible_text_without_comment_ui = "\n".join(
         f"{block_id}\t{block.text}"
         for block_id, block in blocks_without_comment_ui.items()
-        if block_id not in {"limitations", "P119"}
+        if block_id not in {"limitations", "P115", "P119"}
     )
     if (
         hashlib.sha256(visible_text_without_comment_ui.encode("utf-8")).hexdigest()
-        != EXPECTED_V168_VISIBLE_BLOCK_TEXT_EXCLUDING_COMMENT_UI_AND_P119_SHA256
+        != EXPECTED_V169_VISIBLE_BLOCK_TEXT_EXCLUDING_COMMENT_UI_P115_AND_P119_SHA256
     ):
-        raise AssertionError("Visible manuscript block text changed outside comment UI and P119")
+        raise AssertionError("Visible manuscript block text changed outside comment UI, P115, and P119")
     for section, next_section in [("introduction", "methods"), ("methods", "results")]:
         markup_hash = hashlib.sha256(section_markup(document, section, next_section).encode("utf-8")).hexdigest()
         text_hash = hashlib.sha256(section_block_text(document, section).encode("utf-8")).hexdigest()
@@ -2061,8 +2091,9 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
         if re.fullmatch(r"P\d{3}", block_id) and 84 <= int(block_id[1:]) <= 119
     }
     p119_focus = [text for block_id, text in span_records if block_id == "P119"]
-    if results_discussion_focus != {"P119"} or p119_focus != MANUAL_FOCUS_PHRASES["P119"]:
-        raise AssertionError("Results or Discussion focus differs from the selected P119 phrases")
+    p115_focus = [text for block_id, text in span_records if block_id == "P115"]
+    if results_discussion_focus != {"P115", "P119"} or p115_focus != MANUAL_FOCUS_PHRASES["P115"] or p119_focus != MANUAL_FOCUS_PHRASES["P119"]:
+        raise AssertionError("Results or Discussion focus differs from the selected P115 and P119 phrases")
     if re.search(r'<h3[^>]*id="limitations"[^>]*>Limitations</h3>', document):
         raise AssertionError("Removed Limitations heading remains")
     if 'href="#limitations"' in document:
@@ -2203,9 +2234,10 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     p117_html = re.search(r'id="P117"[^>]*>(.*?)</p>', document, flags=re.S)
     if not p115_html or not p117_html:
         raise AssertionError("Discussion comment anchor paragraphs are missing")
-    regimen_sentence = "We addressed this issue by incorporating treatment history and temporal context into the extraction process and adding verification steps to align treatment responses with the appropriate regimen."
-    if f'{esc(regimen_sentence)}<sup class="comment-anchor" id="comment-anchor-13">' not in p115_html.group(1):
-        raise AssertionError("Comment 13 is not anchored to the appropriate regimen sentence")
+    if hashlib.sha256(rendered_physician_prose(document, "P115").encode("utf-8")).hexdigest() != EXPECTED_V169_P115_TEXT_SHA256:
+        raise AssertionError("P115 differs from the approved v1.6.9 wording")
+    if 'comment-anchor-13' in p115_html.group(1) or 'id="physician-comment-13"' in document:
+        raise AssertionError("Resolved Comment 13 remains visible")
     er_sentence = "For example, some rules developed for breast cancer were specific to estrogen receptor (ER), progesterone receptor (PR), and HER2 status, which are used to classify breast cancer subtypes but are not applicable to PDAC."
     if esc(er_sentence) not in p117_html.group(1):
         raise AssertionError("The P117 ER, PR, and HER2 sentence changed")

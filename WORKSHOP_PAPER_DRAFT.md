@@ -1,9 +1,9 @@
 <!-- GENERATED FILE. The canonical physician Word extraction is the prose authority. -->
 # Physician-authored manuscript draft
 
-English working manuscript. Version 1.6.8, November 1, 2026.
+English working manuscript. Version 1.6.9, November 1, 2026.
 
-Current change: removed the separate Limitations heading and clarified the interpretation of physician preference under the tested presentation. The revised wording separates the observed direction from uncertainty in effect size and causal attribution.
+Current change: revised P115 to describe the temporal controls used in the prompt, structured context, and downstream checks, and to state that the physician ratings do not isolate their contribution. Comment 13 is resolved.
 
 The canonical physician blocks below mirror `202601023_Manuscript_JAMA.docx` for audit purposes. The clean HTML applies only the approved cross-reference and reporting edits while preserving all source blocks in its hidden audit representation.
 
@@ -423,7 +423,7 @@ Generated technical content: Supplementary Tables S1-S3 and Supplementary Figure
 
 ## Outstanding physician comments
 
-The canonical extraction retains all 12 Word comments. The HTML displays the 1 unresolved comment and keeps the 11 resolved comments only in its hidden audit representation.
+The canonical extraction retains all 12 Word comments. The HTML keeps all 12 resolved comments in its hidden audit representation.
 
 ## Author literature-review workspace
 
