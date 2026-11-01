@@ -1,9 +1,9 @@
 <!-- GENERATED FILE. The canonical physician Word extraction is the prose authority. -->
 # Physician-authored manuscript draft
 
-English working manuscript. Version 1.3, October 30, 2026.
+English working manuscript. Version 1.4, October 31, 2026.
 
-Current change: conservative grammar edits, verified author-year citations, and three highlighted methods or limitation clarifications.
+Current change: Introduction logic and Methods reporting clarified; detailed gate, interface, and model-role disclosures moved to Supplementary Methods.
 
 The canonical physician blocks below mirror `202601023_Manuscript_JAMA.docx` for audit purposes. The clean HTML applies only the approved cross-reference and reporting edits while preserving all source blocks in its hidden audit representation.
 
@@ -81,8 +81,6 @@ Dataset
 
 <!-- physician:P022 -->
 We used CORAL dataset, a PhysioNet dataset of 40 deidentified medical oncology notes obtain from the University of California, San Francisco. The development pool contains 100 breast-cancer and 100 pancreatic-cancer notes without expert annotation. The untouched holdout test set contains 20 expert-annotated notes for each cancer type. Access requires the PhysioNet credentialing and data-use process described by the dataset authors.
-
-<!-- technical insert after P022 -->
 
 <!-- physician:P023 -->
 <!-- P023 empty -->
@@ -210,8 +208,6 @@ Clinical evaluation data collection and scoring rubric
 
 <!-- physician:P063 -->
 The clinical evaluation presented the source note and two structured outputs through a system-label-masked A/B interface. Evaluators selected A better, B better, or tie for each field. They were blinded from the harness and models. The physician participated in the human-in-the-loop development was not one of the final evaluators. Before evaluating the test set, the authors designed 7 core-fields as clinically important for understanding disease status and current management, see Supplement 1
-
-<!-- technical insert after P063 -->
 
 <!-- physician:P064 -->
 <!-- P064 empty -->
@@ -398,8 +394,6 @@ Our ablation analysis suggested that verification was an important component of 
 
 <!-- physician:P119 -->
 This study has several limitations. First, our primary outcome was physician preference rather than absolute extraction accuracy. A tie could indicate that both systems produced acceptable outputs or that both contained errors. Although physician ratings consistently favored the harness, the evaluation included only four physicians and 40 clinical notes from two cancer types within a single-source dataset. However, these were real clinical notes rather than synthetic cases or model-generated narratives. They contain repeated, copied-forward information, uncertain findings, treatment plans, or even typo or errors that make the extraction task challenging, nevertheless, further studies are needed to investigate if the results can be generalized to other cancer types or language models. Second, the exploratory ablation was evaluated by a single non-physician LLM judge and compared cumulative stages rather than individual components. Therefore, it could not determine the independent contribution of each verification step or clinical rule. Future studies should evaluate extraction accuracy against expert reference standards, include larger and more diverse clinical datasets, and assess whether the harness improves efficiency and reliability in clinical workflows.&#32;
-
-<!-- technical insert after P119 -->
 
 <!-- physician:P120 -->
 <!-- P120 empty -->

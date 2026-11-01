@@ -53,7 +53,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           const button = supplement?.querySelector(':scope > .fold-toggle');
           if (!supplement || !body || !button) return 'missing custom supplement fold';
           const highlights = [...document.querySelectorAll('mark.revision-highlight')];
-          if (highlights.length !== 3) return `unexpected revision-highlight count: ${highlights.length}`;
+          if (highlights.length !== 29) return `unexpected revision-highlight count: ${highlights.length}`;
           if (highlights.some(node => ['transparent', 'rgba(0, 0, 0, 0)'].includes(getComputedStyle(node).backgroundColor))) {
             return 'revision highlight is not visible on screen';
           }
@@ -78,6 +78,17 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
             const details = document.getElementById(id);
             const link = document.querySelector(`.toc a[href="#${id}"]`);
             if (!details || !link) return `missing screen fold ${id}`;
+            if (id === 'version-history') {
+              const current = document.getElementById('version-1-4');
+              const prior = document.getElementById('version-1-3');
+              const older = [...details.querySelectorAll('.version-entry')].filter(node => node !== current);
+              if (details.open || !current?.open || older.some(node => node.open)) return 'unexpected initial version-history state';
+              revealTarget(prior);
+              if (!details.open || !prior.open || current.open || older.some(node => node !== prior && node.open)) return 'version deep link did not isolate prior entry';
+              revealTarget(current);
+              if (!current.open || prior.open) return 'version deep link did not restore current entry';
+              details.open = false;
+            }
             details.open = false;
             link.click();
             if (!details.open || document.activeElement !== details) return `native fold link failed: ${id}`;
@@ -109,7 +120,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
                 self.fail("Invalid print-preparation report"); return
             }
             guard offenders.isEmpty else { self.fail("Page-boundary offenders: \(offenders)"); return }
-            guard highlightCount == 3,
+            guard highlightCount == 29,
                   highlightBackgrounds.allSatisfy({ $0 == "transparent" || $0 == "rgba(0, 0, 0, 0)" }) else {
                 self.fail("Revision highlights retained screen background in print export: \(highlightBackgrounds)"); return
             }
@@ -158,7 +169,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
         guard let data = outputDocument.dataRepresentation() else { fail("Could not encode combined PDF"); return }
         guard data.count < resultCapBytes else { fail("Regression PDF exceeded 10 MiB"); return }
         let text = outputDocument.string ?? ""
-        for required in ["Introduction", "Supplementary Table S1", "Supplementary Table S2", "Supplementary Table S3", "Supplementary Figure S1", "Supplementary Figure S2"] {
+        for required in ["Introduction", "Supplementary Methods", "Supplementary Table S1", "Supplementary Table S2", "Supplementary Table S3", "Supplementary Figure S1", "Supplementary Figure S2"] {
             guard text.contains(required) else { fail("Missing printed content: \(required)"); return }
         }
         for excluded in ["Author literature-review workspace", "Back to comment anchor", "Version history", "Draft relevance:"] {
@@ -186,13 +197,37 @@ guard FileManager.default.fileExists(atPath: inputURL.path) else {
     fputs("Run this verifier from the project root\n", stderr)
     exit(2)
 }
+let html: String
+do {
+    var selfContained = try String(contentsOf: inputURL, encoding: .utf8)
+    let printFigurePaths = [
+        "results/extraction_comparison/clinician_ratings/draft_figures/figure1_development_pathway_print.png",
+        "results/extraction_comparison/clinician_ratings/draft_figures/figure2_evaluator_distribution_print.png",
+        "results/extraction_comparison/clinician_ratings/draft_figures/figure3_interrater_matrix_print.png",
+        "results/extraction_comparison/clinician_ratings/draft_figures/figure4_effect_profile_print.png",
+        "results/extraction_comparison/clinician_ratings/draft_figures/supplementary_figure_s1_note_margins_print.png",
+        "results/extraction_comparison/clinician_ratings/draft_figures/supplementary_figure_s2_staged_ablation_print.png",
+    ]
+    for relativePath in printFigurePaths {
+        let figureURL = projectRoot.appendingPathComponent(relativePath)
+        let figureData = try Data(contentsOf: figureURL)
+        selfContained = selfContained.replacingOccurrences(
+            of: "src=\"\(relativePath)\"",
+            with: "src=\"data:image/png;base64,\(figureData.base64EncodedString())\""
+        )
+    }
+    html = selfContained
+} catch {
+    fputs("Could not build self-contained WebKit input: \(error.localizedDescription)\n", stderr)
+    exit(2)
+}
 let configuredOutputPath = ProcessInfo.processInfo.environment["MED_DICT_PRINT_OUTPUT_PATH"]
 let outputURL = URL(fileURLWithPath: configuredOutputPath ?? "/private/tmp/med_dict_workshop_print_\(ProcessInfo.processInfo.processIdentifier).pdf")
 try? FileManager.default.removeItem(at: outputURL)
 let application = NSApplication.shared
 application.setActivationPolicy(.prohibited)
 let verifier = PrintVerifier(outputURL: outputURL)
-verifier.webView.loadFileURL(inputURL, allowingReadAccessTo: projectRoot)
+verifier.webView.loadHTMLString(html, baseURL: nil)
 let deadline = Date().addingTimeInterval(180)
 while !verifier.done && Date() < deadline {
     RunLoop.main.run(mode: .default, before: Date().addingTimeInterval(0.05))

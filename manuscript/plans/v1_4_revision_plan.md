@@ -1,8 +1,15 @@
 # v1.4 manuscript revision plan
 
-Scope: **proposal only, not applied**.
+Status: **approved by the author and implemented on 2026-10-31**.
 
-This document proposes a v1.4 revision for author review. It does not authorize or modify `WORKSHOP_PAPER_DRAFT.html`, `WORKSHOP_PAPER_DRAFT.md`, the physician Word source, the renderer, figures, tables, data, or analysis. The companion file `v1_4_proposed_text.diff` is a review aid and is deliberately not an executable patch.
+The approved scope covers the Introduction, Methods, Supplementary Methods, the corresponding Limitations disclosure, the screen-only version-history interface, and their renderer and tests. Results, figures, statistics, and other Discussion claims remain outside this revision. The companion file `v1_4_proposed_text.diff` remains a pre-implementation review aid and is not an executable patch.
+
+Author confirmations recorded on 2026-10-31:
+
+- The 40 expert-annotated note texts formed an untouched holdout for final development. Earlier generation or evaluation on those notes was performed while preparing the paper and did not inform workflow iteration.
+- Breast-cancer development used all 100 development notes. The absence of a complete run manifest in the reviewed records does not change the author's study record.
+
+The earlier conflicting project records remain documented below as an internal provenance note. The manuscript follows the author's confirmed account.
 
 ## Editorial position
 
@@ -18,7 +25,7 @@ The current v1.3 visible text is anchored to the physician-authored Word draft, 
 
 3. **Study Design.** Start with a one-sentence map of the two development stages. Define Stage 1 as physician-guided breast-cancer development. Define Stage 2 as pancreatic ductal adenocarcinoma (PDAC) adaptation with no physician review of pancreatic outputs. Then describe the independent physician evaluation. Move the exploratory ablation to a separate paragraph because it answers a technical question rather than describing development or clinical evaluation.
 
-4. **Dataset.** Name the two cancer types directly instead of writing `each cancer type`. Remove PhysioNet credentialing from the main Methods because it is a data-access detail. Place it in Data availability or Supplementary Methods. Retain a concise statement that the existing CORAL annotations were not inputs to the model, were not used to calculate the primary physician-preference endpoint, and were not shown in the evaluation interface. Do not call the 40 note texts `untouched` until the author resolves the conflict described below.
+4. **Dataset.** Name the two cancer types directly instead of writing `each cancer type`. Remove PhysioNet credentialing from the main Methods because it is a data-access detail. Place it in Data availability or Supplementary Methods. Retain a concise statement that the existing CORAL annotations were not inputs to the model, were not used to calculate the primary physician-preference endpoint, and were not shown in the evaluation interface. The author confirmed on 2026-10-31 that the 40 note texts were an untouched holdout for final development.
 
 5. **One model call per note.** Replace this phrase with an application-level description: the baseline submitted the complete note once through one prompt and requested the full schema in one response. State that the study did not measure or make claims about lower-level server execution.
 
@@ -103,7 +110,7 @@ Recommended opening:
 
 ### Dataset
 
-Use one of the two candidates in the companion diff. Candidate A is the current recommendation because it avoids the unresolved word `untouched`. Candidate B may be used only if the author produces dated evidence that the 40 benchmark note texts, not only their annotations, were excluded from every development and error-analysis step before evaluation.
+Use the author-confirmed holdout description. On 2026-10-31, the author confirmed that the 40 note texts and their annotations were untouched during final development and that earlier paper-preparation runs did not inform iteration.
 
 Move this sentence to Data availability or Supplementary Methods:
 
@@ -176,7 +183,7 @@ Add four explicit boundaries:
 3. The ablation used one non-physician LLM judge and cumulative stages, so it cannot isolate each component's causal contribution.
 4. Both systems used the same base-model family. The results estimate the effect of this harness within that setting and do not establish generalization to other model families.
 
-Do not call the 40 notes an untouched holdout unless the author resolves the provenance conflict below.
+The author confirmed the untouched-holdout description on 2026-10-31. The internal provenance note below records why that wording required explicit confirmation.
 
 ## Version-history UI proposal
 
@@ -203,41 +210,41 @@ Implementation requirements for a later execution task:
 - Keep the author-only history out of the print manuscript, as in v1.3.
 - Summarize substantive manuscript changes. Do not mix renderer maintenance with scientific revision unless the maintenance affected what authors reviewed.
 
-## AUTHOR CONFIRMATION REQUIRED
+## Author confirmations and internal provenance note
 
-These conflicts must remain unresolved in the proposal. Do not silently choose a version of events.
+Both conflicts were resolved by author confirmation on 2026-10-31. The following record is retained internally so the decision remains auditable.
 
-### 1. Forty benchmark note texts and the word `untouched`
+### 1. Forty benchmark note texts and the word `untouched` (author-confirmed)
 
 The current manuscript calls the 40 expert-annotated notes an `untouched holdout test set`. Project records dated August 27, 2026 state that the same 40 note texts had already been used in multiple rounds of error analysis, hook or prompt revision, and full reruns. Even if the expert annotation files were never used, use of the note texts for iterative development conflicts with `untouched` and `held out from development`.
 
-Author confirmation needed:
+Earlier provenance questions retained for audit:
 
 - Were any of the 40 benchmark note texts viewed during error analysis before the final harness was frozen?
 - Were changes to prompts, gates, or deterministic rules made after viewing outputs on those notes?
 - What were the freeze date and commit for the harness used in the physician evaluation?
 - Were the physician-evaluation outputs generated before or after any benchmark-driven revisions?
 
-Until dated provenance resolves these questions, use `benchmark notes`, not `untouched holdout test set`. If the project record is accurate, the manuscript must disclose benchmark-informed iteration and cannot present the 40 notes as a confirmatory holdout.
+Author decision, 2026-10-31: the 40 note texts were an untouched holdout for final development. Earlier generation or evaluation was done to prepare the paper and did not inform prompt, gate, hook, or workflow iteration. The manuscript therefore uses `untouched holdout`. The conflicting project-record summary above remains an internal provenance note.
 
-### 2. Fifty-six selected breast-cancer notes versus the claim of all 100
+### 2. Fifty-six selected breast-cancer notes versus the claim of all 100 (author-confirmed)
 
 The current Methods says that breast-cancer development used all 100 development notes and that major and final runs covered all 100. Project records for the v31 development cycle document detailed runs and review on 56 selected breast-cancer notes. The available evidence does not establish the current `all 100` claim for the final development cycle.
 
-Author confirmation needed:
+Earlier provenance questions retained for audit:
 
 - Which breast-cancer note IDs were used in each development iteration?
 - Is there a manifest or result artifact showing a complete 100-note major or final run for the harness described in the manuscript?
 - Did the physician review all 100 outputs, 56 selected outputs, or another subset?
 - Should Methods distinguish notes processed by the system from notes reviewed by the physician?
 
-Do not replace 100 with 56 or retain 100 as settled fact until the author reconciles the run manifests, review records, and intended study description.
+Author decision, 2026-10-31: breast-cancer development used all 100 development notes. The manuscript retains 100. The incomplete manifest noted above remains an internal provenance note.
 
-## Approval gates before any manuscript edit
+## Approval gates and completion status
 
-1. Physician author approves the five-paragraph Introduction and the sharper statement of the contribution.
-2. Author resolves both provenance conflicts in `AUTHOR CONFIRMATION REQUIRED` with dated artifacts.
-3. Author chooses Dataset Candidate A or supplies the evidence required for Candidate B.
-4. Authors approve the neutral fixed-order and attribution disclosure.
-5. Authors approve the separation of ChatGPT, Qwen reviewer, and Codex judge roles.
-6. Only after these decisions should an implementation task update source prose, generated HTML, supplement, tests, and version history.
+1. Completed: the author approved the five-paragraph Introduction and requested minimal reuse-focused editing.
+2. Completed: the author resolved both provenance conflicts by explicit confirmation dated 2026-10-31.
+3. Completed: the author selected the untouched-holdout description.
+4. Completed: fixed ordering and attribution asymmetry are disclosed briefly in main Methods, fully in Supplementary Methods, and discussed in Limitations.
+5. Completed: ChatGPT, the local Qwen reviewer, and the Codex ablation judge are reported as separate roles.
+6. Completed: the renderer, generated manuscript, supplement, tests, and version history were updated within the approved scope.

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the English-only physician-authored manuscript HTML (version 1.3).
+"""Build the English-only physician-authored manuscript HTML (version 1.4).
 
 The canonical Word extraction is the sole prose source. Technical tables,
 figures, captions, navigation, and supplementary analyses are inserted around
@@ -75,7 +75,7 @@ SUBHEADINGS = {
     "Statistical analysis",
     "Performance across Clinical Extraction Fields",
 }
-HIDDEN_SOURCE_BLOCKS = {"P050", "P071", "P089", "P091", "P094", "P099", "P105"}
+HIDDEN_SOURCE_BLOCKS = {"P032", "P033", "P034", "P035", "P036", "P050", "P071", "P089", "P091", "P094", "P099", "P105"}
 OUTSTANDING_COMMENT_IDS = {"13", "14"}
 RESOLVED_COMMENT_LITERATURE_MAP = {
     "0": 21, "1": 3, "2": 22, "3": 10, "4": 23,
@@ -84,26 +84,30 @@ RESOLVED_COMMENT_LITERATURE_MAP = {
 
 REVISED_HEADINGS = {
     "P059": "Model-assisted pancreatic-cancer refinement",
-    "P066": "Staged technical ablation",
+    "P066": "Exploratory staged technical ablation",
     "P096": "Performance across clinical extraction fields",
 }
 
 REVISED_PARAGRAPHS = {
-    "P004": "Recent years have witnessed increased use of large language models (LLMs) in clinical language tasks, including patient education, clinical documentation, and administrative work. Many of these applications rely on identifying relevant information from electronic health record (EHR) data before it can be summarized, analyzed, or used in another task. Reliable extraction from those notes is therefore an important step in applying LLMs to oncology care and research.",
+    "P004": "Recent years have witnessed increased use of large language models (LLMs) in clinical language tasks, including patient education, clinical documentation, and administrative work. Many of these applications rely on identifying relevant information from electronic health record (EHR) notes before it can be summarized, analyzed, or used in another task. Reliable extraction from those notes is therefore an important step in applying LLMs to oncology care and research.",
     "P006": "Although EHRs contain structured fields, it is estimated that 80% of clinical data exist in unstructured form ([[cite:kong]]), and a large proportion of clinically relevant information is encoded in free-text narratives ([[cite:wiest]]). Oncology notes are particularly challenging because a patient can have a complex medical history that contains multiple diagnoses, prior and future treatments, and changes in disease status. Key information may be distributed across different sections, expressed with uncertainty, linked through complex timelines, or even documented incorrectly. As commonly seen in real-world practice, copied-forward laboratory, imaging, and genomic results lengthen notes and further complicate the extraction task. A decade-long study of outpatient documentation found that notes became longer and more redundant, with much of the increase attributable to templates or copied and pasted text ([[cite:rule]]). LLMs must therefore not only identify the relevant information, but also determine its relationship to the patient's current diseases. ",
     "P008": "Currently, LLMs can assist with this task, but the output does not ensure that the extracted information is fully faithful to the original note. Models may generate false information, omit details, confuse historical findings, or infer plausible content where the note does not provide it. These errors can be difficult for human reviewers to detect. Commercial LLMs have been evaluated for clinical note extraction, but performance remains variable. The use of commercial models also raises privacy and governance concerns. The potential transmission of patients' protected health information (PHI) to externally hosted services can introduce institutional and patient concerns related to data processing, retention, and HIPAA compliance. A locally deployed open-weight model can process notes without sending PHI to outside sources. However, local models alone do not resolve extraction errors. ",
-    "P010": "Local open-weight models are smaller, and their performance varies with model size. Recent studies suggest that the performance of LLMs depends not only on the model but also on how the model is used. Several strategies have been used to improve clinical extraction. Fine-tuning adapts the model to a medical task by continuing to train the model on domain-specific knowledge. This process is usually time-consuming and requires large datasets. Alternatively, prompt design, task decomposition, and verification can improve extraction accuracy without retraining the model. Expert review can guide the process by identifying recurring errors and refining the extraction workflow ([[cite:huang]]; [[cite:hein]]). Less is known about how to turn expert feedback into a workflow for note extraction.",
-    "P012": "We use the term inference harness to describe the execution workflow surrounding an LLM, including the sequence of extraction tasks, checks, and clinical rules applied without changing the model weights. We developed a locally deployable framework for extracting information from real-world unstructured oncology notes. The framework combines structured inference-harness engineering with a physician-preference-guided development loop. Our results showed that the harness output was favored over a single-prompt baseline and that we could adapt the harness to a second cancer type through model-assisted development.",
-    "P022": "We used the CORAL dataset, a PhysioNet dataset of 40 deidentified medical oncology notes obtained from the University of California, San Francisco. The development pool contains 100 breast-cancer and 100 pancreatic-cancer notes without expert annotation. The untouched holdout test set contains 20 expert-annotated notes for each cancer type. Access requires the PhysioNet credentialing and data-use process described by the dataset authors.",
-    "P028": "The harness extracted clinical information in multiple steps because different fields required different clinical context and reasoning. First, field-specific prompts independently identified the visit context, cancer diagnosis, laboratory results, objective findings, active medications, and recent treatment changes. Information extracted in earlier steps was then used to guide subsequent assessments. For example, cancer stage and metastatic status provide context for treatment intent, while current therapy and clinical findings provide context for treatment response. Plan fields were extracted primarily from the Assessment and Plan section. The harness first used deterministic patterns to identify this section. If the section could not be identified, the model made up to three attempts to locate and reproduce the relevant text, with each attempt checked against the original note. If all attempts failed, the system omitted plan-specific extraction rather than generate information not present in the source note.",
-    "P030": "Each model output passes through five verification stages. The first two address structural errors through JSON formatting repair and schema validation. The remaining three assess clinical content: semantic alignment, a faithfulness check, and temporal filtering. These verification stages ensure that the extracted information is complete, clinically relevant, and consistent with the source note. See Table 1.",
-    "P032": "JSON formatting repair when parsing fails.",
+    "P010": "Recent studies suggest that the performance of LLMs depends not only on the model but also on how the model is used. Several strategies have been used to improve clinical extraction. Fine-tuning adapts the model to a medical task by continuing to train the model on domain-specific knowledge. This process is usually time-consuming and requires large datasets. Alternatively, prompt design, task decomposition, verification, and deterministic clinical rules can improve extraction without changing the model weights. Expert review can guide this process by identifying recurring errors and refining the extraction workflow ([[cite:huang]]; [[cite:hein]]). Less is known about how to turn recurring expert feedback into a reproducible workflow for oncology-note extraction.",
+    "P012": "We use the term inference harness to describe the execution workflow surrounding an LLM, including the sequence of extraction tasks, checks, and clinical rules applied without changing the model weights. Because it operates outside the frozen model weights, the harness is technically separable from the base model. We developed a locally deployable framework for extracting information from real-world unstructured oncology notes. A physician helped refine the harness on breast-cancer notes, after which it was adapted to pancreatic ductal adenocarcinoma through model-assisted development without physician review of pancreatic outputs. We compared the final harness with a single-prompt baseline using the same underlying model and field definitions. We also conducted an exploratory staged technical ablation of successive harness components.",
+    "P017": "The study comprised two development stages followed by an independent clinical evaluation. Stage 1 used physician-guided review of breast-cancer outputs to develop the inference harness. Stage 2 adapted the harness to pancreatic ductal adenocarcinoma (PDAC) without physician review of PDAC outputs, using model-assisted review and investigator-directed regression testing.",
+    "P019": "The final harness was compared with a single-prompt baseline using the same frozen model and field schema on an untouched holdout set of 40 expert-annotated CORAL notes: 20 breast-cancer notes and 20 PDAC notes. Four physicians completed system-identity-masked field-level evaluations across both cancer types.",
+    "P022": "We used CORAL, a PhysioNet dataset of deidentified medical oncology notes obtained from the University of California, San Francisco. Development used 100 unannotated breast-cancer notes and 100 unannotated pancreatic-cancer notes. A separate untouched holdout set contained 20 expert-annotated breast-cancer notes and 20 expert-annotated pancreatic-cancer notes. The holdout note texts and their existing CORAL annotations were not used for development. The annotations were not provided to the model, used to calculate the primary physician-preference endpoint, or shown in the physician-evaluation interface.",
+    "P025": "We used Qwen2.5-32B-Instruct-AWQ served locally through vLLM. For each note, the baseline sent the complete note to the model in one chat-completion request, using a single prompt, and requested the full target schema in one response. This definition concerns the application-level inference request and does not make a claim about internal server execution or forward passes. In the physician review, the baseline and harness used the same field definitions and output contract.",
+    "P028": "The harness extracted clinical information in multiple steps because different fields required different clinical context and reasoning, as well as different processing and validation logic. It first used deterministic patterns to isolate the Assessment and Plan section for plan-specific fields. If that locator failed, the model made up to three attempts to locate and reproduce the relevant text, with each attempt checked against the original note. If all attempts failed, only the plan-specific branch was skipped; full-note extraction continued. Field-specific prompts independently identified the visit context, cancer diagnosis, laboratory results, objective findings, active medications, and recent treatment changes. Information extracted in earlier steps then guided dependent assessments. For example, cancer stage and metastatic status provided context for treatment intent, while current therapy and clinical findings provided context for treatment response. Plan fields were extracted from the source-supported Assessment and Plan section. For any field, when the note did not provide sufficient evidence, the system omitted the value rather than guess.",
+    "P030": "Outputs passed through structural checks for JSON and schema validity, followed by checks for specificity and semantic alignment, source faithfulness, and temporal consistency. Deterministic clinical rules and cross-field processing were then applied to recurring extraction errors, followed by source attribution when enabled. See Table 1. Operational definitions and the exact order are provided in Supplementary Methods.",
     "P038": "We included clinical rules to address recurring extraction errors. For example, these rules helped the system distinguish regional lymph node involvement from distant metastases, suspected metastatic disease from confirmed metastatic disease, and active anticancer treatment from supportive or home medications. They also prevented disease changes documented before treatment initiation from being misclassified as a treatment response. The system returned supporting excerpts from the original clinical note when available.",
-    "P060": "The harness developed from breast-cancer notes was further adapted to pancreatic cancer using 100 additional pancreatic-cancer notes. No clinician reviewed pancreatic-cancer outputs during this stage. Instead, an external LLM (ChatGPT) was used to organize the clinical error categories that were found during breast-cancer development into a structured review rubric. The Qwen pipeline generated structured outputs, and a rubric-guided Qwen reviewer compared these outputs with the full pancreatic notes to identify potential errors and areas for improvement. Investigators reviewed the errors, implemented selected revisions to prompts, clinical rules, or workflow logic, and kept those changes only after regression testing. ",
+    "P057": "Breast-cancer development used all 100 development notes. Early and targeted iterations used smaller subsets to shorten the feedback cycle, while major and final runs covered all 100 notes to detect less frequent errors and check for regression. A physician reviewed selected outputs, and the investigators compared flagged outputs with the complete source note, grouped recurring errors, and translated them into general changes to prompts, verification logic, or deterministic rules. These changes were retained only after testing on affected examples. The objective was to encode recurring clinical distinctions rather than case-specific corrections. For example, an error in which axillary nodal disease was classified as distant metastasis motivated a general regional-node rule. An error in which a planned drug was listed as active therapy motivated a temporal medication rule. This process did not produce a conventional supervised training set, and the model weights were not updated.",
+    "P060": "The harness developed from breast-cancer notes was further adapted to pancreatic ductal adenocarcinoma using 100 additional pancreatic-cancer notes. No physician reviewed pancreatic-cancer outputs during this stage. ChatGPT organized the clinical error categories and clinical distinctions established during breast-cancer development into a structured review rubric. The Qwen pipeline generated structured outputs, and a rubric-guided Qwen reviewer compared them with the full pancreatic source notes and flagged potential errors. Investigators assessed the flags, implemented selected revisions to prompts, clinical rules, or workflow logic, and retained changes only after regression testing. ",
     "P061": "The adaptation retained the core framework while introducing pancreatic-cancer-specific modifications, particularly for disease terminology, treatment regimens, and post-processing rules. The framework thus preserved its core approach to error detection and correction while accommodating differences between the two cancer types.",
-    "P063": "The clinical evaluation presented the source note and two structured outputs through a system-label-masked A/B interface. Evaluators selected A better, B better, or tie for each field. They were blinded to the identities of the systems. The physician who participated in the human-in-the-loop development was not one of the final evaluators. Before evaluating the test set, the authors designated seven core fields as clinically important for understanding disease status and current management. See Supplementary Table S1.",
+    "P063": "The clinical evaluation presented the source note and two structured outputs through a system-identity-masked A/B interface. The four evaluators selected A better, B better, or tie for each field. The physician who participated in Stage 1 development was not one of the four evaluators. Before evaluating the holdout set, the authors designated seven core fields as clinically important for understanding disease status and current management. Full interface implementation details are provided in Supplementary Methods. See Supplementary Table S1.",
+    "P067": "We conducted an exploratory staged technical ablation on the same 20 breast-cancer and 20 pancreatic-cancer holdout notes. All four conditions used Qwen2.5-32B-Instruct-AWQ, greedy decoding, and the same 31-field output contract. Attribution, tool calling, and letter generation were disabled. ",
     "P068": "See Table 2 for the 4 conditions.",
-    "P073": "We compared adjacent configurations (A vs B, B vs C, and C vs D), yielding 120 paired comparisons across 40 notes. An AI judge (Codex) was given only the source note and the two outputs. The judge had no access to the project code, development history, prior evaluations, or system identities. The judge was instructed to prioritize source faithfulness, then completeness, and to use TIE when differences were minor or offsetting. We compared adjacent configurations using two-sided exact sign tests, excluding ties.",
+    "P073": "We compared adjacent configurations (A vs B, B vs C, and C vs D), yielding 120 paired comparisons across 40 notes. A single blinded OpenAI LLM judge was given only the source note and the two outputs. The judge had no access to the project code, development history, prior evaluations, or system identities. The judge was instructed to prioritize source faithfulness, then completeness, and to use TIE when differences were minor or offsetting. We compared adjacent configurations using two-sided exact sign tests, excluding ties. Exact judge configuration is provided in Supplementary Methods.",
     "P076": "For the physician evaluation, interrater agreement was assessed pairwise using exact agreement and Cohen's κ for each evaluator pair. Results from the 8 completed clinician-by-cancer evaluations were summarized separately. Pooled counts were reported descriptively and were not treated as independent field-level observations.",
     "P080": "The primary outcome was the adjusted probability of harness preference among directional judgments. Predicted probabilities were standardized over the observed covariate distribution, and 95% confidence intervals (CIs) were calculated using the delta method on the logit scale. Adjusted probabilities and adjusted odds ratios (ORs) were reported.",
     "P082": "For sensitivity analyses, we refitted the overall model four times after excluding one physician at a time. We also retained tied judgments by coding harness, tie, and baseline preferences as 1, 0, and −1, respectively, and calculated the mean net preference margin with 95% CIs using note-clustered sandwich standard errors. Finally, we aggregated field-level preferences within each note and performed an exact two-sided sign test comparing positive and negative note-level margins.",
@@ -118,13 +122,51 @@ REVISED_PARAGRAPHS = {
     "P113": "Our study built on these studies by using physician feedback to identify recurring errors and develop clinical rules during breast-cancer note development. Rather than producing a large, supervised training set, we used the feedback to develop field-specific prompts, verification steps, and clinical rules. This approach incorporated clinician knowledge into the inference harness and was reused in subsequent extraction tasks. Instead of asking physicians to perform iterative evaluation, we used ChatGPT to organize the established criteria from breast-cancer development, and used Qwen2.5-32B as a judge. LLM-as-a-judge approaches have been reported in prior studies, which showed that LLM judges had high concordance on text-comparison rubrics such as faithfulness and completeness ([[cite:gershon]]). The final harness was preferred over the baseline by independent physician evaluators for pancreatic cancer. This finding suggests that criteria established through physician feedback may be transferable to other cancer types and may reduce the need for repeated physician review during development.",
     "P115": "One recurring challenge we identified was the interpretation of temporal relationships in oncology notes. Prior studies have reported broader temporal reasoning challenges in clinical notes ([[cite:kruse]]; [[cite:kougia]]). Although the LLM could identify treatment responses documented in the clinical history, it sometimes failed to associate them with the correct disease status. For example, a response to a previous treatment could be incorrectly attributed to the current regimen. This was particularly important for patients who had received multiple lines of therapy, where each treatment response must be associated with the corresponding treatment history. We addressed this issue by incorporating treatment history and temporal context into the extraction process and adding verification steps to align treatment responses with the appropriate regimen. The physician evaluators preferred the harness over the baseline, suggesting that temporal checks could help reduce these errors. ",
     "P117": "Our ablation analysis suggested that verification was an important component of the inference harness (Supplementary Figure S2). Adding decomposed extraction alone did not produce an overall improvement, whereas adding layers of verification gates resulted in significantly more favorable evaluations. Additionally, we found that the clinical rules developed from breast cancer did not provide further improvement for pancreatic cancer. This suggests that restrictive rules that performed well in one cancer type may not improve performance in another. More restrictive rules may introduce trade-offs, especially when the terminology or treatment differs between cancer types. For example, some rules developed for breast cancer were specific to estrogen receptor (ER), progesterone receptor (PR), and HER2 status, which are used to classify breast cancer subtypes but are not applicable to PDAC.",
-    "P119": "This study has several limitations. First, our primary outcome was physician preference rather than absolute extraction accuracy. A tie could indicate that both systems produced acceptable outputs or that both contained errors. Although physician ratings consistently favored the harness, the evaluation included only four physicians and 40 clinical notes from two cancer types within a single-source dataset. However, these were real clinical notes rather than synthetic cases or model-generated narratives. They contain repeated, copied-forward information, uncertain findings, treatment plans, or even typographical errors that make the extraction task challenging. Nevertheless, further studies are needed to investigate whether the results can be generalized to other cancer types or language models. Second, the exploratory ablation was evaluated by a single non-physician LLM judge and compared cumulative stages rather than individual components ([[cite:williams]]). Therefore, it could not determine the independent contribution of each verification step or clinical rule. Future studies should evaluate extraction accuracy against expert reference standards, include larger and more diverse clinical datasets, and assess whether the harness improves efficiency and reliability in clinical workflows. ",
+    "P119": "This study has several limitations. First, our primary outcome was physician preference rather than absolute extraction accuracy. A tie could indicate that both systems produced acceptable outputs or that both contained errors. Although physician ratings consistently favored the harness, the evaluation included only four physicians and 40 clinical notes from two cancer types within a single-source dataset. However, these were real clinical notes rather than synthetic cases or model-generated narratives. They contain repeated, copied-forward information, uncertain findings, treatment plans, or even typographical errors that make the extraction task challenging. The fixed A/B display order and the availability of source attribution only with the harness output may have allowed evaluators to infer a recurring pattern or may have influenced ratings. The direction and magnitude of any effect cannot be determined. Nevertheless, further studies are needed to investigate whether the results can be generalized to other cancer types or language models. Second, the exploratory ablation was evaluated by a single non-physician LLM judge and compared cumulative stages rather than individual components ([[cite:williams]]). Therefore, it could not determine the independent contribution of each verification step or clinical rule. Both systems used the same base-model family, so this study did not evaluate generalization across model families. Future studies should evaluate extraction accuracy against expert reference standards, include larger and more diverse clinical datasets, and assess whether the harness improves efficiency and reliability in clinical workflows. ",
 }
 
 GRAMMAR_REVISED_IDS = {
-    "P004", "P006", "P008", "P010", "P012", "P022", "P028", "P030", "P032", "P038",
-    "P060", "P061", "P063", "P073", "P076", "P082", "P085", "P086", "P092", "P097",
+    "P004", "P006", "P008", "P010", "P012", "P017", "P019", "P022", "P025", "P028", "P030", "P038",
+    "P057", "P060", "P061", "P063", "P067", "P073", "P076", "P082", "P085", "P086", "P092", "P097",
     "P100", "P109", "P111", "P113", "P115", "P117", "P119",
+}
+
+REVISION_HIGHLIGHTS = {
+    "P012": [
+        "Because it operates outside the frozen model weights, the harness is technically separable from the base model.",
+        "without physician review of pancreatic outputs",
+    ],
+    "P017": ["Stage 1", "Stage 2", "without physician review of PDAC outputs"],
+    "P019": ["an untouched holdout set", "Four physicians"],
+    "P022": ["The holdout note texts and their existing CORAL annotations were not used for development."],
+    "P025": ["one chat-completion request", "does not make a claim about internal server execution or forward passes"],
+    "P028": [
+        "only the plan-specific branch was skipped; full-note extraction continued",
+        "the system omitted the value rather than guess",
+    ],
+    "P063": ["system-identity-masked", "Full interface implementation details are provided in Supplementary Methods."],
+    "P067": ["exploratory staged technical ablation"],
+    "P073": ["A single blinded OpenAI LLM judge", "Exact judge configuration is provided in Supplementary Methods."],
+    "P119": [
+        "The fixed A/B display order and the availability of source attribution only with the harness output may have allowed evaluators to infer a recurring pattern or may have influenced ratings.",
+        "The direction and magnitude of any effect cannot be determined.",
+    ],
+}
+
+SUBSTANTIVE_REVISED_IDS = {
+    "P010", "P012", "P017", "P019", "P022", "P025", "P028", "P030", "P057", "P060",
+    "P063", "P067", "P073", "P119",
+}
+
+INTRODUCTION_IDS = ("P004", "P006", "P008", "P010", "P012")
+CONTENT_WORD_STOPLIST = {
+    "a", "an", "and", "are", "as", "at", "be", "been", "being", "but", "by", "can", "could",
+    "did", "do", "does", "for", "from", "had", "has", "have", "he", "her", "here", "hers", "him",
+    "his", "how", "i", "if", "in", "into", "is", "it", "its", "may", "might", "more", "most", "must",
+    "no", "not", "of", "on", "one", "only", "or", "other", "our", "out", "over", "own", "same", "she",
+    "should", "so", "some", "such", "than", "that", "the", "their", "them", "then", "there", "these",
+    "they", "this", "those", "through", "to", "too", "under", "up", "very", "was", "we", "were", "what",
+    "when", "where", "which", "while", "who", "will", "with", "would", "you", "your",
 }
 
 REVISED_TABLE_CELLS = {
@@ -173,7 +215,7 @@ CSS = r"""
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:var(--page);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.62}
 .layout{display:grid;grid-template-columns:270px minmax(0,940px);gap:28px;width:min(1260px,calc(100% - 36px));margin:24px auto 70px;align-items:start}.toc{position:sticky;top:18px;max-height:calc(100vh - 36px);overflow:auto;padding:18px 15px;border:1px solid var(--line);border-radius:12px;background:#fffffff5}.toc strong{display:block;margin-bottom:9px;color:var(--navy)}.toc a{display:block;padding:4px 6px;border-radius:5px;color:#3e5160;text-decoration:none;font-size:12.5px}.toc a:hover{background:#eaf4fa}.toc .sub{padding-left:18px;font-size:11.5px;color:var(--muted)}
 article{min-width:0;padding:45px 54px 68px;border:1px solid var(--line);border-radius:14px;background:var(--paper);box-shadow:0 12px 34px #142b4012}h1{margin:0;color:var(--navy);font-family:Georgia,"Times New Roman",serif;font-size:36px;line-height:1.18}h2,h3{color:var(--navy)}h3{margin:27px 0 9px;font-size:19px}.subtitle{margin:8px 0 20px;color:var(--muted)}
-.revision-legend{margin:10px 0 18px;color:#55636e;font-size:12.5px}.revision-swatch{display:inline-block;width:.85em;height:.85em;margin-right:.35em;border:1px solid #e1c86c;border-radius:2px;background:#fff2b3;vertical-align:-.05em}mark.revision-highlight{background:#fff2b3;color:inherit;padding:.08em .12em;border-radius:2px;-webkit-box-decoration-break:clone;box-decoration-break:clone}.revision-paragraph{margin-top:9px}
+.revision-legend{margin:10px 0 18px;color:#55636e;font-size:12.5px}.revision-swatch{display:inline-block;width:.85em;height:.85em;margin-right:.35em;border:1px solid #e1c86c;border-radius:2px;background:#fff2b3;vertical-align:-.05em}mark.revision-highlight{background:#fff2b3;color:inherit;padding:.08em .12em;border-radius:2px;-webkit-box-decoration-break:clone;box-decoration-break:clone}.revision-paragraph{margin-top:9px}.supplement-methods h4{margin:18px 0 5px;color:#30485a;font-size:15px}.supplement-methods ol{margin:7px 0 14px;padding-left:24px}.supplement-methods li{margin:5px 0}
 details{border:0}summary{cursor:pointer}.fold>summary,.fold-toggle{padding:13px 16px;color:var(--navy);font-weight:750;list-style:none}.fold>summary::-webkit-details-marker,.version-entry>summary::-webkit-details-marker{display:none}.fold>summary::before,.fold-toggle::before,.version-entry>summary::before{content:"▸";display:inline-block;width:1.2em}.fold[open]>summary::before,.custom-fold.is-expanded>.fold-toggle::before,.version-entry[open]>summary::before{content:"▾"}.current-change{margin:14px 0 20px;padding:10px 13px;border-left:4px solid var(--blue);background:#eef7fb;color:#264b61;font-size:13px}.version-entry{margin:8px 0;border:1px solid var(--line);border-radius:7px;background:#fafbfc}.version-entry>summary{padding:9px 11px;color:#30485a;font-weight:700;list-style:none}.version-entry-body{padding:0 13px 10px;color:#4b5964;font-size:13px}.version-entry-body p{margin:5px 0}
 .fold{margin:22px 0;border-top:1px solid var(--line)}.fold>summary,.fold-toggle{margin:0;padding:20px 0 10px;font-family:Georgia,"Times New Roman",serif;font-size:25px}.fold-toggle{display:block;width:100%;border:0;background:transparent;text-align:left;cursor:pointer}.custom-fold.is-collapsed>.fold-body{display:none}.custom-fold.is-expanded>.fold-body{display:block}.fold-body{padding:0 0 8px}.source-empty,.source-audit{display:none!important}.physician-paragraph,.manuscript-paragraph{margin:11px 0}.physician-subheading{scroll-margin-top:15px}.xref,.citation,.comment-anchor a{color:var(--blue);text-decoration:none}.xref:hover,.citation:hover,.comment-anchor a:hover{text-decoration:underline}.comment-anchor{margin-left:.18em;font-size:.72em;vertical-align:super}.comment-anchor a{font-weight:650}.comment-backlink{display:inline-block;margin-top:7px;font-size:12px}.print-page-spacer{display:none}
 .table-wrap{margin:20px 0 28px;overflow-x:auto}.table-caption,.figure-caption{margin:0 0 8px;color:#314452;font-size:13px}.table-caption strong,.figure-caption strong{color:var(--navy)}table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:8px 9px;border:1px solid #d6dde3;vertical-align:top}th{background:#e9f1f6;color:#173f5f;text-align:left}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}tbody tr:nth-child(even){background:#fafbfc}.physician-native-table th{background:#eaf4ef;color:#18533f}
@@ -186,7 +228,7 @@ html.print-export{scroll-behavior:auto}html.print-export body{background:#fff;fo
 
 SCRIPT = r"""
 function setCustomFold(fold,open){if(!fold||!fold.classList.contains('custom-fold'))return;fold.classList.toggle('is-expanded',open);fold.classList.toggle('is-collapsed',!open);const button=fold.querySelector(':scope>.fold-toggle');if(button)button.setAttribute('aria-expanded',open?'true':'false')}
-function revealTarget(target){if(!target)return;if(target instanceof HTMLDetailsElement||target.tagName==='DETAILS')target.open=true;if(target.classList&&target.classList.contains('custom-fold'))setCustomFold(target,true);let p=target.parentElement;const chain=[];while(p){if(p.tagName==='DETAILS'||p.classList.contains('custom-fold'))chain.push(p);p=p.parentElement;}chain.reverse().forEach(d=>{if(d.tagName==='DETAILS')d.open=true;else setCustomFold(d,true)});if(!target.hasAttribute('tabindex'))target.setAttribute('tabindex','-1');target.focus({preventScroll:true});target.scrollIntoView({block:'start'})}
+function revealTarget(target){if(!target)return;if(target.matches&&target.matches('#version-history .version-entry'))document.querySelectorAll('#version-history .version-entry').forEach(entry=>entry.open=entry===target);else if(target instanceof HTMLDetailsElement||target.tagName==='DETAILS')target.open=true;if(target.classList&&target.classList.contains('custom-fold'))setCustomFold(target,true);let p=target.parentElement;const chain=[];while(p){if(p.tagName==='DETAILS'||p.classList.contains('custom-fold'))chain.push(p);p=p.parentElement;}chain.reverse().forEach(d=>{if(d.tagName==='DETAILS')d.open=true;else setCustomFold(d,true)});if(!target.hasAttribute('tabindex'))target.setAttribute('tabindex','-1');target.focus({preventScroll:true});target.scrollIntoView({block:'start'})}
 document.addEventListener('click',e=>{const toggle=e.target.closest('.fold-toggle');if(toggle){const fold=toggle.closest('.custom-fold');setCustomFold(fold,!fold.classList.contains('is-expanded'));return}const a=e.target.closest('a[href^="#"]');if(!a)return;const id=decodeURIComponent(a.getAttribute('href').slice(1));revealTarget(document.getElementById(id))});
 window.addEventListener('hashchange',()=>revealTarget(document.getElementById(decodeURIComponent(location.hash.slice(1)))));window.addEventListener('DOMContentLoaded',()=>{if(location.hash)revealTarget(document.getElementById(decodeURIComponent(location.hash.slice(1))))});
 window.preparePrintExport=function(pageHeight=960){if(!Number.isFinite(pageHeight)||pageHeight<400)throw new Error('Invalid page height');document.querySelectorAll('.print-page-spacer').forEach(node=>node.remove());document.documentElement.classList.add('print-export');void document.documentElement.offsetHeight;const candidates=[...document.querySelectorAll('.figure,.table-wrap')].filter(node=>getComputedStyle(node).display!=='none');for(const node of candidates){const rect=node.getBoundingClientRect();const top=rect.top+window.scrollY;const offset=((top%pageHeight)+pageHeight)%pageHeight;if(rect.height<pageHeight&&offset>0&&offset+rect.height>pageHeight-.5){const spacer=document.createElement('div');spacer.className='print-page-spacer';spacer.setAttribute('aria-hidden','true');spacer.style.height=`${Math.ceil(pageHeight-offset)+1}px`;node.before(spacer);void spacer.offsetHeight}}const items=candidates.map(node=>{const rect=node.getBoundingClientRect();const top=rect.top+window.scrollY;const bottom=rect.bottom+window.scrollY;return{id:node.id,kind:node.classList.contains('figure')?'figure':'table',top,bottom,height:rect.height,crosses:Math.floor((top+.5)/pageHeight)!==Math.floor((bottom-.5)/pageHeight)}});const printable=[...document.querySelectorAll('article>.main-section>.fold-body>*,#supplement-body>*')].filter(node=>!node.classList.contains('print-page-spacer')&&getComputedStyle(node).display!=='none');const contentBottom=Math.ceil(Math.max(0,...printable.map(node=>node.getBoundingClientRect().bottom+window.scrollY)));const revisionHighlights=[...document.querySelectorAll('mark.revision-highlight')];return{pageHeight,documentHeight:document.documentElement.scrollHeight,contentBottom,supplementVisible:getComputedStyle(document.getElementById('supplement-body')).display!=='none',revisionHighlightCount:revisionHighlights.length,revisionHighlightBackgrounds:revisionHighlights.map(node=>getComputedStyle(node).backgroundColor),items,offenders:items.filter(item=>item.crosses).map(item=>item.id)}};
@@ -203,6 +245,23 @@ def markdown_source_text(value: str) -> str:
 
     trailing = len(value) - len(value.rstrip(" "))
     return value.rstrip(" ") + "&#32;" * trailing
+
+
+def introduction_content_word_reuse(data: dict[str, object]) -> tuple[int, int, float]:
+    source_by_id = {str(item["id"]): str(item["raw_visible_text"]) for item in data["paragraphs"]}
+    citation_token = re.compile(r"\s*\[\[cite:[a-z_]+\]\]")
+
+    def tokens(text: str) -> list[str]:
+        return [
+            token for token in re.findall(r"[a-z0-9]+", text.lower())
+            if token not in CONTENT_WORD_STOPLIST and not token.isdigit()
+        ]
+
+    source_counts = Counter(tokens(" ".join(source_by_id[block_id] for block_id in INTRODUCTION_IDS)))
+    revised_counts = Counter(tokens(" ".join(citation_token.sub("", REVISED_PARAGRAPHS[block_id]) for block_id in INTRODUCTION_IDS)))
+    reused = sum(min(count, source_counts[token]) for token, count in revised_counts.items())
+    total = sum(revised_counts.values())
+    return reused, total, reused / total
 
 
 def load_canonical() -> dict[str, object]:
@@ -301,6 +360,23 @@ def revision_paragraph(text: str, *, paragraph_id: str) -> str:
     )
 
 
+def highlighted_text(text: str, phrases: list[str]) -> str:
+    rendered = link_crossrefs(text)
+    for phrase in phrases:
+        needle = esc(phrase)
+        if rendered.count(needle) != 1:
+            raise AssertionError(f"Revision highlight phrase is missing or repeated: {phrase}")
+        rendered = rendered.replace(needle, f'<mark class="revision-highlight">{needle}</mark>')
+    return rendered
+
+
+def revision_inline_paragraph(text: str, *, paragraph_id: str, phrases: list[str]) -> str:
+    return (
+        f'<p class="manuscript-paragraph revision-paragraph" data-origin="technical-insert" id="{esc(paragraph_id)}">'
+        f'{highlighted_text(text, phrases)}</p>'
+    )
+
+
 def render_physician_paragraph(paragraph: dict[str, object], comment_ids: list[str]) -> str:
     block_id = str(paragraph["id"])
     text = str(paragraph["raw_visible_text"])
@@ -311,7 +387,7 @@ def render_physician_paragraph(paragraph: dict[str, object], comment_ids: list[s
         return (
             source_audit(block_id, text)
             + f'<p class="manuscript-paragraph" id="{esc(block_id)}" data-origin="manuscript-edit">'
-            + link_crossrefs(REVISED_PARAGRAPHS[block_id])
+            + highlighted_text(REVISED_PARAGRAPHS[block_id], REVISION_HIGHLIGHTS.get(block_id, []))
             + anchors
             + "</p>"
         )
@@ -548,17 +624,18 @@ def literature_workspace() -> str:
 
 def technical_inserts_after(block_id: str) -> str:
     inserts = {
-        "P019": manuscript_paragraph("The study workflow is shown in Figure 1.", paragraph_id="workflow-cross-reference"),
-        "P022": revision_paragraph("The expert annotations for the holdout notes were not provided to either system, were not used to develop the inference harness, and were not used to calculate the primary physician-preference endpoint.", paragraph_id="revision-annotation-use"),
+        "P019": revision_inline_paragraph(
+            "We separately conducted an exploratory staged technical ablation of four cumulative harness configurations using a blinded OpenAI LLM judge. The study workflow is shown in Figure 1.",
+            paragraph_id="study-design-ablation",
+            phrases=["exploratory staged technical ablation"],
+        ),
         "P038": figure("1", "Development, adaptation, and evaluation workflow", "Development, transfer, and evaluation pathway. Breast-cancer physician review informed the inference harness. The failure history and clinical rubric then supported author-controlled PDAC adaptation without target-domain physician review of outputs. Four physicians compared the final harness with the same-model single-prompt baseline on the 40-note holdout set."),
-        "P063": revision_paragraph("Output A was always the inference-harness output, and output B was always the single-prompt baseline output. Physicians were blinded to these system identities. Source attribution was available only in the inference-harness output, so the comparison evaluated the full system output packages rather than any isolated component.", paragraph_id="revision-evaluation-package"),
         "P082": manuscript_paragraph("Exploratory core-field analysis used one joint population-averaged logistic GEE on 495 directional core judgments. Field, physician, and cancer type were fixed effects; repeated judgments were clustered by note with an exchangeable working correlation. Field-specific probabilities were standardized over the physician and cancer distribution observed for that field. Breast type and receptor status applied only to breast-cancer notes. Ties were excluded. These estimates describe preference rather than accuracy, and no pairwise field tests or multiplicity claims were made.", paragraph_id="core-field-statistical-analysis"),
         "P085": table_3() + table_4(),
         "P087": figure("2", "Physician preference overview", "Physician preferences across eight physician-by-cancer evaluations. Panel A retains harness, baseline, and tie judgments. Panel B shows the harness share among directional judgments."),
         "P092": table_5(),
         "P095": manuscript_paragraph("Pairwise exact agreement ranged from 73.1% to 82.9%, with Cohen's kappa ranging from 0.511 to 0.646 (Figure 3 and Supplementary Table S2).", paragraph_id="agreement-results") + figure("3", "Inter-physician agreement", "Pairwise exact agreement and Cohen's kappa among four physicians in breast cancer and PDAC. Each breast-cancer pair shared 280 judgments, and each PDAC pair shared 260 judgments."),
         "P097": figure("4", "Core-field raw and adjusted preference estimates", "Core-field preference results. Panel A retains the tie-inclusive raw distribution for seven physician-prioritized fields. Panel B shows core-field adjusted harness-preference probabilities with 95% confidence intervals from one joint exploratory GEE fitted to 495 directional core judgments. The model included field, physician, and cancer fixed effects, clustered repeated judgments by note with an exchangeable working correlation, and standardized each field over its observed physician and cancer distribution. Breast type and receptor status applied only to breast-cancer notes. Ties were excluded from Panel B. The estimates report preference, not accuracy. No pairwise field tests or multiplicity claims were made."),
-        "P119": revision_paragraph("Both systems used the same base-model family, so this study did not evaluate whether the findings generalize across model families.", paragraph_id="revision-model-family-limitation"),
     }
     return inserts.get(block_id, "")
 
@@ -621,15 +698,76 @@ def build_scientific_sections(data: dict[str, object]) -> tuple[str, str]:
     return "".join(front_blocks + sections), "\n".join(markdown)
 
 
+def supplementary_methods() -> str:
+    gate_items = [
+        "Gate 1 repaired JSON formatting only when parsing failed.",
+        "Gate 2 checked the output schema and repaired incorrect or leaked keys.",
+        "Gate 3 checked specificity and semantic alignment for vague or off-task answers.",
+        "Gate 4 trimmed clearly unsupported or contradictory content while retaining supported information.",
+        "Gate 5 removed completed or historical events from future-plan fields.",
+    ]
+    gates = "".join(f"<li>{esc(item)}</li>" for item in gate_items)
+    return (
+        '<div class="supplement-methods" id="supplementary-methods">'
+        '<h3>Supplementary Methods</h3>'
+        '<h4>Data access and holdout definition</h4>'
+        + revision_inline_paragraph(
+            "CORAL access is governed by the PhysioNet credentialing and data-use process specified by the dataset authors. The 40 holdout note texts and their existing expert annotations were excluded from development, error analysis, prompt revision, rule development, and regression testing before the final harness was frozen. The annotations were not provided to the model, used to calculate the primary physician-preference endpoint, or shown in the evaluation interface.",
+            paragraph_id="supplement-data-access",
+            phrases=["The 40 holdout note texts and their existing expert annotations were excluded from development"],
+        )
+        + '<h4>Assessment and Plan identification</h4>'
+        + revision_inline_paragraph(
+            "The harness first used deterministic patterns to locate the Assessment and Plan section. If no section was found, the model made up to three attempts to reproduce the relevant source text. Each candidate was checked for source fidelity. Failure of all attempts skipped only the plan-specific extraction branch; extraction from the complete note continued.",
+            paragraph_id="supplement-plan-identification",
+            phrases=["Failure of all attempts skipped only the plan-specific extraction branch"],
+        )
+        + '<h4>Verification and postprocessing order</h4>'
+        + '<p class="manuscript-paragraph" data-origin="technical-insert">Each field-level model output passed through the following gates in order:</p>'
+        + f'<ol data-origin="technical-insert">{gates}</ol>'
+        + revision_inline_paragraph(
+            "After the gates, deterministic field-level filters and cross-field clinical hooks addressed recurring errors. Source-attribution extraction followed postprocessing when enabled.",
+            paragraph_id="supplement-postprocessing-order",
+            phrases=["Source-attribution extraction followed postprocessing when enabled."],
+        )
+        + '<h4>Insufficient source information</h4>'
+        + revision_inline_paragraph(
+            "Hypothetical example: a note may contain imaging findings or other clinical details associated with advanced disease but still lack enough confirmed, source-supported information to assign a formal cancer stage under the extraction rules. In that case, the system returns not stated or leaves the stage field empty rather than guessing. This example is illustrative and does not describe a CORAL patient.",
+            paragraph_id="supplement-stage-example",
+            phrases=["Hypothetical example", "does not describe a CORAL patient"],
+        )
+        + '<h4>Model roles during PDAC adaptation</h4>'
+        + revision_inline_paragraph(
+            "ChatGPT organized the breast-derived error categories and clinical distinctions into a structured review rubric. A local Qwen reviewer used that rubric to compare pipeline outputs with complete pancreatic source notes and flag potential errors. Investigators decided which changes to implement and retained them only after regression testing. Neither ChatGPT nor the Qwen reviewer served as the ablation judge.",
+            paragraph_id="supplement-pdac-model-roles",
+            phrases=["Neither ChatGPT nor the Qwen reviewer served as the ablation judge."],
+        )
+        + '<h4>Physician evaluation interface</h4>'
+        + revision_inline_paragraph(
+            "The interface used a fixed position mapping: A displayed the inference-harness output and B displayed the single-prompt baseline. Evaluators were not shown these identities. Source attribution was available only with the harness output when present. The evaluation therefore compared the complete system outputs rather than isolating attribution as a component.",
+            paragraph_id="supplement-evaluation-interface",
+            phrases=["fixed position mapping", "Source attribution was available only with the harness output"],
+        )
+        + '<h4>Exploratory ablation judge</h4>'
+        + revision_inline_paragraph(
+            "The ablation judge was Codex using model gpt-5.6-sol, reasoning effort xhigh, and service tier default. It reviewed blinded adjacent-configuration pairs and received only the source note and two outputs. ChatGPT was used only for the PDAC review-rubric role described above.",
+            paragraph_id="supplement-ablation-judge",
+            phrases=["Codex using model gpt-5.6-sol, reasoning effort xhigh, and service tier default"],
+        )
+        + "</div>"
+    )
+
+
 def build_supplement() -> str:
     return (
         '<section class="fold supplement custom-fold is-collapsed" id="supplementary-material" data-origin="technical-insert">'
         '<button class="fold-toggle" type="button" aria-expanded="false" aria-controls="supplement-body">Supplementary material</button>'
         '<div class="fold-body" id="supplement-body">'
+        + supplementary_methods()
         + supplementary_table_1()
         + supplementary_table_2()
         + figure("S1", "Note-level preference-margin distribution", "This figure shows the note-level distribution after pooling all four physicians within each cancer type, previously drafted as Panel C of the main figure. The margin is (harness preferences minus baseline preferences) divided by completed judgments for that note. All 20 breast-cancer notes and 19 of 20 PDAC notes had positive margins; one PDAC note had a negative margin. The prior detailed breast and PDAC note panels are not retained. This is a supporting preference sensitivity analysis, not an accuracy estimate.", supplementary=True)
-        + figure("S2", "Staged technical ablation", "Blinded staged technical ablation across three cumulative transitions. A was the single-prompt baseline; B added decomposition and orchestration; C added semantic, faithfulness, and temporal verification; D added deterministic inline processing and the complete POST-hook layer. One non-physician Codex judge produced these secondary technical judgments. Exact two-sided sign tests exclude ties.", supplementary=True)
+        + figure("S2", "Exploratory staged technical ablation", "Blinded staged technical ablation across three cumulative transitions. A was the single-prompt baseline; B added decomposition and orchestration; C added semantic, faithfulness, and temporal verification; D added deterministic inline processing and the complete POST-hook layer. One non-physician OpenAI LLM judge produced these exploratory technical judgments. Exact two-sided sign tests exclude ties.", supplementary=True)
         + supplementary_table_3()
         + "</div></section>"
     )
@@ -637,6 +775,7 @@ def build_supplement() -> str:
 
 def version_history() -> str:
     entries = [
+        ("v1.4", "2026-10-31", "Current change", "Reorganized the five-paragraph Introduction while retaining the physician's language, clarified the two-stage Methods and holdout design, moved gate and interface details to Supplementary Methods, and added the corresponding evaluation limitation."),
         ("v1.3", "2026-10-30", "Applied conservative grammar and punctuation edits, added direct verified author-year citations, retained two outstanding physician comments, and highlighted three new methods or limitation clarifications for review."),
         ("v1.2.3", "2026-10-27", "Removed the empty trailing WebKit export page by ending capture at the last printable manuscript element, and added explicit failure cleanup with a post-write fault-injection test."),
         ("v1.2.2", "2026-10-27", "Replaced the supplementary native disclosure with an accessible custom fold so print media always contains the complete supplement, and added safe-boundary pagination preparation for bounded WebKit PDF verification."),
@@ -654,16 +793,26 @@ def version_history() -> str:
         ("v0.18", "2026-10-10", "Integrated four physicians across two cancer types and revised the study framing around extraction rather than letter generation."),
         ("v0.17", "Date not recorded", "Established the first tracked multi-physician analysis and staged technical ablation draft."),
     ]
-    return "".join(
-        f'<details class="version-entry" id="version-{esc(version[1:].replace(".", "-"))}" data-origin="technical-insert">'
-        f'<summary>{esc(version)} · {esc(date)}</summary><div class="version-entry-body"><p>{esc(note)}</p></div></details>'
-        for version, date, note in entries
-    )
+    rendered = []
+    for entry in entries:
+        if len(entry) == 4:
+            version, date, label, note = entry
+        else:
+            version, date, note = entry
+            label = ""
+        current = version == "v1.4"
+        open_attr = " open" if current else ""
+        summary = f"{version} · {label} · {date}" if label else f"{version} · {date}"
+        rendered.append(
+            f'<details class="version-entry" id="version-{esc(version[1:].replace(".", "-"))}" data-origin="technical-insert"{open_attr}>'
+            f'<summary>{esc(summary)}</summary><div class="version-entry-body"><p>{esc(note)}</p></div></details>'
+        )
+    return "".join(rendered)
 
 
 def toc() -> str:
     links = [("#section-introduction", "Introduction", False), ("#section-methods", "Methods", False)]
-    for heading in ["Study Design", "Dataset", "Baseline model and model development", "Inference Harness", "Clinician-in-the-loop breast-cancer refinement", "Model-assisted pancreatic-cancer refinement", "Clinical evaluation data collection and scoring rubric", "Staged technical ablation", "Statistical analysis"]:
+    for heading in ["Study Design", "Dataset", "Baseline model and model development", "Inference Harness", "Clinician-in-the-loop breast-cancer refinement", "Model-assisted pancreatic-cancer refinement", "Clinical evaluation data collection and scoring rubric", "Exploratory staged technical ablation", "Statistical analysis"]:
         links.append(("#" + re.sub(r"[^a-z0-9]+", "-", heading.lower()).strip("-"), heading, True))
     links.extend([("#section-results", "Results", False), ("#performance-across-clinical-extraction-fields", "Performance across clinical extraction fields", True), ("#section-discussion", "Discussion", False), ("#supplementary-material", "Supplementary material", False), ("#physician-comments", "Outstanding physician comments (2)", False), ("#version-history", "Version history", False), ("#literature-workspace", "Literature-review workspace", False)])
     return '<nav class="toc" data-origin="technical-insert"><strong>Contents</strong>' + "".join(f'<a class="{"sub" if sub else ""}" href="{href}" data-origin="technical-insert">{esc(label)}</a>' for href, label, sub in links) + "</nav>"
@@ -674,23 +823,22 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
     article = f"""
 <article>
   <h1 class="screen-only">Physician-authored manuscript draft</h1>
-  <p class="subtitle screen-only">English working manuscript · Version 1.3 · October 30, 2026</p>
-  <p class="current-change screen-only"><strong>Current change:</strong> conservative grammar edits, verified author-year citations, and three highlighted methods or limitation clarifications.</p>
-  <p class="revision-legend screen-only"><span class="revision-swatch" aria-hidden="true"></span>Highlighted text marks new methods or limitation clarifications for physician review.</p>
+  <p class="subtitle screen-only">English working manuscript · Version 1.4 · October 31, 2026</p>
+  <details class="fold" id="version-history"><summary>Version history</summary><div class="fold-body">{version_history()}</div></details>
+  <p class="revision-legend screen-only"><span class="revision-swatch" aria-hidden="true"></span>Highlighted text marks new or substantively revised language in the current change.</p>
   {sections}
   {build_supplement()}
   <details class="fold" id="physician-comments"><summary>Outstanding physician comments (2)</summary><div class="fold-body">{render_comments(data)}</div></details>
-  <details class="fold" id="version-history"><summary>Version history</summary><div class="fold-body">{version_history()}</div></details>
   {literature_workspace()}
 </article>
 """
-    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v1.3</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
+    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v1.4</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
     markdown = f"""<!-- GENERATED FILE. The canonical physician Word extraction is the prose authority. -->
 # Physician-authored manuscript draft
 
-English working manuscript. Version 1.3, October 30, 2026.
+English working manuscript. Version 1.4, October 31, 2026.
 
-Current change: conservative grammar edits, verified author-year citations, and three highlighted methods or limitation clarifications.
+Current change: Introduction logic and Methods reporting clarified; detailed gate, interface, and model-role disclosures moved to Supplementary Methods.
 
 The canonical physician blocks below mirror `{SOURCE_DOCX.name}` for audit purposes. The clean HTML applies only the approved cross-reference and reporting edits while preserving all source blocks in its hidden audit representation.
 
@@ -852,13 +1000,23 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     for comment_id, literature_entry in RESOLVED_COMMENT_LITERATURE_MAP.items():
         marker = f'data-comment-text-id="{comment_id}" data-status="resolved" data-resolved-literature-entry="{literature_entry}"'
         if marker not in document: raise AssertionError(f"Resolved literature comment mapping is missing: {comment_id}")
-    if parser.revision_highlights != 3: raise AssertionError(f"Expected 3 revision highlights, found {parser.revision_highlights}")
-    for revision_id in ["revision-annotation-use", "revision-evaluation-package", "revision-model-family-limitation"]:
+    if parser.revision_highlights != 29: raise AssertionError(f"Expected 29 restrained revision highlights, found {parser.revision_highlights}")
+    for revision_id in [
+        "study-design-ablation", "supplement-data-access", "supplement-plan-identification",
+        "supplement-postprocessing-order", "supplement-stage-example", "supplement-pdac-model-roles",
+        "supplement-evaluation-interface", "supplement-ablation-judge",
+    ]:
         if f'id="{revision_id}"' not in document: raise AssertionError(f"Highlighted clarification is missing: {revision_id}")
     if 'id="draft-metadata"' in document or "Draft information and source provenance" in document: raise AssertionError("Removed draft-information block remains")
-    if "Version 1.3 · October 30, 2026" not in document or "draft v1.3" not in document: raise AssertionError("Version 1.3 metadata is missing")
-    if document.count('class="version-entry"') != 16 or any(f'id="version-{item}"' not in document for item in ["1-3", "1-2-3", "1-2-2", "1-2-1", "1-2", "1-1", "1-0", "0-25", "0-24", "0-23", "0-22", "0-21", "0-20", "0-19", "0-18", "0-17"]):
+    if "Version 1.4 · October 31, 2026" not in document or "draft v1.4" not in document: raise AssertionError("Version 1.4 metadata is missing")
+    if document.count('class="version-entry"') != 17 or any(f'id="version-{item}"' not in document for item in ["1-4", "1-3", "1-2-3", "1-2-2", "1-2-1", "1-2", "1-1", "1-0", "0-25", "0-24", "0-23", "0-22", "0-21", "0-20", "0-19", "0-18", "0-17"]):
         raise AssertionError("Nested version history is incomplete")
+    if not re.search(r'<details class="version-entry" id="version-1-4"[^>]* open>', document):
+        raise AssertionError("Current v1.4 history entry is not expanded inside the closed parent")
+    if "v1.4 · Current change · 2026-10-31" not in document:
+        raise AssertionError("Current version-history label is missing")
+    if "querySelectorAll('#version-history .version-entry').forEach(entry=>entry.open=entry===target)" not in document:
+        raise AssertionError("Version-history deep links do not isolate the targeted entry")
     if 'lang="zh"' in document or 'id="chinese-version"' in document: raise AssertionError("Chinese manuscript shell remains")
     visible_text_lower = parser.visible_text.lower()
     if "—" in parser.visible_text or "–" in parser.visible_text: raise AssertionError("Visible manuscript contains an em or en dash")
@@ -880,8 +1038,12 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
         if original == revised: raise AssertionError(f"Grammar revision is unchanged: {paragraph_id}")
         original_words = re.findall(r"[A-Za-z0-9]+", original.lower())
         revised_words = re.findall(r"[A-Za-z0-9]+", revised.lower())
-        if SequenceMatcher(None, original_words, revised_words).ratio() < 0.75:
-            raise AssertionError(f"Grammar revision exceeded conservative edit distance: {paragraph_id}")
+        threshold = 0.25 if paragraph_id in SUBSTANTIVE_REVISED_IDS else 0.75
+        if SequenceMatcher(None, original_words, revised_words).ratio() < threshold:
+            raise AssertionError(f"Revision exceeded allowed edit distance: {paragraph_id}")
+    reused_words, revised_words, reuse_ratio = introduction_content_word_reuse(data)
+    if reuse_ratio < 0.70:
+        raise AssertionError(f"Introduction physician-language reuse fell below 70%: {reuse_ratio:.2%}")
     if set(REVISED_HEADINGS) != {"P059", "P066", "P096"}: raise AssertionError("Revised heading registry changed")
     if set(REVISED_TABLE_CELLS) != {"T1R4C2", "T1R5C2", "T1R5C3", "T1R6C2", "T1R6C3"}: raise AssertionError("Table 1 grammar revision registry changed")
     for revised_cell in REVISED_TABLE_CELLS.values():
@@ -927,6 +1089,8 @@ def main() -> None:
     OUTPUT_HTML.write_text(document, encoding="utf-8")
     print(f"Wrote {SOURCE_MD}")
     print(f"Wrote {OUTPUT_HTML}")
+    reused_words, revised_words, reuse_ratio = introduction_content_word_reuse(data)
+    print(f"Introduction physician-language content-word reuse: {reused_words}/{revised_words} ({reuse_ratio:.2%}).")
     print("Preserved 162/162 physician text blocks (127 paragraphs and 35 native-table cells) and 12/12 comments; rendered 4 main and 2 supplementary figures.")
 
 
