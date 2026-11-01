@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deterministic v1.6.3 manuscript, section-revert, and manual-focus checks."""
+"""Deterministic v1.6.4 manuscript, section-revert, and manual-focus checks."""
 
 from __future__ import annotations
 
@@ -49,12 +49,12 @@ def main() -> None:
 
     state = renderer.review_redline_state(document)
     assert state["changed"] == state["highlighted"]
-    assert len(state["changed"]) == 66
+    assert len(state["changed"]) == 67
     assert state["section_counts"] == {
         "discussion": 2,
         "introduction": 5,
         "methods": 29,
-        "results": 5,
+        "results": 6,
         "supplementary-material": 4,
         "supplementary-methods": 21,
     }
@@ -132,16 +132,20 @@ def main() -> None:
         f"{block_id}\t{block.text}" for block_id, block in blocks.items() if block.section == "results"
     )
     assert sum(block.section == "results" for block in blocks.values()) == 121
-    assert hashlib.sha256(results_text.encode("utf-8")).hexdigest() == renderer.EXPECTED_V163_RESULTS_SHA256
+    assert hashlib.sha256(results_text.encode("utf-8")).hexdigest() == renderer.EXPECTED_V164_RESULTS_SHA256
     assert 'id="loo-results"' in document and 'href="#supplementary-table-s3"' in document
+    assert renderer.rendered_physician_prose(document, "P085").endswith(
+        "(note cluster robust 95% CI 76.14% to 83.96%)."
+    )
+    assert renderer.rendered_physician_prose(document, "P096") == "Performance across Clinical Extraction Fields"
 
     assert document.count('data-comment-text-id=') == 12
     assert document.count('data-literature-entry=') == 30
-    assert "Version 1.6.3 · November 1, 2026" in document
-    assert "draft v1.6.3" in document
+    assert "Version 1.6.4 · November 1, 2026" in document
+    assert "draft v1.6.4" in document
 
     print(
-        "V163_OK "
+        "V164_OK "
         f"canonical=127+35+12 visible_blocks={len(blocks)} changed={len(state['changed'])} "
         f"focus_spans={len(rows)} focus_blocks={len(expected_focus_blocks)} results_sha256="
         f"{hashlib.sha256(results_text.encode('utf-8')).hexdigest()}"

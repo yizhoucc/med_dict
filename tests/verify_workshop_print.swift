@@ -57,7 +57,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           if (!supplement || !body || !button) return 'missing custom supplement fold';
           const changedBlocks = [...document.querySelectorAll('[data-review-changed-from="v1.3"]')];
           const highlights = [...document.querySelectorAll('.focus-highlight')];
-          if (changedBlocks.length !== 66) return `unexpected changed-block count: ${changedBlocks.length}`;
+          if (changedBlocks.length !== 67) return `unexpected changed-block count: ${changedBlocks.length}`;
           if (highlights.length !== 33) return `unexpected manual-focus count: ${highlights.length}`;
           if (document.querySelector('.revision-legend,.revision-swatch,.revision-light,.revision-medium,.revision-strong')) {
             return 'obsolete revision legend or importance styling remains';
@@ -187,7 +187,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           if (!visible() || document.activeElement?.id !== 'figure-s1') return 'nested supplement link did not reveal and focus';
           button.click();
           const history = document.getElementById('version-history');
-          const current = document.getElementById('version-1-6-3');
+          const current = document.getElementById('version-1-6-4');
           const older = [...history.querySelectorAll('.version-entry')].filter(node => node !== current);
           if (history.open || !current?.open || older.some(node => node.open)) return 'unexpected initial version-history state';
           window.__workshopVersionHashState = 'waiting';
@@ -228,7 +228,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
         let checks = #"""
         (() => {
           const history = document.getElementById('version-history');
-          const current = document.getElementById('version-1-6-3');
+          const current = document.getElementById('version-1-6-4');
           const prior = document.getElementById('version-1-4-1');
           const older = [...history.querySelectorAll('.version-entry')].filter(node => node !== current);
           if (location.hash !== '#version-1-4-1' || !history.open || current.open || !prior.open || older.some(node => node !== prior && node.open) || document.activeElement !== prior) {

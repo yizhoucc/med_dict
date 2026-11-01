@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the English-only physician-authored manuscript HTML (version 1.6.3).
+"""Build the English-only physician-authored manuscript HTML (version 1.6.4).
 
 The canonical Word extraction is the sole prose source. Technical tables,
 figures, captions, navigation, and supplementary analyses are inserted around
@@ -143,13 +143,13 @@ class SectionOverlay:
     count: int = 1
 
 
-SECTION_OVERLAY_CATEGORIES = {"terminology", "number-format", "cross-reference", "citation"}
+SECTION_OVERLAY_CATEGORIES = {"terminology", "hyphen-only", "number-format", "cross-reference", "citation"}
 RESULTS_DISCUSSION_OVERLAYS: dict[str, tuple[SectionOverlay, ...]] = {
     "P085": (
         SectionOverlay("number-format", "completed 2160 comparisons", "completed 2,160 comparisons"),
         SectionOverlay("terminology", "required note-field judgments", "required judgments for each note and field"),
         SectionOverlay("cross-reference", ", see Table1.", ". See Table 3, Table 4, and Figure 2."),
-        SectionOverlay("terminology", "note-cluster robust 95% CI", "95% CI based on standard errors clustered at the note level,"),
+        SectionOverlay("hyphen-only", "note-cluster robust 95% CI", "note cluster robust 95% CI"),
     ),
     "P086": (
         SectionOverlay("terminology", "breast-cancer", "breast cancer"),
@@ -164,9 +164,6 @@ RESULTS_DISCUSSION_OVERLAYS: dict[str, tuple[SectionOverlay, ...]] = {
         SectionOverlay("number-format", "p<0.05", "p < 0.05", 2),
         SectionOverlay("number-format", "p <0.05", "p < 0.05"),
         SectionOverlay("cross-reference", ", see Table 3.", ". See Table 5."),
-    ),
-    "P096": (
-        SectionOverlay("terminology", "Performance across Clinical Extraction Fields", "Performance across clinical extraction fields"),
     ),
     "P097": (
         SectionOverlay("cross-reference", "(Figure 3).", "(Figure 4)."),
@@ -231,9 +228,9 @@ F7_SECTION_BASELINE = {
         "text_sha256": "628d07037caf487000bb27b068fccc0cbd398d1d9cae74422daba48635aa31a0",
     },
 }
-EXPECTED_V163_RESULTS_SHA256 = "18cb06b404bc9fc4490f7ce74e4b180039ea0714e49956d65958cd2d334cba86"
-EXPECTED_V163_RESULTS_NUMERIC_SHA256 = "2966552230c8eb68c13797418d36abf7abdd1e8269f753f5f49bf91a74aec5b4"
-EXPECTED_F7_V163_SEMANTIC_RESULTS_NUMERIC_SHA256 = "c63c2e9083b71313e519062257189f27373673692ddce5d1bab0e4a3e743ddd5"
+EXPECTED_V164_RESULTS_SHA256 = "5aceff6ac9b1f9a78abf8bc322c19556a32cc0ba722359b7656e987b226965b3"
+EXPECTED_V164_RESULTS_NUMERIC_SHA256 = "2966552230c8eb68c13797418d36abf7abdd1e8269f753f5f49bf91a74aec5b4"
+EXPECTED_F7_V164_SEMANTIC_RESULTS_NUMERIC_SHA256 = "c63c2e9083b71313e519062257189f27373673692ddce5d1bab0e4a3e743ddd5"
 
 
 def apply_results_discussion_overlay(block_id: str, canonical_text: str) -> str:
@@ -1496,7 +1493,8 @@ def build_supplement() -> str:
 
 def version_history() -> str:
     entries = [
-        ("v1.6.3", "2026-11-01", "Current change", "Reset Results and Discussion physician prose to the canonical Word draft for physician review. Retained only approved terminology, numbers, cross references, citations, comment anchors, and independently labeled technical result inserts."),
+        ("v1.6.4", "2026-11-01", "Current change", "Restored the canonical Results confidence interval wording with only hyphen normalization and restored the canonical capitalization of the clinical extraction fields heading."),
+        ("v1.6.3", "2026-11-01", "Results and Discussion section revert", "Reset Results and Discussion physician prose to the canonical Word draft for physician review. Retained only approved terminology, numbers, cross references, citations, comment anchors, and independently labeled technical result inserts."),
         ("v1.6.2", "2026-11-01", "Adjacent focus correction", "Removed the adjacent second focus phrase in the system identity sentence and added a DOM aware check that rejects adjacent focus spans when their combined visual coverage forms a complete sentence."),
         ("v1.6.1", "2026-10-31", "Literature framing", "Separated the Huang and Hein study descriptions to preserve their distinct methods, narrowed five complete sentence highlights to short review phrases, and retained the 24 browser comment revisions without changing Results."),
         ("v1.6", "2026-10-31", "Browser comments", "Resolved 24 browser review comments. Reworked the Introduction and Study Design, clarified the holdout, baseline, plan branch, evaluation interface, and ablation judge, replaced broad revision coloring with a small set of manual focus phrases, and completed a language audit for unnecessary hyphens and colons."),
@@ -1529,7 +1527,7 @@ def version_history() -> str:
         else:
             version, date, note = entry
             label = ""
-        current = version == "v1.6.3"
+        current = version == "v1.6.4"
         open_attr = " open" if current else ""
         summary = f"{version} · {label} · {date}" if label else f"{version} · {date}"
         rendered.append(
@@ -1552,7 +1550,7 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
     article = f"""
 <article>
   <h1 class="screen-only">Physician-authored manuscript draft</h1>
-  <p class="subtitle screen-only">English working manuscript · Version 1.6.3 · November 1, 2026</p>
+  <p class="subtitle screen-only">English working manuscript · Version 1.6.4 · November 1, 2026</p>
   <details class="fold" id="version-history"><summary>Version history</summary><div class="fold-body">{version_history()}</div></details>
   {sections}
   {build_supplement()}
@@ -1560,14 +1558,14 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
   {literature_workspace()}
 </article>
 """
-    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v1.6.3</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
+    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v1.6.4</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
     document = apply_review_block_metadata(document)
     markdown = f"""<!-- GENERATED FILE. The canonical physician Word extraction is the prose authority. -->
 # Physician-authored manuscript draft
 
-English working manuscript. Version 1.6.3, November 1, 2026.
+English working manuscript. Version 1.6.4, November 1, 2026.
 
-Current change: reset Results and Discussion physician prose to the canonical Word draft and retained only approved overlays and technical result inserts.
+Current change: restored the canonical Results confidence interval wording with only hyphen normalization and restored the canonical capitalization of the clinical extraction fields heading.
 
 The canonical physician blocks below mirror `{SOURCE_DOCX.name}` for audit purposes. The clean HTML applies only the approved cross-reference and reporting edits while preserving all source blocks in its hidden audit representation.
 
@@ -1965,14 +1963,14 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     ]:
         if f'id="{revision_id}"' not in document: raise AssertionError(f"Clarification is missing: {revision_id}")
     if 'id="draft-metadata"' in document or "Draft information and source provenance" in document: raise AssertionError("Removed draft-information block remains")
-    if "Version 1.6.3 · November 1, 2026" not in document or "draft v1.6.3" not in document: raise AssertionError("Version 1.6.3 metadata is missing")
-    if document.count('class="version-entry"') != 25 or any(f'id="version-{item}"' not in document for item in ["1-6-3", "1-6-2", "1-6-1", "1-6", "1-5-2", "1-5-1", "1-5", "1-4-1", "1-4", "1-3", "1-2-3", "1-2-2", "1-2-1", "1-2", "1-1", "1-0", "0-25", "0-24", "0-23", "0-22", "0-21", "0-20", "0-19", "0-18", "0-17"]):
+    if "Version 1.6.4 · November 1, 2026" not in document or "draft v1.6.4" not in document: raise AssertionError("Version 1.6.4 metadata is missing")
+    if document.count('class="version-entry"') != 26 or any(f'id="version-{item}"' not in document for item in ["1-6-4", "1-6-3", "1-6-2", "1-6-1", "1-6", "1-5-2", "1-5-1", "1-5", "1-4-1", "1-4", "1-3", "1-2-3", "1-2-2", "1-2-1", "1-2", "1-1", "1-0", "0-25", "0-24", "0-23", "0-22", "0-21", "0-20", "0-19", "0-18", "0-17"]):
         raise AssertionError("Nested version history is incomplete")
-    if not re.search(r'<details class="version-entry" id="version-1-6-3"[^>]* open>', document):
-        raise AssertionError("Current v1.6.3 history entry is not expanded inside the closed parent")
+    if not re.search(r'<details class="version-entry" id="version-1-6-4"[^>]* open>', document):
+        raise AssertionError("Current v1.6.4 history entry is not expanded inside the closed parent")
     if any(re.search(rf'<details class="version-entry" id="version-{item}"[^>]* open>', document) for item in ["1-6-2", "1-6-1", "1-6", "1-5-2", "1-5-1", "1-5", "1-4-1", "1-4", "1-3"]):
         raise AssertionError("Prior version-history entries must be closed")
-    if "v1.6.3 · Current change · 2026-11-01" not in document:
+    if "v1.6.4 · Current change · 2026-11-01" not in document:
         raise AssertionError("Current version-history label is missing")
     if "querySelectorAll('#version-history .version-entry').forEach(entry=>entry.open=entry===target)" not in document:
         raise AssertionError("Version-history deep links do not isolate the targeted entry")
@@ -2003,14 +2001,14 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     results_text = "\n".join(
         f"{block_id}\t{block.text}" for block_id, block in manuscript_blocks.items() if block.section == "results"
     )
-    if hashlib.sha256(results_text.encode("utf-8")).hexdigest() != EXPECTED_V163_RESULTS_SHA256:
-        raise AssertionError("Visible v1.6.3 Results hash changed")
+    if hashlib.sha256(results_text.encode("utf-8")).hexdigest() != EXPECTED_V164_RESULTS_SHA256:
+        raise AssertionError("Visible v1.6.4 Results hash changed")
     result_numbers = re.findall(
         r"(?<![A-Za-z])(?:[+-]?\d[\d,]*(?:\.\d+)?%?|[+-]?\d+(?:\.\d+)?e-\d+)",
         results_text,
         flags=re.I,
     )
-    if hashlib.sha256("\n".join(result_numbers).encode("utf-8")).hexdigest() != EXPECTED_V163_RESULTS_NUMERIC_SHA256:
+    if hashlib.sha256("\n".join(result_numbers).encode("utf-8")).hexdigest() != EXPECTED_V164_RESULTS_NUMERIC_SHA256:
         raise AssertionError("Authoritative Results number sequence changed")
     semantic_results_text = re.sub(r"\bseven\b", "7", results_text, flags=re.I)
     semantic_result_numbers = re.findall(
@@ -2020,7 +2018,7 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     )
     if (
         hashlib.sha256("\n".join(semantic_result_numbers).encode("utf-8")).hexdigest()
-        != EXPECTED_F7_V163_SEMANTIC_RESULTS_NUMERIC_SHA256
+        != EXPECTED_F7_V164_SEMANTIC_RESULTS_NUMERIC_SHA256
     ):
         raise AssertionError("Semantic Results number sequence differs from commit f7b0f34d")
     for block_id, focused_text in span_records:
