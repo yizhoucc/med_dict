@@ -37,9 +37,9 @@ The current v1.3 visible text is anchored to the physician-authored Word draft, 
 
 9. **Evaluator independence.** State evaluator independence once in the Clinical evaluation subsection. Delete the duplicate sentence from the breast-cancer refinement subsection.
 
-10. **Fixed A/B positions.** Use one neutral disclosure in Methods: the implementation fixed A as the harness and B as the baseline, while evaluators were not told the system identities. Put interface details in the supplement. Discuss the possible effect in Limitations.
+10. **Fixed A/B positions.** Put the implementation detail in Supplementary Methods: A displayed the harness and B displayed the baseline, while evaluators were not told the system identities. In the main Methods, refer readers to Supplementary Methods for the full interface implementation. Discuss the possible effect in Limitations.
 
-11. **Source attribution asymmetry.** Mention in Methods that source excerpts were available only as part of the harness output when present, so the study compared complete system outputs. Put the display details in the supplement. In Limitations, state that fixed ordering and unequal source-attribution features may have permitted pattern inference or influenced ratings. Do not assert the direction or size of the effect.
+11. **Source attribution asymmetry.** State in Supplementary Methods that source excerpts were available only as part of the harness output when present, so the study compared complete system outputs. In the main Methods, refer readers to Supplementary Methods for the full interface implementation. In Limitations, state that fixed ordering and unequal source-attribution features may have permitted pattern inference or influenced ratings. Do not assert the direction or size of the effect.
 
 12. **`Secondary` ablation.** Rename the subsection and study component `Exploratory staged technical ablation`. This phrase states the evidentiary role and the staged design without an unexplained hierarchy label.
 
@@ -141,9 +141,9 @@ Recommended main-text summary of the gates:
 
 ### Clinical evaluation
 
-Describe the source note, the two outputs, the field-level choices, and the seven prespecified fields. Keep evaluator independence here and nowhere else. Use neutral interface disclosure:
+Describe the source note, the two outputs, the field-level choices, and the seven prespecified fields. Keep evaluator independence here and nowhere else. Refer readers to the supplement for implementation details:
 
-> The implementation used a fixed display order, with the harness shown as A and the baseline as B, while evaluators were not told the system identities. Source excerpts were available only as part of the harness output when present, so the evaluation compared the complete outputs of the two systems. Full interface details are provided in Supplementary Methods.
+> The clinical evaluation presented the source note and two structured outputs through a system-identity-masked A/B interface. Full interface implementation details are provided in Supplementary Methods.
 
 ### Exploratory staged technical ablation
 
@@ -245,6 +245,6 @@ Author decision, 2026-10-31: breast-cancer development used all 100 development 
 1. Completed: the author approved the five-paragraph Introduction and requested minimal reuse-focused editing.
 2. Completed: the author resolved both provenance conflicts by explicit confirmation dated 2026-10-31.
 3. Completed: the author selected the untouched-holdout description.
-4. Completed: fixed ordering and attribution asymmetry are disclosed briefly in main Methods, fully in Supplementary Methods, and discussed in Limitations.
+4. Completed: fixed ordering and attribution asymmetry are disclosed in Supplementary Methods, their possible effect is discussed in P119 Limitations, and the main Methods refers readers to the supplement without repeating those details.
 5. Completed: ChatGPT, the local Qwen reviewer, and the Codex ablation judge are reported as separate roles.
 6. Completed: the renderer, generated manuscript, supplement, tests, and version history were updated within the approved scope.

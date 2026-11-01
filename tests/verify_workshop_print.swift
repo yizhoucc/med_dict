@@ -21,6 +21,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
     var capturedBytes = 0
     var done = false
     var failure: String?
+    var screenChecksStarted = false
 
     init(outputURL: URL) {
         self.outputURL = outputURL
@@ -46,6 +47,8 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
     }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        guard !screenChecksStarted else { return }
+        screenChecksStarted = true
         let screenChecks = #"""
         (() => {
           const supplement = document.getElementById('supplementary-material');
@@ -74,21 +77,58 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           figureLink?.click();
           if (!visible() || document.activeElement?.id !== 'figure-s1') return 'nested supplement link did not reveal and focus';
           button.click();
+          const history = document.getElementById('version-history');
+          const current = document.getElementById('version-1-4');
+          const older = [...history.querySelectorAll('.version-entry')].filter(node => node !== current);
+          if (history.open || !current?.open || older.some(node => node.open)) return 'unexpected initial version-history state';
+          window.__workshopVersionHashState = 'waiting';
+          window.addEventListener('hashchange', () => {
+            setTimeout(() => {
+              window.__workshopVersionHashState = 'settled';
+            }, 0);
+          }, {once: true});
+          setTimeout(() => { location.hash='#version-1-3'; }, 0);
+          return 'waiting-for-version-hash';
+        })()
+        """#
+        webView.evaluateJavaScript(screenChecks) { value, error in
+            if let error = error { self.fail(error.localizedDescription); return }
+            guard (value as? String) == "waiting-for-version-hash" else {
+                self.fail("Screen fold/navigation setup failed: \(value ?? "no result")"); return
+            }
+            self.waitForVersionHash(until: Date().addingTimeInterval(3))
+        }
+    }
+
+    func waitForVersionHash(until deadline: Date) {
+        webView.evaluateJavaScript("[window.__workshopVersionHashState || 'missing', location.hash, location.href].join(' | ')") { value, error in
+            if let error = error { self.fail(error.localizedDescription); return }
+            if (value as? String)?.hasPrefix("settled | ") == true {
+                self.finishScreenChecks()
+            } else if Date() >= deadline {
+                self.fail("Version hashchange did not settle: \(value ?? "no result")")
+            } else {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.02) {
+                    self.waitForVersionHash(until: deadline)
+                }
+            }
+        }
+    }
+
+    func finishScreenChecks() {
+        let checks = #"""
+        (() => {
+          const history = document.getElementById('version-history');
+          const current = document.getElementById('version-1-4');
+          const prior = document.getElementById('version-1-3');
+          const older = [...history.querySelectorAll('.version-entry')].filter(node => node !== current);
+          if (location.hash !== '#version-1-3' || !history.open || current.open || !prior.open || older.some(node => node !== prior && node.open) || document.activeElement !== prior) {
+            return 'version hash navigation did not isolate and focus prior entry';
+          }
           for (const id of ['physician-comments', 'version-history', 'literature-workspace']) {
             const details = document.getElementById(id);
             const link = document.querySelector(`.toc a[href="#${id}"]`);
             if (!details || !link) return `missing screen fold ${id}`;
-            if (id === 'version-history') {
-              const current = document.getElementById('version-1-4');
-              const prior = document.getElementById('version-1-3');
-              const older = [...details.querySelectorAll('.version-entry')].filter(node => node !== current);
-              if (details.open || !current?.open || older.some(node => node.open)) return 'unexpected initial version-history state';
-              revealTarget(prior);
-              if (!details.open || !prior.open || current.open || older.some(node => node !== prior && node.open)) return 'version deep link did not isolate prior entry';
-              revealTarget(current);
-              if (!current.open || prior.open) return 'version deep link did not restore current entry';
-              details.open = false;
-            }
             details.open = false;
             link.click();
             if (!details.open || document.activeElement !== details) return `native fold link failed: ${id}`;
@@ -97,7 +137,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           return 'ok';
         })()
         """#
-        webView.evaluateJavaScript(screenChecks) { value, error in
+        webView.evaluateJavaScript(checks) { value, error in
             if let error = error { self.fail(error.localizedDescription); return }
             guard (value as? String) == "ok" else {
                 self.fail("Screen fold/navigation check failed: \(value ?? "no result")"); return
@@ -227,7 +267,7 @@ try? FileManager.default.removeItem(at: outputURL)
 let application = NSApplication.shared
 application.setActivationPolicy(.prohibited)
 let verifier = PrintVerifier(outputURL: outputURL)
-verifier.webView.loadHTMLString(html, baseURL: nil)
+verifier.webView.loadHTMLString(html, baseURL: projectRoot)
 let deadline = Date().addingTimeInterval(180)
 while !verifier.done && Date() < deadline {
     RunLoop.main.run(mode: .default, before: Date().addingTimeInterval(0.05))
