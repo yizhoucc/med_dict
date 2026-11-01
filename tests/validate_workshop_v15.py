@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Deterministic v1.5.1 manuscript and importance-aware redline checks."""
+"""Deterministic v1.5.2 manuscript and token-level redline checks."""
 
 from __future__ import annotations
 
 import ast
 import difflib
 import hashlib
+import html
 import re
 import subprocess
 import sys
@@ -58,6 +59,27 @@ def result_hash(document: str) -> tuple[int, str]:
     return sum(block.section == "results" for block in blocks.values()), hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
+def revision_span_metrics(document: str) -> dict[str, object]:
+    matches = re.findall(
+        r'<span (?P<attrs>[^>]*class="[^"]*\brevision-highlight\b[^"]*"[^>]*)>(?P<body>.*?)</span>',
+        document,
+        flags=re.S,
+    )
+    rows = []
+    for attrs, body in matches:
+        block = re.search(r'data-review-for="([^"]+)"', attrs)
+        assert block
+        text = html.unescape(re.sub(r"<[^>]+>", "", body)).strip()
+        change = re.search(r'data-review-change="([^"]+)"', attrs)
+        rows.append((html.unescape(block.group(1)), text, change.group(1) if change else "", body))
+    return {
+        "rows": rows,
+        "count": len(rows),
+        "blocks": {row[0] for row in rows},
+        "max_length": max(len(row[1]) for row in rows),
+    }
+
+
 def main() -> None:
     document = (ROOT / "WORKSHOP_PAPER_DRAFT.html").read_text(encoding="utf-8")
     state = renderer.review_redline_state(document)
@@ -95,6 +117,35 @@ def main() -> None:
     }
     assert "P117" in state["changed"] == state["highlighted"]
 
+    spans = revision_span_metrics(document)
+    assert spans["count"] == 242
+    assert len(spans["blocks"]) == 66
+    assert spans["max_length"] == 79
+    assert not [row for row in spans["rows"] if "external-citation" in row[3] or "comment-anchor" in row[3]]
+    assert not re.findall(
+        r'<(?:p|h3|h4|li|td|th|figcaption)[^>]*class="[^"]*\brevision-highlight\b',
+        document,
+    )
+    for paragraph_id in ["P004", "P006", "P008", "P010", "P012"]:
+        opening = re.search(rf'<p[^>]*id="{paragraph_id}"[^>]*>', document)
+        assert opening and "revision-highlight" not in opening.group(0)
+        assert paragraph_id in spans["blocks"]
+    assert "figure-s1::caption" not in spans["blocks"]
+    assert "figure-s2::caption" in spans["blocks"]
+    required_focus = {
+        "not used for development",
+        "not provided to the model",
+        "primary physician-preference endpoint",
+        "A displayed the inference-harness output",
+        "B displayed the single-prompt baseline",
+        "not shown these identities",
+        "Source attribution was available only with the harness output",
+        "complete system outputs",
+        "same base-model family",
+        "did not evaluate generalization across model families",
+    }
+    assert required_focus.issubset({row[1] for row in spans["rows"]})
+
     metrics = introduction_diff_metrics()
     inserted_or_replaced = metrics["inserted_words"] + metrics["replacement_words"]
     # The approved final text is immutable in this check. Under the documented
@@ -112,21 +163,21 @@ def main() -> None:
     assert (old_result_count, old_result_hash) == (new_result_count, new_result_hash)
 
     print(
-        "V151_REVIEW_OK "
+        "V152_REVIEW_OK "
         f"baseline_blocks={state['baseline']['block_count']} "
         f"current_blocks={len(state['current'])} "
-        f"changed={len(state['changed'])} highlighted={len(state['highlighted'])} "
+        f"changed_blocks={len(state['changed'])} token_spans={spans['count']} span_blocks={len(spans['blocks'])} "
         f"deleted={len(state['deleted'])} importance="
         f"{dict(sorted((level, len(block_ids)) for level, block_ids in state['importance'].items()))} "
         f"sections={state['section_counts']}"
     )
-    print(f"V151_WORDING_OK visible_blocks={len(current_blocks)} unchanged_from=744986d9")
+    print(f"V152_WORDING_OK visible_blocks={len(current_blocks)} unchanged_from=744986d9")
     print(
-        "V151_INTRO_OK "
+        "V152_INTRO_OK "
         f"old_words={metrics['old_words']} new_words={metrics['new_words']} "
         f"inserted_or_replaced={inserted_or_replaced} metrics={metrics}"
     )
-    print(f"V151_RESULTS_OK blocks={new_result_count} sha256={new_result_hash}")
+    print(f"V152_RESULTS_OK blocks={new_result_count} sha256={new_result_hash}")
 
 
 if __name__ == "__main__":

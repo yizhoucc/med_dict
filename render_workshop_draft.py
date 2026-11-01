@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the English-only physician-authored manuscript HTML (version 1.5.1).
+"""Build the English-only physician-authored manuscript HTML (version 1.5.2).
 
 The canonical Word extraction is the sole prose source. Technical tables,
 figures, captions, navigation, and supplementary analyses are inserted around
@@ -160,25 +160,52 @@ GRAMMAR_REVISED_IDS = {
     "P100", "P109", "P111", "P113", "P115", "P117", "P119",
 }
 
-REVISION_HIGHLIGHTS = {
-    "P012": [
-        "Because it operates outside the frozen model weights, the harness is technically separable from the base model.",
-        "without physician review of pancreatic outputs",
+# When a sentence or paragraph is wholly new, a literal diff would paint a
+# large yellow rectangle.  These phrases identify the clinically meaningful
+# wording within those long insertions.  Short replacements and grammar edits
+# continue to use the automatic token-level diff below.
+FOCUSED_LONG_CHANGE_PHRASES = {
+    "P004": ["extraction task"],
+    "P022": [
+        "100 unannotated breast-cancer notes and 100 unannotated pancreatic-cancer notes",
+        "separate untouched holdout set",
+        "not used for development",
+        "not provided to the model",
+        "primary physician-preference endpoint",
     ],
-    "P017": ["Stage 1", "Stage 2", "without physician review of PDAC outputs"],
-    "P019": ["an untouched holdout set", "Four physicians"],
-    "P022": ["The holdout note texts and their existing CORAL annotations were not used for development."],
-    "P025": ["one chat-completion request", "does not make a claim about internal server execution or forward passes"],
+    "P025": [
+        "one chat-completion request",
+        "application-level inference request",
+        "same field definitions and output contract",
+    ],
     "P028": [
-        "only the plan-specific branch was skipped; full-note extraction continued",
-        "the system omitted the value rather than guess",
+        "processing and validation logic",
+        "Assessment and Plan section for plan-specific fields",
+        "up to three attempts",
+        "only the plan-specific branch was skipped",
+        "full-note extraction continued",
+        "source-supported Assessment and Plan section",
+        "omitted the value rather than guess",
     ],
-    "P063": ["A/B test interface", "Full interface implementation details are provided in Supplementary Methods."],
-    "P067": ["to examine how output quality changed across successive harness configurations"],
-    "P073": ["A single blinded OpenAI LLM judge", "Exact judge configuration is provided in Supplementary Methods."],
+    "P030": [
+        "structural checks for JSON and schema validity",
+        "specificity and semantic alignment",
+        "source faithfulness",
+        "temporal consistency",
+        "source attribution when enabled",
+    ],
+    "P063": [
+        "A/B test interface",
+        "not one of the four evaluators",
+        "seven core fields",
+        "Supplementary Methods",
+    ],
     "P119": [
-        "The fixed A/B display order and the availability of source attribution only with the harness output may have allowed evaluators to infer a recurring pattern or may have influenced ratings.",
-        "The direction and magnitude of any effect cannot be determined.",
+        "fixed A/B display order",
+        "source attribution only with the harness output",
+        "direction and magnitude of any effect cannot be determined",
+        "same base-model family",
+        "did not evaluate generalization across model families",
     ],
 }
 
@@ -205,10 +232,6 @@ REVISED_TABLE_CELLS = {
     "T1R6C2": "Confusion among past, current, and future information.",
     "T1R6C3": "Remove a completed scan from the imaging plan",
     "T2R1C2": "A single-prompt baseline with one inference request per note.",
-}
-
-REVISION_HIGHLIGHT_TABLE_CELLS = {
-    "T2R1C2": ["one inference request per note"],
 }
 
 XREF_TARGETS = {
@@ -249,7 +272,7 @@ CSS = r"""
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:var(--page);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.62}
 .layout{display:grid;grid-template-columns:270px minmax(0,940px);gap:28px;width:min(1260px,calc(100% - 36px));margin:24px auto 70px;align-items:start}.toc{position:sticky;top:18px;max-height:calc(100vh - 36px);overflow:auto;padding:18px 15px;border:1px solid var(--line);border-radius:12px;background:#fffffff5}.toc strong{display:block;margin-bottom:9px;color:var(--navy)}.toc a{display:block;padding:4px 6px;border-radius:5px;color:#3e5160;text-decoration:none;font-size:12.5px}.toc a:hover{background:#eaf4fa}.toc .sub{padding-left:18px;font-size:11.5px;color:var(--muted)}
 article{min-width:0;padding:45px 54px 68px;border:1px solid var(--line);border-radius:14px;background:var(--paper);box-shadow:0 12px 34px #142b4012}h1{margin:0;color:var(--navy);font-family:Georgia,"Times New Roman",serif;font-size:36px;line-height:1.18}h2,h3{color:var(--navy)}h3{margin:27px 0 9px;font-size:19px}.subtitle{margin:8px 0 20px;color:var(--muted)}
-.revision-legend{margin:10px 0 18px;color:#55636e;font-size:12.5px}.revision-legend-line{display:block;margin-top:4px}.revision-key{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}.revision-key-item{white-space:nowrap}.revision-swatch{display:inline-block;width:.85em;height:.85em;margin-right:.35em;border:1px solid rgba(201,152,0,.55);border-radius:2px;vertical-align:-.05em}.revision-swatch.revision-light,.revision-highlight.revision-light{background:rgba(255,193,7,.12)}.revision-swatch.revision-medium,.revision-highlight.revision-medium{background:rgba(255,193,7,.27)}.revision-swatch.revision-strong,.revision-highlight.revision-strong{background:rgba(255,193,7,.50)}.revision-highlight{color:inherit;border-radius:2px;-webkit-box-decoration-break:clone;box-decoration-break:clone}.revision-paragraph{margin-top:9px}.supplement-methods h4{margin:18px 0 5px;color:#30485a;font-size:15px}.supplement-methods ol{margin:7px 0 14px;padding-left:24px}.supplement-methods li{margin:5px 0}
+.revision-legend{margin:10px 0 18px;color:#55636e;font-size:12.5px}.revision-legend-line{display:block;margin-top:4px}.revision-key{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}.revision-key-item{white-space:nowrap}.revision-swatch{display:inline-block;width:.85em;height:.85em;margin-right:.35em;border:1px solid rgba(201,152,0,.55);border-radius:2px;vertical-align:-.05em}.revision-swatch.revision-light,.revision-highlight.revision-light{background:rgba(255,193,7,.12)}.revision-swatch.revision-medium,.revision-highlight.revision-medium{background:rgba(255,193,7,.27)}.revision-swatch.revision-strong,.revision-highlight.revision-strong{background:rgba(255,193,7,.50)}.revision-highlight{color:inherit;border-radius:2px;-webkit-box-decoration-break:clone;box-decoration-break:clone;cursor:help}.review-block{background:transparent}.citation.external-citation{background:transparent}.revision-paragraph{margin-top:9px}.supplement-methods h4{margin:18px 0 5px;color:#30485a;font-size:15px}.supplement-methods ol{margin:7px 0 14px;padding-left:24px}.supplement-methods li{margin:5px 0}
 details{border:0}summary{cursor:pointer}.fold>summary,.fold-toggle{padding:13px 16px;color:var(--navy);font-weight:750;list-style:none}.fold>summary::-webkit-details-marker,.version-entry>summary::-webkit-details-marker{display:none}.fold>summary::before,.fold-toggle::before,.version-entry>summary::before{content:"▸";display:inline-block;width:1.2em}.fold[open]>summary::before,.custom-fold.is-expanded>.fold-toggle::before,.version-entry[open]>summary::before{content:"▾"}.current-change{margin:14px 0 20px;padding:10px 13px;border-left:4px solid var(--blue);background:#eef7fb;color:#264b61;font-size:13px}.version-entry{margin:8px 0;border:1px solid var(--line);border-radius:7px;background:#fafbfc}.version-entry>summary{padding:9px 11px;color:#30485a;font-weight:700;list-style:none}.version-entry-body{padding:0 13px 10px;color:#4b5964;font-size:13px}.version-entry-body p{margin:5px 0}
 .fold{margin:22px 0;border-top:1px solid var(--line)}.fold>summary,.fold-toggle{margin:0;padding:20px 0 10px;font-family:Georgia,"Times New Roman",serif;font-size:25px}.fold-toggle{display:block;width:100%;border:0;background:transparent;text-align:left;cursor:pointer}.custom-fold.is-collapsed>.fold-body{display:none}.custom-fold.is-expanded>.fold-body{display:block}.fold-body{padding:0 0 8px}.source-empty,.source-audit{display:none!important}.physician-paragraph,.manuscript-paragraph{margin:11px 0}.physician-subheading{scroll-margin-top:15px}.xref,.citation,.comment-anchor a{color:var(--blue);text-decoration:none}.xref:hover,.citation:hover,.comment-anchor a:hover{text-decoration:underline}.comment-anchor{margin-left:.18em;font-size:.72em;vertical-align:super}.comment-anchor a{font-weight:650}.comment-backlink{display:inline-block;margin-top:7px;font-size:12px}.print-page-spacer{display:none}
 .table-wrap{margin:20px 0 28px;overflow-x:auto}.table-caption,.figure-caption{margin:0 0 8px;color:#314452;font-size:13px}.table-caption strong,.figure-caption strong{color:var(--navy)}table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:8px 9px;border:1px solid #d6dde3;vertical-align:top}th{background:#e9f1f6;color:#173f5f;text-align:left}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}tbody tr:nth-child(even){background:#fafbfc}.physician-native-table th{background:#eaf4ef;color:#18533f}
@@ -265,7 +288,7 @@ function setCustomFold(fold,open){if(!fold||!fold.classList.contains('custom-fol
 function revealTarget(target){if(!target)return;if(target.matches&&target.matches('#version-history .version-entry'))document.querySelectorAll('#version-history .version-entry').forEach(entry=>entry.open=entry===target);else if(target instanceof HTMLDetailsElement||target.tagName==='DETAILS')target.open=true;if(target.classList&&target.classList.contains('custom-fold'))setCustomFold(target,true);let p=target.parentElement;const chain=[];while(p){if(p.tagName==='DETAILS'||p.classList.contains('custom-fold'))chain.push(p);p=p.parentElement;}chain.reverse().forEach(d=>{if(d.tagName==='DETAILS')d.open=true;else setCustomFold(d,true)});if(!target.hasAttribute('tabindex'))target.setAttribute('tabindex','-1');target.focus({preventScroll:true});target.scrollIntoView({block:'start'})}
 document.addEventListener('click',e=>{const toggle=e.target.closest('.fold-toggle');if(toggle){const fold=toggle.closest('.custom-fold');setCustomFold(fold,!fold.classList.contains('is-expanded'));return}const a=e.target.closest('a[href^="#"]');if(!a)return;const id=decodeURIComponent(a.getAttribute('href').slice(1));revealTarget(document.getElementById(id))});
 window.addEventListener('hashchange',()=>revealTarget(document.getElementById(decodeURIComponent(location.hash.slice(1)))));window.addEventListener('DOMContentLoaded',()=>{if(location.hash)revealTarget(document.getElementById(decodeURIComponent(location.hash.slice(1))))});
-window.preparePrintExport=function(pageHeight=960){if(!Number.isFinite(pageHeight)||pageHeight<400)throw new Error('Invalid page height');document.querySelectorAll('.print-page-spacer').forEach(node=>node.remove());document.documentElement.classList.add('print-export');void document.documentElement.offsetHeight;const candidates=[...document.querySelectorAll('.figure,.table-wrap')].filter(node=>getComputedStyle(node).display!=='none');for(const node of candidates){const rect=node.getBoundingClientRect();const top=rect.top+window.scrollY;const offset=((top%pageHeight)+pageHeight)%pageHeight;if(rect.height<pageHeight&&offset>0&&offset+rect.height>pageHeight-.5){const spacer=document.createElement('div');spacer.className='print-page-spacer';spacer.setAttribute('aria-hidden','true');spacer.style.height=`${Math.ceil(pageHeight-offset)+1}px`;node.before(spacer);void spacer.offsetHeight}}const items=candidates.map(node=>{const rect=node.getBoundingClientRect();const top=rect.top+window.scrollY;const bottom=rect.bottom+window.scrollY;return{id:node.id,kind:node.classList.contains('figure')?'figure':'table',top,bottom,height:rect.height,crosses:Math.floor((top+.5)/pageHeight)!==Math.floor((bottom-.5)/pageHeight)}});const printable=[...document.querySelectorAll('article>.main-section>.fold-body>*,#supplement-body>*')].filter(node=>!node.classList.contains('print-page-spacer')&&getComputedStyle(node).display!=='none');const contentBottom=Math.ceil(Math.max(0,...printable.map(node=>node.getBoundingClientRect().bottom+window.scrollY)));const revisionHighlights=[...document.querySelectorAll('[data-review-changed-from="v1.3"]')];return{pageHeight,documentHeight:document.documentElement.scrollHeight,contentBottom,supplementVisible:getComputedStyle(document.getElementById('supplement-body')).display!=='none',revisionHighlightCount:revisionHighlights.length,revisionHighlightBackgrounds:revisionHighlights.map(node=>getComputedStyle(node).backgroundColor),items,offenders:items.filter(item=>item.crosses).map(item=>item.id)}};
+window.preparePrintExport=function(pageHeight=960){if(!Number.isFinite(pageHeight)||pageHeight<400)throw new Error('Invalid page height');document.querySelectorAll('.print-page-spacer').forEach(node=>node.remove());document.documentElement.classList.add('print-export');void document.documentElement.offsetHeight;const candidates=[...document.querySelectorAll('.figure,.table-wrap')].filter(node=>getComputedStyle(node).display!=='none');for(const node of candidates){const rect=node.getBoundingClientRect();const top=rect.top+window.scrollY;const offset=((top%pageHeight)+pageHeight)%pageHeight;if(rect.height<pageHeight&&offset>0&&offset+rect.height>pageHeight-.5){const spacer=document.createElement('div');spacer.className='print-page-spacer';spacer.setAttribute('aria-hidden','true');spacer.style.height=`${Math.ceil(pageHeight-offset)+1}px`;node.before(spacer);void spacer.offsetHeight}}const items=candidates.map(node=>{const rect=node.getBoundingClientRect();const top=rect.top+window.scrollY;const bottom=rect.bottom+window.scrollY;return{id:node.id,kind:node.classList.contains('figure')?'figure':'table',top,bottom,height:rect.height,crosses:Math.floor((top+.5)/pageHeight)!==Math.floor((bottom-.5)/pageHeight)}});const printable=[...document.querySelectorAll('article>.main-section>.fold-body>*,#supplement-body>*')].filter(node=>!node.classList.contains('print-page-spacer')&&getComputedStyle(node).display!=='none');const contentBottom=Math.ceil(Math.max(0,...printable.map(node=>node.getBoundingClientRect().bottom+window.scrollY)));const revisionHighlights=[...document.querySelectorAll('.revision-highlight')];return{pageHeight,documentHeight:document.documentElement.scrollHeight,contentBottom,supplementVisible:getComputedStyle(document.getElementById('supplement-body')).display!=='none',revisionHighlightCount:revisionHighlights.length,revisionHighlightBackgrounds:revisionHighlights.map(node=>getComputedStyle(node).backgroundColor),items,offenders:items.filter(item=>item.crosses).map(item=>item.id)}};
 window.resetPrintExport=function(){document.querySelectorAll('.print-page-spacer').forEach(node=>node.remove());document.documentElement.classList.remove('print-export')};
 """
 
@@ -619,16 +642,23 @@ def _review_start_tag(raw: str, block_id: str, changed: bool) -> str:
         class_match = re.search(r'class="([^"]*)"', raw)
         if class_match:
             classes = class_match.group(1).split()
-            for class_name in ["review-block", "revision-highlight", f"revision-{level}"]:
+            for class_name in ["review-block"]:
                 if class_name not in classes:
                     classes.append(class_name)
             raw = raw[:class_match.start(1)] + " ".join(classes) + raw[class_match.end(1):]
         else:
-            attributes += f' class="review-block revision-highlight revision-{level}"'
+            attributes += ' class="review-block"'
     return raw[:-1] + attributes + ">"
 
 
-def apply_complete_review_redline(document: str) -> str:
+def apply_review_block_metadata(document: str) -> str:
+    """Attach stable change metadata without coloring whole blocks.
+
+    The visible review marks are inserted by the text renderers at token
+    granularity.  Block metadata remains useful for auditing the complete v1.3
+    comparison and for the version-diff report, but it has no yellow style.
+    """
+
     state = review_redline_state(document)
     current: dict[str, ReviewBlock] = state["current"]
     scoped_current: dict[str, ReviewBlock] = state["scoped_current"]
@@ -741,21 +771,185 @@ def revision_paragraph(text: str, *, paragraph_id: str) -> str:
     )
 
 
-def highlighted_text(text: str, phrases: list[str]) -> str:
-    """Render legacy phrase registries without word-level review markup.
+_CITATION_GROUP_RE = re.compile(
+    r"\(\s*\[\[cite:[a-z_]+\]\](?:\s*;\s*\[\[cite:[a-z_]+\]\])*\s*\)|\[\[cite:[a-z_]+\]\]"
+)
+MAX_REVIEW_SPAN_CHARS = 180
 
-    Version 1.5 applies one complete block-level redline after rendering. The
-    phrase lists remain as historical edit metadata, not as a second visual
-    highlighting system.
+
+def review_importance(block_id: str) -> str:
+    levels = [level for level, block_ids in REVIEW_IMPORTANCE.items() if block_id in block_ids]
+    if len(levels) > 1:
+        raise AssertionError(f"Review block has multiple importance levels: {block_id}")
+    return levels[0] if levels else "light"
+
+
+def _review_tokens(text: str) -> list[dict[str, object]]:
+    xrefs = "|".join(re.escape(label) for label in sorted(XREF_TARGETS, key=len, reverse=True))
+    pattern = re.compile(
+        rf"\[\[cite:[a-z_]+\]\]|{xrefs}|\s+|\w+(?:[-'’]\w+)*|[^\w\s]"
+    )
+    citation_ranges = [match.span() for match in _CITATION_GROUP_RE.finditer(text)]
+    tokens: list[dict[str, object]] = []
+    for match in pattern.finditer(text):
+        start, end = match.span()
+        raw = match.group(0)
+        tokens.append({
+            "raw": raw,
+            "start": start,
+            "end": end,
+            "space": raw.isspace(),
+            "citation": any(start >= left and end <= right for left, right in citation_ranges),
+            "highlight": False,
+            "title": "",
+            "change": "",
+        })
+    if "".join(str(token["raw"]) for token in tokens) != text:
+        raise AssertionError(f"Review tokenizer did not preserve text: {text[:80]!r}")
+    return tokens
+
+
+def _short_review_text(text: str, limit: int = 150) -> str:
+    compact = " ".join(text.split())
+    return compact if len(compact) <= limit else compact[: limit - 1].rstrip() + "…"
+
+
+def _mark_focus_phrases(
+    tokens: list[dict[str, object]],
+    text: str,
+    phrases: list[str],
+) -> None:
+    for phrase in phrases:
+        cursor = 0
+        found = False
+        while True:
+            start = text.find(phrase, cursor)
+            if start < 0:
+                break
+            found = True
+            end = start + len(phrase)
+            for token in tokens:
+                if bool(token["space"]) or bool(token["citation"]):
+                    continue
+                if int(token["start"]) < end and int(token["end"]) > start:
+                    token["highlight"] = True
+                    token["title"] = f'Key revised wording: “{phrase}”'
+                    token["change"] = "focus"
+            cursor = end
+        if not found:
+            raise AssertionError(f"Review focus phrase is missing: {phrase!r}")
+
+
+def _render_review_tokens(tokens: list[dict[str, object]], block_id: str) -> str:
+    level = review_importance(block_id)
+    parts: list[str] = []
+    index = 0
+    while index < len(tokens):
+        token = tokens[index]
+        if not bool(token["highlight"]):
+            parts.append(link_crossrefs(str(token["raw"])))
+            index += 1
+            continue
+        title = str(token["title"])
+        change = str(token["change"])
+        run = [token]
+        index += 1
+        while index < len(tokens):
+            candidate = tokens[index]
+            if bool(candidate["highlight"]) and str(candidate["title"]) == title and str(candidate["change"]) == change:
+                run.append(candidate)
+                index += 1
+                continue
+            if bool(candidate["space"]) and index + 1 < len(tokens):
+                following = tokens[index + 1]
+                if bool(following["highlight"]) and str(following["title"]) == title and str(following["change"]) == change:
+                    run.extend([candidate, following])
+                    index += 2
+                    continue
+            break
+        remaining = "".join(str(item["raw"]) for item in run)
+        while remaining:
+            if len(remaining.strip()) <= MAX_REVIEW_SPAN_CHARS:
+                fragment, remaining = remaining, ""
+            else:
+                cut = remaining.rfind(" ", 0, MAX_REVIEW_SPAN_CHARS + 1)
+                if cut <= 0:
+                    cut = MAX_REVIEW_SPAN_CHARS
+                fragment, remaining = remaining[:cut], remaining[cut:]
+            leading = fragment[: len(fragment) - len(fragment.lstrip())]
+            trailing = fragment[len(fragment.rstrip()):]
+            core = fragment.strip()
+            parts.append(link_crossrefs(leading))
+            attrs = (
+                f'class="revision-highlight revision-{level}" data-review-for="{esc(block_id)}" '
+                f'data-review-change="{esc(change)}" title="{esc(title)}" '
+                f'aria-label="Revised wording. {esc(title)}"'
+            )
+            parts.append(f'<span {attrs}>{link_crossrefs(core)}</span>')
+            parts.append(link_crossrefs(trailing))
+    return "".join(parts)
+
+
+def word_diff_text(original: str, revised: str, *, block_id: str) -> tuple[str, list[str]]:
+    """Render a minimal token-level insertion/replacement diff.
+
+    Citations remain ordinary blue links. Deletions are retained as review
+    metadata on the containing block instead of occupying visible body space.
     """
 
-    return link_crossrefs(text)
+    old_tokens = _review_tokens(original)
+    new_tokens = _review_tokens(revised)
+    old_indices = [
+        index for index, token in enumerate(old_tokens)
+        if not bool(token["space"]) and not bool(token["citation"])
+    ]
+    new_indices = [
+        index for index, token in enumerate(new_tokens)
+        if not bool(token["space"]) and not bool(token["citation"])
+    ]
+    old_values = [str(old_tokens[index]["raw"]) for index in old_indices]
+    new_values = [str(new_tokens[index]["raw"]) for index in new_indices]
+    deleted: list[str] = []
+    focus_phrases = FOCUSED_LONG_CHANGE_PHRASES.get(block_id, [])
+    matcher = SequenceMatcher(None, old_values, new_values, autojunk=False)
+    for operation, old_start, old_end, new_start, new_end in matcher.get_opcodes():
+        if operation == "equal":
+            continue
+        old_text = " ".join(old_values[old_start:old_end])
+        new_text = " ".join(new_values[new_start:new_end])
+        if operation in {"delete", "replace"} and old_text:
+            deleted.append(old_text)
+        if operation not in {"insert", "replace"}:
+            continue
+        # Long wholly new passages are represented by a few preselected key
+        # phrases so the review view does not become a solid yellow block.
+        if focus_phrases and new_end - new_start > 8:
+            continue
+        if operation == "replace":
+            title = f'Original: “{_short_review_text(old_text)}” | Revised: “{_short_review_text(new_text)}”'
+        else:
+            title = f'Inserted: “{_short_review_text(new_text)}”'
+        for aligned_index in range(new_start, new_end):
+            token = new_tokens[new_indices[aligned_index]]
+            token["highlight"] = True
+            token["title"] = title
+            token["change"] = operation
+    _mark_focus_phrases(new_tokens, revised, focus_phrases)
+    return _render_review_tokens(new_tokens, block_id), deleted
+
+
+def highlighted_text(text: str, phrases: list[str], *, block_id: str) -> str:
+    """Highlight only selected key phrases in wholly generated text."""
+
+    tokens = _review_tokens(text)
+    _mark_focus_phrases(tokens, text, phrases)
+    return _render_review_tokens(tokens, block_id)
 
 
 def revision_inline_paragraph(text: str, *, paragraph_id: str, phrases: list[str]) -> str:
     return (
         f'<p class="manuscript-paragraph revision-paragraph" data-origin="technical-insert" id="{esc(paragraph_id)}">'
-        f'{highlighted_text(text, phrases)}</p>'
+        f'{highlighted_text(text, phrases, block_id=paragraph_id)}</p>'
     )
 
 
@@ -766,18 +960,21 @@ def render_physician_paragraph(paragraph: dict[str, object], comment_ids: list[s
     if block_id in HIDDEN_SOURCE_BLOCKS:
         return source_audit(block_id, text) + anchors
     if block_id in REVISED_PARAGRAPHS:
+        rendered, deleted = word_diff_text(text, REVISED_PARAGRAPHS[block_id], block_id=block_id)
+        deleted_attr = f' data-review-deleted="{esc(" | ".join(deleted))}"' if deleted else ""
         return (
             source_audit(block_id, text)
-            + f'<p class="manuscript-paragraph" id="{esc(block_id)}" data-origin="manuscript-edit">'
-            + highlighted_text(REVISED_PARAGRAPHS[block_id], REVISION_HIGHLIGHTS.get(block_id, []))
+            + f'<p class="manuscript-paragraph" id="{esc(block_id)}" data-origin="manuscript-edit"{deleted_attr}>'
+            + rendered
             + anchors
             + "</p>"
         )
     if block_id in REVISED_HEADINGS:
         revised = REVISED_HEADINGS[block_id]
         slug = re.sub(r"[^a-z0-9]+", "-", revised.lower()).strip("-")
-        rendered = esc(revised)
-        return source_audit(block_id, text) + f'<h3 class="physician-subheading" id="{slug}" data-origin="manuscript-edit">{rendered}{anchors}</h3>'
+        rendered, deleted = word_diff_text(text, revised, block_id=block_id)
+        deleted_attr = f' data-review-deleted="{esc(" | ".join(deleted))}"' if deleted else ""
+        return source_audit(block_id, text) + f'<h3 class="physician-subheading" id="{slug}" data-origin="manuscript-edit"{deleted_attr}>{rendered}{anchors}</h3>'
     source_span = (
         f'<span data-origin="physician" data-source-block="{esc(block_id)}">{esc(text)}</span>'
     )
@@ -789,11 +986,22 @@ def render_physician_paragraph(paragraph: dict[str, object], comment_ids: list[s
     return f'<p class="physician-paragraph" id="{esc(block_id)}">{source_span}{anchors}</p>'
 
 
-def render_native_table(table: dict[str, object], label: str, title: str) -> str:
+def render_native_table(
+    table: dict[str, object],
+    label: str,
+    title: str,
+    *,
+    caption_review_phrases: list[str] | None = None,
+) -> str:
     rows = table["rows"]
+    table_id = label.lower().replace(" ", "-")
+    rendered_title = (
+        highlighted_text(title, caption_review_phrases, block_id=f"{table_id}::caption")
+        if caption_review_phrases else esc(title)
+    )
     parts = [
-        f'<div class="table-wrap" data-origin="technical-insert" id="{esc(label.lower().replace(" ", "-"))}">',
-        f'<p class="table-caption"><strong>{esc(label)}.</strong> {esc(title)}</p>',
+        f'<div class="table-wrap" data-origin="technical-insert" id="{esc(table_id)}">',
+        f'<p class="table-caption"><strong>{esc(label)}.</strong> {rendered_title}</p>',
         '<table class="physician-native-table">',
     ]
     for row_index, row in enumerate(rows):
@@ -803,12 +1011,10 @@ def render_native_table(table: dict[str, object], label: str, title: str) -> str
             cell_id = str(cell["id"])
             raw_text = str(cell["raw_visible_text"])
             if cell_id in REVISED_TABLE_CELLS:
-                revised_text = highlighted_text(
-                    REVISED_TABLE_CELLS[cell_id],
-                    REVISION_HIGHLIGHT_TABLE_CELLS.get(cell_id, []),
-                )
+                revised_text, deleted = word_diff_text(raw_text, REVISED_TABLE_CELLS[cell_id], block_id=cell_id)
+                deleted_attr = f' data-review-deleted="{esc(" | ".join(deleted))}"' if deleted else ""
                 parts.append(
-                    f'<{tag} data-origin="manuscript-edit">{source_audit(cell_id, raw_text)}'
+                    f'<{tag} data-origin="manuscript-edit"{deleted_attr}>{source_audit(cell_id, raw_text)}'
                     f'{revised_text}</{tag}>'
                 )
             else:
@@ -839,18 +1045,29 @@ def result_table(label: str, title: str, headers: list[str], rows: list[list[str
     return "".join(parts)
 
 
-def figure(number: str, title: str, caption: str, *, supplementary: bool = False) -> str:
+def figure(
+    number: str,
+    title: str,
+    caption: str,
+    *,
+    supplementary: bool = False,
+    caption_review_phrases: list[str] | None = None,
+) -> str:
     path = SUPPLEMENTARY_FIGURES[number] if supplementary else MAIN_FIGURES[number]
     print_path = PRINT_FIGURES[number]
     validate_print_png(number, print_path)
     print_src = print_path.relative_to(ROOT).as_posix()
     label = f"Supplementary Figure {number}" if supplementary else f"Figure {number}"
     attr = "data-supplementary-figure" if supplementary else "data-main-figure"
+    rendered_caption = (
+        highlighted_text(caption, caption_review_phrases, block_id=f"figure-{number.lower()}::caption")
+        if caption_review_phrases else esc(caption)
+    )
     return (
         f'<figure class="figure" id="figure-{number.lower()}" data-origin="technical-insert" {attr}="{number}">'
         f'<img class="figure-screen" src="{svg_data_uri(path)}" alt="{esc(title)}">'
         f'<img class="figure-print" src="{esc(print_src)}" alt="" aria-hidden="true">'
-        f'<figcaption class="figure-caption"><strong>{esc(label)}.</strong> {esc(caption)}</figcaption></figure>'
+        f'<figcaption class="figure-caption"><strong>{esc(label)}.</strong> {rendered_caption}</figcaption></figure>'
     )
 
 
@@ -1079,7 +1296,12 @@ def build_scientific_sections(data: dict[str, object]) -> tuple[str, str]:
             if table_id == "T1":
                 current_parts.append(render_native_table(tables[table_id], "Table 1", "Inference harness components"))
             elif table_id == "T2":
-                current_parts.append(render_native_table(tables[table_id], "Table 2", "Ablation study conditions"))
+                current_parts.append(render_native_table(
+                    tables[table_id],
+                    "Table 2",
+                    "Ablation study conditions",
+                    caption_review_phrases=["Ablation study conditions"],
+                ))
             current_md.extend([f'<!-- physician native table:{table_id}; cells preserved in canonical JSON -->', ""])
     flush()
     return "".join(front_blocks + sections), "\n".join(markdown)
@@ -1093,49 +1315,90 @@ def supplementary_methods() -> str:
         "Gate 4 trimmed clearly unsupported or contradictory content while retaining supported information.",
         "Gate 5 removed completed or historical events from future-plan fields.",
     ]
-    gates = "".join(f"<li>{esc(item)}</li>" for item in gate_items)
+    gate_phrases = [
+        "JSON formatting",
+        "output schema",
+        "specificity and semantic alignment",
+        "unsupported or contradictory content",
+        "completed or historical events",
+    ]
+    gates = "".join(
+        f'<li>{highlighted_text(item, [gate_phrases[index]], block_id=f"supplementary-methods::li:{index}")}</li>'
+        for index, item in enumerate(gate_items)
+    )
+    headings = [
+        "Data access and holdout definition",
+        "Assessment and Plan identification",
+        "Verification and postprocessing order",
+        "Insufficient source information",
+        "Model roles during PDAC adaptation",
+        "Physician evaluation interface",
+        "Ablation study judge",
+    ]
+    rendered_headings = [
+        highlighted_text(text, [text], block_id=f"supplementary-methods::h4:{index}")
+        for index, text in enumerate(headings)
+    ]
     return (
         '<div class="supplement-methods" id="supplementary-methods">'
-        '<h3>Supplementary Methods</h3>'
-        '<h4>Data access and holdout definition</h4>'
+        '<h3>'
+        + highlighted_text("Supplementary Methods", ["Supplementary Methods"], block_id="supplementary-methods::h3:0")
+        + '</h3>'
+        + f'<h4>{rendered_headings[0]}</h4>'
         + revision_inline_paragraph(
             "CORAL access is governed by the PhysioNet credentialing and data-use process specified by the dataset authors. The 40 holdout note texts and their existing expert annotations were excluded from development, error analysis, prompt revision, rule development, and regression testing before the final harness was frozen. The annotations were not provided to the model, used to calculate the primary physician-preference endpoint, or shown in the evaluation interface.",
             paragraph_id="supplement-data-access",
-            phrases=["The 40 holdout note texts and their existing expert annotations were excluded from development"],
+            phrases=[
+                "excluded from development",
+                "not provided to the model",
+                "primary physician-preference endpoint",
+            ],
         )
-        + '<h4>Assessment and Plan identification</h4>'
+        + f'<h4>{rendered_headings[1]}</h4>'
         + revision_inline_paragraph(
             "The harness first used deterministic patterns to locate the Assessment and Plan section. If no section was found, the model made up to three attempts to reproduce the relevant source text. Each candidate was checked for source fidelity. Failure of all attempts skipped only the plan-specific extraction branch; extraction from the complete note continued.",
             paragraph_id="supplement-plan-identification",
             phrases=["Failure of all attempts skipped only the plan-specific extraction branch"],
         )
-        + '<h4>Verification and postprocessing order</h4>'
-        + '<p class="manuscript-paragraph" data-origin="technical-insert">Each field-level model output passed through the following gates in order:</p>'
+        + f'<h4>{rendered_headings[2]}</h4>'
+        + '<p class="manuscript-paragraph" data-origin="technical-insert">'
+        + highlighted_text(
+            "Each field-level model output passed through the following gates in order:",
+            ["following gates in order"],
+            block_id="supplementary-methods::p:2",
+        )
+        + '</p>'
         + f'<ol data-origin="technical-insert">{gates}</ol>'
         + revision_inline_paragraph(
             "After the gates, deterministic field-level filters and cross-field clinical hooks addressed recurring errors. Source-attribution extraction followed postprocessing when enabled.",
             paragraph_id="supplement-postprocessing-order",
             phrases=["Source-attribution extraction followed postprocessing when enabled."],
         )
-        + '<h4>Insufficient source information</h4>'
+        + f'<h4>{rendered_headings[3]}</h4>'
         + revision_inline_paragraph(
             "Hypothetical example: a note may contain imaging findings or other clinical details associated with advanced disease but still lack enough confirmed, source-supported information to assign a formal cancer stage under the extraction rules. In that case, the system returns not stated or leaves the stage field empty rather than guessing. This example is illustrative and does not describe a CORAL patient.",
             paragraph_id="supplement-stage-example",
             phrases=["Hypothetical example", "does not describe a CORAL patient"],
         )
-        + '<h4>Model roles during PDAC adaptation</h4>'
+        + f'<h4>{rendered_headings[4]}</h4>'
         + revision_inline_paragraph(
             "ChatGPT organized the breast-derived error categories and clinical distinctions into a structured review rubric. A local Qwen reviewer used that rubric to compare pipeline outputs with complete pancreatic source notes and flag potential errors. Investigators decided which changes to implement and retained them only after regression testing. Neither ChatGPT nor the Qwen reviewer served as the ablation judge.",
             paragraph_id="supplement-pdac-model-roles",
             phrases=["Neither ChatGPT nor the Qwen reviewer served as the ablation judge."],
         )
-        + '<h4>Physician evaluation interface</h4>'
+        + f'<h4>{rendered_headings[5]}</h4>'
         + revision_inline_paragraph(
             "The interface used a fixed position mapping: A displayed the inference-harness output and B displayed the single-prompt baseline. Evaluators were not shown these identities. Source attribution was available only with the harness output when present. The evaluation therefore compared the complete system outputs rather than isolating attribution as a component.",
             paragraph_id="supplement-evaluation-interface",
-            phrases=["fixed position mapping", "Source attribution was available only with the harness output"],
+            phrases=[
+                "A displayed the inference-harness output",
+                "B displayed the single-prompt baseline",
+                "not shown these identities",
+                "Source attribution was available only with the harness output",
+                "complete system outputs",
+            ],
         )
-        + '<h4>Ablation study judge</h4>'
+        + f'<h4>{rendered_headings[6]}</h4>'
         + revision_inline_paragraph(
             "The ablation judge was Codex using model gpt-5.6-sol, reasoning effort xhigh, and service tier default. It reviewed blinded adjacent-configuration pairs and received only the source note and two outputs. ChatGPT was used only for the PDAC review-rubric role described above.",
             paragraph_id="supplement-ablation-judge",
@@ -1154,7 +1417,16 @@ def build_supplement() -> str:
         + supplementary_table_1()
         + supplementary_table_2()
         + figure("S1", "Note-level preference-margin distribution", "This figure shows the note-level distribution after pooling all four physicians within each cancer type, previously drafted as Panel C of the main figure. The margin is (harness preferences minus baseline preferences) divided by completed judgments for that note. All 20 breast-cancer notes and 19 of 20 PDAC notes had positive margins; one PDAC note had a negative margin. The prior detailed breast and PDAC note panels are not retained. This is a supporting preference sensitivity analysis, not an accuracy estimate.", supplementary=True)
-        + figure("S2", "Ablation study", "Blinded comparisons across three transitions between four cumulative configurations. A was the single-prompt baseline; B added decomposition and orchestration; C added semantic, faithfulness, and temporal verification; D added deterministic inline processing and the complete POST-hook layer. One non-physician OpenAI LLM judge produced the judgments. Exact two-sided sign tests exclude ties.", supplementary=True)
+        + figure(
+            "S2",
+            "Ablation study",
+            "Blinded comparisons across three transitions between four cumulative configurations. A was the single-prompt baseline; B added decomposition and orchestration; C added semantic, faithfulness, and temporal verification; D added deterministic inline processing and the complete POST-hook layer. One non-physician OpenAI LLM judge produced the judgments. Exact two-sided sign tests exclude ties.",
+            supplementary=True,
+            caption_review_phrases=[
+                "four cumulative configurations",
+                "One non-physician OpenAI LLM judge",
+            ],
+        )
         + supplementary_table_3()
         + "</div></section>"
     )
@@ -1162,7 +1434,8 @@ def build_supplement() -> str:
 
 def version_history() -> str:
     entries = [
-        ("v1.5.1", "2026-10-31", "Current change", "Added light, medium, and strong review highlights to show the importance of the 44 wording changes already identified against v1.3. Manuscript wording and Results are unchanged; deletions remain in the version diff."),
+        ("v1.5.2", "2026-10-31", "Current change", "Replaced whole-block yellow review backgrounds with token-level highlights. Only inserted or replaced words and selected key phrases in wholly new passages are colored; manuscript wording, statistics, links, numbering, and comments are unchanged."),
+        ("v1.5.1", "2026-10-31", "Added light, medium, and strong review highlights to show the importance of the 44 wording changes already identified against v1.3. Manuscript wording and Results are unchanged; deletions remain in the version diff."),
         ("v1.5", "2026-10-31", "Clarified the five-paragraph Introduction and added a complete block-level redline against the v1.3 visible manuscript, including the revised ablation discussion. Every visible manuscript block with changed wording is highlighted; deletions are recorded in the version diff."),
         ("v1.4.1", "2026-10-31", "Simplified the A/B interface and ablation-study wording, defined the ablation purpose as examining output-quality changes across successive harness configurations, and aligned the baseline condition with the application-level inference-request definition."),
         ("v1.4", "2026-10-31", "Reorganized the five-paragraph Introduction while retaining the physician's language, clarified the two-stage Methods and holdout design, moved gate and interface details to Supplementary Methods, and added the corresponding evaluation limitation."),
@@ -1190,7 +1463,7 @@ def version_history() -> str:
         else:
             version, date, note = entry
             label = ""
-        current = version == "v1.5.1"
+        current = version == "v1.5.2"
         open_attr = " open" if current else ""
         summary = f"{version} · {label} · {date}" if label else f"{version} · {date}"
         rendered.append(
@@ -1213,23 +1486,23 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
     article = f"""
 <article>
   <h1 class="screen-only">Physician-authored manuscript draft</h1>
-  <p class="subtitle screen-only">English working manuscript · Version 1.5.1 · October 31, 2026</p>
+  <p class="subtitle screen-only">English working manuscript · Version 1.5.2 · October 31, 2026</p>
   <details class="fold" id="version-history"><summary>Version history</summary><div class="fold-body">{version_history()}</div></details>
-  <div class="revision-legend screen-only"><span class="revision-legend-line">All visible blocks changed since v1.3 are highlighted; deletions are recorded in the version diff.</span><span class="revision-legend-line">Highlight intensity reflects the importance of changes since v1.3: light for minor edits, medium for clarifications, and strong for substantive changes.</span><span class="revision-key" aria-label="Highlight importance key"><span class="revision-key-item"><span class="revision-swatch revision-light" aria-hidden="true"></span>Light</span><span class="revision-key-item"><span class="revision-swatch revision-medium" aria-hidden="true"></span>Medium</span><span class="revision-key-item"><span class="revision-swatch revision-strong" aria-hidden="true"></span>Strong</span></span></div>
+  <div class="revision-legend screen-only"><span class="revision-legend-line">Yellow marks inserted or replaced words, not entire revised paragraphs. Hover over a marked phrase to see its original wording when available.</span><span class="revision-legend-line">Highlight intensity reflects review importance: light for minor edits, medium for clarifications, and strong for substantive changes.</span><span class="revision-key" aria-label="Highlight importance key"><span class="revision-key-item"><span class="revision-swatch revision-light" aria-hidden="true"></span>Light</span><span class="revision-key-item"><span class="revision-swatch revision-medium" aria-hidden="true"></span>Medium</span><span class="revision-key-item"><span class="revision-swatch revision-strong" aria-hidden="true"></span>Strong</span></span></div>
   {sections}
   {build_supplement()}
   <details class="fold" id="physician-comments"><summary>Outstanding physician comments (2)</summary><div class="fold-body">{render_comments(data)}</div></details>
   {literature_workspace()}
 </article>
 """
-    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v1.5.1</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
-    document = apply_complete_review_redline(document)
+    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v1.5.2</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
+    document = apply_review_block_metadata(document)
     markdown = f"""<!-- GENERATED FILE. The canonical physician Word extraction is the prose authority. -->
 # Physician-authored manuscript draft
 
-English working manuscript. Version 1.5.1, October 31, 2026.
+English working manuscript. Version 1.5.2, October 31, 2026.
 
-Current change: the complete redline now uses light, medium, and strong yellow highlights to show the importance of each change. Manuscript wording is unchanged from v1.5, and deletions remain in the v1.5 version diff.
+Current change: review highlighting is now token-level. Yellow marks only inserted or replaced wording and selected key phrases in wholly new passages. Manuscript wording is unchanged from v1.5.1.
 
 The canonical physician blocks below mirror `{SOURCE_DOCX.name}` for audit purposes. The clean HTML applies only the approved cross-reference and reporting edits while preserving all source blocks in its hidden audit representation.
 
@@ -1420,13 +1693,78 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
         raise AssertionError("Review-importance counts changed")
     if any(block.importance for block_id, block in redline["current"].items() if block_id not in changed):
         raise AssertionError("An unmodified block has a review-importance level")
-    legend_text = "Highlight intensity reflects the importance of changes since v1.3: light for minor edits, medium for clarifications, and strong for substantive changes."
-    if legend_text not in document or "All visible blocks changed since v1.3 are highlighted; deletions are recorded in the version diff." not in document:
-        raise AssertionError("Importance-aware complete-redline legend is missing")
+    legend_text = "Yellow marks inserted or replaced words, not entire revised paragraphs. Hover over a marked phrase to see its original wording when available."
+    if legend_text not in document or "Highlight intensity reflects review importance: light for minor edits, medium for clarifications, and strong for substantive changes." not in document:
+        raise AssertionError("Token-level review legend is missing")
     if "Selected highlights" in document or "not a complete redline" in document:
         raise AssertionError("Obsolete selected-highlight legend remains")
     if "<mark" in document:
-        raise AssertionError("Legacy word-level revision markup remains")
+        raise AssertionError("Review markup must use accessible span metadata")
+    block_level_highlights = re.findall(
+        r'<(?:p|h3|h4|li|td|th|figcaption)[^>]*class="[^"]*\brevision-highlight\b',
+        document,
+    )
+    if block_level_highlights:
+        raise AssertionError("A whole paragraph, heading, cell, list item, or caption is yellow")
+    revision_spans = re.findall(
+        r'<span (?P<attrs>[^>]*class="[^"]*\brevision-highlight\b[^"]*"[^>]*)>(?P<body>.*?)</span>',
+        document,
+        flags=re.S,
+    )
+    if len(revision_spans) != parser.revision_highlights:
+        raise AssertionError("Revision-span parser counts differ")
+    span_blocks: set[str] = set()
+    span_texts: set[str] = set()
+    for attrs, body in revision_spans:
+        block_match = re.search(r'data-review-for="([^"]+)"', attrs)
+        if not block_match:
+            raise AssertionError("A word-level review span lacks its block ID")
+        block_id = html.unescape(block_match.group(1))
+        text = html.unescape(re.sub(r"<[^>]+>", "", body)).strip()
+        if not text or len(text) > MAX_REVIEW_SPAN_CHARS:
+            raise AssertionError(f"Invalid review-span length in {block_id}: {len(text)}")
+        if "external-citation" in body or "comment-anchor" in body:
+            raise AssertionError(f"Citation or comment marker is inside a yellow span: {block_id}")
+        if not re.search(r'title="[^"]+"', attrs) or not re.search(r'aria-label="[^"]+"', attrs):
+            raise AssertionError(f"A review span lacks hover or accessibility metadata: {block_id}")
+        span_blocks.add(block_id)
+        span_texts.add(text)
+    citation_token = re.compile(r"\s*\[\[cite:[a-z_]+\]\]")
+    source_revision_blocks = {
+        block_id for block_id, revised in REVISED_PARAGRAPHS.items()
+        if citation_token.sub("", revised) != expected_paragraphs[block_id]
+    }
+    source_revision_blocks.update(
+        block_id for block_id, revised in REVISED_HEADINGS.items()
+        if revised != expected_paragraphs[block_id]
+    )
+    source_revision_blocks.update(
+        block_id for block_id, revised in REVISED_TABLE_CELLS.items()
+        if revised != expected_cells[block_id]
+    )
+    expected_span_blocks = source_revision_blocks | changed
+    if span_blocks != expected_span_blocks:
+        raise AssertionError(
+            f"Word-level review coverage differs: missing={sorted(expected_span_blocks - span_blocks)}, "
+            f"orphan={sorted(span_blocks - expected_span_blocks)}"
+        )
+    for required_phrase in [
+        "not used for development", "not provided to the model", "primary physician-preference endpoint",
+        "A displayed the inference-harness output", "B displayed the single-prompt baseline",
+        "not shown these identities", "Source attribution was available only with the harness output",
+        "complete system outputs", "same base-model family",
+        "did not evaluate generalization across model families",
+    ]:
+        if required_phrase not in span_texts:
+            raise AssertionError(f"Required focused review phrase is missing: {required_phrase}")
+    if "figure-s1::caption" in span_blocks:
+        raise AssertionError("Unchanged Supplementary Figure S1 caption is highlighted")
+    source_highlighted_paragraphs = {
+        str(item["id"]) for item in data["paragraphs"]
+        if any(bool(segment.get("highlighted")) for segment in item.get("segments", []))
+    }
+    if source_highlighted_paragraphs != {"P060", "P062", "P063", "P115"}:
+        raise AssertionError("Canonical Word-highlight audit changed")
     for revision_id in [
         "study-design-ablation", "supplement-data-access", "supplement-plan-identification",
         "supplement-postprocessing-order", "supplement-stage-example", "supplement-pdac-model-roles",
@@ -1434,14 +1772,14 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     ]:
         if f'id="{revision_id}"' not in document: raise AssertionError(f"Clarification is missing: {revision_id}")
     if 'id="draft-metadata"' in document or "Draft information and source provenance" in document: raise AssertionError("Removed draft-information block remains")
-    if "Version 1.5.1 · October 31, 2026" not in document or "draft v1.5.1" not in document: raise AssertionError("Version 1.5.1 metadata is missing")
-    if document.count('class="version-entry"') != 20 or any(f'id="version-{item}"' not in document for item in ["1-5-1", "1-5", "1-4-1", "1-4", "1-3", "1-2-3", "1-2-2", "1-2-1", "1-2", "1-1", "1-0", "0-25", "0-24", "0-23", "0-22", "0-21", "0-20", "0-19", "0-18", "0-17"]):
+    if "Version 1.5.2 · October 31, 2026" not in document or "draft v1.5.2" not in document: raise AssertionError("Version 1.5.2 metadata is missing")
+    if document.count('class="version-entry"') != 21 or any(f'id="version-{item}"' not in document for item in ["1-5-2", "1-5-1", "1-5", "1-4-1", "1-4", "1-3", "1-2-3", "1-2-2", "1-2-1", "1-2", "1-1", "1-0", "0-25", "0-24", "0-23", "0-22", "0-21", "0-20", "0-19", "0-18", "0-17"]):
         raise AssertionError("Nested version history is incomplete")
-    if not re.search(r'<details class="version-entry" id="version-1-5-1"[^>]* open>', document):
-        raise AssertionError("Current v1.5.1 history entry is not expanded inside the closed parent")
-    if any(re.search(rf'<details class="version-entry" id="version-{item}"[^>]* open>', document) for item in ["1-5", "1-4-1", "1-4", "1-3"]):
+    if not re.search(r'<details class="version-entry" id="version-1-5-2"[^>]* open>', document):
+        raise AssertionError("Current v1.5.2 history entry is not expanded inside the closed parent")
+    if any(re.search(rf'<details class="version-entry" id="version-{item}"[^>]* open>', document) for item in ["1-5-1", "1-5", "1-4-1", "1-4", "1-3"]):
         raise AssertionError("Prior version-history entries must be closed")
-    if "v1.5.1 · Current change · 2026-10-31" not in document:
+    if "v1.5.2 · Current change · 2026-10-31" not in document:
         raise AssertionError("Current version-history label is missing")
     if "querySelectorAll('#version-history .version-entry').forEach(entry=>entry.open=entry===target)" not in document:
         raise AssertionError("Version-history deep links do not isolate the targeted entry")
@@ -1459,7 +1797,6 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
         if f'data-source-block="{source_block}"' not in document or f'id="{source_block}"' in document:
             raise AssertionError(f"Hidden source placeholder audit is incomplete: {source_block}")
     if not GRAMMAR_REVISED_IDS.issubset(REVISED_PARAGRAPHS): raise AssertionError("Grammar revision registry is incomplete")
-    citation_token = re.compile(r"\s*\[\[cite:[a-z_]+\]\]")
     for paragraph_id in sorted(GRAMMAR_REVISED_IDS):
         original = expected_paragraphs[paragraph_id]
         revised = citation_token.sub("", REVISED_PARAGRAPHS[paragraph_id])
@@ -1475,7 +1812,7 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     if set(REVISED_HEADINGS) != {"P059", "P066", "P096"}: raise AssertionError("Revised heading registry changed")
     if set(REVISED_TABLE_CELLS) != {"T1R4C2", "T1R5C2", "T1R5C3", "T1R6C2", "T1R6C3", "T2R1C2"}: raise AssertionError("Native-table revision registry changed")
     for cell_id, revised_cell in REVISED_TABLE_CELLS.items():
-        rendered_cell = highlighted_text(revised_cell, REVISION_HIGHLIGHT_TABLE_CELLS.get(cell_id, []))
+        rendered_cell, _ = word_diff_text(expected_cells[cell_id], revised_cell, block_id=cell_id)
         if rendered_cell not in document: raise AssertionError(f"Revised native-table text is missing: {revised_cell}")
     expected_inline_urls = []
     for paragraph in data["paragraphs"]:
