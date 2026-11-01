@@ -56,11 +56,13 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           const button = supplement?.querySelector(':scope > .fold-toggle');
           if (!supplement || !body || !button) return 'missing custom supplement fold';
           const changedBlocks = [...document.querySelectorAll('[data-review-changed-from="v1.3"]')];
-          const highlights = [...document.querySelectorAll('.revision-highlight')];
-          if (changedBlocks.length !== 44) return `unexpected changed-block count: ${changedBlocks.length}`;
-          if (highlights.length !== 242) return `unexpected word-level highlight count: ${highlights.length}`;
-          const reviewColors = new Set([...document.querySelectorAll('.revision-swatch')].map(node => getComputedStyle(node).backgroundColor));
-          if (changedBlocks.some(node => node.classList.contains('revision-highlight') || reviewColors.has(getComputedStyle(node).backgroundColor))) {
+          const highlights = [...document.querySelectorAll('.focus-highlight')];
+          if (changedBlocks.length !== 66) return `unexpected changed-block count: ${changedBlocks.length}`;
+          if (highlights.length !== 44) return `unexpected manual-focus count: ${highlights.length}`;
+          if (document.querySelector('.revision-legend,.revision-swatch,.revision-light,.revision-medium,.revision-strong')) {
+            return 'obsolete revision legend or importance styling remains';
+          }
+          if (changedBlocks.some(node => node.classList.contains('focus-highlight'))) {
             return 'a changed paragraph or block retains a whole-block yellow background';
           }
           if (highlights.some(node => ['transparent', 'rgba(0, 0, 0, 0)'].includes(getComputedStyle(node).backgroundColor))) {
@@ -69,48 +71,21 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           if (highlights.some(node => node.textContent.trim().length === 0 || node.textContent.trim().length > 180)) {
             return 'word-level highlight has an invalid text length';
           }
-          if ([...document.querySelectorAll('.external-citation,.comment-anchor')].some(node => node.closest('.revision-highlight'))) {
+          if ([...document.querySelectorAll('.external-citation,.comment-anchor')].some(node => node.closest('.focus-highlight'))) {
             return 'citation link or comment marker is inside a yellow span';
           }
-          const expectedCounts = {light: 102, medium: 63, strong: 77};
-          for (const [level, expected] of Object.entries(expectedCounts)) {
-            const nodes = highlights.filter(node => node.classList.contains(`revision-${level}`));
-            if (nodes.length !== expected) return `unexpected ${level} highlight count: ${nodes.length}`;
-          }
-          if (highlights.some(node => ['light', 'medium', 'strong'].filter(level => node.classList.contains(`revision-${level}`)).length !== 1)) {
-            return 'word-level highlight lacks exactly one importance level';
-          }
-          const legendLines = [...document.querySelectorAll('.revision-legend-line')].map(node => node.textContent.trim());
-          if (legendLines[0] !== 'Yellow marks inserted or replaced words, not entire revised paragraphs. Hover over a marked phrase to see its original wording when available.' ||
-              legendLines[1] !== 'Highlight intensity reflects review importance: light for minor edits, medium for clarifications, and strong for substantive changes.') {
-            return `unexpected review legend: ${legendLines.join(' | ')}`;
-          }
-          const swatches = [...document.querySelectorAll('.revision-key .revision-swatch')];
-          if (swatches.length !== 3 || new Set(swatches.map(node => getComputedStyle(node).backgroundColor)).size !== 3) {
-            return 'importance legend does not show three distinct swatches';
-          }
-          const changedSample = ['P004', 'P010', 'P017', 'P025', 'P066', 'P067', 'T2R1C2', 'table-2::caption', 'supplement-data-access', 'P117', 'P119'];
+          const changedSample = ['P004', 'P010', 'P017', 'P025', 'P055', 'P066', 'P067', 'T2R1C2', 'supplement-data-access', 'P117', 'P119'];
           for (const id of changedSample) {
             const node = document.querySelector(`[data-review-block-id="${id}"]`);
-            if (!node || node.getAttribute('data-review-changed-from') !== 'v1.3' || node.classList.contains('revision-highlight')) {
+            if (!node || node.getAttribute('data-review-changed-from') !== 'v1.3' || node.classList.contains('focus-highlight')) {
               return `changed sample metadata or word-level styling is incorrect: ${id}`;
             }
           }
-          const unchangedSample = ['P002', 'P014', 'P016', 'T1R1C1', 'figure-1::caption'];
+          const unchangedSample = ['P002', 'P014', 'P016', 'T1R1C1'];
           for (const id of unchangedSample) {
             const node = document.querySelector(`[data-review-block-id="${id}"]`);
-            if (!node || node.hasAttribute('data-review-changed-from') || node.hasAttribute('data-review-importance') || node.classList.contains('revision-highlight')) {
+            if (!node || node.hasAttribute('data-review-changed-from') || node.hasAttribute('data-review-importance') || node.classList.contains('focus-highlight')) {
               return `unchanged sample is highlighted: ${id}`;
-            }
-          }
-          for (const [id, level] of [['P008', 'light'], ['P067', 'medium'], ['P010', 'strong']]) {
-            const node = document.querySelector(`.revision-highlight[data-review-for="${id}"]`);
-            const swatch = document.querySelector(`.revision-swatch.revision-${level}`);
-            if (!node || !node.classList.contains(`revision-${level}`)) {
-              return `importance sample mismatch: ${id}`;
-            }
-            if (!swatch || getComputedStyle(node).backgroundColor !== getComputedStyle(swatch).backgroundColor) {
-              return `highlight and legend swatch color differ: ${id}`;
             }
           }
           const ablationPurpose = document.querySelector('[data-review-block-id="P067"]');
@@ -120,23 +95,28 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           if (document.body.innerText.includes('to examine how successive harness components contributed to the observed improvement')) {
             return 'obsolete ablation-purpose wording remains visible';
           }
-          for (const id of ['P004', 'P006']) {
+          for (const id of ['P004', 'P008', 'P010', 'P012']) {
             const node = document.getElementById(id);
-            const highlightedCharacters = [...node.querySelectorAll('.revision-highlight')].reduce((total, span) => total + span.textContent.trim().length, 0);
-            if (!node || node.classList.contains('revision-highlight') || highlightedCharacters >= node.textContent.trim().length * 0.5) {
-              return `Introduction paragraph is not a sparse word-level diff: ${id}`;
+            const highlightedCharacters = [...node.querySelectorAll('.focus-highlight')].reduce((total, span) => total + span.textContent.trim().length, 0);
+            if (!node || node.classList.contains('focus-highlight') || highlightedCharacters >= node.textContent.trim().length * 0.45) {
+              return `Introduction paragraph does not use sparse manual focus: ${id}`;
             }
           }
+          if (document.getElementById('P006')?.querySelector('.focus-highlight')) return 'simple P006 grammar edits are highlighted';
           const requiredFocusedText = [
-            'not used for development', 'not provided to the model', 'primary physician-preference endpoint',
-            'A displayed the inference-harness output', 'B displayed the single-prompt baseline',
-            'not shown these identities', 'Source attribution was available only with the harness output',
-            'complete system outputs', 'same base-model family',
-            'did not evaluate generalization across model families'
+            'Reliable extraction', 'This study focuses on that extraction task', 'outputs can vary',
+            'checking every field in every output can approach the cost of manual extraction',
+            'privacy and governance concerns', 'local models can still produce unstable or incorrect extractions',
+            'not provided to the models', 'not used during harness development',
+            'not used to calculate the primary physician preference endpoint',
+            'A displayed the inference harness output', 'B displayed the one prompt baseline',
+            'blinded to system identities', 'Source attribution was available only with the harness output',
+            'complete output packages', 'same base model family',
+            'generalization across model families was not assessed'
           ];
           const highlightedText = new Set(highlights.map(node => node.textContent.trim()));
           if (requiredFocusedText.some(text => !highlightedText.has(text))) return 'a focused Methods or limitation phrase is missing';
-          if (document.querySelector('.revision-highlight[data-review-for="figure-s1::caption"]')) return 'unchanged S1 caption is highlighted';
+          if (document.querySelector('.focus-highlight[data-review-for^="figure-"]')) return 'a figure caption is highlighted';
           const visible = () => getComputedStyle(body).display !== 'none';
           if (!supplement.classList.contains('is-collapsed') || visible() || button.getAttribute('aria-expanded') !== 'false') {
             return 'supplement was not initially collapsed';
@@ -155,7 +135,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           if (!visible() || document.activeElement?.id !== 'figure-s1') return 'nested supplement link did not reveal and focus';
           button.click();
           const history = document.getElementById('version-history');
-          const current = document.getElementById('version-1-5-2');
+          const current = document.getElementById('version-1-6');
           const older = [...history.querySelectorAll('.version-entry')].filter(node => node !== current);
           if (history.open || !current?.open || older.some(node => node.open)) return 'unexpected initial version-history state';
           window.__workshopVersionHashState = 'waiting';
@@ -196,7 +176,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
         let checks = #"""
         (() => {
           const history = document.getElementById('version-history');
-          const current = document.getElementById('version-1-5-2');
+          const current = document.getElementById('version-1-6');
           const prior = document.getElementById('version-1-4-1');
           const older = [...history.querySelectorAll('.version-entry')].filter(node => node !== current);
           if (location.hash !== '#version-1-4-1' || !history.open || current.open || !prior.open || older.some(node => node !== prior && node.open) || document.activeElement !== prior) {
@@ -227,12 +207,11 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
         let printExportChecks = #"""
         (() => {
           const report = window.preparePrintExport(960);
-          const highlights = [...document.querySelectorAll('.revision-highlight')];
+          const highlights = [...document.querySelectorAll('.focus-highlight')];
           report.revisionHighlightPrintStyles = highlights.map(node => {
             const style = getComputedStyle(node);
             return {
               id: node.dataset.reviewFor || '',
-              importance: ['light', 'medium', 'strong'].find(level => node.classList.contains(`revision-${level}`)) || '',
               backgroundColor: style.backgroundColor,
               outlineStyle: style.outlineStyle,
               outlineWidth: style.outlineWidth,
@@ -244,7 +223,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
             for (const rule of [...(sheet.cssRules || [])]) {
               if (!(rule instanceof CSSMediaRule) || rule.conditionText !== 'print') continue;
               for (const nested of [...rule.cssRules]) {
-                if (nested.selectorText?.includes('.revision-highlight') && nested.selectorText.includes('.revision-strong')) {
+                if (nested.selectorText?.includes('.focus-highlight')) {
                   printReviewRules.push({
                     selector: nested.selectorText,
                     backgroundColor: nested.style.getPropertyValue('background-color'),
@@ -275,26 +254,19 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
                 self.fail("Invalid print-preparation report"); return
             }
             guard offenders.isEmpty else { self.fail("Page-boundary offenders: \(offenders)"); return }
-            guard highlightCount == 242,
+            guard highlightCount == 44,
                   highlightBackgrounds.allSatisfy({ $0 == "transparent" || $0 == "rgba(0, 0, 0, 0)" }) else {
                 self.fail("Revision highlights retained screen background in print export: \(highlightBackgrounds)"); return
             }
-            let validLevels: Set<String> = ["light", "medium", "strong"]
-            guard highlightPrintStyles.count == 242,
+            guard highlightPrintStyles.count == 44,
                   highlightPrintStyles.allSatisfy({ style in
                       let background = style["backgroundColor"] as? String ?? ""
                       let outlineStyle = style["outlineStyle"] as? String ?? ""
                       let outlineWidth = style["outlineWidth"] as? String ?? ""
-                      let importance = style["importance"] as? String ?? ""
                       return (background == "transparent" || background == "rgba(0, 0, 0, 0)") &&
-                             (outlineStyle == "none" || outlineWidth == "0px") &&
-                             validLevels.contains(importance)
+                             (outlineStyle == "none" || outlineWidth == "0px")
                   }) else {
                 self.fail("Print export retained a highlight background or outline: \(highlightPrintStyles)"); return
-            }
-            guard let figureCaptionStyle = highlightPrintStyles.first(where: { ($0["id"] as? String) == "figure-s2::caption" }),
-                  (figureCaptionStyle["outlineStyle"] as? String) == "none" || (figureCaptionStyle["outlineWidth"] as? String) == "0px" else {
-                self.fail("Highlighted figure caption retained an outline in print export"); return
             }
             guard printReviewRules.count == 1,
                   (printReviewRules[0]["backgroundColor"] as? String) == "transparent",
