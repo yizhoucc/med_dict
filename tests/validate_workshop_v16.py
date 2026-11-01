@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deterministic v1.6.2 manuscript, audit, and manual-focus checks."""
+"""Deterministic v1.6.3 manuscript, section-revert, and manual-focus checks."""
 
 from __future__ import annotations
 
@@ -60,8 +60,8 @@ def main() -> None:
     }
 
     rows = focus_spans(document)
-    assert len(rows) == 38
-    assert len({row[0] for row in rows}) == 14
+    assert len(rows) == 33
+    assert len({row[0] for row in rows}) == 13
     assert max(len(row[1]) for row in rows) == 79
     assert not [row for row in rows if "external-citation" in row[2] or "comment-anchor" in row[2]]
     assert not re.findall(
@@ -94,8 +94,6 @@ def main() -> None:
         "blinded to system identities",
         "Source attribution was available only with the harness output",
         "complete output packages",
-        "same base model family",
-        "generalization across model families was not assessed",
     }.issubset(focus_text)
 
     for paragraph_id in ["P004", "P008", "P010", "P012"]:
@@ -108,6 +106,13 @@ def main() -> None:
     assert p006 and "focus-highlight" not in p006.group(1)
 
     blocks = renderer.collect_review_blocks(document)
+    for section, next_section in [("introduction", "methods"), ("methods", "results")]:
+        assert hashlib.sha256(renderer.section_markup(document, section, next_section).encode()).hexdigest() == renderer.F7_SECTION_BASELINE[section]["markup_sha256"]
+        assert hashlib.sha256(renderer.section_block_text(document, section).encode()).hexdigest() == renderer.F7_SECTION_BASELINE[section]["text_sha256"]
+    assert not [
+        row for row in rows
+        if re.fullmatch(r"P\d{3}", row[0]) and 84 <= int(row[0][1:]) <= 119
+    ]
     for block_id, focused_text, _ in rows:
         sentences = {
             sentence.strip().rstrip(".!?").strip()
@@ -122,20 +127,21 @@ def main() -> None:
         '<span class="focus-highlight">were not disclosed</span>.</p>'
     )
     assert renderer.sentence_sized_focus_runs(synthetic_adjacent_sentence) == ["synthetic"]
-    assert len(blocks) == 354
+    assert len(blocks) == 355
     results_text = "\n".join(
         f"{block_id}\t{block.text}" for block_id, block in blocks.items() if block.section == "results"
     )
-    assert sum(block.section == "results" for block in blocks.values()) == 120
-    assert hashlib.sha256(results_text.encode("utf-8")).hexdigest() == "e8a0a9844ffa51292752c4aff018e489a31acd1027ae630f70024694efe1d5e6"
+    assert sum(block.section == "results" for block in blocks.values()) == 121
+    assert hashlib.sha256(results_text.encode("utf-8")).hexdigest() == renderer.EXPECTED_V163_RESULTS_SHA256
+    assert 'id="loo-results"' in document and 'href="#supplementary-table-s3"' in document
 
     assert document.count('data-comment-text-id=') == 12
     assert document.count('data-literature-entry=') == 30
-    assert "Version 1.6.2 · November 1, 2026" in document
-    assert "draft v1.6.2" in document
+    assert "Version 1.6.3 · November 1, 2026" in document
+    assert "draft v1.6.3" in document
 
     print(
-        "V162_OK "
+        "V163_OK "
         f"canonical=127+35+12 visible_blocks={len(blocks)} changed={len(state['changed'])} "
         f"focus_spans={len(rows)} focus_blocks={len(expected_focus_blocks)} results_sha256="
         f"{hashlib.sha256(results_text.encode('utf-8')).hexdigest()}"

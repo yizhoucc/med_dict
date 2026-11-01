@@ -58,7 +58,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           const changedBlocks = [...document.querySelectorAll('[data-review-changed-from="v1.3"]')];
           const highlights = [...document.querySelectorAll('.focus-highlight')];
           if (changedBlocks.length !== 66) return `unexpected changed-block count: ${changedBlocks.length}`;
-          if (highlights.length !== 38) return `unexpected manual-focus count: ${highlights.length}`;
+          if (highlights.length !== 33) return `unexpected manual-focus count: ${highlights.length}`;
           if (document.querySelector('.revision-legend,.revision-swatch,.revision-light,.revision-medium,.revision-strong')) {
             return 'obsolete revision legend or importance styling remains';
           }
@@ -113,11 +113,21 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
             'not used to calculate the primary physician preference endpoint',
             'A displayed the inference harness output', 'B displayed the one prompt baseline',
             'blinded to system identities', 'Source attribution was available only with the harness output',
-            'complete output packages', 'same base model family',
-            'generalization across model families was not assessed'
+            'complete output packages'
           ];
           const highlightedText = new Set(highlights.map(node => node.textContent.trim()));
           if (requiredFocusedText.some(text => !highlightedText.has(text))) return 'a focused Methods or limitation phrase is missing';
+          if (highlights.some(node => {
+            const block = node.closest('[data-review-block-id]');
+            const id = block?.dataset.reviewBlockId || '';
+            return /^P\d{3}$/.test(id) && Number(id.slice(1)) >= 84 && Number(id.slice(1)) <= 119;
+          })) return 'Results or Discussion contains a visible review focus';
+          const comment13 = document.getElementById('comment-anchor-13');
+          const comment14 = document.getElementById('comment-anchor-14');
+          const comment13Target = 'We addressed this issue by incorporating treatment history and temporal context into the extraction process and adding verification steps to align treatment responses with the appropriate regimen.';
+          if (!comment13?.previousSibling?.textContent?.endsWith(comment13Target)) return 'comment 13 anchor moved';
+          if (!comment14?.previousSibling?.textContent?.includes('ER), progesterone receptor (PR), and HER2 status')) return 'comment 14 anchor moved';
+          if (!document.getElementById('loo-results')?.querySelector('a[href="#supplementary-table-s3"]')) return 'independent LOO result is missing';
           for (const highlight of highlights) {
             const block = document.querySelector(`[data-review-block-id="${highlight.dataset.reviewFor}"]`);
             const sentences = block?.textContent.trim().split(/(?<=[.!?])\s+/).map(text => text.replace(/[.!?]+$/, '').trim()) || [];
@@ -177,7 +187,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           if (!visible() || document.activeElement?.id !== 'figure-s1') return 'nested supplement link did not reveal and focus';
           button.click();
           const history = document.getElementById('version-history');
-          const current = document.getElementById('version-1-6-2');
+          const current = document.getElementById('version-1-6-3');
           const older = [...history.querySelectorAll('.version-entry')].filter(node => node !== current);
           if (history.open || !current?.open || older.some(node => node.open)) return 'unexpected initial version-history state';
           window.__workshopVersionHashState = 'waiting';
@@ -218,7 +228,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
         let checks = #"""
         (() => {
           const history = document.getElementById('version-history');
-          const current = document.getElementById('version-1-6-2');
+          const current = document.getElementById('version-1-6-3');
           const prior = document.getElementById('version-1-4-1');
           const older = [...history.querySelectorAll('.version-entry')].filter(node => node !== current);
           if (location.hash !== '#version-1-4-1' || !history.open || current.open || !prior.open || older.some(node => node !== prior && node.open) || document.activeElement !== prior) {
@@ -296,11 +306,11 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
                 self.fail("Invalid print-preparation report"); return
             }
             guard offenders.isEmpty else { self.fail("Page-boundary offenders: \(offenders)"); return }
-            guard highlightCount == 38,
+            guard highlightCount == 33,
                   highlightBackgrounds.allSatisfy({ $0 == "transparent" || $0 == "rgba(0, 0, 0, 0)" }) else {
                 self.fail("Revision highlights retained screen background in print export: \(highlightBackgrounds)"); return
             }
-            guard highlightPrintStyles.count == 38,
+            guard highlightPrintStyles.count == 33,
                   highlightPrintStyles.allSatisfy({ style in
                       let background = style["backgroundColor"] as? String ?? ""
                       let outlineStyle = style["outlineStyle"] as? String ?? ""
