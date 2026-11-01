@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deterministic v1.8.0 manuscript, physician Results, and focus checks."""
+"""Deterministic v1.8.1 manuscript, physician Results, and focus checks."""
 
 from __future__ import annotations
 
@@ -176,7 +176,7 @@ def main() -> None:
     visible_manuscript_text = "\n".join(
         f"{block_id}\t{block.text}" for block_id, block in blocks_without_comment_ui.items()
     )
-    assert hashlib.sha256(visible_manuscript_text.encode("utf-8")).hexdigest() == renderer.EXPECTED_V180_VISIBLE_MANUSCRIPT_TEXT_SHA256
+    assert hashlib.sha256(visible_manuscript_text.encode("utf-8")).hexdigest() == renderer.EXPECTED_V181_VISIBLE_MANUSCRIPT_TEXT_SHA256
     assert hashlib.sha256(blocks_without_comment_ui["figure-s2::caption"].text.encode("utf-8")).hexdigest() == renderer.EXPECTED_V170_S2_CAPTION_SHA256
     results_displays = "\n".join(
         f"{block_id}\t{block.text}"
@@ -231,7 +231,9 @@ def main() -> None:
     assert all(value in p095_text for value in ["+24.4", "39 of 40", "77.08%", "83.53%"])
     assert re.search(r'data-source-block="P100"', document) and not re.search(r'(?<![\w-])id="P100"', document)
     p109_text = renderer.rendered_physician_prose(document, "P109")
-    assert hashlib.sha256(p109_text.encode()).hexdigest() == renderer.EXPECTED_V180_P109_TEXT_SHA256
+    assert hashlib.sha256(p109_text.encode()).hexdigest() == renderer.EXPECTED_V181_P109_TEXT_SHA256
+    assert "The note level results also indicate" in p109_text
+    assert "The note level findings also suggest" not in p109_text
     assert "not driven by a small number of clinical notes" in p109_text
     for heading_id, heading in [
         ("overall-physician-preference", "Overall physician preference"),
@@ -286,11 +288,11 @@ def main() -> None:
     ) in document
     assert "Outstanding physician comments (0)" in document
     assert document.count('data-literature-entry=') == 30
-    assert "Version 1.8.0 · November 1, 2026" in document
-    assert "draft v1.8.0" in document
+    assert "Version 1.8.1 · November 1, 2026" in document
+    assert "draft v1.8.1" in document
 
     print(
-        "V180_OK "
+        "V181_OK "
         f"canonical=127+35+12 visible_blocks={len(blocks)} changed={len(state['changed'])} "
         f"focus_spans={len(rows)} focus_blocks={len(expected_focus_blocks)} results_sha256="
         f"{hashlib.sha256(results_text.encode('utf-8')).hexdigest()}"

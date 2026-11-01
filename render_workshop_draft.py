@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the English-only physician-authored manuscript HTML (version 1.8.0).
+"""Build the English-only physician-authored manuscript HTML (version 1.8.1).
 
 The canonical Word extraction is the sole prose source. Technical tables,
 figures, captions, navigation, and supplementary analyses are inserted around
@@ -213,7 +213,7 @@ RESULTS_DISCUSSION_OVERLAYS: dict[str, tuple[SectionOverlay, ...]] = {
         SectionOverlay(
             "user-approved-results",
             "These findings suggest that a structured inference harness can improve the clinical quality of extracted information without additional model training.",
-            "These findings suggest that a structured inference harness can improve the clinical quality of extracted information without additional model training. The note level findings also suggest that the observed preference was not driven by a small number of clinical notes.",
+            "These findings suggest that a structured inference harness can improve the clinical quality of extracted information without additional model training. The note level results also indicate that the observed preference was not driven by a small number of clinical notes.",
         ),
     ),
     "P111": (
@@ -315,6 +315,8 @@ EXPECTED_V180_RESULTS_DISPLAY_SHA256 = "a600fc71cf7cc90e98d05d8abc4c1fc1f3305ab1
 EXPECTED_V180_DISCUSSION_EXCLUDING_P109_SHA256 = "697fdf89480c77f30bbe17a8b290483d80896d09ccfb532fecd8740c133aa732"
 EXPECTED_V180_SUPPLEMENT_SHA256 = "13492a199535133aacb87d878627d78653f454eac04c31c8c37de78f35bb7bf4"
 EXPECTED_V180_P109_TEXT_SHA256 = "ef2a49bc6b7e82351ce18b84d7474fe1f537822b17aa3ee9996b05dafe7030f3"
+EXPECTED_V181_VISIBLE_MANUSCRIPT_TEXT_SHA256 = "1233212fc75362d570651f4beee1c3d139d6533da95584c41dfd3d3139ecf2da"
+EXPECTED_V181_P109_TEXT_SHA256 = "6713da1cfc322cc59d62e8e625c5321b0adc21ec0c2c19b778100ae5672cc0df"
 EXPECTED_CANONICAL_SHA256 = "e6efe8f8f775a5e2d85d122011823cb83b62869a66e0585a41dbcd94afc4d72d"
 
 
@@ -1692,6 +1694,7 @@ def build_supplement() -> str:
 
 def version_history() -> str:
     entries = [
+        ("v1.8.1", "2026-11-01", "Discussion wording", "Removed a repeated findings suggest construction from the note level interpretation moved to P109. No other manuscript wording, data, tables, figures, or captions changed."),
         ("v1.8.0", "2026-11-01", "Physician source first Results", "Reorganized the physician authored Results under five descriptive headings, removed repeated summary sentences, added the staged technical ablation results, and moved one note level interpretation to the Discussion. The canonical physician source, tables, figures, captions, and data are unchanged."),
         ("v1.7.0", "2026-11-01", "Figure S2 redesign", "Redrew Supplementary Figure S2 to show the cumulative A through D configurations, the change introduced at each transition, and three equally formatted adjacent comparisons. Manuscript text and the figure caption are unchanged."),
         ("v1.6.9", "2026-11-01", "Temporal control description", "Revised P115 to describe the prompt, structured context, semantic and source support checks, and the limit on attributing physician preference to temporal controls alone. Comment 13 is resolved."),
@@ -1733,7 +1736,7 @@ def version_history() -> str:
         else:
             version, date, note = entry
             label = ""
-        current = version == "v1.8.0"
+        current = version == "v1.8.1"
         open_attr = " open" if current else ""
         summary = f"{version} · {label} · {date}" if label else f"{version} · {date}"
         rendered.append(
@@ -1759,7 +1762,7 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
     article = f"""
 <article>
   <h1 class="screen-only">Physician-authored manuscript draft</h1>
-  <p class="subtitle screen-only">English working manuscript · Version 1.8.0 · November 1, 2026</p>
+  <p class="subtitle screen-only">English working manuscript · Version 1.8.1 · November 1, 2026</p>
   <details class="fold" id="version-history"><summary>Version history</summary><div class="fold-body">{version_history()}</div></details>
   {sections}
   {build_supplement()}
@@ -1767,14 +1770,14 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
   {literature_workspace()}
 </article>
 """
-    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v1.8.0</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
+    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v1.8.1</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
     document = apply_review_block_metadata(document)
     markdown = f"""<!-- GENERATED FILE. The canonical physician Word extraction is the prose authority. -->
 # Physician-authored manuscript draft
 
-English working manuscript. Version 1.8.0, November 1, 2026.
+English working manuscript. Version 1.8.1, November 1, 2026.
 
-Current change: reorganized the physician authored Results under five descriptive headings, removed repeated summary sentences, added the staged technical ablation results, and moved one note level interpretation to the Discussion. The canonical physician source, tables, figures, captions, and data are unchanged.
+Current change: removed a repeated findings suggest construction from the note level interpretation moved to P109. No other manuscript wording, data, tables, figures, or captions changed.
 
 The canonical physician blocks below mirror `{SOURCE_DOCX.name}` for audit purposes. The clean HTML applies only the approved cross-reference and reporting edits while preserving all source blocks in its hidden audit representation.
 
@@ -2239,14 +2242,14 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     ]:
         if f'id="{revision_id}"' not in document: raise AssertionError(f"Clarification is missing: {revision_id}")
     if 'id="draft-metadata"' in document or "Draft information and source provenance" in document: raise AssertionError("Removed draft-information block remains")
-    if "Version 1.8.0 · November 1, 2026" not in document or "draft v1.8.0" not in document: raise AssertionError("Version 1.8.0 metadata is missing")
-    if document.count('class="version-entry"') != 33 or any(f'id="version-{item}"' not in document for item in ["1-8-0", "1-7-0", "1-6-9", "1-6-8", "1-6-7", "1-6-6", "1-6-5", "1-6-4", "1-6-3", "1-6-2", "1-6-1", "1-6", "1-5-2", "1-5-1", "1-5", "1-4-1", "1-4", "1-3", "1-2-3", "1-2-2", "1-2-1", "1-2", "1-1", "1-0", "0-25", "0-24", "0-23", "0-22", "0-21", "0-20", "0-19", "0-18", "0-17"]):
+    if "Version 1.8.1 · November 1, 2026" not in document or "draft v1.8.1" not in document: raise AssertionError("Version 1.8.1 metadata is missing")
+    if document.count('class="version-entry"') != 34 or any(f'id="version-{item}"' not in document for item in ["1-8-1", "1-8-0", "1-7-0", "1-6-9", "1-6-8", "1-6-7", "1-6-6", "1-6-5", "1-6-4", "1-6-3", "1-6-2", "1-6-1", "1-6", "1-5-2", "1-5-1", "1-5", "1-4-1", "1-4", "1-3", "1-2-3", "1-2-2", "1-2-1", "1-2", "1-1", "1-0", "0-25", "0-24", "0-23", "0-22", "0-21", "0-20", "0-19", "0-18", "0-17"]):
         raise AssertionError("Nested version history is incomplete")
-    if not re.search(r'<details class="version-entry" id="version-1-8-0"[^>]* open>', document):
-        raise AssertionError("Current v1.8.0 history entry is not expanded inside the closed parent")
-    if any(re.search(rf'<details class="version-entry" id="version-{item}"[^>]* open>', document) for item in ["1-7-0", "1-6-9", "1-6-8", "1-6-7", "1-6-6", "1-6-5", "1-6-4", "1-6-3", "1-6-2", "1-6-1", "1-6", "1-5-2", "1-5-1", "1-5", "1-4-1", "1-4", "1-3"]):
+    if not re.search(r'<details class="version-entry" id="version-1-8-1"[^>]* open>', document):
+        raise AssertionError("Current v1.8.1 history entry is not expanded inside the closed parent")
+    if any(re.search(rf'<details class="version-entry" id="version-{item}"[^>]* open>', document) for item in ["1-8-0", "1-7-0", "1-6-9", "1-6-8", "1-6-7", "1-6-6", "1-6-5", "1-6-4", "1-6-3", "1-6-2", "1-6-1", "1-6", "1-5-2", "1-5-1", "1-5", "1-4-1", "1-4", "1-3"]):
         raise AssertionError("Prior version-history entries must be closed")
-    if "v1.8.0 · Physician source first Results · 2026-11-01" not in document:
+    if "v1.8.1 · Discussion wording · 2026-11-01" not in document:
         raise AssertionError("Current version-history label is missing")
     if "querySelectorAll('#version-history .version-entry').forEach(entry=>entry.open=entry===target)" not in document:
         raise AssertionError("Version-history deep links do not isolate the targeted entry")
@@ -2259,8 +2262,8 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     visible_manuscript_text = "\n".join(
         f"{block_id}\t{block.text}" for block_id, block in blocks_without_comment_ui.items()
     )
-    if hashlib.sha256(visible_manuscript_text.encode("utf-8")).hexdigest() != EXPECTED_V180_VISIBLE_MANUSCRIPT_TEXT_SHA256:
-        raise AssertionError("Visible manuscript text differs from the approved v1.8.0 Results structure")
+    if hashlib.sha256(visible_manuscript_text.encode("utf-8")).hexdigest() != EXPECTED_V181_VISIBLE_MANUSCRIPT_TEXT_SHA256:
+        raise AssertionError("Visible manuscript text differs from the approved v1.8.1 wording")
     if hashlib.sha256(blocks_without_comment_ui["figure-s2::caption"].text.encode("utf-8")).hexdigest() != EXPECTED_V170_S2_CAPTION_SHA256:
         raise AssertionError("Supplementary Figure S2 caption changed")
     results_displays = "\n".join(
@@ -2303,8 +2306,8 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
         raise AssertionError("Removed Limitations link remains")
     if hashlib.sha256(rendered_physician_prose(document, "P119").encode("utf-8")).hexdigest() != EXPECTED_V168_P119_TEXT_SHA256:
         raise AssertionError("P119 differs from the approved v1.6.8 wording")
-    if hashlib.sha256(rendered_physician_prose(document, "P109").encode("utf-8")).hexdigest() != EXPECTED_V180_P109_TEXT_SHA256:
-        raise AssertionError("P109 differs from the approved v1.8.0 moved interpretation")
+    if hashlib.sha256(rendered_physician_prose(document, "P109").encode("utf-8")).hexdigest() != EXPECTED_V181_P109_TEXT_SHA256:
+        raise AssertionError("P109 differs from the approved v1.8.1 moved interpretation")
     for paragraph in data["paragraphs"]:
         block_id = str(paragraph["id"])
         if not re.fullmatch(r"P\d{3}", block_id) or not 84 <= int(block_id[1:]) <= 119:
