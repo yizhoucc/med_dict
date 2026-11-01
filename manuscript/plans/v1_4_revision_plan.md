@@ -248,3 +248,13 @@ Author decision, 2026-10-31: breast-cancer development used all 100 development 
 4. Completed: fixed ordering and attribution asymmetry are disclosed in Supplementary Methods, their possible effect is discussed in P119 Limitations, and the main Methods refers readers to the supplement without repeating those details.
 5. Completed: ChatGPT, the local Qwen reviewer, and the Codex ablation judge are reported as separate roles.
 6. Completed: the renderer, generated manuscript, supplement, tests, and version history were updated within the approved scope.
+
+## v1.4.1 wording follow-up
+
+Status: completed on 2026-10-31.
+
+1. The main clinical-evaluation sentence now uses `A/B test interface`. The fixed A/B mapping, attribution asymmetry, and related limitation remain in Supplementary Methods and P119.
+2. The current manuscript consistently names this component `Ablation study`. The Methods state that its purpose was to examine how successive harness components contributed to the observed improvement.
+3. Table 2 defines condition A as one application-level inference request per note. The four cumulative configurations, LLM-judge method, results, and evidence boundary are unchanged.
+4. The page legend now states that selected highlights are not a complete redline. The A/B phrase, ablation heading and purpose, and revised Table 2 wording are highlighted.
+5. Version history is closed by default. The v1.4.1 entry is open inside it, while v1.4 and all older entries are closed.

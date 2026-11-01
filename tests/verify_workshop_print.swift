@@ -56,7 +56,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           const button = supplement?.querySelector(':scope > .fold-toggle');
           if (!supplement || !body || !button) return 'missing custom supplement fold';
           const highlights = [...document.querySelectorAll('mark.revision-highlight')];
-          if (highlights.length !== 29) return `unexpected revision-highlight count: ${highlights.length}`;
+          if (highlights.length !== 31) return `unexpected revision-highlight count: ${highlights.length}`;
           if (highlights.some(node => ['transparent', 'rgba(0, 0, 0, 0)'].includes(getComputedStyle(node).backgroundColor))) {
             return 'revision highlight is not visible on screen';
           }
@@ -78,7 +78,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           if (!visible() || document.activeElement?.id !== 'figure-s1') return 'nested supplement link did not reveal and focus';
           button.click();
           const history = document.getElementById('version-history');
-          const current = document.getElementById('version-1-4');
+          const current = document.getElementById('version-1-4-1');
           const older = [...history.querySelectorAll('.version-entry')].filter(node => node !== current);
           if (history.open || !current?.open || older.some(node => node.open)) return 'unexpected initial version-history state';
           window.__workshopVersionHashState = 'waiting';
@@ -87,7 +87,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
               window.__workshopVersionHashState = 'settled';
             }, 0);
           }, {once: true});
-          setTimeout(() => { location.hash='#version-1-3'; }, 0);
+          setTimeout(() => { location.hash='#version-1-4'; }, 0);
           return 'waiting-for-version-hash';
         })()
         """#
@@ -119,10 +119,10 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
         let checks = #"""
         (() => {
           const history = document.getElementById('version-history');
-          const current = document.getElementById('version-1-4');
-          const prior = document.getElementById('version-1-3');
+          const current = document.getElementById('version-1-4-1');
+          const prior = document.getElementById('version-1-4');
           const older = [...history.querySelectorAll('.version-entry')].filter(node => node !== current);
-          if (location.hash !== '#version-1-3' || !history.open || current.open || !prior.open || older.some(node => node !== prior && node.open) || document.activeElement !== prior) {
+          if (location.hash !== '#version-1-4' || !history.open || current.open || !prior.open || older.some(node => node !== prior && node.open) || document.activeElement !== prior) {
             return 'version hash navigation did not isolate and focus prior entry';
           }
           for (const id of ['physician-comments', 'version-history', 'literature-workspace']) {
@@ -160,7 +160,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
                 self.fail("Invalid print-preparation report"); return
             }
             guard offenders.isEmpty else { self.fail("Page-boundary offenders: \(offenders)"); return }
-            guard highlightCount == 29,
+            guard highlightCount == 31,
                   highlightBackgrounds.allSatisfy({ $0 == "transparent" || $0 == "rgba(0, 0, 0, 0)" }) else {
                 self.fail("Revision highlights retained screen background in print export: \(highlightBackgrounds)"); return
             }

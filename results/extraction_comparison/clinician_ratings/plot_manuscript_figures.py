@@ -723,8 +723,8 @@ def plot_staged_ablation() -> None:
         if key == "B→C":
             round_rect(out, px + 85, 600, 290, 35, fill=HARNESS_SOFT, stroke=PL, radius=17)
             text(out, px + 230, 623, "Clear overall verification gain", 13, anchor="middle", weight=700, fill=PL)
-    text(out, 750, 705, "One blinded non-physician Codex judge; secondary technical evidence", 14, anchor="middle", weight=700, fill=LLM)
-    text(out, 750, 732, "Exact two-sided sign tests exclude ties; overall p values are exploratory and unadjusted", 12, anchor="middle", fill=MUTED)
+    text(out, 750, 705, "One blinded non-physician Codex judge", 14, anchor="middle", weight=700, fill=LLM)
+    text(out, 750, 732, "Exact two-sided sign tests exclude ties; overall p values are unadjusted", 12, anchor="middle", fill=MUTED)
     svg_end(out, OUTPUT / "supplementary_figure_s2_staged_ablation.svg")
 
 

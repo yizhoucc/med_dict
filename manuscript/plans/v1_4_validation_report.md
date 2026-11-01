@@ -61,3 +61,13 @@ The renderer enforces the 70% minimum on every build.
   - post-write fault cleanup passed and left no PDF
 
 The WebKit verifier now constructs a self-contained in-memory page for testing. This avoids local-file sandbox failures while preserving the same rendered HTML and all six print images.
+
+## v1.4.1 wording follow-up
+
+Date: 2026-10-31
+
+The follow-up simplified the main evaluation sentence to `A/B test interface`, standardized the current scientific text on `Ablation study`, added the ablation purpose to Methods, and changed Table 2 condition A to `one inference request per note`. The Supplementary Methods and P119 disclosures about fixed ordering, source-attribution asymmetry, cumulative configurations, and the single non-physician LLM judge remain intact. Results, numerical values, and conclusions were not changed.
+
+The revision legend now says: `Selected highlights call attention to key new or substantively revised passages; they are not a complete redline.` Version history remains closed by default; v1.4.1 is the open current entry inside it, and v1.4 and older entries are closed.
+
+Validation passed with 127 physician paragraphs, 35 native-table cells, 12 Word comments, 2 visible comments, 30 literature entries, 6 figures, and 8 tables. The renderer, Python compilation, 9 ablation unit tests, internal cross-references, unique IDs, real hash navigation, bounded WebKit print regression, and post-write cleanup checks passed. The temporary regression PDF had 14 pages and 1,266,508 bytes and was deleted after validation.

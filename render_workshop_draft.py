@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the English-only physician-authored manuscript HTML (version 1.4).
+"""Build the English-only physician-authored manuscript HTML (version 1.4.1).
 
 The canonical Word extraction is the sole prose source. Technical tables,
 figures, captions, navigation, and supplementary analyses are inserted around
@@ -84,16 +84,18 @@ RESOLVED_COMMENT_LITERATURE_MAP = {
 
 REVISED_HEADINGS = {
     "P059": "Model-assisted pancreatic-cancer refinement",
-    "P066": "Exploratory staged technical ablation",
+    "P066": "Ablation study",
     "P096": "Performance across clinical extraction fields",
 }
+
+REVISION_HIGHLIGHT_HEADINGS = {"P066"}
 
 REVISED_PARAGRAPHS = {
     "P004": "Recent years have witnessed increased use of large language models (LLMs) in clinical language tasks, including patient education, clinical documentation, and administrative work. Many of these applications rely on identifying relevant information from electronic health record (EHR) notes before it can be summarized, analyzed, or used in another task. Reliable extraction from those notes is therefore an important step in applying LLMs to oncology care and research.",
     "P006": "Although EHRs contain structured fields, it is estimated that 80% of clinical data exist in unstructured form ([[cite:kong]]), and a large proportion of clinically relevant information is encoded in free-text narratives ([[cite:wiest]]). Oncology notes are particularly challenging because a patient can have a complex medical history that contains multiple diagnoses, prior and future treatments, and changes in disease status. Key information may be distributed across different sections, expressed with uncertainty, linked through complex timelines, or even documented incorrectly. As commonly seen in real-world practice, copied-forward laboratory, imaging, and genomic results lengthen notes and further complicate the extraction task. A decade-long study of outpatient documentation found that notes became longer and more redundant, with much of the increase attributable to templates or copied and pasted text ([[cite:rule]]). LLMs must therefore not only identify the relevant information, but also determine its relationship to the patient's current diseases. ",
     "P008": "Currently, LLMs can assist with this task, but the output does not ensure that the extracted information is fully faithful to the original note. Models may generate false information, omit details, confuse historical findings, or infer plausible content where the note does not provide it. These errors can be difficult for human reviewers to detect. Commercial LLMs have been evaluated for clinical note extraction, but performance remains variable. The use of commercial models also raises privacy and governance concerns. The potential transmission of patients' protected health information (PHI) to externally hosted services can introduce institutional and patient concerns related to data processing, retention, and HIPAA compliance. A locally deployed open-weight model can process notes without sending PHI to outside sources. However, local models alone do not resolve extraction errors. ",
     "P010": "Recent studies suggest that the performance of LLMs depends not only on the model but also on how the model is used. Several strategies have been used to improve clinical extraction. Fine-tuning adapts the model to a medical task by continuing to train the model on domain-specific knowledge. This process is usually time-consuming and requires large datasets. Alternatively, prompt design, task decomposition, verification, and deterministic clinical rules can improve extraction without changing the model weights. Expert review can guide this process by identifying recurring errors and refining the extraction workflow ([[cite:huang]]; [[cite:hein]]). Less is known about how to turn recurring expert feedback into a reproducible workflow for oncology-note extraction.",
-    "P012": "We use the term inference harness to describe the execution workflow surrounding an LLM, including the sequence of extraction tasks, checks, and clinical rules applied without changing the model weights. Because it operates outside the frozen model weights, the harness is technically separable from the base model. We developed a locally deployable framework for extracting information from real-world unstructured oncology notes. A physician helped refine the harness on breast-cancer notes, after which it was adapted to pancreatic ductal adenocarcinoma through model-assisted development without physician review of pancreatic outputs. We compared the final harness with a single-prompt baseline using the same underlying model and field definitions. We also conducted an exploratory staged technical ablation of successive harness components.",
+    "P012": "We use the term inference harness to describe the execution workflow surrounding an LLM, including the sequence of extraction tasks, checks, and clinical rules applied without changing the model weights. Because it operates outside the frozen model weights, the harness is technically separable from the base model. We developed a locally deployable framework for extracting information from real-world unstructured oncology notes. A physician helped refine the harness on breast-cancer notes, after which it was adapted to pancreatic ductal adenocarcinoma through model-assisted development without physician review of pancreatic outputs. We compared the final harness with a single-prompt baseline using the same underlying model and field definitions. We also conducted an ablation study of successive harness components.",
     "P017": "The study comprised two development stages followed by an independent clinical evaluation. Stage 1 used physician-guided review of breast-cancer outputs to develop the inference harness. Stage 2 adapted the harness to pancreatic ductal adenocarcinoma (PDAC) without physician review of PDAC outputs, using model-assisted review and investigator-directed regression testing.",
     "P019": "The final harness was compared with a single-prompt baseline using the same frozen model and field schema on an untouched holdout set of 40 expert-annotated CORAL notes: 20 breast-cancer notes and 20 PDAC notes. Four physicians completed system-identity-masked field-level evaluations across both cancer types.",
     "P022": "We used CORAL, a PhysioNet dataset of deidentified medical oncology notes obtained from the University of California, San Francisco. Development used 100 unannotated breast-cancer notes and 100 unannotated pancreatic-cancer notes. A separate untouched holdout set contained 20 expert-annotated breast-cancer notes and 20 expert-annotated pancreatic-cancer notes. The holdout note texts and their existing CORAL annotations were not used for development. The annotations were not provided to the model, used to calculate the primary physician-preference endpoint, or shown in the physician-evaluation interface.",
@@ -104,8 +106,8 @@ REVISED_PARAGRAPHS = {
     "P057": "Breast-cancer development used all 100 development notes. Early and targeted iterations used smaller subsets to shorten the feedback cycle, while major and final runs covered all 100 notes to detect less frequent errors and check for regression. A physician reviewed selected outputs, and the investigators compared flagged outputs with the complete source note, grouped recurring errors, and translated them into general changes to prompts, verification logic, or deterministic rules. These changes were retained only after testing on affected examples. The objective was to encode recurring clinical distinctions rather than case-specific corrections. For example, an error in which axillary nodal disease was classified as distant metastasis motivated a general regional-node rule. An error in which a planned drug was listed as active therapy motivated a temporal medication rule. This process did not produce a conventional supervised training set, and the model weights were not updated.",
     "P060": "The harness developed from breast-cancer notes was further adapted to pancreatic ductal adenocarcinoma using 100 additional pancreatic-cancer notes. No physician reviewed pancreatic-cancer outputs during this stage. ChatGPT organized the clinical error categories and clinical distinctions established during breast-cancer development into a structured review rubric. The Qwen pipeline generated structured outputs, and a rubric-guided Qwen reviewer compared them with the full pancreatic source notes and flagged potential errors. Investigators assessed the flags, implemented selected revisions to prompts, clinical rules, or workflow logic, and retained changes only after regression testing. ",
     "P061": "The adaptation retained the core framework while introducing pancreatic-cancer-specific modifications, particularly for disease terminology, treatment regimens, and post-processing rules. The framework thus preserved its core approach to error detection and correction while accommodating differences between the two cancer types.",
-    "P063": "The clinical evaluation presented the source note and two structured outputs through a system-identity-masked A/B interface. The four evaluators selected A better, B better, or tie for each field. The physician who participated in Stage 1 development was not one of the four evaluators. Before evaluating the holdout set, the authors designated seven core fields as clinically important for understanding disease status and current management. Full interface implementation details are provided in Supplementary Methods. See Supplementary Table S1.",
-    "P067": "We conducted an exploratory staged technical ablation on the same 20 breast-cancer and 20 pancreatic-cancer holdout notes. All four conditions used Qwen2.5-32B-Instruct-AWQ, greedy decoding, and the same 31-field output contract. Attribution, tool calling, and letter generation were disabled. ",
+    "P063": "The clinical evaluation presented the source note and two structured outputs through an A/B test interface. The four evaluators selected A better, B better, or tie for each field. The physician who participated in Stage 1 development was not one of the four evaluators. Before evaluating the holdout set, the authors designated seven core fields as clinically important for understanding disease status and current management. Full interface implementation details are provided in Supplementary Methods. See Supplementary Table S1.",
+    "P067": "We conducted an ablation study on the same 20 breast-cancer and 20 pancreatic-cancer holdout notes to examine how successive harness components contributed to the observed improvement. All four conditions used Qwen2.5-32B-Instruct-AWQ, greedy decoding, and the same 31-field output contract. Attribution, tool calling, and letter generation were disabled. ",
     "P068": "See Table 2 for the 4 conditions.",
     "P073": "We compared adjacent configurations (A vs B, B vs C, and C vs D), yielding 120 paired comparisons across 40 notes. A single blinded OpenAI LLM judge was given only the source note and the two outputs. The judge had no access to the project code, development history, prior evaluations, or system identities. The judge was instructed to prioritize source faithfulness, then completeness, and to use TIE when differences were minor or offsetting. We compared adjacent configurations using two-sided exact sign tests, excluding ties. Exact judge configuration is provided in Supplementary Methods.",
     "P076": "For the physician evaluation, interrater agreement was assessed pairwise using exact agreement and Cohen's κ for each evaluator pair. Results from the 8 completed clinician-by-cancer evaluations were summarized separately. Pooled counts were reported descriptively and were not treated as independent field-level observations.",
@@ -121,8 +123,8 @@ REVISED_PARAGRAPHS = {
     "P111": "Structured extraction can convert long, complex, free-text notes into a compact set of fields that can be checked, searched, and reused downstream. In oncology, this is useful because clinical notes can be complex and contain multiple diagnoses, prior and future treatments, and changes in disease status. Prior studies have demonstrated the potential of LLMs for extracting structured information from clinical notes. However, the CORAL study showed that advanced commercial models could omit information or generate unsupported findings ([[cite:sushil]]). [[cite:huang_named]] demonstrated that iterative prompt engineering using ChatGPT via an API could improve extraction of free-text pathology notes. Similarly, [[cite:hein_named]] showed that iterative refinement guided by clinicians and systematic error analysis could improve structured extraction and be adapted to other cancer types.",
     "P113": "Our study built on these studies by using physician feedback to identify recurring errors and develop clinical rules during breast-cancer note development. Rather than producing a large, supervised training set, we used the feedback to develop field-specific prompts, verification steps, and clinical rules. This approach incorporated clinician knowledge into the inference harness and was reused in subsequent extraction tasks. Instead of asking physicians to perform iterative evaluation, we used ChatGPT to organize the established criteria from breast-cancer development, and used Qwen2.5-32B as a judge. LLM-as-a-judge approaches have been reported in prior studies, which showed that LLM judges had high concordance on text-comparison rubrics such as faithfulness and completeness ([[cite:gershon]]). The final harness was preferred over the baseline by independent physician evaluators for pancreatic cancer. This finding suggests that criteria established through physician feedback may be transferable to other cancer types and may reduce the need for repeated physician review during development.",
     "P115": "One recurring challenge we identified was the interpretation of temporal relationships in oncology notes. Prior studies have reported broader temporal reasoning challenges in clinical notes ([[cite:kruse]]; [[cite:kougia]]). Although the LLM could identify treatment responses documented in the clinical history, it sometimes failed to associate them with the correct disease status. For example, a response to a previous treatment could be incorrectly attributed to the current regimen. This was particularly important for patients who had received multiple lines of therapy, where each treatment response must be associated with the corresponding treatment history. We addressed this issue by incorporating treatment history and temporal context into the extraction process and adding verification steps to align treatment responses with the appropriate regimen. The physician evaluators preferred the harness over the baseline, suggesting that temporal checks could help reduce these errors. ",
-    "P117": "Our ablation analysis suggested that verification was an important component of the inference harness (Supplementary Figure S2). Adding decomposed extraction alone did not produce an overall improvement, whereas adding layers of verification gates resulted in significantly more favorable evaluations. Additionally, we found that the clinical rules developed from breast cancer did not provide further improvement for pancreatic cancer. This suggests that restrictive rules that performed well in one cancer type may not improve performance in another. More restrictive rules may introduce trade-offs, especially when the terminology or treatment differs between cancer types. For example, some rules developed for breast cancer were specific to estrogen receptor (ER), progesterone receptor (PR), and HER2 status, which are used to classify breast cancer subtypes but are not applicable to PDAC.",
-    "P119": "This study has several limitations. First, our primary outcome was physician preference rather than absolute extraction accuracy. A tie could indicate that both systems produced acceptable outputs or that both contained errors. Although physician ratings consistently favored the harness, the evaluation included only four physicians and 40 clinical notes from two cancer types within a single-source dataset. However, these were real clinical notes rather than synthetic cases or model-generated narratives. They contain repeated, copied-forward information, uncertain findings, treatment plans, or even typographical errors that make the extraction task challenging. The fixed A/B display order and the availability of source attribution only with the harness output may have allowed evaluators to infer a recurring pattern or may have influenced ratings. The direction and magnitude of any effect cannot be determined. Nevertheless, further studies are needed to investigate whether the results can be generalized to other cancer types or language models. Second, the exploratory ablation was evaluated by a single non-physician LLM judge and compared cumulative stages rather than individual components ([[cite:williams]]). Therefore, it could not determine the independent contribution of each verification step or clinical rule. Both systems used the same base-model family, so this study did not evaluate generalization across model families. Future studies should evaluate extraction accuracy against expert reference standards, include larger and more diverse clinical datasets, and assess whether the harness improves efficiency and reliability in clinical workflows. ",
+    "P117": "The ablation study suggested that verification was an important component of the inference harness (Supplementary Figure S2). Adding decomposed extraction alone did not produce an overall improvement, whereas adding layers of verification gates resulted in significantly more favorable evaluations. Additionally, we found that the clinical rules developed from breast cancer did not provide further improvement for pancreatic cancer. This suggests that restrictive rules that performed well in one cancer type may not improve performance in another. More restrictive rules may introduce trade-offs, especially when the terminology or treatment differs between cancer types. For example, some rules developed for breast cancer were specific to estrogen receptor (ER), progesterone receptor (PR), and HER2 status, which are used to classify breast cancer subtypes but are not applicable to PDAC.",
+    "P119": "This study has several limitations. First, our primary outcome was physician preference rather than absolute extraction accuracy. A tie could indicate that both systems produced acceptable outputs or that both contained errors. Although physician ratings consistently favored the harness, the evaluation included only four physicians and 40 clinical notes from two cancer types within a single-source dataset. However, these were real clinical notes rather than synthetic cases or model-generated narratives. They contain repeated, copied-forward information, uncertain findings, treatment plans, or even typographical errors that make the extraction task challenging. The fixed A/B display order and the availability of source attribution only with the harness output may have allowed evaluators to infer a recurring pattern or may have influenced ratings. The direction and magnitude of any effect cannot be determined. Nevertheless, further studies are needed to investigate whether the results can be generalized to other cancer types or language models. Second, the ablation study used a single non-physician LLM judge and compared cumulative configurations rather than individual components ([[cite:williams]]). Therefore, it could not determine the independent contribution of each verification step or clinical rule. Both systems used the same base-model family, so this study did not evaluate generalization across model families. Future studies should evaluate extraction accuracy against expert reference standards, include larger and more diverse clinical datasets, and assess whether the harness improves efficiency and reliability in clinical workflows. ",
 }
 
 GRAMMAR_REVISED_IDS = {
@@ -144,8 +146,8 @@ REVISION_HIGHLIGHTS = {
         "only the plan-specific branch was skipped; full-note extraction continued",
         "the system omitted the value rather than guess",
     ],
-    "P063": ["system-identity-masked", "Full interface implementation details are provided in Supplementary Methods."],
-    "P067": ["exploratory staged technical ablation"],
+    "P063": ["A/B test interface", "Full interface implementation details are provided in Supplementary Methods."],
+    "P067": ["to examine how successive harness components contributed to the observed improvement"],
     "P073": ["A single blinded OpenAI LLM judge", "Exact judge configuration is provided in Supplementary Methods."],
     "P119": [
         "The fixed A/B display order and the availability of source attribution only with the harness output may have allowed evaluators to infer a recurring pattern or may have influenced ratings.",
@@ -175,6 +177,11 @@ REVISED_TABLE_CELLS = {
     "T1R5C3": "Keep a lesion classified as suspected rather than label it as confirmed when a biopsy is pending",
     "T1R6C2": "Confusion among past, current, and future information.",
     "T1R6C3": "Remove a completed scan from the imaging plan",
+    "T2R1C2": "A single-prompt baseline with one inference request per note.",
+}
+
+REVISION_HIGHLIGHT_TABLE_CELLS = {
+    "T2R1C2": ["one inference request per note"],
 }
 
 XREF_TARGETS = {
@@ -394,7 +401,10 @@ def render_physician_paragraph(paragraph: dict[str, object], comment_ids: list[s
     if block_id in REVISED_HEADINGS:
         revised = REVISED_HEADINGS[block_id]
         slug = re.sub(r"[^a-z0-9]+", "-", revised.lower()).strip("-")
-        return source_audit(block_id, text) + f'<h3 class="physician-subheading" id="{slug}" data-origin="manuscript-edit">{esc(revised)}{anchors}</h3>'
+        rendered = esc(revised)
+        if block_id in REVISION_HIGHLIGHT_HEADINGS:
+            rendered = f'<mark class="revision-highlight">{rendered}</mark>'
+        return source_audit(block_id, text) + f'<h3 class="physician-subheading" id="{slug}" data-origin="manuscript-edit">{rendered}{anchors}</h3>'
     source_span = (
         f'<span data-origin="physician" data-source-block="{esc(block_id)}">{esc(text)}</span>'
     )
@@ -420,9 +430,13 @@ def render_native_table(table: dict[str, object], label: str, title: str) -> str
             cell_id = str(cell["id"])
             raw_text = str(cell["raw_visible_text"])
             if cell_id in REVISED_TABLE_CELLS:
+                revised_text = highlighted_text(
+                    REVISED_TABLE_CELLS[cell_id],
+                    REVISION_HIGHLIGHT_TABLE_CELLS.get(cell_id, []),
+                )
                 parts.append(
                     f'<{tag} data-origin="manuscript-edit">{source_audit(cell_id, raw_text)}'
-                    f'{esc(REVISED_TABLE_CELLS[cell_id])}</{tag}>'
+                    f'{revised_text}</{tag}>'
                 )
             else:
                 parts.append(
@@ -625,9 +639,9 @@ def literature_workspace() -> str:
 def technical_inserts_after(block_id: str) -> str:
     inserts = {
         "P019": revision_inline_paragraph(
-            "We separately conducted an exploratory staged technical ablation of four cumulative harness configurations using a blinded OpenAI LLM judge. The study workflow is shown in Figure 1.",
+            "We separately conducted an ablation study of four cumulative harness configurations using a blinded OpenAI LLM judge. The study workflow is shown in Figure 1.",
             paragraph_id="study-design-ablation",
-            phrases=["exploratory staged technical ablation"],
+            phrases=["ablation study"],
         ),
         "P038": figure("1", "Development, adaptation, and evaluation workflow", "Development, transfer, and evaluation pathway. Breast-cancer physician review informed the inference harness. The failure history and clinical rubric then supported author-controlled PDAC adaptation without target-domain physician review of outputs. Four physicians compared the final harness with the same-model single-prompt baseline on the 40-note holdout set."),
         "P082": manuscript_paragraph("Exploratory core-field analysis used one joint population-averaged logistic GEE on 495 directional core judgments. Field, physician, and cancer type were fixed effects; repeated judgments were clustered by note with an exchangeable working correlation. Field-specific probabilities were standardized over the physician and cancer distribution observed for that field. Breast type and receptor status applied only to breast-cancer notes. Ties were excluded. These estimates describe preference rather than accuracy, and no pairwise field tests or multiplicity claims were made.", paragraph_id="core-field-statistical-analysis"),
@@ -692,7 +706,7 @@ def build_scientific_sections(data: dict[str, object]) -> tuple[str, str]:
             if table_id == "T1":
                 current_parts.append(render_native_table(tables[table_id], "Table 1", "Inference harness components"))
             elif table_id == "T2":
-                current_parts.append(render_native_table(tables[table_id], "Table 2", "Staged technical ablation conditions"))
+                current_parts.append(render_native_table(tables[table_id], "Table 2", "Ablation study conditions"))
             current_md.extend([f'<!-- physician native table:{table_id}; cells preserved in canonical JSON -->', ""])
     flush()
     return "".join(front_blocks + sections), "\n".join(markdown)
@@ -748,7 +762,7 @@ def supplementary_methods() -> str:
             paragraph_id="supplement-evaluation-interface",
             phrases=["fixed position mapping", "Source attribution was available only with the harness output"],
         )
-        + '<h4>Exploratory ablation judge</h4>'
+        + '<h4>Ablation study judge</h4>'
         + revision_inline_paragraph(
             "The ablation judge was Codex using model gpt-5.6-sol, reasoning effort xhigh, and service tier default. It reviewed blinded adjacent-configuration pairs and received only the source note and two outputs. ChatGPT was used only for the PDAC review-rubric role described above.",
             paragraph_id="supplement-ablation-judge",
@@ -767,7 +781,7 @@ def build_supplement() -> str:
         + supplementary_table_1()
         + supplementary_table_2()
         + figure("S1", "Note-level preference-margin distribution", "This figure shows the note-level distribution after pooling all four physicians within each cancer type, previously drafted as Panel C of the main figure. The margin is (harness preferences minus baseline preferences) divided by completed judgments for that note. All 20 breast-cancer notes and 19 of 20 PDAC notes had positive margins; one PDAC note had a negative margin. The prior detailed breast and PDAC note panels are not retained. This is a supporting preference sensitivity analysis, not an accuracy estimate.", supplementary=True)
-        + figure("S2", "Exploratory staged technical ablation", "Blinded staged technical ablation across three cumulative transitions. A was the single-prompt baseline; B added decomposition and orchestration; C added semantic, faithfulness, and temporal verification; D added deterministic inline processing and the complete POST-hook layer. One non-physician OpenAI LLM judge produced these exploratory technical judgments. Exact two-sided sign tests exclude ties.", supplementary=True)
+        + figure("S2", "Ablation study", "Blinded comparisons across three transitions between four cumulative configurations. A was the single-prompt baseline; B added decomposition and orchestration; C added semantic, faithfulness, and temporal verification; D added deterministic inline processing and the complete POST-hook layer. One non-physician OpenAI LLM judge produced the judgments. Exact two-sided sign tests exclude ties.", supplementary=True)
         + supplementary_table_3()
         + "</div></section>"
     )
@@ -775,7 +789,8 @@ def build_supplement() -> str:
 
 def version_history() -> str:
     entries = [
-        ("v1.4", "2026-10-31", "Current change", "Reorganized the five-paragraph Introduction while retaining the physician's language, clarified the two-stage Methods and holdout design, moved gate and interface details to Supplementary Methods, and added the corresponding evaluation limitation."),
+        ("v1.4.1", "2026-10-31", "Current change", "Simplified the A/B interface wording, renamed the ablation study consistently, stated its purpose, and aligned the baseline condition with the application-level inference-request definition."),
+        ("v1.4", "2026-10-31", "Reorganized the five-paragraph Introduction while retaining the physician's language, clarified the two-stage Methods and holdout design, moved gate and interface details to Supplementary Methods, and added the corresponding evaluation limitation."),
         ("v1.3", "2026-10-30", "Applied conservative grammar and punctuation edits, added direct verified author-year citations, retained two outstanding physician comments, and highlighted three new methods or limitation clarifications for review."),
         ("v1.2.3", "2026-10-27", "Removed the empty trailing WebKit export page by ending capture at the last printable manuscript element, and added explicit failure cleanup with a post-write fault-injection test."),
         ("v1.2.2", "2026-10-27", "Replaced the supplementary native disclosure with an accessible custom fold so print media always contains the complete supplement, and added safe-boundary pagination preparation for bounded WebKit PDF verification."),
@@ -791,7 +806,7 @@ def version_history() -> str:
         ("v0.20", "2026-10-11", "Added probability-scale adjusted effects alongside the odds-ratio results."),
         ("v0.19", "2026-10-11", "Redrew the figure set in a common visual system and consolidated the judge protocol."),
         ("v0.18", "2026-10-10", "Integrated four physicians across two cancer types and revised the study framing around extraction rather than letter generation."),
-        ("v0.17", "Date not recorded", "Established the first tracked multi-physician analysis and staged technical ablation draft."),
+        ("v0.17", "Date not recorded", "Established the first tracked multi-physician analysis and ablation-study draft."),
     ]
     rendered = []
     for entry in entries:
@@ -800,7 +815,7 @@ def version_history() -> str:
         else:
             version, date, note = entry
             label = ""
-        current = version == "v1.4"
+        current = version == "v1.4.1"
         open_attr = " open" if current else ""
         summary = f"{version} · {label} · {date}" if label else f"{version} · {date}"
         rendered.append(
@@ -812,7 +827,7 @@ def version_history() -> str:
 
 def toc() -> str:
     links = [("#section-introduction", "Introduction", False), ("#section-methods", "Methods", False)]
-    for heading in ["Study Design", "Dataset", "Baseline model and model development", "Inference Harness", "Clinician-in-the-loop breast-cancer refinement", "Model-assisted pancreatic-cancer refinement", "Clinical evaluation data collection and scoring rubric", "Exploratory staged technical ablation", "Statistical analysis"]:
+    for heading in ["Study Design", "Dataset", "Baseline model and model development", "Inference Harness", "Clinician-in-the-loop breast-cancer refinement", "Model-assisted pancreatic-cancer refinement", "Clinical evaluation data collection and scoring rubric", "Ablation study", "Statistical analysis"]:
         links.append(("#" + re.sub(r"[^a-z0-9]+", "-", heading.lower()).strip("-"), heading, True))
     links.extend([("#section-results", "Results", False), ("#performance-across-clinical-extraction-fields", "Performance across clinical extraction fields", True), ("#section-discussion", "Discussion", False), ("#supplementary-material", "Supplementary material", False), ("#physician-comments", "Outstanding physician comments (2)", False), ("#version-history", "Version history", False), ("#literature-workspace", "Literature-review workspace", False)])
     return '<nav class="toc" data-origin="technical-insert"><strong>Contents</strong>' + "".join(f'<a class="{"sub" if sub else ""}" href="{href}" data-origin="technical-insert">{esc(label)}</a>' for href, label, sub in links) + "</nav>"
@@ -823,22 +838,22 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
     article = f"""
 <article>
   <h1 class="screen-only">Physician-authored manuscript draft</h1>
-  <p class="subtitle screen-only">English working manuscript · Version 1.4 · October 31, 2026</p>
+  <p class="subtitle screen-only">English working manuscript · Version 1.4.1 · October 31, 2026</p>
   <details class="fold" id="version-history"><summary>Version history</summary><div class="fold-body">{version_history()}</div></details>
-  <p class="revision-legend screen-only"><span class="revision-swatch" aria-hidden="true"></span>Highlighted text marks new or substantively revised language in the current change.</p>
+  <p class="revision-legend screen-only"><span class="revision-swatch" aria-hidden="true"></span>Selected highlights call attention to key new or substantively revised passages; they are not a complete redline.</p>
   {sections}
   {build_supplement()}
   <details class="fold" id="physician-comments"><summary>Outstanding physician comments (2)</summary><div class="fold-body">{render_comments(data)}</div></details>
   {literature_workspace()}
 </article>
 """
-    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v1.4</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
+    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v1.4.1</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
     markdown = f"""<!-- GENERATED FILE. The canonical physician Word extraction is the prose authority. -->
 # Physician-authored manuscript draft
 
-English working manuscript. Version 1.4, October 31, 2026.
+English working manuscript. Version 1.4.1, October 31, 2026.
 
-Current change: Introduction logic and Methods reporting clarified; detailed gate, interface, and model-role disclosures moved to Supplementary Methods.
+Current change: A/B interface and ablation-study wording simplified and standardized; the baseline condition now uses the application-level inference-request definition.
 
 The canonical physician blocks below mirror `{SOURCE_DOCX.name}` for audit purposes. The clean HTML applies only the approved cross-reference and reporting edits while preserving all source blocks in its hidden audit representation.
 
@@ -1000,7 +1015,7 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     for comment_id, literature_entry in RESOLVED_COMMENT_LITERATURE_MAP.items():
         marker = f'data-comment-text-id="{comment_id}" data-status="resolved" data-resolved-literature-entry="{literature_entry}"'
         if marker not in document: raise AssertionError(f"Resolved literature comment mapping is missing: {comment_id}")
-    if parser.revision_highlights != 29: raise AssertionError(f"Expected 29 restrained revision highlights, found {parser.revision_highlights}")
+    if parser.revision_highlights != 31: raise AssertionError(f"Expected 31 restrained revision highlights, found {parser.revision_highlights}")
     for revision_id in [
         "study-design-ablation", "supplement-data-access", "supplement-plan-identification",
         "supplement-postprocessing-order", "supplement-stage-example", "supplement-pdac-model-roles",
@@ -1008,12 +1023,14 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     ]:
         if f'id="{revision_id}"' not in document: raise AssertionError(f"Highlighted clarification is missing: {revision_id}")
     if 'id="draft-metadata"' in document or "Draft information and source provenance" in document: raise AssertionError("Removed draft-information block remains")
-    if "Version 1.4 · October 31, 2026" not in document or "draft v1.4" not in document: raise AssertionError("Version 1.4 metadata is missing")
-    if document.count('class="version-entry"') != 17 or any(f'id="version-{item}"' not in document for item in ["1-4", "1-3", "1-2-3", "1-2-2", "1-2-1", "1-2", "1-1", "1-0", "0-25", "0-24", "0-23", "0-22", "0-21", "0-20", "0-19", "0-18", "0-17"]):
+    if "Version 1.4.1 · October 31, 2026" not in document or "draft v1.4.1" not in document: raise AssertionError("Version 1.4.1 metadata is missing")
+    if document.count('class="version-entry"') != 18 or any(f'id="version-{item}"' not in document for item in ["1-4-1", "1-4", "1-3", "1-2-3", "1-2-2", "1-2-1", "1-2", "1-1", "1-0", "0-25", "0-24", "0-23", "0-22", "0-21", "0-20", "0-19", "0-18", "0-17"]):
         raise AssertionError("Nested version history is incomplete")
-    if not re.search(r'<details class="version-entry" id="version-1-4"[^>]* open>', document):
-        raise AssertionError("Current v1.4 history entry is not expanded inside the closed parent")
-    if "v1.4 · Current change · 2026-10-31" not in document:
+    if not re.search(r'<details class="version-entry" id="version-1-4-1"[^>]* open>', document):
+        raise AssertionError("Current v1.4.1 history entry is not expanded inside the closed parent")
+    if re.search(r'<details class="version-entry" id="version-1-4"[^>]* open>', document):
+        raise AssertionError("Prior v1.4 history entry must be closed")
+    if "v1.4.1 · Current change · 2026-10-31" not in document:
         raise AssertionError("Current version-history label is missing")
     if "querySelectorAll('#version-history .version-entry').forEach(entry=>entry.open=entry===target)" not in document:
         raise AssertionError("Version-history deep links do not isolate the targeted entry")
@@ -1045,9 +1062,10 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     if reuse_ratio < 0.70:
         raise AssertionError(f"Introduction physician-language reuse fell below 70%: {reuse_ratio:.2%}")
     if set(REVISED_HEADINGS) != {"P059", "P066", "P096"}: raise AssertionError("Revised heading registry changed")
-    if set(REVISED_TABLE_CELLS) != {"T1R4C2", "T1R5C2", "T1R5C3", "T1R6C2", "T1R6C3"}: raise AssertionError("Table 1 grammar revision registry changed")
-    for revised_cell in REVISED_TABLE_CELLS.values():
-        if esc(revised_cell) not in document: raise AssertionError(f"Revised Table 1 text is missing: {revised_cell}")
+    if set(REVISED_TABLE_CELLS) != {"T1R4C2", "T1R5C2", "T1R5C3", "T1R6C2", "T1R6C3", "T2R1C2"}: raise AssertionError("Native-table revision registry changed")
+    for cell_id, revised_cell in REVISED_TABLE_CELLS.items():
+        rendered_cell = highlighted_text(revised_cell, REVISION_HIGHLIGHT_TABLE_CELLS.get(cell_id, []))
+        if rendered_cell not in document: raise AssertionError(f"Revised native-table text is missing: {revised_cell}")
     expected_inline_urls = []
     for paragraph in data["paragraphs"]:
         revised = REVISED_PARAGRAPHS.get(str(paragraph["id"]), "")
@@ -1077,6 +1095,15 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     if 'href="#figure-3"' not in document or 'href="#supplementary-table-s2"' not in document: raise AssertionError("Agreement Results cross-references are missing")
     for stale in ["figure5_staged_ablation.svg", "figure6_clinical_handoff.svg", 'data-main-figure="5"', 'data-main-figure="6"']:
         if stale in document: raise AssertionError(f"Retired main figure remains: {stale}")
+    for obsolete_wording in [
+        "system-identity-masked a/b interface",
+        "exploratory staged technical ablation",
+        "staged technical ablation",
+        "exploratory ablation",
+        "one model call per note",
+    ]:
+        if obsolete_wording in visible_text_lower:
+            raise AssertionError(f"Obsolete visible wording remains: {obsolete_wording}")
     if len(markdown.split()) < 3000: raise AssertionError("Generated Markdown is unexpectedly short")
     if len(document.encode("utf-8")) >= 209_715_200: raise AssertionError("HTML exceeds 200 MiB")
 

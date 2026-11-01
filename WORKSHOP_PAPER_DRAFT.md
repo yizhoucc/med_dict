@@ -1,9 +1,9 @@
 <!-- GENERATED FILE. The canonical physician Word extraction is the prose authority. -->
 # Physician-authored manuscript draft
 
-English working manuscript. Version 1.4, October 31, 2026.
+English working manuscript. Version 1.4.1, October 31, 2026.
 
-Current change: Introduction logic and Methods reporting clarified; detailed gate, interface, and model-role disclosures moved to Supplementary Methods.
+Current change: A/B interface and ablation-study wording simplified and standardized; the baseline condition now uses the application-level inference-request definition.
 
 The canonical physician blocks below mirror `202601023_Manuscript_JAMA.docx` for audit purposes. The clean HTML applies only the approved cross-reference and reporting edits while preserving all source blocks in its hidden audit representation.
 

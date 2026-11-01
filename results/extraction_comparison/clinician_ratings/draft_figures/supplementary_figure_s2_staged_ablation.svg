@@ -118,7 +118,7 @@
 <text x="1270.0" y="500.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">2</text>
 <text x="1298.0" y="528.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">5</text>
 <text x="1270.0" y="563.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">later-stage share among non-ties: 27.8%</text>
-<text x="750.0" y="705.0" text-anchor="middle" font-size="16" font-weight="700" fill="#7A5FA8">One blinded non-physician Codex judge; secondary technical evidence</text>
-<text x="750.0" y="732.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">Exact two-sided sign tests exclude ties; overall p values are exploratory and unadjusted</text>
+<text x="750.0" y="705.0" text-anchor="middle" font-size="16" font-weight="700" fill="#7A5FA8">One blinded non-physician Codex judge</text>
+<text x="750.0" y="732.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">Exact two-sided sign tests exclude ties; overall p values are unadjusted</text>
 </g>
 </svg>
