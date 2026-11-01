@@ -1,9 +1,9 @@
 <!-- GENERATED FILE. The canonical physician Word extraction is the prose authority. -->
 # Physician-authored manuscript draft
 
-English working manuscript. Version 1.5, October 31, 2026.
+English working manuscript. Version 1.5.1, October 31, 2026.
 
-Current change: the five-paragraph Introduction was clarified, and the HTML now applies a complete block-level redline against the v1.3 visible manuscript. Deletions are recorded in the v1.5 version diff.
+Current change: the complete redline now uses light, medium, and strong yellow highlights to show the importance of each change. Manuscript wording is unchanged from v1.5, and deletions remain in the v1.5 version diff.
 
 The canonical physician blocks below mirror `202601023_Manuscript_JAMA.docx` for audit purposes. The clean HTML applies only the approved cross-reference and reporting edits while preserving all source blocks in its hidden audit representation.
 

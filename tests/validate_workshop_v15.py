@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deterministic v1.5 manuscript and review-redline regression checks."""
+"""Deterministic v1.5.1 manuscript and importance-aware redline checks."""
 
 from __future__ import annotations
 
@@ -61,11 +61,31 @@ def result_hash(document: str) -> tuple[int, str]:
 def main() -> None:
     document = (ROOT / "WORKSHOP_PAPER_DRAFT.html").read_text(encoding="utf-8")
     state = renderer.review_redline_state(document)
+    v15_document = subprocess.check_output(
+        ["git", "show", "744986d9:WORKSHOP_PAPER_DRAFT.html"],
+        cwd=ROOT,
+        text=True,
+    )
+    v15_blocks = renderer.collect_review_blocks(v15_document)
+    current_blocks = renderer.collect_review_blocks(document)
+    assert {block_id: block.text for block_id, block in current_blocks.items()} == {
+        block_id: block.text for block_id, block in v15_blocks.items()
+    }
     assert state["changed"] == state["highlighted"]
     assert not [block_id for block_id in state["highlighted"] if block_id not in state["scoped_current"]]
     assert not [block_id for block_id in state["changed"] if state["current"][block_id].section == "results"]
     assert len(state["scoped_current"]) == 342
     assert len(state["changed"]) == len(state["highlighted"]) == 44
+    expected_importance = {level: set(block_ids) for level, block_ids in renderer.REVIEW_IMPORTANCE.items()}
+    assert state["importance"] == expected_importance
+    assert {level: len(block_ids) for level, block_ids in state["importance"].items()} == {
+        "light": 20,
+        "medium": 12,
+        "strong": 12,
+    }
+    assert set().union(*state["importance"].values()) == state["changed"]
+    assert sum(len(block_ids) for block_ids in state["importance"].values()) == len(state["changed"])
+    assert not [block_id for block_id, block in state["current"].items() if block.importance and block_id not in state["changed"]]
     assert state["section_counts"] == {
         "discussion": 2,
         "introduction": 5,
@@ -92,18 +112,21 @@ def main() -> None:
     assert (old_result_count, old_result_hash) == (new_result_count, new_result_hash)
 
     print(
-        "V15_REVIEW_OK "
+        "V151_REVIEW_OK "
         f"baseline_blocks={state['baseline']['block_count']} "
         f"current_blocks={len(state['current'])} "
         f"changed={len(state['changed'])} highlighted={len(state['highlighted'])} "
-        f"deleted={len(state['deleted'])} sections={state['section_counts']}"
+        f"deleted={len(state['deleted'])} importance="
+        f"{dict(sorted((level, len(block_ids)) for level, block_ids in state['importance'].items()))} "
+        f"sections={state['section_counts']}"
     )
+    print(f"V151_WORDING_OK visible_blocks={len(current_blocks)} unchanged_from=744986d9")
     print(
-        "V15_INTRO_OK "
+        "V151_INTRO_OK "
         f"old_words={metrics['old_words']} new_words={metrics['new_words']} "
         f"inserted_or_replaced={inserted_or_replaced} metrics={metrics}"
     )
-    print(f"V15_RESULTS_OK blocks={new_result_count} sha256={new_result_hash}")
+    print(f"V151_RESULTS_OK blocks={new_result_count} sha256={new_result_hash}")
 
 
 if __name__ == "__main__":

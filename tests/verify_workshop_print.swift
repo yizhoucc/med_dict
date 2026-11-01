@@ -60,9 +60,23 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           if (highlights.some(node => ['transparent', 'rgba(0, 0, 0, 0)'].includes(getComputedStyle(node).backgroundColor))) {
             return 'revision highlight is not visible on screen';
           }
-          const legend = document.querySelector('.revision-legend')?.textContent.trim();
-          if (legend !== 'Complete block-level redline against v1.3: every visible manuscript block with changed wording is highlighted. Deletions are recorded in the version diff.') {
-            return `unexpected review legend: ${legend}`;
+          const expectedCounts = {light: 20, medium: 12, strong: 12};
+          for (const [level, expected] of Object.entries(expectedCounts)) {
+            const nodes = highlights.filter(node => node.dataset.reviewImportance === level);
+            if (nodes.length !== expected) return `unexpected ${level} highlight count: ${nodes.length}`;
+            if (nodes.some(node => !node.classList.contains(`revision-${level}`))) return `${level} highlight class mismatch`;
+          }
+          if (highlights.some(node => !['light', 'medium', 'strong'].includes(node.dataset.reviewImportance))) {
+            return 'changed block lacks exactly one importance level';
+          }
+          const legendLines = [...document.querySelectorAll('.revision-legend-line')].map(node => node.textContent.trim());
+          if (legendLines[0] !== 'All visible blocks changed since v1.3 are highlighted; deletions are recorded in the version diff.' ||
+              legendLines[1] !== 'Highlight intensity reflects the importance of changes since v1.3: light for minor edits, medium for clarifications, and strong for substantive changes.') {
+            return `unexpected review legend: ${legendLines.join(' | ')}`;
+          }
+          const swatches = [...document.querySelectorAll('.revision-key .revision-swatch')];
+          if (swatches.length !== 3 || new Set(swatches.map(node => getComputedStyle(node).backgroundColor)).size !== 3) {
+            return 'importance legend does not show three distinct swatches';
           }
           const changedSample = ['P004', 'P010', 'P017', 'P025', 'P066', 'P067', 'T2R1C2', 'table-2::caption', 'supplement-data-access', 'P117', 'P119'];
           for (const id of changedSample) {
@@ -74,8 +88,14 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           const unchangedSample = ['P002', 'P014', 'P016', 'T1R1C1', 'figure-1::caption'];
           for (const id of unchangedSample) {
             const node = document.querySelector(`[data-review-block-id="${id}"]`);
-            if (!node || node.hasAttribute('data-review-changed-from') || node.classList.contains('revision-highlight')) {
+            if (!node || node.hasAttribute('data-review-changed-from') || node.hasAttribute('data-review-importance') || node.classList.contains('revision-highlight')) {
               return `unchanged sample is highlighted: ${id}`;
+            }
+          }
+          for (const [id, level] of [['P008', 'light'], ['P067', 'medium'], ['P010', 'strong']]) {
+            const node = document.querySelector(`[data-review-block-id="${id}"]`);
+            if (node?.dataset.reviewImportance !== level || !node.classList.contains(`revision-${level}`)) {
+              return `importance sample mismatch: ${id}`;
             }
           }
           const ablationPurpose = document.querySelector('[data-review-block-id="P067"]');
@@ -103,7 +123,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           if (!visible() || document.activeElement?.id !== 'figure-s1') return 'nested supplement link did not reveal and focus';
           button.click();
           const history = document.getElementById('version-history');
-          const current = document.getElementById('version-1-5');
+          const current = document.getElementById('version-1-5-1');
           const older = [...history.querySelectorAll('.version-entry')].filter(node => node !== current);
           if (history.open || !current?.open || older.some(node => node.open)) return 'unexpected initial version-history state';
           window.__workshopVersionHashState = 'waiting';
@@ -144,7 +164,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
         let checks = #"""
         (() => {
           const history = document.getElementById('version-history');
-          const current = document.getElementById('version-1-5');
+          const current = document.getElementById('version-1-5-1');
           const prior = document.getElementById('version-1-4-1');
           const older = [...history.querySelectorAll('.version-entry')].filter(node => node !== current);
           if (location.hash !== '#version-1-4-1' || !history.open || current.open || !prior.open || older.some(node => node !== prior && node.open) || document.activeElement !== prior) {

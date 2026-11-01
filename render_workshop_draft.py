@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the English-only physician-authored manuscript HTML (version 1.5).
+"""Build the English-only physician-authored manuscript HTML (version 1.5.1).
 
 The canonical Word extraction is the sole prose source. Technical tables,
 figures, captions, navigation, and supplementary analyses are inserted around
@@ -39,6 +39,29 @@ REVIEW_BASELINE_PATH = ROOT / "manuscript/review_baselines/v1.3_visible_blocks.j
 REVIEW_BASELINE_VERSION = "v1.3"
 EXPECTED_REVIEW_BASELINE_COMMIT = "de4fff87eae0dc00f4c4eb65ec2274a3c7108cd8"
 EXPECTED_REVIEW_BASELINE_HTML_SHA256 = "db7b8fb330cce451383bc9741e616aa17f6bc87d5b3da3afdf39a309d6ecbb47"
+
+REVIEW_IMPORTANCE = {
+    "strong": {
+        "P010", "P012", "P017", "P019", "P022", "P028", "P030", "P119",
+        "supplement-data-access", "supplement-evaluation-interface",
+        "supplement-pdac-model-roles", "supplement-plan-identification",
+    },
+    "medium": {
+        "P004", "P006", "P025", "P060", "P063", "P067", "P073",
+        "figure-s2::caption", "study-design-ablation", "supplement-ablation-judge",
+        "supplement-postprocessing-order", "supplement-stage-example",
+    },
+    "light": {
+        "P008", "P057", "P066", "P117", "T2R1C2", "supplementary-methods::h3:0",
+        "supplementary-methods::h4:0", "supplementary-methods::h4:1",
+        "supplementary-methods::h4:2", "supplementary-methods::h4:3",
+        "supplementary-methods::h4:4", "supplementary-methods::h4:5",
+        "supplementary-methods::h4:6", "supplementary-methods::li:0",
+        "supplementary-methods::li:1", "supplementary-methods::li:2",
+        "supplementary-methods::li:3", "supplementary-methods::li:4",
+        "supplementary-methods::p:2", "table-2::caption",
+    },
+}
 
 MAIN_FIGURES = {
     "1": FIGURE_DIR / "figure1_development_pathway_rough.svg",
@@ -226,15 +249,15 @@ CSS = r"""
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:var(--page);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.62}
 .layout{display:grid;grid-template-columns:270px minmax(0,940px);gap:28px;width:min(1260px,calc(100% - 36px));margin:24px auto 70px;align-items:start}.toc{position:sticky;top:18px;max-height:calc(100vh - 36px);overflow:auto;padding:18px 15px;border:1px solid var(--line);border-radius:12px;background:#fffffff5}.toc strong{display:block;margin-bottom:9px;color:var(--navy)}.toc a{display:block;padding:4px 6px;border-radius:5px;color:#3e5160;text-decoration:none;font-size:12.5px}.toc a:hover{background:#eaf4fa}.toc .sub{padding-left:18px;font-size:11.5px;color:var(--muted)}
 article{min-width:0;padding:45px 54px 68px;border:1px solid var(--line);border-radius:14px;background:var(--paper);box-shadow:0 12px 34px #142b4012}h1{margin:0;color:var(--navy);font-family:Georgia,"Times New Roman",serif;font-size:36px;line-height:1.18}h2,h3{color:var(--navy)}h3{margin:27px 0 9px;font-size:19px}.subtitle{margin:8px 0 20px;color:var(--muted)}
-.revision-legend{margin:10px 0 18px;color:#55636e;font-size:12.5px}.revision-swatch{display:inline-block;width:.85em;height:.85em;margin-right:.35em;border:1px solid #e1c86c;border-radius:2px;background:#fff2b3;vertical-align:-.05em}.revision-highlight{background:#fff2b3;color:inherit;border-radius:2px;-webkit-box-decoration-break:clone;box-decoration-break:clone}.revision-paragraph{margin-top:9px}.supplement-methods h4{margin:18px 0 5px;color:#30485a;font-size:15px}.supplement-methods ol{margin:7px 0 14px;padding-left:24px}.supplement-methods li{margin:5px 0}
+.revision-legend{margin:10px 0 18px;color:#55636e;font-size:12.5px}.revision-legend-line{display:block;margin-top:4px}.revision-key{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}.revision-key-item{white-space:nowrap}.revision-swatch{display:inline-block;width:.85em;height:.85em;margin-right:.35em;border:1px solid rgba(201,152,0,.55);border-radius:2px;vertical-align:-.05em}.revision-swatch.revision-light,.revision-highlight.revision-light{background:rgba(255,193,7,.12)}.revision-swatch.revision-medium,.revision-highlight.revision-medium{background:rgba(255,193,7,.27)}.revision-swatch.revision-strong,.revision-highlight.revision-strong{background:rgba(255,193,7,.50)}.revision-highlight{color:inherit;border-radius:2px;-webkit-box-decoration-break:clone;box-decoration-break:clone}.revision-paragraph{margin-top:9px}.supplement-methods h4{margin:18px 0 5px;color:#30485a;font-size:15px}.supplement-methods ol{margin:7px 0 14px;padding-left:24px}.supplement-methods li{margin:5px 0}
 details{border:0}summary{cursor:pointer}.fold>summary,.fold-toggle{padding:13px 16px;color:var(--navy);font-weight:750;list-style:none}.fold>summary::-webkit-details-marker,.version-entry>summary::-webkit-details-marker{display:none}.fold>summary::before,.fold-toggle::before,.version-entry>summary::before{content:"▸";display:inline-block;width:1.2em}.fold[open]>summary::before,.custom-fold.is-expanded>.fold-toggle::before,.version-entry[open]>summary::before{content:"▾"}.current-change{margin:14px 0 20px;padding:10px 13px;border-left:4px solid var(--blue);background:#eef7fb;color:#264b61;font-size:13px}.version-entry{margin:8px 0;border:1px solid var(--line);border-radius:7px;background:#fafbfc}.version-entry>summary{padding:9px 11px;color:#30485a;font-weight:700;list-style:none}.version-entry-body{padding:0 13px 10px;color:#4b5964;font-size:13px}.version-entry-body p{margin:5px 0}
 .fold{margin:22px 0;border-top:1px solid var(--line)}.fold>summary,.fold-toggle{margin:0;padding:20px 0 10px;font-family:Georgia,"Times New Roman",serif;font-size:25px}.fold-toggle{display:block;width:100%;border:0;background:transparent;text-align:left;cursor:pointer}.custom-fold.is-collapsed>.fold-body{display:none}.custom-fold.is-expanded>.fold-body{display:block}.fold-body{padding:0 0 8px}.source-empty,.source-audit{display:none!important}.physician-paragraph,.manuscript-paragraph{margin:11px 0}.physician-subheading{scroll-margin-top:15px}.xref,.citation,.comment-anchor a{color:var(--blue);text-decoration:none}.xref:hover,.citation:hover,.comment-anchor a:hover{text-decoration:underline}.comment-anchor{margin-left:.18em;font-size:.72em;vertical-align:super}.comment-anchor a{font-weight:650}.comment-backlink{display:inline-block;margin-top:7px;font-size:12px}.print-page-spacer{display:none}
 .table-wrap{margin:20px 0 28px;overflow-x:auto}.table-caption,.figure-caption{margin:0 0 8px;color:#314452;font-size:13px}.table-caption strong,.figure-caption strong{color:var(--navy)}table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:8px 9px;border:1px solid #d6dde3;vertical-align:top}th{background:#e9f1f6;color:#173f5f;text-align:left}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}tbody tr:nth-child(even){background:#fafbfc}.physician-native-table th{background:#eaf4ef;color:#18533f}
 .figure{margin:24px 0 30px}.figure img{display:block;width:100%;height:auto;border:1px solid #e0e5e9;background:white}.figure-print{display:none!important}.figure-caption{margin-top:9px}.comment{margin:13px 0;padding:12px 14px;border:1px solid var(--line);border-radius:7px;background:#fafbfc}.comment-meta{font-size:12px;color:var(--muted)}.comment-text{margin:7px 0;white-space:pre-wrap}.comment-context{margin-top:7px;color:#4e5c67;font-size:12px}.literature-workspace li{margin:11px 0}.reference-note{display:block;margin-top:3px;color:#4e5c67;font-size:12px}.workspace-note{color:#4e5c67;font-size:13px}.version-list li{margin:6px 0}.source-hash{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;overflow-wrap:anywhere}
 @media(max-width:900px){.layout{display:block;width:min(100% - 18px,940px);margin:10px auto 40px}.toc{position:relative;top:auto;max-height:none;margin-bottom:12px}.toc a.sub{display:none}article{padding:30px 24px 48px}h1{font-size:30px}.metadata-grid{grid-template-columns:1fr}.table-wrap{margin-left:-8px;margin-right:-8px}.figure{margin-left:-8px;margin-right:-8px}}
 @media(max-width:440px){article{padding:24px 15px 40px}h1{font-size:27px}.fold>summary,.fold-toggle{font-size:22px}table{font-size:11px}th,td{padding:6px 5px}.figure-caption,.table-caption{padding:0 3px}}
-@media print{@page{margin:.62in}html{scroll-behavior:auto}body{background:#fff;font-family:Arial,sans-serif;font-size:10pt;line-height:1.42}.layout{display:block;width:auto;margin:0}.toc,.screen-only,#physician-comments,#version-history,#literature-workspace,.source-audit,.source-empty,.figure-screen{display:none!important}article{padding:0;border:0;box-shadow:none}.main-section,.supplement{display:block!important;border:0;margin:0}.main-section:not([open])>.fold-body,.supplement>.fold-body{display:block!important}.main-section>summary,.supplement>.fold-toggle{display:block!important;padding:16px 0 7px;list-style:none;break-after:avoid;font-size:19pt}.main-section>summary::before,.supplement>.fold-toggle::before{display:none!important}.physician-subheading{break-after:avoid}.figure,.table-wrap{break-inside:avoid;page-break-inside:avoid}.figure{margin:14px 0 18px}.figure .figure-print{display:block!important;width:100%;max-height:8.4in;object-fit:contain;border:0}.table-wrap{margin:12px 0 18px;overflow:visible}table{font-size:8.5pt}th,td{padding:5px 6px}.table-caption,.figure-caption{font-size:9pt}.comment-anchor{display:none!important}.revision-highlight{background:transparent!important;color:inherit}}
-html.print-export{scroll-behavior:auto}html.print-export body{background:#fff;font-family:Arial,sans-serif;font-size:13.333px;line-height:1.42;margin:0}html.print-export .layout{display:block;width:720px;margin:0}html.print-export .toc,html.print-export .screen-only,html.print-export #physician-comments,html.print-export #version-history,html.print-export #literature-workspace,html.print-export .source-audit,html.print-export .source-empty,html.print-export .figure-screen{display:none!important}html.print-export article{width:720px;padding:45px;box-sizing:border-box;border:0;box-shadow:none}html.print-export .main-section,html.print-export .supplement{display:block!important;border:0;margin:0}html.print-export .main-section>.fold-body,html.print-export .supplement>.fold-body{display:block!important}html.print-export .main-section>summary,html.print-export .supplement>.fold-toggle{display:block!important;padding:16px 0 7px;list-style:none;font-size:25px}html.print-export .main-section>summary::before,html.print-export .supplement>.fold-toggle::before{display:none!important}html.print-export .figure,html.print-export .table-wrap{break-inside:avoid}html.print-export .figure{margin:14px 0 18px}html.print-export .figure .figure-print{display:block!important;width:100%;max-height:806px;object-fit:contain;border:0}html.print-export .table-wrap{margin:12px 0 18px;overflow:visible}html.print-export table{font-size:11.333px}html.print-export th,html.print-export td{padding:5px 6px}html.print-export .table-caption,html.print-export .figure-caption{font-size:12px}html.print-export .comment-anchor{display:none!important}html.print-export .revision-highlight{background:transparent!important;color:inherit}html.print-export .print-page-spacer{display:block!important;width:1px;visibility:hidden}
+@media print{@page{margin:.62in}html{scroll-behavior:auto}body{background:#fff;font-family:Arial,sans-serif;font-size:10pt;line-height:1.42}.layout{display:block;width:auto;margin:0}.toc,.screen-only,#physician-comments,#version-history,#literature-workspace,.source-audit,.source-empty,.figure-screen{display:none!important}article{padding:0;border:0;box-shadow:none}.main-section,.supplement{display:block!important;border:0;margin:0}.main-section:not([open])>.fold-body,.supplement>.fold-body{display:block!important}.main-section>summary,.supplement>.fold-toggle{display:block!important;padding:16px 0 7px;list-style:none;break-after:avoid;font-size:19pt}.main-section>summary::before,.supplement>.fold-toggle::before{display:none!important}.physician-subheading{break-after:avoid}.figure,.table-wrap{break-inside:avoid;page-break-inside:avoid}.figure{margin:14px 0 18px}.figure .figure-print{display:block!important;width:100%;max-height:8.4in;object-fit:contain;border:0}.table-wrap{margin:12px 0 18px;overflow:visible}table{font-size:8.5pt}th,td{padding:5px 6px}.table-caption,.figure-caption{font-size:9pt}.comment-anchor{display:none!important}.revision-highlight,.revision-light,.revision-medium,.revision-strong{background:transparent!important;outline:0!important;color:inherit}}
+html.print-export{scroll-behavior:auto}html.print-export body{background:#fff;font-family:Arial,sans-serif;font-size:13.333px;line-height:1.42;margin:0}html.print-export .layout{display:block;width:720px;margin:0}html.print-export .toc,html.print-export .screen-only,html.print-export #physician-comments,html.print-export #version-history,html.print-export #literature-workspace,html.print-export .source-audit,html.print-export .source-empty,html.print-export .figure-screen{display:none!important}html.print-export article{width:720px;padding:45px;box-sizing:border-box;border:0;box-shadow:none}html.print-export .main-section,html.print-export .supplement{display:block!important;border:0;margin:0}html.print-export .main-section>.fold-body,html.print-export .supplement>.fold-body{display:block!important}html.print-export .main-section>summary,html.print-export .supplement>.fold-toggle{display:block!important;padding:16px 0 7px;list-style:none;font-size:25px}html.print-export .main-section>summary::before,html.print-export .supplement>.fold-toggle::before{display:none!important}html.print-export .figure,html.print-export .table-wrap{break-inside:avoid}html.print-export .figure{margin:14px 0 18px}html.print-export .figure .figure-print{display:block!important;width:100%;max-height:806px;object-fit:contain;border:0}html.print-export .table-wrap{margin:12px 0 18px;overflow:visible}html.print-export table{font-size:11.333px}html.print-export th,html.print-export td{padding:5px 6px}html.print-export .table-caption,html.print-export .figure-caption{font-size:12px}html.print-export .comment-anchor{display:none!important}html.print-export .revision-highlight,html.print-export .revision-light,html.print-export .revision-medium,html.print-export .revision-strong{background:transparent!important;outline:0!important;color:inherit}html.print-export .print-page-spacer{display:block!important;width:1px;visibility:hidden}
 """
 
 SCRIPT = r"""
@@ -285,6 +308,7 @@ class ReviewBlock:
     start_tag_end: int
     tag: str
     changed_from: str | None = None
+    importance: str | None = None
 
     @property
     def sha256(self) -> str:
@@ -517,6 +541,7 @@ def collect_review_blocks(document: str) -> dict[str, ReviewBlock]:
             start_tag_end=node.start_tag_end,
             tag=node.tag,
             changed_from=str(node.attrs.get("data-review-changed-from")) if node.attrs.get("data-review-changed-from") else None,
+            importance=str(node.attrs.get("data-review-importance")) if node.attrs.get("data-review-importance") else None,
         )
     return blocks
 
@@ -561,6 +586,10 @@ def review_redline_state(document: str) -> dict[str, object]:
         if block_id not in baseline_blocks or block.text != baseline_blocks[block_id]["text"]
     }
     highlighted = {block_id for block_id, block in scoped_current.items() if block.changed_from == REVIEW_BASELINE_VERSION}
+    importance = {
+        level: {block_id for block_id, block in scoped_current.items() if block.importance == level}
+        for level in REVIEW_IMPORTANCE
+    }
     deleted = {
         block_id for block_id, block in baseline_blocks.items()
         if review_block_in_scope({"block_id": block_id, **block}) and block_id not in current
@@ -572,6 +601,7 @@ def review_redline_state(document: str) -> dict[str, object]:
         "scoped_current": scoped_current,
         "changed": changed,
         "highlighted": highlighted,
+        "importance": importance,
         "deleted": deleted,
         "section_counts": dict(sorted(section_counts.items())),
     }
@@ -580,16 +610,21 @@ def review_redline_state(document: str) -> dict[str, object]:
 def _review_start_tag(raw: str, block_id: str, changed: bool) -> str:
     attributes = f' data-review-block-id="{esc(block_id)}"'
     if changed:
+        levels = [level for level, block_ids in REVIEW_IMPORTANCE.items() if block_id in block_ids]
+        if len(levels) != 1:
+            raise AssertionError(f"Changed review block must have exactly one importance level: {block_id}")
+        level = levels[0]
         attributes += f' data-review-changed-from="{REVIEW_BASELINE_VERSION}"'
+        attributes += f' data-review-importance="{level}"'
         class_match = re.search(r'class="([^"]*)"', raw)
         if class_match:
             classes = class_match.group(1).split()
-            for class_name in ["review-block", "revision-highlight"]:
+            for class_name in ["review-block", "revision-highlight", f"revision-{level}"]:
                 if class_name not in classes:
                     classes.append(class_name)
             raw = raw[:class_match.start(1)] + " ".join(classes) + raw[class_match.end(1):]
         else:
-            attributes += ' class="review-block revision-highlight"'
+            attributes += f' class="review-block revision-highlight revision-{level}"'
     return raw[:-1] + attributes + ">"
 
 
@@ -1127,7 +1162,8 @@ def build_supplement() -> str:
 
 def version_history() -> str:
     entries = [
-        ("v1.5", "2026-10-31", "Current change", "Clarified the five-paragraph Introduction and added a complete block-level redline against the v1.3 visible manuscript, including the revised ablation discussion. Every visible manuscript block with changed wording is highlighted; deletions are recorded in the version diff."),
+        ("v1.5.1", "2026-10-31", "Current change", "Added light, medium, and strong review highlights to show the importance of the 44 wording changes already identified against v1.3. Manuscript wording and Results are unchanged; deletions remain in the version diff."),
+        ("v1.5", "2026-10-31", "Clarified the five-paragraph Introduction and added a complete block-level redline against the v1.3 visible manuscript, including the revised ablation discussion. Every visible manuscript block with changed wording is highlighted; deletions are recorded in the version diff."),
         ("v1.4.1", "2026-10-31", "Simplified the A/B interface and ablation-study wording, defined the ablation purpose as examining output-quality changes across successive harness configurations, and aligned the baseline condition with the application-level inference-request definition."),
         ("v1.4", "2026-10-31", "Reorganized the five-paragraph Introduction while retaining the physician's language, clarified the two-stage Methods and holdout design, moved gate and interface details to Supplementary Methods, and added the corresponding evaluation limitation."),
         ("v1.3", "2026-10-30", "Applied conservative grammar and punctuation edits, added direct verified author-year citations, retained two outstanding physician comments, and highlighted three new methods or limitation clarifications for review."),
@@ -1154,7 +1190,7 @@ def version_history() -> str:
         else:
             version, date, note = entry
             label = ""
-        current = version == "v1.5"
+        current = version == "v1.5.1"
         open_attr = " open" if current else ""
         summary = f"{version} · {label} · {date}" if label else f"{version} · {date}"
         rendered.append(
@@ -1177,23 +1213,23 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
     article = f"""
 <article>
   <h1 class="screen-only">Physician-authored manuscript draft</h1>
-  <p class="subtitle screen-only">English working manuscript · Version 1.5 · October 31, 2026</p>
+  <p class="subtitle screen-only">English working manuscript · Version 1.5.1 · October 31, 2026</p>
   <details class="fold" id="version-history"><summary>Version history</summary><div class="fold-body">{version_history()}</div></details>
-  <p class="revision-legend screen-only"><span class="revision-swatch" aria-hidden="true"></span>Complete block-level redline against v1.3: every visible manuscript block with changed wording is highlighted. Deletions are recorded in the version diff.</p>
+  <div class="revision-legend screen-only"><span class="revision-legend-line">All visible blocks changed since v1.3 are highlighted; deletions are recorded in the version diff.</span><span class="revision-legend-line">Highlight intensity reflects the importance of changes since v1.3: light for minor edits, medium for clarifications, and strong for substantive changes.</span><span class="revision-key" aria-label="Highlight importance key"><span class="revision-key-item"><span class="revision-swatch revision-light" aria-hidden="true"></span>Light</span><span class="revision-key-item"><span class="revision-swatch revision-medium" aria-hidden="true"></span>Medium</span><span class="revision-key-item"><span class="revision-swatch revision-strong" aria-hidden="true"></span>Strong</span></span></div>
   {sections}
   {build_supplement()}
   <details class="fold" id="physician-comments"><summary>Outstanding physician comments (2)</summary><div class="fold-body">{render_comments(data)}</div></details>
   {literature_workspace()}
 </article>
 """
-    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v1.5</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
+    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v1.5.1</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
     document = apply_complete_review_redline(document)
     markdown = f"""<!-- GENERATED FILE. The canonical physician Word extraction is the prose authority. -->
 # Physician-authored manuscript draft
 
-English working manuscript. Version 1.5, October 31, 2026.
+English working manuscript. Version 1.5.1, October 31, 2026.
 
-Current change: the five-paragraph Introduction was clarified, and the HTML now applies a complete block-level redline against the v1.3 visible manuscript. Deletions are recorded in the v1.5 version diff.
+Current change: the complete redline now uses light, medium, and strong yellow highlights to show the importance of each change. Manuscript wording is unchanged from v1.5, and deletions remain in the v1.5 version diff.
 
 The canonical physician blocks below mirror `{SOURCE_DOCX.name}` for audit purposes. The clean HTML applies only the approved cross-reference and reporting edits while preserving all source blocks in its hidden audit representation.
 
@@ -1329,7 +1365,7 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
         ".toc,.screen-only,#physician-comments,#version-history,#literature-workspace,.source-audit,.source-empty,.figure-screen{display:none!important}",
         ".figure .figure-print{display:block!important;width:100%;max-height:8.4in;object-fit:contain;border:0}",
         "window.preparePrintExport=function(pageHeight=960)", "contentBottom=Math.ceil", "offenders:items.filter(item=>item.crosses)",
-        ".revision-highlight{background:transparent!important;color:inherit}",
+        ".revision-highlight,.revision-light,.revision-medium,.revision-strong{background:transparent!important;outline:0!important;color:inherit}",
     ]
     if any(rule not in document for rule in print_requirements):
         raise AssertionError("Print view does not isolate and constrain the clean manuscript")
@@ -1373,8 +1409,20 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
         raise AssertionError("The v1.3 review-baseline block count changed")
     if any(redline["current"][block_id].section == "results" for block_id in changed):
         raise AssertionError("Results must remain identical to the v1.3 visible baseline")
-    if "Complete block-level redline against v1.3: every visible manuscript block with changed wording is highlighted. Deletions are recorded in the version diff." not in document:
-        raise AssertionError("Complete-redline legend is missing")
+    expected_importance = {level: set(block_ids) for level, block_ids in REVIEW_IMPORTANCE.items()}
+    if set().union(*expected_importance.values()) != changed:
+        raise AssertionError("Review-importance registry does not cover the changed block set")
+    if sum(len(block_ids) for block_ids in expected_importance.values()) != len(changed):
+        raise AssertionError("Review-importance registry contains duplicate block assignments")
+    if redline["importance"] != expected_importance:
+        raise AssertionError(f"Rendered review-importance sets differ: {redline['importance']}")
+    if {level: len(block_ids) for level, block_ids in redline["importance"].items()} != {"strong": 12, "medium": 12, "light": 20}:
+        raise AssertionError("Review-importance counts changed")
+    if any(block.importance for block_id, block in redline["current"].items() if block_id not in changed):
+        raise AssertionError("An unmodified block has a review-importance level")
+    legend_text = "Highlight intensity reflects the importance of changes since v1.3: light for minor edits, medium for clarifications, and strong for substantive changes."
+    if legend_text not in document or "All visible blocks changed since v1.3 are highlighted; deletions are recorded in the version diff." not in document:
+        raise AssertionError("Importance-aware complete-redline legend is missing")
     if "Selected highlights" in document or "not a complete redline" in document:
         raise AssertionError("Obsolete selected-highlight legend remains")
     if "<mark" in document:
@@ -1386,14 +1434,14 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     ]:
         if f'id="{revision_id}"' not in document: raise AssertionError(f"Clarification is missing: {revision_id}")
     if 'id="draft-metadata"' in document or "Draft information and source provenance" in document: raise AssertionError("Removed draft-information block remains")
-    if "Version 1.5 · October 31, 2026" not in document or "draft v1.5" not in document: raise AssertionError("Version 1.5 metadata is missing")
-    if document.count('class="version-entry"') != 19 or any(f'id="version-{item}"' not in document for item in ["1-5", "1-4-1", "1-4", "1-3", "1-2-3", "1-2-2", "1-2-1", "1-2", "1-1", "1-0", "0-25", "0-24", "0-23", "0-22", "0-21", "0-20", "0-19", "0-18", "0-17"]):
+    if "Version 1.5.1 · October 31, 2026" not in document or "draft v1.5.1" not in document: raise AssertionError("Version 1.5.1 metadata is missing")
+    if document.count('class="version-entry"') != 20 or any(f'id="version-{item}"' not in document for item in ["1-5-1", "1-5", "1-4-1", "1-4", "1-3", "1-2-3", "1-2-2", "1-2-1", "1-2", "1-1", "1-0", "0-25", "0-24", "0-23", "0-22", "0-21", "0-20", "0-19", "0-18", "0-17"]):
         raise AssertionError("Nested version history is incomplete")
-    if not re.search(r'<details class="version-entry" id="version-1-5"[^>]* open>', document):
-        raise AssertionError("Current v1.5 history entry is not expanded inside the closed parent")
-    if any(re.search(rf'<details class="version-entry" id="version-{item}"[^>]* open>', document) for item in ["1-4-1", "1-4", "1-3"]):
+    if not re.search(r'<details class="version-entry" id="version-1-5-1"[^>]* open>', document):
+        raise AssertionError("Current v1.5.1 history entry is not expanded inside the closed parent")
+    if any(re.search(rf'<details class="version-entry" id="version-{item}"[^>]* open>', document) for item in ["1-5", "1-4-1", "1-4", "1-3"]):
         raise AssertionError("Prior version-history entries must be closed")
-    if "v1.5 · Current change · 2026-10-31" not in document:
+    if "v1.5.1 · Current change · 2026-10-31" not in document:
         raise AssertionError("Current version-history label is missing")
     if "querySelectorAll('#version-history .version-entry').forEach(entry=>entry.open=entry===target)" not in document:
         raise AssertionError("Version-history deep links do not isolate the targeted entry")
