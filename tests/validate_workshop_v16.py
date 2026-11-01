@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deterministic v1.6.5 manuscript, section-revert, and manual-focus checks."""
+"""Deterministic v1.6.6 manuscript, comment-resolution, and manual-focus checks."""
 
 from __future__ import annotations
 
@@ -138,10 +138,17 @@ def main() -> None:
         "(note cluster robust 95% CI 76.14% to 83.96%)."
     )
     assert renderer.rendered_physician_prose(document, "P096") == "Performance across Clinical Extraction Fields"
-    non_p119_text = "\n".join(
-        f"{block_id}\t{block.text}" for block_id, block in blocks.items() if block_id != "P119"
+    document_without_comment_ui = re.sub(
+        r'<sup class="comment-anchor".*?</sup>', "", document, flags=re.S
     )
-    assert hashlib.sha256(non_p119_text.encode("utf-8")).hexdigest() == renderer.EXPECTED_V165_NON_P119_BLOCKS_SHA256
+    blocks_without_comment_ui = renderer.collect_review_blocks(document_without_comment_ui)
+    visible_text_without_comment_ui = "\n".join(
+        f"{block_id}\t{block.text}" for block_id, block in blocks_without_comment_ui.items()
+    )
+    assert (
+        hashlib.sha256(visible_text_without_comment_ui.encode("utf-8")).hexdigest()
+        == renderer.EXPECTED_V166_VISIBLE_BLOCK_TEXT_EXCLUDING_COMMENT_UI_SHA256
+    )
     p119_text = renderer.rendered_physician_prose(document, "P119")
     assert all(phrase in p119_text for phrase in [
         "fixed A/B display order",
@@ -155,12 +162,20 @@ def main() -> None:
     ).group(1)
 
     assert document.count('data-comment-text-id=') == 12
+    assert document.count('data-comment-id=') == 1
+    assert 'data-comment-id="13"' in document and 'comment-anchor-13' in document
+    assert 'data-comment-id="14"' not in document and 'comment-anchor-14' not in document
+    assert (
+        'data-comment-text-id="14" data-status="resolved" '
+        f'data-resolution-basis="{renderer.COMMENT_14_RESOLUTION_BASIS}"'
+    ) in document
+    assert "Outstanding physician comments (1)" in document
     assert document.count('data-literature-entry=') == 30
-    assert "Version 1.6.5 · November 1, 2026" in document
-    assert "draft v1.6.5" in document
+    assert "Version 1.6.6 · November 1, 2026" in document
+    assert "draft v1.6.6" in document
 
     print(
-        "V165_OK "
+        "V166_OK "
         f"canonical=127+35+12 visible_blocks={len(blocks)} changed={len(state['changed'])} "
         f"focus_spans={len(rows)} focus_blocks={len(expected_focus_blocks)} results_sha256="
         f"{hashlib.sha256(results_text.encode('utf-8')).hexdigest()}"

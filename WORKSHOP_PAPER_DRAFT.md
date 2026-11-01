@@ -1,9 +1,9 @@
 <!-- GENERATED FILE. The canonical physician Word extraction is the prose authority. -->
 # Physician-authored manuscript draft
 
-English working manuscript. Version 1.6.5, November 1, 2026.
+English working manuscript. Version 1.6.6, November 1, 2026.
 
-Current change: restored five user approved evaluation design limitations in P119 without changing the remaining physician prose or adding review highlights.
+Current change: closed physician Comment 14 after verifying breast ER, PR, and HER2 rules in the prompt, breast-only routing, hooks, and tests. Comment 13 remains open.
 
 The canonical physician blocks below mirror `202601023_Manuscript_JAMA.docx` for audit purposes. The clean HTML applies only the approved cross-reference and reporting edits while preserving all source blocks in its hidden audit representation.
 
@@ -423,7 +423,7 @@ Generated technical content: Supplementary Tables S1-S3 and Supplementary Figure
 
 ## Outstanding physician comments
 
-The canonical extraction retains all 12 Word comments. The HTML displays the 2 unresolved comments and keeps the 10 resolved literature comments only in its hidden audit representation.
+The canonical extraction retains all 12 Word comments. The HTML displays the 1 unresolved comment and keeps the 11 resolved comments only in its hidden audit representation.
 
 ## Author literature-review workspace
 

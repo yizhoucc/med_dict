@@ -126,7 +126,10 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           const comment14 = document.getElementById('comment-anchor-14');
           const comment13Target = 'We addressed this issue by incorporating treatment history and temporal context into the extraction process and adding verification steps to align treatment responses with the appropriate regimen.';
           if (!comment13?.previousSibling?.textContent?.endsWith(comment13Target)) return 'comment 13 anchor moved';
-          if (!comment14?.previousSibling?.textContent?.includes('ER), progesterone receptor (PR), and HER2 status')) return 'comment 14 anchor moved';
+          if (comment14 || document.getElementById('physician-comment-14')) return 'resolved comment 14 remains visible';
+          const resolved14 = document.querySelector('[data-comment-text-id="14"][data-status="resolved"]');
+          if (resolved14?.dataset.resolutionBasis !== 'Breast ER/PR/HER2 rules verified in prompt, breast-only routing, hooks, and tests.') return 'comment 14 resolution evidence is missing';
+          if (document.querySelectorAll('#physician-comments .comment').length !== 1 || !document.getElementById('physician-comment-13')) return 'outstanding comment display is not limited to comment 13';
           if (!document.getElementById('loo-results')?.querySelector('a[href="#supplementary-table-s3"]')) return 'independent LOO result is missing';
           for (const highlight of highlights) {
             const block = document.querySelector(`[data-review-block-id="${highlight.dataset.reviewFor}"]`);
@@ -187,7 +190,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           if (!visible() || document.activeElement?.id !== 'figure-s1') return 'nested supplement link did not reveal and focus';
           button.click();
           const history = document.getElementById('version-history');
-          const current = document.getElementById('version-1-6-5');
+          const current = document.getElementById('version-1-6-6');
           const older = [...history.querySelectorAll('.version-entry')].filter(node => node !== current);
           if (history.open || !current?.open || older.some(node => node.open)) return 'unexpected initial version-history state';
           window.__workshopVersionHashState = 'waiting';
@@ -228,7 +231,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
         let checks = #"""
         (() => {
           const history = document.getElementById('version-history');
-          const current = document.getElementById('version-1-6-5');
+          const current = document.getElementById('version-1-6-6');
           const prior = document.getElementById('version-1-4-1');
           const older = [...history.querySelectorAll('.version-entry')].filter(node => node !== current);
           if (location.hash !== '#version-1-4-1' || !history.open || current.open || !prior.open || older.some(node => node !== prior && node.open) || document.activeElement !== prior) {
