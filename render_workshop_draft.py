@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the English-only physician-authored manuscript HTML (version 1.6).
+"""Build the English-only physician-authored manuscript HTML (version 1.6.1).
 
 The canonical Word extraction is the sole prose source. Technical tables,
 figures, captions, navigation, and supplementary analyses are inserted around
@@ -99,9 +99,9 @@ REVISED_PARAGRAPHS = {
     "P004": "Large language models (LLMs) are increasingly used for clinical documentation, patient communication, and administrative tasks. Many clinical applications depend on identifying relevant facts in electronic health record (EHR) notes before those facts can be summarized, analyzed, or used in another task. Reliable extraction is therefore an important step for many uses of LLMs in oncology care and research. This study focuses on that extraction task.",
     "P006": "Although EHRs contain structured fields, it is estimated that 80% of clinical data exist in unstructured form ([[cite:kong]]), with a large proportion of clinically relevant information encoded in free text narratives ([[cite:wiest]]). Oncology notes are particularly challenging because a patient can have a complex medical history that contains multiple diagnoses, prior and future treatments, and changes in disease status. Key information may be distributed across different sections, expressed with uncertainty, linked through complex timelines, or even documented incorrectly. As commonly seen in real world practice, laboratory, imaging, and genomic results copied from earlier notes lengthen notes and further complicate the extraction task. A study of outpatient documentation across a decade found that notes became longer and more redundant, with much of the increase attributable to templates or copied and pasted text ([[cite:rule]]). LLMs must therefore identify the relevant information and determine its relationship to the patient's current disease status, treatment, and timeline.",
     "P008": "LLMs can extract information from clinical notes, but their outputs can vary. They may omit details, confuse past findings with current findings, or add information that is not supported by the original note ([[cite:sushil]]; [[cite:huang]]). A reviewer may be able to identify these errors, but checking every field in every output can approach the cost of manual extraction. Commercial models perform better on some clinical extraction tasks, but sending protected health information (PHI) to externally hosted services raises privacy and governance concerns, including HIPAA compliance ([[cite:huang]]; [[cite:wiest]]). Local deployment avoids external transfer of PHI, but local models can still produce unstable or incorrect extractions ([[cite:wiest]]). A useful clinical workflow must therefore improve reliability without depending on external processing or case by case manual review.",
-    "P010": "How an LLM is used may be as important as the model itself. Additional training can adapt model weights to a clinical task. When the weights are unchanged, prompt design, task decomposition, verification, and clinical rules can organize the extraction process. Huang et al. and Hein et al. used physician review to iteratively refine prompts and output schemas for pathology reports, then applied their strategies or templates to other cancer domains ([[cite:huang]]; [[cite:hein]]). These studies focused on pathology reports and prompt or schema refinement. It remains unclear whether a broader multistep workflow developed from physician feedback on breast cancer notes can transfer to longitudinal PDAC notes with multiple fields when no physician reviews the PDAC development outputs.",
+    "P010": "How an LLM is used may be as important as the model itself. Additional training can adapt model weights to a clinical task. When the weights are unchanged, prompt design, task decomposition, verification, and clinical rules can organize the extraction process. Huang et al. iteratively refined prompts on expert curated lung pathology data and later applied the same prompt engineering strategy to osteosarcoma reports. Hein et al. used a human in the loop process to refine prompts, output schemas, and an error ontology, then applied the resulting templates to breast and prostate pathology reports ([[cite:huang]]; [[cite:hein]]). These studies focused on pathology reports and prompt or schema refinement. It remains unclear whether a broader multistep workflow developed from physician feedback on breast cancer notes can transfer to longitudinal PDAC notes with multiple fields when no physician reviews the PDAC development outputs.",
     "P012": "To address this gap, we built a locally deployable inference harness around a frozen LLM. The harness divides extraction into smaller tasks and applies checks and clinical rules without changing the model weights. We developed the breast cancer harness with physician input. We then adapted it to PDAC using LLM review and regression tests without physician review of the PDAC development outputs. Four physicians compared the final harness with a one prompt baseline that used the same model. We also conducted a technical ablation to examine changes across successive harness configurations.",
-    "P017": "The study comprised two development stages followed by an independent physician evaluation. In Stage 1, a physician and an investigator developed the breast cancer inference harness through review of selected outputs. In Stage 2, the investigator adapted the harness to pancreatic ductal adenocarcinoma (PDAC) using LLM review and regression tests. No physician reviewed the PDAC development outputs. Four physicians then compared the final systems on an untouched holdout set.",
+    "P017": "The study comprised two development stages followed by an independent physician evaluation. In Stage 1, a physician and an investigator developed the breast cancer inference harness through review of selected outputs. In Stage 2, the investigator adapted the harness to pancreatic ductal adenocarcinoma (PDAC) using LLM review and regression tests, without physician review of the PDAC development outputs. Four physicians then compared the final systems on an untouched holdout set.",
     "P019": "The final harness was compared with a one prompt baseline using the same frozen model and field schema on an untouched holdout set of 40 CORAL notes annotated by experts. The set included 20 breast cancer notes and 20 PDAC notes. Four physicians completed evaluations for each field across both cancer types. System identities were not disclosed.",
     "P022": "We used CORAL, a PhysioNet dataset of deidentified medical oncology notes obtained from the University of California, San Francisco. The development process used 100 unannotated breast cancer notes and 100 unannotated pancreatic cancer notes. A separate untouched holdout set of 40 notes annotated by experts consisted of 20 breast cancer notes and 20 PDAC notes. The holdout note texts were not used for development. The annotations were not provided to the model or used during development, and they were not used to calculate the primary endpoint based on physician preference. They were not shown to the physicians in the evaluation interface.",
     "P025": "We used Qwen2.5-32B-Instruct-AWQ served locally through vLLM. The baseline used the complete note and all extraction questions in one prompt and requested the full target schema in one response. Each note was processed in one chat completion request. This describes the application level request and does not make a claim about internal server execution or forward passes. In the physician review, the baseline and harness used the same field definitions and output contract.",
@@ -144,7 +144,7 @@ GRAMMAR_REVISED_IDS = {
 # source audit text. Simple grammar, punctuation, and linking edits are not
 # colored.
 MANUAL_FOCUS_PHRASES = {
-    "P004": ["Reliable extraction", "This study focuses on that extraction task"],
+    "P004": ["focuses on that extraction task"],
     "P008": [
         "outputs can vary",
         "checking every field in every output can approach the cost of manual extraction",
@@ -163,11 +163,7 @@ MANUAL_FOCUS_PHRASES = {
         "without physician review of the PDAC development outputs",
         "technical ablation",
     ],
-    "P017": [
-        "two development stages followed by an independent physician evaluation",
-        "No physician reviewed the PDAC development outputs",
-        "untouched holdout set",
-    ],
+    "P017": ["without physician review"],
     "P022": [
         "100 unannotated breast cancer notes and 100 unannotated pancreatic cancer notes",
         "separate untouched holdout set",
@@ -179,17 +175,10 @@ MANUAL_FOCUS_PHRASES = {
         "skipped only the plan branch and continued extraction from the complete note",
         "leave a field empty when the note did not provide sufficient evidence",
     ],
-    "P060": [
-        "No physician reviewed pancreatic cancer outputs during this stage",
-        "Qwen reviewer guided by the rubric",
-    ],
+    "P060": ["No physician reviewed pancreatic cancer outputs"],
     "P061": ["modifications specific to pancreatic cancer"],
-    "P063": [
-        "System identities were not disclosed",
-        "Source attribution was available only with the harness output",
-        "full output packages",
-    ],
-    "P073": ["Details of the judge model and settings are provided in Supplementary Methods"],
+    "P063": ["System identities", "were not disclosed"],
+    "P073": ["judge model and settings"],
     "P119": [
         "fixed A/B display order",
         "source attribution only with the harness output",
@@ -1368,7 +1357,8 @@ def build_supplement() -> str:
 
 def version_history() -> str:
     entries = [
-        ("v1.6", "2026-10-31", "Current change", "Resolved 24 browser review comments. Reworked the Introduction and Study Design, clarified the holdout, baseline, plan branch, evaluation interface, and ablation judge, replaced broad revision coloring with a small set of manual focus phrases, and completed a language audit for unnecessary hyphens and colons."),
+        ("v1.6.1", "2026-10-31", "Current change", "Separated the Huang and Hein study descriptions to preserve their distinct methods, narrowed five complete sentence highlights to short review phrases, and retained the 24 browser comment revisions without changing Results."),
+        ("v1.6", "2026-10-31", "Browser comments", "Resolved 24 browser review comments. Reworked the Introduction and Study Design, clarified the holdout, baseline, plan branch, evaluation interface, and ablation judge, replaced broad revision coloring with a small set of manual focus phrases, and completed a language audit for unnecessary hyphens and colons."),
         ("v1.5.2", "2026-10-31", "Word level review", "Replaced whole-block yellow review backgrounds with token-level highlights. Only inserted or replaced words and selected key phrases in wholly new passages are colored; manuscript wording, statistics, links, numbering, and comments are unchanged."),
         ("v1.5.1", "2026-10-31", "Added light, medium, and strong review highlights to show the importance of the 44 wording changes already identified against v1.3. Manuscript wording and Results are unchanged; deletions remain in the version diff."),
         ("v1.5", "2026-10-31", "Clarified the five-paragraph Introduction and added a complete block-level redline against the v1.3 visible manuscript, including the revised ablation discussion. Every visible manuscript block with changed wording is highlighted; deletions are recorded in the version diff."),
@@ -1398,7 +1388,7 @@ def version_history() -> str:
         else:
             version, date, note = entry
             label = ""
-        current = version == "v1.6"
+        current = version == "v1.6.1"
         open_attr = " open" if current else ""
         summary = f"{version} · {label} · {date}" if label else f"{version} · {date}"
         rendered.append(
@@ -1421,7 +1411,7 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
     article = f"""
 <article>
   <h1 class="screen-only">Physician-authored manuscript draft</h1>
-  <p class="subtitle screen-only">English working manuscript · Version 1.6 · October 31, 2026</p>
+  <p class="subtitle screen-only">English working manuscript · Version 1.6.1 · October 31, 2026</p>
   <details class="fold" id="version-history"><summary>Version history</summary><div class="fold-body">{version_history()}</div></details>
   {sections}
   {build_supplement()}
@@ -1429,14 +1419,14 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
   {literature_workspace()}
 </article>
 """
-    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v1.6</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
+    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v1.6.1</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
     document = apply_review_block_metadata(document)
     markdown = f"""<!-- GENERATED FILE. The canonical physician Word extraction is the prose authority. -->
 # Physician-authored manuscript draft
 
-English working manuscript. Version 1.6, October 31, 2026.
+English working manuscript. Version 1.6.1, October 31, 2026.
 
-Current change: resolved 24 browser review comments, revised the Introduction and Methods language, and limited visible review color to a small set of manually selected focus phrases.
+Current change: separated the Huang and Hein study descriptions and narrowed five complete sentence highlights to short review phrases without changing Results.
 
 The canonical physician blocks below mirror `{SOURCE_DOCX.name}` for audit purposes. The clean HTML applies only the approved cross-reference and reporting edits while preserving all source blocks in its hidden audit representation.
 
@@ -1633,6 +1623,7 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
         raise AssertionError("Revision-span parser counts differ")
     span_blocks: set[str] = set()
     span_texts: set[str] = set()
+    span_records: list[tuple[str, str]] = []
     for attrs, body in revision_spans:
         block_match = re.search(r'data-review-for="([^"]+)"', attrs)
         if not block_match:
@@ -1647,6 +1638,7 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
             raise AssertionError(f"A review span lacks hover or accessibility metadata: {block_id}")
         span_blocks.add(block_id)
         span_texts.add(text)
+        span_records.append((block_id, text))
     expected_span_blocks = set(MANUAL_FOCUS_PHRASES) | {"supplement-data-access", "supplement-evaluation-interface"}
     if span_blocks != expected_span_blocks:
         raise AssertionError(
@@ -1654,9 +1646,11 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
             f"orphan={sorted(span_blocks - expected_span_blocks)}"
         )
     for required_phrase in [
-        "Reliable extraction", "This study focuses on that extraction task",
+        "focuses on that extraction task",
         "outputs can vary", "checking every field in every output can approach the cost of manual extraction",
         "privacy and governance concerns", "local models can still produce unstable or incorrect extractions",
+        "without physician review", "No physician reviewed pancreatic cancer outputs",
+        "System identities", "were not disclosed", "judge model and settings",
         "not provided to the models", "not used during harness development",
         "not used to calculate the primary physician preference endpoint",
         "A displayed the inference harness output", "B displayed the one prompt baseline",
@@ -1687,19 +1681,30 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     ]:
         if f'id="{revision_id}"' not in document: raise AssertionError(f"Clarification is missing: {revision_id}")
     if 'id="draft-metadata"' in document or "Draft information and source provenance" in document: raise AssertionError("Removed draft-information block remains")
-    if "Version 1.6 · October 31, 2026" not in document or "draft v1.6" not in document: raise AssertionError("Version 1.6 metadata is missing")
-    if document.count('class="version-entry"') != 22 or any(f'id="version-{item}"' not in document for item in ["1-6", "1-5-2", "1-5-1", "1-5", "1-4-1", "1-4", "1-3", "1-2-3", "1-2-2", "1-2-1", "1-2", "1-1", "1-0", "0-25", "0-24", "0-23", "0-22", "0-21", "0-20", "0-19", "0-18", "0-17"]):
+    if "Version 1.6.1 · October 31, 2026" not in document or "draft v1.6.1" not in document: raise AssertionError("Version 1.6.1 metadata is missing")
+    if document.count('class="version-entry"') != 23 or any(f'id="version-{item}"' not in document for item in ["1-6-1", "1-6", "1-5-2", "1-5-1", "1-5", "1-4-1", "1-4", "1-3", "1-2-3", "1-2-2", "1-2-1", "1-2", "1-1", "1-0", "0-25", "0-24", "0-23", "0-22", "0-21", "0-20", "0-19", "0-18", "0-17"]):
         raise AssertionError("Nested version history is incomplete")
-    if not re.search(r'<details class="version-entry" id="version-1-6"[^>]* open>', document):
-        raise AssertionError("Current v1.6 history entry is not expanded inside the closed parent")
-    if any(re.search(rf'<details class="version-entry" id="version-{item}"[^>]* open>', document) for item in ["1-5-2", "1-5-1", "1-5", "1-4-1", "1-4", "1-3"]):
+    if not re.search(r'<details class="version-entry" id="version-1-6-1"[^>]* open>', document):
+        raise AssertionError("Current v1.6.1 history entry is not expanded inside the closed parent")
+    if any(re.search(rf'<details class="version-entry" id="version-{item}"[^>]* open>', document) for item in ["1-6", "1-5-2", "1-5-1", "1-5", "1-4-1", "1-4", "1-3"]):
         raise AssertionError("Prior version-history entries must be closed")
-    if "v1.6 · Current change · 2026-10-31" not in document:
+    if "v1.6.1 · Current change · 2026-10-31" not in document:
         raise AssertionError("Current version-history label is missing")
     if "querySelectorAll('#version-history .version-entry').forEach(entry=>entry.open=entry===target)" not in document:
         raise AssertionError("Version-history deep links do not isolate the targeted entry")
     if 'lang="zh"' in document or 'id="chinese-version"' in document: raise AssertionError("Chinese manuscript shell remains")
     manuscript_blocks = collect_review_blocks(document)
+    for block_id, focused_text in span_records:
+        block = manuscript_blocks.get(block_id)
+        if not block:
+            raise AssertionError(f"Focused review block is missing: {block_id}")
+        sentences = {
+            sentence.strip().rstrip(".!?").strip()
+            for sentence in re.split(r"(?<=[.!?])\s+", block.text)
+            if sentence.strip()
+        }
+        if focused_text.strip().rstrip(".!?").strip() in sentences:
+            raise AssertionError(f"A focus highlight covers a complete sentence: {block_id}")
     manuscript_text = " ".join(block.text for block in manuscript_blocks.values())
     visible_text_lower = manuscript_text.lower()
     if "—" in manuscript_text or "–" in manuscript_text: raise AssertionError("Visible manuscript contains an em or en dash")
@@ -1792,7 +1797,7 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
         "P008": "checking every field in every output can approach the cost of manual extraction",
         "P010": "no physician reviews the PDAC development outputs",
         "P012": "To address this gap",
-        "P017": "two development stages followed by an independent physician evaluation",
+        "P017": "without physician review of the PDAC development outputs",
         "P022": "A separate untouched holdout set of 40 notes annotated by experts consisted of 20 breast cancer notes and 20 PDAC notes.",
         "P025": "Each note was processed in one chat completion request.",
         "P028": "If this step failed",

@@ -1,15 +1,14 @@
-# v1.6 browser comment resolution and validation
+# v1.6.1 browser comment resolution and validation
 
 Date: 2026-10-31
 
 ## Comment resolution
 
 1. Removed the revision legend, its swatches, and the light, medium, and strong
-   review styles. The page now uses 44 manually selected focus spans in 14
+   review styles. The page now uses 39 manually selected focus spans in 14
    blocks. Complete change metadata remains separate from visible color.
 2. Replaced P004 with the requested plain statement of the extraction task.
-   Only `Reliable extraction` and `This study focuses on that extraction task`
-   receive visible focus.
+   Only `focuses on that extraction task` receives visible focus.
 3. Replaced faithfulness language in the manuscript with plain descriptions of
    accuracy and support from the original note.
 4. Rebuilt P008 around variable output, the cost of checking every field,
@@ -20,10 +19,12 @@ Date: 2026-10-31
 6. Removed `recurring` and `recurrent` from the visible manuscript. Repeated
    errors are described directly where needed.
 7. Rebuilt P010 to distinguish additional training from methods that keep model
-   weights unchanged. Huang and Hein are described as pathology studies that
-   used physician review to refine prompts and schemas and then applied the
-   strategies or templates to other cancer domains. The gap is limited to the
-   broader breast cancer to PDAC workflow tested here.
+   weights unchanged. Huang is described as refining prompts on expert curated
+   lung pathology data and then applying the prompt engineering strategy to
+   osteosarcoma reports. Hein is described separately as using a human in the
+   loop process to refine prompts, schemas, and an error ontology before using
+   the templates for breast and prostate pathology reports. The gap remains
+   limited to the broader breast cancer to PDAC workflow tested here.
 8. P022 now states that annotations were not provided to the model or used
    during development, did not determine the physician preference endpoint,
    and were not shown to physicians.
@@ -64,6 +65,14 @@ Date: 2026-10-31
 24. The Introduction does not name Qwen. The full Qwen model identifier remains
     in Methods.
 
+## v1.6.1 audit corrections
+
+- Separated the Huang and Hein descriptions in P010 so the Huang study is not
+  described as a physician review driven schema loop.
+- Reduced five complete sentence highlights to short review phrases in P004,
+  P017, P060, P063, and P073. No focus span now covers a complete sentence.
+- Retained all 24 browser comment resolutions and the unchanged Results hash.
+
 ## Hyphen audit
 
 No ordinary prose compound with a hyphen remains in the visible manuscript.
@@ -82,16 +91,17 @@ workspace, which is outside the manuscript body.
 - Canonical physician audit: 127 paragraphs, 35 native table cells, and 12 Word
   comments preserved exactly.
 - Visible page: 354 stable blocks, 66 blocks changed from the v1.3 audit
-  baseline, and 44 manual focus spans across 14 blocks.
+  baseline, and 39 manual focus spans across 14 blocks.
 - Comments and literature: 12 canonical comments, 2 visible unresolved
   comments, and 30 literature entries preserved.
 - Introduction: P004, P006, P008, P010, and P012 reviewed individually. No
-  paragraph level yellow wrapper is present. P006 has no visible focus span.
+  paragraph level yellow wrapper is present. P006 has no visible focus span,
+  and physician language content word reuse is 215/381 (56.43%).
 - Renderer: HTML and Markdown are byte exact after a second render.
 - Experiment tooling: all 9 staged ablation unit tests pass in the project
   `.venv`.
 - Results regression: 120 Results blocks with SHA-256
   `e8a0a9844ffa51292752c4aff018e489a31acd1027ae630f70024694efe1d5e6`.
-- WebKit screen and print: 14 pages, 1,271,706 bytes, 6 figures, 8 tables, no
+- WebKit screen and print: 14 pages, 1,270,713 bytes, 6 figures, 8 tables, no
   figure or table split across a page boundary, no focus background in print,
   and no temporary PDF after the injected failure path.

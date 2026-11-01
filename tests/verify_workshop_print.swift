@@ -58,7 +58,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           const changedBlocks = [...document.querySelectorAll('[data-review-changed-from="v1.3"]')];
           const highlights = [...document.querySelectorAll('.focus-highlight')];
           if (changedBlocks.length !== 66) return `unexpected changed-block count: ${changedBlocks.length}`;
-          if (highlights.length !== 44) return `unexpected manual-focus count: ${highlights.length}`;
+          if (highlights.length !== 39) return `unexpected manual-focus count: ${highlights.length}`;
           if (document.querySelector('.revision-legend,.revision-swatch,.revision-light,.revision-medium,.revision-strong')) {
             return 'obsolete revision legend or importance styling remains';
           }
@@ -104,9 +104,11 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           }
           if (document.getElementById('P006')?.querySelector('.focus-highlight')) return 'simple P006 grammar edits are highlighted';
           const requiredFocusedText = [
-            'Reliable extraction', 'This study focuses on that extraction task', 'outputs can vary',
+            'focuses on that extraction task', 'outputs can vary',
             'checking every field in every output can approach the cost of manual extraction',
             'privacy and governance concerns', 'local models can still produce unstable or incorrect extractions',
+            'without physician review', 'No physician reviewed pancreatic cancer outputs',
+            'System identities', 'were not disclosed', 'judge model and settings',
             'not provided to the models', 'not used during harness development',
             'not used to calculate the primary physician preference endpoint',
             'A displayed the inference harness output', 'B displayed the one prompt baseline',
@@ -116,6 +118,11 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           ];
           const highlightedText = new Set(highlights.map(node => node.textContent.trim()));
           if (requiredFocusedText.some(text => !highlightedText.has(text))) return 'a focused Methods or limitation phrase is missing';
+          for (const highlight of highlights) {
+            const block = document.querySelector(`[data-review-block-id="${highlight.dataset.reviewFor}"]`);
+            const sentences = block?.textContent.trim().split(/(?<=[.!?])\s+/).map(text => text.replace(/[.!?]+$/, '').trim()) || [];
+            if (sentences.includes(highlight.textContent.trim().replace(/[.!?]+$/, '').trim())) return `complete sentence is highlighted: ${highlight.dataset.reviewFor}`;
+          }
           if (document.querySelector('.focus-highlight[data-review-for^="figure-"]')) return 'a figure caption is highlighted';
           const visible = () => getComputedStyle(body).display !== 'none';
           if (!supplement.classList.contains('is-collapsed') || visible() || button.getAttribute('aria-expanded') !== 'false') {
@@ -135,7 +142,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           if (!visible() || document.activeElement?.id !== 'figure-s1') return 'nested supplement link did not reveal and focus';
           button.click();
           const history = document.getElementById('version-history');
-          const current = document.getElementById('version-1-6');
+          const current = document.getElementById('version-1-6-1');
           const older = [...history.querySelectorAll('.version-entry')].filter(node => node !== current);
           if (history.open || !current?.open || older.some(node => node.open)) return 'unexpected initial version-history state';
           window.__workshopVersionHashState = 'waiting';
@@ -176,7 +183,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
         let checks = #"""
         (() => {
           const history = document.getElementById('version-history');
-          const current = document.getElementById('version-1-6');
+          const current = document.getElementById('version-1-6-1');
           const prior = document.getElementById('version-1-4-1');
           const older = [...history.querySelectorAll('.version-entry')].filter(node => node !== current);
           if (location.hash !== '#version-1-4-1' || !history.open || current.open || !prior.open || older.some(node => node !== prior && node.open) || document.activeElement !== prior) {
@@ -254,11 +261,11 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
                 self.fail("Invalid print-preparation report"); return
             }
             guard offenders.isEmpty else { self.fail("Page-boundary offenders: \(offenders)"); return }
-            guard highlightCount == 44,
+            guard highlightCount == 39,
                   highlightBackgrounds.allSatisfy({ $0 == "transparent" || $0 == "rgba(0, 0, 0, 0)" }) else {
                 self.fail("Revision highlights retained screen background in print export: \(highlightBackgrounds)"); return
             }
-            guard highlightPrintStyles.count == 44,
+            guard highlightPrintStyles.count == 39,
                   highlightPrintStyles.allSatisfy({ style in
                       let background = style["backgroundColor"] as? String ?? ""
                       let outlineStyle = style["outlineStyle"] as? String ?? ""

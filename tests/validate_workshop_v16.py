@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deterministic v1.6 manuscript, audit, and manual-focus checks."""
+"""Deterministic v1.6.1 manuscript, audit, and manual-focus checks."""
 
 from __future__ import annotations
 
@@ -60,7 +60,7 @@ def main() -> None:
     }
 
     rows = focus_spans(document)
-    assert len(rows) == 44
+    assert len(rows) == 39
     assert len({row[0] for row in rows}) == 14
     assert max(len(row[1]) for row in rows) == 79
     assert not [row for row in rows if "external-citation" in row[2] or "comment-anchor" in row[2]]
@@ -77,12 +77,16 @@ def main() -> None:
     assert {row[0] for row in rows} == expected_focus_blocks
     focus_text = {row[1] for row in rows}
     assert {
-        "Reliable extraction",
-        "This study focuses on that extraction task",
+        "focuses on that extraction task",
         "outputs can vary",
         "checking every field in every output can approach the cost of manual extraction",
         "privacy and governance concerns",
         "local models can still produce unstable or incorrect extractions",
+        "without physician review",
+        "No physician reviewed pancreatic cancer outputs",
+        "System identities",
+        "were not disclosed",
+        "judge model and settings",
         "not provided to the models",
         "not used during harness development",
         "not used to calculate the primary physician preference endpoint",
@@ -105,6 +109,13 @@ def main() -> None:
     assert p006 and "focus-highlight" not in p006.group(1)
 
     blocks = renderer.collect_review_blocks(document)
+    for block_id, focused_text, _ in rows:
+        sentences = {
+            sentence.strip().rstrip(".!?").strip()
+            for sentence in re.split(r"(?<=[.!?])\s+", blocks[block_id].text)
+            if sentence.strip()
+        }
+        assert focused_text.strip().rstrip(".!?").strip() not in sentences
     assert len(blocks) == 354
     results_text = "\n".join(
         f"{block_id}\t{block.text}" for block_id, block in blocks.items() if block.section == "results"
@@ -114,11 +125,11 @@ def main() -> None:
 
     assert document.count('data-comment-text-id=') == 12
     assert document.count('data-literature-entry=') == 30
-    assert "Version 1.6 · October 31, 2026" in document
-    assert "draft v1.6" in document
+    assert "Version 1.6.1 · October 31, 2026" in document
+    assert "draft v1.6.1" in document
 
     print(
-        "V16_OK "
+        "V161_OK "
         f"canonical=127+35+12 visible_blocks={len(blocks)} changed={len(state['changed'])} "
         f"focus_spans={len(rows)} focus_blocks={len(expected_focus_blocks)} results_sha256="
         f"{hashlib.sha256(results_text.encode('utf-8')).hexdigest()}"
