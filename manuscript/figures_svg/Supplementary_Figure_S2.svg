@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1120" viewBox="0 0 1500 1120">
+<rect x="0" y="0" width="1500" height="1120" fill="#FFFFFF"/>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#65737E"/></marker>
+<marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#0072B2"/></marker>
+<marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#7A5FA8"/></marker>
+<marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#009E73"/></marker>
+<marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#D55E00"/></marker>
+</defs>
+<g font-family="Arial, Helvetica, sans-serif" fill="#222222">
+<text x="40.0" y="35.0" text-anchor="start" font-size="23" font-weight="700" fill="#222222">Ordered cumulative configurations</text>
+<rect x="40.0" y="55.0" width="325.0" height="145.0" rx="12" fill="#FBECE5" stroke="#D55E00" stroke-width="2"/>
+<circle cx="72.0" cy="87.0" r="20" fill="#D55E00"/>
+<text x="72.0" y="94.0" text-anchor="middle" font-size="19" font-weight="700" fill="white">A</text>
+<text x="102.0" y="94.0" text-anchor="start" font-size="20" font-weight="700" fill="#222222">One prompt baseline</text>
+<text x="62.0" y="130.0" text-anchor="start" font-size="19" font-weight="400" fill="#5E6870">Cumulative contents</text>
+<rect x="62.0" y="150.0" width="281.0" height="25" fill="#D55E00" stroke="white" stroke-width="2"/>
+<text x="202.5" y="168.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">A</text>
+<rect x="405.0" y="55.0" width="325.0" height="145.0" rx="12" fill="#FFF3D6" stroke="#E69F00" stroke-width="2"/>
+<circle cx="437.0" cy="87.0" r="20" fill="#E69F00"/>
+<text x="437.0" y="94.0" text-anchor="middle" font-size="19" font-weight="700" fill="white">B</text>
+<text x="467.0" y="94.0" text-anchor="start" font-size="20" font-weight="700" fill="#222222">Decomposed extraction</text>
+<text x="427.0" y="130.0" text-anchor="start" font-size="19" font-weight="400" fill="#5E6870">Cumulative contents</text>
+<rect x="427.0" y="150.0" width="140.5" height="25" fill="#D55E00" stroke="white" stroke-width="2"/>
+<text x="497.2" y="168.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">A</text>
+<rect x="567.5" y="150.0" width="140.5" height="25" fill="#E69F00" stroke="white" stroke-width="2"/>
+<text x="637.8" y="168.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">B</text>
+<line x1="365.0" y1="127.0" x2="405.0" y2="127.0" stroke="#65737E" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="770.0" y="55.0" width="325.0" height="145.0" rx="12" fill="#E4F4FB" stroke="#56B4E9" stroke-width="2"/>
+<circle cx="802.0" cy="87.0" r="20" fill="#56B4E9"/>
+<text x="802.0" y="94.0" text-anchor="middle" font-size="19" font-weight="700" fill="#222222">C</text>
+<text x="832.0" y="94.0" text-anchor="start" font-size="20" font-weight="700" fill="#222222">Verified extraction</text>
+<text x="792.0" y="130.0" text-anchor="start" font-size="19" font-weight="400" fill="#5E6870">Cumulative contents</text>
+<rect x="792.0" y="150.0" width="93.7" height="25" fill="#D55E00" stroke="white" stroke-width="2"/>
+<text x="838.8" y="168.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">A</text>
+<rect x="885.7" y="150.0" width="93.7" height="25" fill="#E69F00" stroke="white" stroke-width="2"/>
+<text x="932.5" y="168.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">B</text>
+<rect x="979.3" y="150.0" width="93.7" height="25" fill="#56B4E9" stroke="white" stroke-width="2"/>
+<text x="1026.2" y="168.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">C</text>
+<line x1="730.0" y1="127.0" x2="770.0" y2="127.0" stroke="#65737E" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="1135.0" y="55.0" width="325.0" height="145.0" rx="12" fill="#E7F2F8" stroke="#0072B2" stroke-width="2"/>
+<circle cx="1167.0" cy="87.0" r="20" fill="#0072B2"/>
+<text x="1167.0" y="94.0" text-anchor="middle" font-size="19" font-weight="700" fill="white">D</text>
+<text x="1197.0" y="94.0" text-anchor="start" font-size="20" font-weight="700" fill="#222222">Full inference harness</text>
+<text x="1157.0" y="130.0" text-anchor="start" font-size="19" font-weight="400" fill="#5E6870">Cumulative contents</text>
+<rect x="1157.0" y="150.0" width="70.2" height="25" fill="#D55E00" stroke="white" stroke-width="2"/>
+<text x="1192.1" y="168.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">A</text>
+<rect x="1227.2" y="150.0" width="70.2" height="25" fill="#E69F00" stroke="white" stroke-width="2"/>
+<text x="1262.4" y="168.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">B</text>
+<rect x="1297.5" y="150.0" width="70.2" height="25" fill="#56B4E9" stroke="white" stroke-width="2"/>
+<text x="1332.6" y="168.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">C</text>
+<rect x="1367.8" y="150.0" width="70.2" height="25" fill="#0072B2" stroke="white" stroke-width="2"/>
+<text x="1402.9" y="168.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">D</text>
+<line x1="1095.0" y1="127.0" x2="1135.0" y2="127.0" stroke="#65737E" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="40.0" y="230.0" width="450.0" height="190.0" rx="11" fill="white" stroke="#D7DEE3" stroke-width="1.5"/>
+<text x="68.0" y="269.0" text-anchor="middle" font-size="21" font-weight="700" fill="#222222">A</text>
+<text x="462.0" y="269.0" text-anchor="middle" font-size="21" font-weight="700" fill="#222222">B</text>
+<line x1="92.0" y1="263.0" x2="438.0" y2="263.0" stroke="#0072B2" stroke-width="2.2" marker-end="url(#arrow-blue)"/>
+<text x="265.0" y="287.5" text-anchor="middle" font-size="21" font-weight="700" fill="#222222">Replace one prompt with</text>
+<text x="265.0" y="312.7" text-anchor="middle" font-size="21" font-weight="400" fill="#222222">Field decomposition and cross field routing</text>
+<text x="265.0" y="337.9" text-anchor="middle" font-size="21" font-weight="400" fill="#222222">Bounded Assessment and Plan retry</text>
+<text x="265.0" y="363.1" text-anchor="middle" font-size="21" font-weight="400" fill="#222222">G1/G2 safeguards</text>
+<rect x="525.0" y="230.0" width="450.0" height="190.0" rx="11" fill="white" stroke="#D7DEE3" stroke-width="1.5"/>
+<text x="553.0" y="269.0" text-anchor="middle" font-size="21" font-weight="700" fill="#222222">B</text>
+<text x="947.0" y="269.0" text-anchor="middle" font-size="21" font-weight="700" fill="#222222">C</text>
+<line x1="577.0" y1="263.0" x2="923.0" y2="263.0" stroke="#0072B2" stroke-width="2.2" marker-end="url(#arrow-blue)"/>
+<text x="750.0" y="312.5" text-anchor="middle" font-size="21" font-weight="700" fill="#222222">Add G3-G5 verification bundle</text>
+<text x="750.0" y="337.7" text-anchor="middle" font-size="21" font-weight="400" fill="#222222">Semantic   •   Source support   •   Temporal</text>
+<rect x="1010.0" y="230.0" width="450.0" height="190.0" rx="11" fill="white" stroke="#D7DEE3" stroke-width="1.5"/>
+<text x="1038.0" y="269.0" text-anchor="middle" font-size="21" font-weight="700" fill="#222222">C</text>
+<text x="1432.0" y="269.0" text-anchor="middle" font-size="21" font-weight="700" fill="#222222">D</text>
+<line x1="1062.0" y1="263.0" x2="1408.0" y2="263.0" stroke="#0072B2" stroke-width="2.2" marker-end="url(#arrow-blue)"/>
+<text x="1235.0" y="312.5" text-anchor="middle" font-size="21" font-weight="700" fill="#222222">Add deterministic inline processing</text>
+<text x="1235.0" y="337.7" text-anchor="middle" font-size="21" font-weight="400" fill="#222222">and complete POST hooks</text>
+<text x="40.0" y="470.0" text-anchor="start" font-size="23" font-weight="700" fill="#222222">Adjacent comparisons of cumulative configurations</text>
+<text x="40.0" y="503.0" text-anchor="start" font-size="20" font-weight="400" fill="#5E6870">Counts are shown as first configuration, second configuration, and ties. N = 40 notes per comparison.</text>
+<rect x="40.0" y="530.0" width="450.0" height="330.0" rx="12" fill="#FAFBFC" stroke="#D7DEE3" stroke-width="1.5"/>
+<text x="265.0" y="567.0" text-anchor="middle" font-size="21" font-weight="700" fill="#D55E00">A  One prompt baseline</text>
+<text x="265.0" y="594.0" text-anchor="middle" font-size="19" font-weight="400" fill="#5E6870">versus</text>
+<text x="265.0" y="623.0" text-anchor="middle" font-size="21" font-weight="700" fill="#E69F00">B  Decomposed extraction</text>
+<rect x="64.0" y="650.0" width="122.0" height="92.0" rx="9" fill="#FBECE5" stroke="#D55E00" stroke-width="2"/>
+<text x="125.0" y="681.0" text-anchor="middle" font-size="20" font-weight="700" fill="#D55E00">A</text>
+<text x="125.0" y="720.0" text-anchor="middle" font-size="30" font-weight="700" fill="#222222">17</text>
+<rect x="204.0" y="650.0" width="122.0" height="92.0" rx="9" fill="#FFF3D6" stroke="#E69F00" stroke-width="2"/>
+<text x="265.0" y="681.0" text-anchor="middle" font-size="20" font-weight="700" fill="#E69F00">B</text>
+<text x="265.0" y="720.0" text-anchor="middle" font-size="30" font-weight="700" fill="#222222">17</text>
+<rect x="344.0" y="650.0" width="122.0" height="92.0" rx="9" fill="#F0F2F3" stroke="#B8B8B8" stroke-width="2"/>
+<text x="405.0" y="681.0" text-anchor="middle" font-size="20" font-weight="700" fill="#65737E">Tie</text>
+<text x="405.0" y="720.0" text-anchor="middle" font-size="30" font-weight="700" fill="#222222">6</text>
+<rect x="64.0" y="766.0" width="170.8" height="22" fill="#D55E00"/>
+<rect x="234.8" y="766.0" width="170.8" height="22" fill="#E69F00"/>
+<rect x="405.7" y="766.0" width="60.3" height="22" fill="#B8B8B8"/>
+<text x="265.0" y="826.0" text-anchor="middle" font-size="20" font-weight="700" fill="#222222">P = 1.000</text>
+<rect x="525.0" y="530.0" width="450.0" height="330.0" rx="12" fill="#FAFBFC" stroke="#D7DEE3" stroke-width="1.5"/>
+<text x="750.0" y="567.0" text-anchor="middle" font-size="21" font-weight="700" fill="#E69F00">B  Decomposed extraction</text>
+<text x="750.0" y="594.0" text-anchor="middle" font-size="19" font-weight="400" fill="#5E6870">versus</text>
+<text x="750.0" y="623.0" text-anchor="middle" font-size="21" font-weight="700" fill="#56B4E9">C  Verified extraction</text>
+<rect x="549.0" y="650.0" width="122.0" height="92.0" rx="9" fill="#FFF3D6" stroke="#E69F00" stroke-width="2"/>
+<text x="610.0" y="681.0" text-anchor="middle" font-size="20" font-weight="700" fill="#E69F00">B</text>
+<text x="610.0" y="720.0" text-anchor="middle" font-size="30" font-weight="700" fill="#222222">2</text>
+<rect x="689.0" y="650.0" width="122.0" height="92.0" rx="9" fill="#E4F4FB" stroke="#56B4E9" stroke-width="2"/>
+<text x="750.0" y="681.0" text-anchor="middle" font-size="20" font-weight="700" fill="#56B4E9">C</text>
+<text x="750.0" y="720.0" text-anchor="middle" font-size="30" font-weight="700" fill="#222222">24</text>
+<rect x="829.0" y="650.0" width="122.0" height="92.0" rx="9" fill="#F0F2F3" stroke="#B8B8B8" stroke-width="2"/>
+<text x="890.0" y="681.0" text-anchor="middle" font-size="20" font-weight="700" fill="#65737E">Tie</text>
+<text x="890.0" y="720.0" text-anchor="middle" font-size="30" font-weight="700" fill="#222222">14</text>
+<rect x="549.0" y="766.0" width="20.1" height="22" fill="#E69F00"/>
+<rect x="569.1" y="766.0" width="241.2" height="22" fill="#56B4E9"/>
+<rect x="810.3" y="766.0" width="140.7" height="22" fill="#B8B8B8"/>
+<text x="750.0" y="826.0" text-anchor="middle" font-size="20" font-weight="700" fill="#222222">P = 1.05 × 10⁻⁵</text>
+<rect x="1010.0" y="530.0" width="450.0" height="330.0" rx="12" fill="#FAFBFC" stroke="#D7DEE3" stroke-width="1.5"/>
+<text x="1235.0" y="567.0" text-anchor="middle" font-size="21" font-weight="700" fill="#56B4E9">C  Verified extraction</text>
+<text x="1235.0" y="594.0" text-anchor="middle" font-size="19" font-weight="400" fill="#5E6870">versus</text>
+<text x="1235.0" y="623.0" text-anchor="middle" font-size="21" font-weight="700" fill="#0072B2">D  Full inference harness</text>
+<rect x="1034.0" y="650.0" width="122.0" height="92.0" rx="9" fill="#E4F4FB" stroke="#56B4E9" stroke-width="2"/>
+<text x="1095.0" y="681.0" text-anchor="middle" font-size="20" font-weight="700" fill="#56B4E9">C</text>
+<text x="1095.0" y="720.0" text-anchor="middle" font-size="30" font-weight="700" fill="#222222">19</text>
+<rect x="1174.0" y="650.0" width="122.0" height="92.0" rx="9" fill="#E7F2F8" stroke="#0072B2" stroke-width="2"/>
+<text x="1235.0" y="681.0" text-anchor="middle" font-size="20" font-weight="700" fill="#0072B2">D</text>
+<text x="1235.0" y="720.0" text-anchor="middle" font-size="30" font-weight="700" fill="#222222">16</text>
+<rect x="1314.0" y="650.0" width="122.0" height="92.0" rx="9" fill="#F0F2F3" stroke="#B8B8B8" stroke-width="2"/>
+<text x="1375.0" y="681.0" text-anchor="middle" font-size="20" font-weight="700" fill="#65737E">Tie</text>
+<text x="1375.0" y="720.0" text-anchor="middle" font-size="30" font-weight="700" fill="#222222">5</text>
+<rect x="1034.0" y="766.0" width="190.9" height="22" fill="#56B4E9"/>
+<rect x="1225.0" y="766.0" width="160.8" height="22" fill="#0072B2"/>
+<rect x="1385.8" y="766.0" width="50.2" height="22" fill="#B8B8B8"/>
+<text x="1235.0" y="826.0" text-anchor="middle" font-size="20" font-weight="700" fill="#222222">P = .736</text>
+<text x="750.0" y="910.0" text-anchor="middle" font-size="21" font-weight="400" fill="#5E6870">Adjacent comparisons of cumulative configurations.</text>
+<text x="750.0" y="943.0" text-anchor="middle" font-size="21" font-weight="400" fill="#5E6870">Ties are displayed but excluded from two sided exact sign tests.</text>
+<text x="750.0" y="976.0" text-anchor="middle" font-size="21" font-weight="400" fill="#5E6870">The three overall P values are unadjusted.</text>
+<text x="750.0" y="1009.0" text-anchor="middle" font-size="21" font-weight="400" fill="#5E6870">One blinded nonphysician LLM judge evaluated all comparisons.</text>
+</g>
+</svg>
