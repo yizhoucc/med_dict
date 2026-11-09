@@ -286,6 +286,7 @@ EXPECTED_V180_SUPPLEMENT_SHA256 = "13492a199535133aacb87d878627d78653f454eac04c3
 EXPECTED_V180_P109_TEXT_SHA256 = "ef2a49bc6b7e82351ce18b84d7474fe1f537822b17aa3ee9996b05dafe7030f3"
 EXPECTED_V181_VISIBLE_MANUSCRIPT_TEXT_SHA256 = "1233212fc75362d570651f4beee1c3d139d6533da95584c41dfd3d3139ecf2da"
 EXPECTED_V181_P109_TEXT_SHA256 = "6713da1cfc322cc59d62e8e625c5321b0adc21ec0c2c19b778100ae5672cc0df"
+EXPECTED_V200_MANUSCRIPT_BLOCK_TEXT_SHA256 = "2193c1f2da3814e36c56b64696c5e3e764a508bf219b65660f1279be37f19458"
 EXPECTED_CANONICAL_SHA256 = "8b9a152d06791ca4e073ca42fa8641789229e287f7b2518b5d0661fa7f08cbf5"
 
 
@@ -465,41 +466,47 @@ XREF_TARGETS = {
     "Supplementary Figure S2": "figure-s2",
 }
 
-AUTHOR_REVIEW_SPECS: dict[str, list[tuple[str, str, str]]] = {
+AUTHOR_REVIEW_SPECS: dict[str, list[tuple[str, str, str, str]]] = {
     "P010": [
-        ("author-review-1", "a broader multistep workflow developed from physician feedback can be used to improve note extraction", "Confirm the breadth of the stated research gap."),
+        ("author-review-1", "a broader multistep workflow developed from physician feedback can be used to improve note extraction", "研究缺口可以更具体地对应跨癌种适应过程。", "We therefore examined whether a multistep workflow refined with physician feedback on breast cancer notes could be adapted to longitudinal PDAC notes without physician review during PDAC development."),
     ],
     "P012": [
-        ("author-review-2a", "one prompt baseline", "Confirm the preferred system name."),
-        ("author-review-2b", "single-prompt baseline", "Confirm the preferred system name."),
+        ("author-review-2a", "one prompt baseline", "系统名称与全文其他位置不一致。", "single-prompt baseline"),
+        ("author-review-2b", "single-prompt baseline", "这里已经使用建议的系统名称，其他三处可与此统一。", "Keep “single-prompt baseline” here and use the same term throughout."),
     ],
     "P019": [
-        ("author-review-2c", "one prompt baseline", "Confirm the preferred system name."),
+        ("author-review-2c", "one prompt baseline", "系统名称与全文其他位置不一致。", "single-prompt baseline"),
     ],
     "P065": [
-        ("author-review-3", "population-averaged logistic generalized estimating equation (GEE) with an exchangeable working correlation structure at the note level", "Confirm the statistical model description."),
-        ("author-review-4", "to account for clustering of repeated field-level judgments within the same note", "Confirm the stated clustering rationale."),
+        ("author-review-3", "population-averaged logistic generalized estimating equation (GEE) with an exchangeable working correlation structure at the note level", "当前句子重复说明 note-level correlation 和 clustering。", "population-averaged logistic GEE with an exchangeable working correlation"),
+        ("author-review-4", "to account for clustering of repeated field-level judgments within the same note", "聚类单位是 note，表述可以更直接。", "to account for repeated field-level judgments within each note"),
     ],
     "P084": [
-        ("author-review-5a", "p < 0.05", "Confirm the first threshold-only P value."),
-        ("author-review-5b", "p < 0.05", "Confirm the second threshold-only P value."),
-        ("author-review-5c", "p < 0.05", "Confirm the third threshold-only P value."),
+        ("author-review-5a", "p < 0.05", "Table 5 已提供 overall estimate 的精确 P 值。", "P = 2.67 × 10⁻²⁸"),
+        ("author-review-5b", "p < 0.05", "Table 5 已提供 breast cancer estimate 的精确 P 值。", "P = 7.04 × 10⁻¹⁸"),
+        ("author-review-5c", "p < 0.05", "Table 5 已提供 pancreatic cancer estimate 的精确 P 值。", "P = 2.30 × 10⁻¹²"),
     ],
     "P099": [
-        ("author-review-6", "P < 0.05", "Confirm the threshold-only ablation P value."),
-        ("author-review-7", "significantly affected the LLM judge’s preference", "Confirm this interpretation of the ablation result."),
+        ("author-review-6", "P < 0.05", "Supplementary Figure S2 已报告 exact sign test 的精确结果。", "P = 1.05 × 10⁻⁵"),
+        ("author-review-7", "significantly affected the LLM judge’s preference", "累计配置比较支持偏好差异，但不能隔离单一步骤的因果效应。", "In the B versus C comparison, the LLM judge preferred verified extraction over decomposed extraction."),
     ],
     "P104": [
-        ("author-review-2d", "one prompt baseline", "Confirm the preferred system name."),
-        ("author-review-8", "improve the clinical quality of extracted information", "Confirm that preference supports this clinical-quality claim."),
+        ("author-review-2d", "one prompt baseline", "系统名称与全文其他位置不一致。", "single-prompt baseline"),
+        ("author-review-8", "improve the clinical quality of extracted information", "主要 endpoint 是 physician preference，不是 absolute clinical quality。", "These findings indicate that physicians more often preferred inference harness outputs than same-model baseline outputs."),
     ],
     "P108": [
-        ("author-review-9", "LLM-as-a-judge", "Confirm the term and supporting citations."),
+        ("author-review-9", "LLM-as-a-judge", "既往研究中的 agreement 会随 rubric、模型和应用场景变化。", "Prior studies have examined LLM-as-a-judge evaluation in clinical generative AI, with agreement varying by rubric and setting (Gershon et al., 2026; Williams et al., 2026)."),
     ],
     "P112": [
-        ("author-review-10", "the clinical rules developed from breast cancer did not provide further improvement for pancreatic cancer", "Confirm this cross-cancer ablation interpretation."),
-        ("author-review-11", "some rules developed for breast cancer were specific to estrogen receptor (ER), progesterone receptor (PR), and HER2 status", "Confirm that this example matches the implemented rules."),
+        ("author-review-10", "the clinical rules developed from breast cancer did not provide further improvement for pancreatic cancer", "C versus D 是累计配置比较，不能把结果单独归因于 breast cancer clinical rules。", "The C versus D comparison did not provide evidence of a directional preference between verified extraction and the full inference harness (19 vs 16 preferences; 5 ties; P = .736)."),
+        ("author-review-11", "some rules developed for breast cancer were specific to estrogen receptor (ER), progesterone receptor (PR), and HER2 status", "实现中确有 receptor-specific prompts 和 checks，但 ablation 没有单独验证这一机制。", "For example, the breast cancer workflow included receptor-specific prompts and post-processing checks for estrogen receptor (ER), progesterone receptor (PR), and HER2 status."),
     ],
+}
+
+AUTHOR_REVIEW_PAIRED = {
+    "author-review-3", "author-review-4",
+    "author-review-5a", "author-review-5b", "author-review-5c",
+    "author-review-10", "author-review-11",
 }
 
 AUTHOR_REVIEW_GROUPS = [
@@ -537,22 +544,23 @@ CSS = r"""
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:var(--page);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.62}
 .layout{display:grid;grid-template-columns:270px minmax(0,940px);gap:28px;width:min(1260px,calc(100% - 36px));margin:24px auto 70px;align-items:start}.toc{position:sticky;top:18px;max-height:calc(100vh - 36px);overflow:auto;padding:18px 15px;border:1px solid var(--line);border-radius:12px;background:#fffffff5}.toc strong{display:block;margin-bottom:9px;color:var(--navy)}.toc a{display:block;padding:4px 6px;border-radius:5px;color:#3e5160;text-decoration:none;font-size:12.5px}.toc a:hover{background:#eaf4fa}.toc .sub{padding-left:18px;font-size:11.5px;color:var(--muted)}
 article{min-width:0;padding:45px 54px 68px;border:1px solid var(--line);border-radius:14px;background:var(--paper);box-shadow:0 12px 34px #142b4012}h1{margin:0;color:var(--navy);font-family:Georgia,"Times New Roman",serif;font-size:36px;line-height:1.18}h2,h3{color:var(--navy)}h3{margin:27px 0 9px;font-size:19px}.subtitle{margin:8px 0 20px;color:var(--muted)}
-.focus-highlight{color:inherit;background:transparent}.review-block{background:transparent}.citation.external-citation{background:transparent}.revision-paragraph{margin-top:9px}.author-review-underline{text-decoration-line:underline;text-decoration-color:#8a5a00;text-decoration-thickness:1.5px;text-underline-offset:3px;scroll-margin-top:18px}.author-review-backlink{margin-left:.16em;font-size:.68em;vertical-align:super}.author-review-backlink a{color:var(--blue);text-decoration:none}.author-review-list li{margin:7px 0}.author-review-list a{color:var(--blue)}.supplement-methods h4{margin:18px 0 5px;color:#30485a;font-size:15px}.supplement-methods ol{margin:7px 0 14px;padding-left:24px}.supplement-methods li{margin:5px 0}
+.focus-highlight{color:inherit;background:transparent}.review-block{background:transparent}.citation.external-citation{background:transparent}.revision-paragraph{margin-top:9px}.author-review-underline{cursor:help;text-decoration-line:underline;text-decoration-color:#8a5a00;text-decoration-thickness:1.5px;text-underline-offset:3px;scroll-margin-top:18px}.author-review-underline:focus-visible{border-radius:2px;outline:2px solid #0072b2;outline-offset:2px}.author-review-backlink{margin-left:.16em;font-size:.68em;vertical-align:super}.author-review-backlink a{color:var(--blue);text-decoration:none}.author-review-list li{margin:7px 0}.author-review-list a{color:var(--blue)}.author-review-tooltip{position:fixed;z-index:10000;width:max-content;max-width:min(420px,calc(100vw - 24px));max-height:min(50vh,320px);overflow-y:auto;padding:11px 13px;border:1px solid #9aa9b5;border-radius:8px;background:#172633;color:#fff;box-shadow:0 8px 24px #12212d33;font-size:13px;line-height:1.42;overflow-wrap:anywhere;pointer-events:none}.author-review-tooltip[hidden]{display:none!important}.author-review-tooltip-section+.author-review-tooltip-section{margin-top:9px}.author-review-tooltip-label{display:block;margin-bottom:2px;color:#b9dff2;font-size:11px;font-weight:750}.author-review-tooltip-suggestion{font-family:Georgia,"Times New Roman",serif}.author-review-tooltip-paired{margin-top:9px;color:#ffe2a8;font-size:11px}.supplement-methods h4{margin:18px 0 5px;color:#30485a;font-size:15px}.supplement-methods ol{margin:7px 0 14px;padding-left:24px}.supplement-methods li{margin:5px 0}
 details{border:0}summary{cursor:pointer}.fold>summary,.fold-toggle{padding:13px 16px;color:var(--navy);font-weight:750;list-style:none}.fold>summary::-webkit-details-marker,.version-entry>summary::-webkit-details-marker{display:none}.fold>summary::before,.fold-toggle::before,.version-entry>summary::before{content:"▸";display:inline-block;width:1.2em}.fold[open]>summary::before,.custom-fold.is-expanded>.fold-toggle::before,.version-entry[open]>summary::before{content:"▾"}.current-change{margin:14px 0 20px;padding:10px 13px;border-left:4px solid var(--blue);background:#eef7fb;color:#264b61;font-size:13px}.version-entry{margin:8px 0;border:1px solid var(--line);border-radius:7px;background:#fafbfc}.version-entry>summary{padding:9px 11px;color:#30485a;font-weight:700;list-style:none}.version-entry-body{padding:0 13px 10px;color:#4b5964;font-size:13px}.version-entry-body p{margin:5px 0}
 .fold{margin:22px 0;border-top:1px solid var(--line)}.fold>summary,.fold-toggle{margin:0;padding:20px 0 10px;font-family:Georgia,"Times New Roman",serif;font-size:25px}.fold-toggle{display:block;width:100%;border:0;background:transparent;text-align:left;cursor:pointer}.custom-fold.is-collapsed>.fold-body{display:none}.custom-fold.is-expanded>.fold-body{display:block}.fold-body{padding:0 0 8px}.source-empty,.source-audit{display:none!important}.physician-paragraph,.manuscript-paragraph{margin:11px 0}.physician-subheading{scroll-margin-top:15px}.xref,.citation,.comment-anchor a{color:var(--blue);text-decoration:none}.xref:hover,.citation:hover,.comment-anchor a:hover{text-decoration:underline}.comment-anchor{margin-left:.18em;font-size:.72em;vertical-align:super}.comment-anchor a{font-weight:650}.comment-backlink{display:inline-block;margin-top:7px;font-size:12px}.print-page-spacer{display:none}
 .table-wrap{margin:20px 0 28px;overflow-x:auto}.table-caption,.figure-caption{margin:0 0 8px;color:#314452;font-size:13px}.table-caption strong,.figure-caption strong{color:var(--navy)}table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:8px 9px;border:1px solid #d6dde3;vertical-align:top}th{background:#e9f1f6;color:#173f5f;text-align:left}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}tbody tr:nth-child(even){background:#fafbfc}.physician-native-table th{background:#eaf4ef;color:#18533f}
 .figure{margin:24px 0 30px}.figure img{display:block;width:100%;height:auto;border:1px solid #e0e5e9;background:white}.figure-print{display:none!important}.figure-caption{margin-top:9px}.comment{margin:13px 0;padding:12px 14px;border:1px solid var(--line);border-radius:7px;background:#fafbfc}.comment-meta{font-size:12px;color:var(--muted)}.comment-text{margin:7px 0;white-space:pre-wrap}.comment-context{margin-top:7px;color:#4e5c67;font-size:12px}.literature-workspace li{margin:11px 0}.reference-note{display:block;margin-top:3px;color:#4e5c67;font-size:12px}.workspace-note{color:#4e5c67;font-size:13px}.version-list li{margin:6px 0}.source-hash{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;overflow-wrap:anywhere}
 @media(max-width:900px){.layout{display:block;width:min(100% - 18px,940px);margin:10px auto 40px}.toc{position:relative;top:auto;max-height:none;margin-bottom:12px}.toc a.sub{display:none}article{padding:30px 24px 48px}h1{font-size:30px}.metadata-grid{grid-template-columns:1fr}.table-wrap{margin-left:-8px;margin-right:-8px}.figure{margin-left:-8px;margin-right:-8px}}
-@media(max-width:440px){article{padding:24px 15px 40px}h1{font-size:27px}.fold>summary,.fold-toggle{font-size:22px}table{font-size:11px}th,td{padding:6px 5px}.figure-caption,.table-caption{padding:0 3px}}
-@media print{@page{margin:.62in}html{scroll-behavior:auto}body{background:#fff;font-family:Arial,sans-serif;font-size:10pt;line-height:1.42}.layout{display:block;width:auto;margin:0}.toc,.screen-only,#physician-comments,#version-history,#literature-workspace,.source-audit,.source-empty,.figure-screen{display:none!important}article{padding:0;border:0;box-shadow:none}.main-section,.supplement{display:block!important;border:0;margin:0}.main-section:not([open])>.fold-body,.supplement>.fold-body{display:block!important}.main-section>summary,.supplement>.fold-toggle{display:block!important;padding:16px 0 7px;list-style:none;break-after:avoid;font-size:19pt}.main-section>summary::before,.supplement>.fold-toggle::before{display:none!important}.physician-subheading{break-after:avoid}.figure,.table-wrap{break-inside:avoid;page-break-inside:avoid}.figure{margin:14px 0 18px}.figure .figure-print{display:block!important;width:100%;max-height:8.4in;object-fit:contain;border:0}.table-wrap{margin:12px 0 18px;overflow:visible}table{font-size:8.5pt}th,td{padding:5px 6px}.table-caption,.figure-caption{font-size:9pt}.comment-anchor{display:none!important}.focus-highlight{background:transparent!important;outline:0!important;color:inherit}}
-html.print-export{scroll-behavior:auto}html.print-export body{background:#fff;font-family:Arial,sans-serif;font-size:13.333px;line-height:1.42;margin:0}html.print-export .layout{display:block;width:720px;margin:0}html.print-export .toc,html.print-export .screen-only,html.print-export #physician-comments,html.print-export #version-history,html.print-export #literature-workspace,html.print-export .source-audit,html.print-export .source-empty,html.print-export .figure-screen{display:none!important}html.print-export article{width:720px;padding:45px;box-sizing:border-box;border:0;box-shadow:none}html.print-export .main-section,html.print-export .supplement{display:block!important;border:0;margin:0}html.print-export .main-section>.fold-body,html.print-export .supplement>.fold-body{display:block!important}html.print-export .main-section>summary,html.print-export .supplement>.fold-toggle{display:block!important;padding:16px 0 7px;list-style:none;font-size:25px}html.print-export .main-section>summary::before,html.print-export .supplement>.fold-toggle::before{display:none!important}html.print-export .figure,html.print-export .table-wrap{break-inside:avoid}html.print-export .figure{margin:14px 0 18px}html.print-export .figure .figure-print{display:block!important;width:100%;max-height:806px;object-fit:contain;border:0}html.print-export .table-wrap{margin:12px 0 18px;overflow:visible}html.print-export table{font-size:11.333px}html.print-export th,html.print-export td{padding:5px 6px}html.print-export .table-caption,html.print-export .figure-caption{font-size:12px}html.print-export .comment-anchor{display:none!important}html.print-export .focus-highlight{background:transparent!important;outline:0!important;color:inherit}html.print-export .print-page-spacer{display:block!important;width:1px;visibility:hidden}
+@media(max-width:440px){article{padding:24px 15px 40px}h1{font-size:27px}.fold>summary,.fold-toggle{font-size:22px}table{font-size:11px}th,td{padding:6px 5px}.figure-caption,.table-caption{padding:0 3px}.author-review-tooltip{max-width:calc(100vw - 16px);font-size:12px}}
+@media print{@page{margin:.62in}html{scroll-behavior:auto}body{background:#fff;font-family:Arial,sans-serif;font-size:10pt;line-height:1.42}.layout{display:block;width:auto;margin:0}.toc,.screen-only,#physician-comments,#version-history,#literature-workspace,.source-audit,.source-empty,.figure-screen,.author-review-tooltip{display:none!important}article{padding:0;border:0;box-shadow:none}.main-section,.supplement{display:block!important;border:0;margin:0}.main-section:not([open])>.fold-body,.supplement>.fold-body{display:block!important}.main-section>summary,.supplement>.fold-toggle{display:block!important;padding:16px 0 7px;list-style:none;break-after:avoid;font-size:19pt}.main-section>summary::before,.supplement>.fold-toggle::before{display:none!important}.physician-subheading{break-after:avoid}.figure,.table-wrap{break-inside:avoid;page-break-inside:avoid}.figure{margin:14px 0 18px}.figure .figure-print{display:block!important;width:100%;max-height:8.4in;object-fit:contain;border:0}.table-wrap{margin:12px 0 18px;overflow:visible}table{font-size:8.5pt}th,td{padding:5px 6px}.table-caption,.figure-caption{font-size:9pt}.comment-anchor{display:none!important}.focus-highlight{background:transparent!important;outline:0!important;color:inherit}}
+html.print-export{scroll-behavior:auto}html.print-export body{background:#fff;font-family:Arial,sans-serif;font-size:13.333px;line-height:1.42;margin:0}html.print-export .layout{display:block;width:720px;margin:0}html.print-export .toc,html.print-export .screen-only,html.print-export #physician-comments,html.print-export #version-history,html.print-export #literature-workspace,html.print-export .source-audit,html.print-export .source-empty,html.print-export .figure-screen,html.print-export .author-review-tooltip{display:none!important}html.print-export article{width:720px;padding:45px;box-sizing:border-box;border:0;box-shadow:none}html.print-export .main-section,html.print-export .supplement{display:block!important;border:0;margin:0}html.print-export .main-section>.fold-body,html.print-export .supplement>.fold-body{display:block!important}html.print-export .main-section>summary,html.print-export .supplement>.fold-toggle{display:block!important;padding:16px 0 7px;list-style:none;font-size:25px}html.print-export .main-section>summary::before,html.print-export .supplement>.fold-toggle::before{display:none!important}html.print-export .figure,html.print-export .table-wrap{break-inside:avoid}html.print-export .figure{margin:14px 0 18px}html.print-export .figure .figure-print{display:block!important;width:100%;max-height:806px;object-fit:contain;border:0}html.print-export .table-wrap{margin:12px 0 18px;overflow:visible}html.print-export table{font-size:11.333px}html.print-export th,html.print-export td{padding:5px 6px}html.print-export .table-caption,html.print-export .figure-caption{font-size:12px}html.print-export .comment-anchor{display:none!important}html.print-export .focus-highlight{background:transparent!important;outline:0!important;color:inherit}html.print-export .print-page-spacer{display:block!important;width:1px;visibility:hidden}
 """
 
 SCRIPT = r"""
 function setCustomFold(fold,open){if(!fold||!fold.classList.contains('custom-fold'))return;fold.classList.toggle('is-expanded',open);fold.classList.toggle('is-collapsed',!open);const button=fold.querySelector(':scope>.fold-toggle');if(button)button.setAttribute('aria-expanded',open?'true':'false')}
 function revealTarget(target){if(!target)return;if(target.matches&&target.matches('#version-history .version-entry'))document.querySelectorAll('#version-history .version-entry').forEach(entry=>entry.open=entry===target);else if(target instanceof HTMLDetailsElement||target.tagName==='DETAILS')target.open=true;if(target.classList&&target.classList.contains('custom-fold'))setCustomFold(target,true);let p=target.parentElement;const chain=[];while(p){if(p.tagName==='DETAILS'||p.classList.contains('custom-fold'))chain.push(p);p=p.parentElement;}chain.reverse().forEach(d=>{if(d.tagName==='DETAILS')d.open=true;else setCustomFold(d,true)});if(!target.hasAttribute('tabindex'))target.setAttribute('tabindex','-1');target.focus({preventScroll:true});target.scrollIntoView({block:'start'})}
+function initializeAuthorReviewTooltips(){const targets=[...document.querySelectorAll('.author-review-underline')];if(!targets.length)return;let tooltip=document.getElementById('author-review-tooltip');if(!tooltip){tooltip=document.createElement('div');tooltip.id='author-review-tooltip';tooltip.className='author-review-tooltip screen-only';tooltip.setAttribute('role','tooltip');tooltip.setAttribute('aria-hidden','true');tooltip.hidden=true;tooltip.innerHTML='<div class="author-review-tooltip-section"><span class="author-review-tooltip-label">为什么需要复核</span><span class="author-review-tooltip-reason"></span></div><div class="author-review-tooltip-section"><span class="author-review-tooltip-label">建议改为</span><span class="author-review-tooltip-suggestion" lang="en"></span></div><div class="author-review-tooltip-paired">建议与相邻标记一起修改</div>';document.body.appendChild(tooltip)}const reasonNode=tooltip.querySelector('.author-review-tooltip-reason');const suggestionNode=tooltip.querySelector('.author-review-tooltip-suggestion');const pairedNode=tooltip.querySelector('.author-review-tooltip-paired');let active=null;let openedBy='';const place=()=>{if(!active||tooltip.hidden)return;const margin=8;const gap=8;const rect=active.getBoundingClientRect();tooltip.style.visibility='hidden';tooltip.style.left='0px';tooltip.style.top='0px';const width=tooltip.offsetWidth;const height=tooltip.offsetHeight;let left=rect.left+(rect.width-width)/2;left=Math.max(margin,Math.min(left,window.innerWidth-width-margin));let top=rect.bottom+gap;let side='below';if(top+height>window.innerHeight-margin){top=rect.top-height-gap;side='above'}top=Math.max(margin,Math.min(top,window.innerHeight-height-margin));tooltip.style.left=`${Math.round(left)}px`;tooltip.style.top=`${Math.round(top)}px`;tooltip.dataset.side=side;tooltip.style.visibility='visible'};const hide=()=>{active=null;openedBy='';tooltip.hidden=true;tooltip.setAttribute('aria-hidden','true');tooltip.style.visibility='hidden'};const show=(target,source)=>{active=target;openedBy=source;reasonNode.textContent=target.dataset.reviewReason||'';suggestionNode.textContent=target.dataset.reviewSuggestion||'';pairedNode.hidden=target.dataset.reviewPaired!=='true';tooltip.hidden=false;tooltip.setAttribute('aria-hidden','false');place()};for(const target of targets){target.setAttribute('tabindex','0');target.setAttribute('aria-describedby',tooltip.id);target.addEventListener('mouseenter',()=>show(target,'hover'));target.addEventListener('mouseleave',hide);target.addEventListener('focus',()=>show(target,'focus'));target.addEventListener('blur',hide);target.addEventListener('click',event=>{event.stopPropagation();if(active===target&&openedBy==='click')hide();else show(target,'click')})}document.addEventListener('click',event=>{if(active&&!active.contains(event.target))hide()});document.addEventListener('keydown',event=>{if(event.key==='Escape'&&active){hide();event.preventDefault()}});window.addEventListener('resize',place);window.addEventListener('scroll',place,true);window.__authorReviewTooltip={get active(){return active},tooltip,show,hide,place}}
 document.addEventListener('click',e=>{const toggle=e.target.closest('.fold-toggle');if(toggle){const fold=toggle.closest('.custom-fold');setCustomFold(fold,!fold.classList.contains('is-expanded'));return}const a=e.target.closest('a[href^="#"]');if(!a)return;const id=decodeURIComponent(a.getAttribute('href').slice(1));revealTarget(document.getElementById(id))});
-window.addEventListener('hashchange',()=>revealTarget(document.getElementById(decodeURIComponent(location.hash.slice(1)))));window.addEventListener('DOMContentLoaded',()=>{if(location.hash)revealTarget(document.getElementById(decodeURIComponent(location.hash.slice(1))))});
+window.addEventListener('hashchange',()=>revealTarget(document.getElementById(decodeURIComponent(location.hash.slice(1)))));window.addEventListener('DOMContentLoaded',()=>{initializeAuthorReviewTooltips();if(location.hash)revealTarget(document.getElementById(decodeURIComponent(location.hash.slice(1))))});
 window.preparePrintExport=function(pageHeight=960){if(!Number.isFinite(pageHeight)||pageHeight<400)throw new Error('Invalid page height');document.querySelectorAll('.print-page-spacer').forEach(node=>node.remove());document.documentElement.classList.add('print-export');void document.documentElement.offsetHeight;const candidates=[...document.querySelectorAll('.figure,.table-wrap')].filter(node=>getComputedStyle(node).display!=='none');for(const node of candidates){const rect=node.getBoundingClientRect();const top=rect.top+window.scrollY;const offset=((top%pageHeight)+pageHeight)%pageHeight;if(rect.height<pageHeight&&offset>0&&offset+rect.height>pageHeight-.5){const spacer=document.createElement('div');spacer.className='print-page-spacer';spacer.setAttribute('aria-hidden','true');spacer.style.height=`${Math.ceil(pageHeight-offset)+1}px`;node.before(spacer);void spacer.offsetHeight}}const items=candidates.map(node=>{const rect=node.getBoundingClientRect();const top=rect.top+window.scrollY;const bottom=rect.bottom+window.scrollY;return{id:node.id,kind:node.classList.contains('figure')?'figure':'table',top,bottom,height:rect.height,crosses:Math.floor((top+.5)/pageHeight)!==Math.floor((bottom-.5)/pageHeight)}});const printable=[...document.querySelectorAll('article>.main-section>.fold-body>*,#supplement-body>*')].filter(node=>!node.classList.contains('print-page-spacer')&&getComputedStyle(node).display!=='none');const contentBottom=Math.ceil(Math.max(0,...printable.map(node=>node.getBoundingClientRect().bottom+window.scrollY)));const focusHighlights=[...document.querySelectorAll('.focus-highlight')];return{pageHeight,documentHeight:document.documentElement.scrollHeight,contentBottom,supplementVisible:getComputedStyle(document.getElementById('supplement-body')).display!=='none',revisionHighlightCount:focusHighlights.length,revisionHighlightBackgrounds:focusHighlights.map(node=>getComputedStyle(node).backgroundColor),items,offenders:items.filter(item=>item.crosses).map(item=>item.id)}};
 window.resetPrintExport=function(){document.querySelectorAll('.print-page-spacer').forEach(node=>node.remove());document.documentElement.classList.remove('print-export')};
 """
@@ -990,22 +998,26 @@ def link_crossrefs(text: str) -> str:
 
 
 def render_author_review_text(text: str, block_id: str) -> str:
-    """Render prose and wrap only the approved v2.0 review phrases."""
+    """Render prose and wrap only the approved v2.0.1 review phrases."""
 
     specs = AUTHOR_REVIEW_SPECS.get(block_id, [])
     if not specs:
         return link_crossrefs(text)
     parts: list[str] = []
     cursor = 0
-    for anchor_id, phrase, reason in specs:
+    for anchor_id, phrase, reason, suggestion in specs:
         start = text.find(phrase, cursor)
         if start < 0:
             raise AssertionError(f"Author-review phrase is missing from {block_id}: {phrase!r}")
         end = start + len(phrase)
+        paired_attr = ' data-review-paired="true"' if anchor_id in AUTHOR_REVIEW_PAIRED else ""
+        fallback = f"为什么需要复核：{reason} 建议改为：{suggestion}"
         parts.append(link_crossrefs(text[cursor:start]))
         parts.append(
             f'<span class="author-review-underline" id="{esc(anchor_id)}" '
-            f'data-review-reason="{esc(reason)}" title="{esc(reason)}">'
+            f'data-review-reason="{esc(reason)}" data-review-suggestion="{esc(suggestion)}"'
+            f'{paired_attr} tabindex="0" aria-describedby="author-review-tooltip" '
+            f'title="{esc(fallback)}">'
             f'{link_crossrefs(phrase)}</span>'
             f'<sup class="author-review-backlink screen-only"><a href="#author-review-list" '
             f'aria-label="Back to author review list">↩</a></sup>'
@@ -1717,6 +1729,7 @@ def build_supplement() -> str:
 
 def version_history() -> str:
     entries = [
+        ("v2.0.1", "2026-11-09", "Author review tooltips", "Underlined phrases now show reasons and suggested revisions on hover/focus."),
         ("v2.0", "2026-11-08", "Physician prose authority", "The latest doctor Word draft is now the prose authority. The current HTML retains the technical figures, tables, captions, numbering, cross references, citations, supplement, and layout. Underlined phrases require author review."),
         ("v1.8.1", "2026-11-01", "Discussion wording", "Removed a repeated findings suggest construction from the note level interpretation moved to P109. No other manuscript wording, data, tables, figures, or captions changed."),
         ("v1.8.0", "2026-11-01", "Physician source first Results", "Reorganized the physician authored Results under five descriptive headings, removed repeated summary sentences, added the staged technical ablation results, and moved one note level interpretation to the Discussion. The canonical physician source, tables, figures, captions, and data are unchanged."),
@@ -1760,7 +1773,7 @@ def version_history() -> str:
         else:
             version, date, note = entry
             label = ""
-        current = version == "v2.0"
+        current = version == "v2.0.1"
         open_attr = " open" if current else ""
         summary = f"{version} · {label} · {date}" if label else f"{version} · {date}"
         rendered.append(
@@ -1786,7 +1799,7 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
     article = f"""
 <article>
   <h1 class="screen-only">Physician-authored manuscript draft</h1>
-  <p class="subtitle screen-only">English working manuscript · Version 2.0 · November 8, 2026</p>
+  <p class="subtitle screen-only">English working manuscript · Version 2.0.1 · November 9, 2026</p>
   <details class="fold" id="version-history"><summary>Version history</summary><div class="fold-body">{version_history()}</div></details>
   {author_review_list()}
   {sections}
@@ -1795,14 +1808,14 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
   {literature_workspace()}
 </article>
 """
-    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v2.0</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
+    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v2.0.1</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
     document = apply_review_block_metadata(document)
     markdown = f"""<!-- GENERATED FILE. The canonical physician Word extraction is the prose authority. -->
 # Physician-authored manuscript draft
 
-English working manuscript. Version 2.0, November 8, 2026.
+English working manuscript. Version 2.0.1, November 9, 2026.
 
-Current change: the latest doctor Word draft is the prose authority. The HTML retains the current technical objects. Underlined phrases require author review.
+Current change: underlined phrases now show reasons and suggested revisions on hover/focus. The latest doctor Word draft remains the prose authority, and the HTML retains the current technical objects.
 
 The canonical physician blocks below mirror `{SOURCE_DOCX.name}` for audit purposes. The clean HTML applies only the approved cross-reference and reporting edits while preserving all source blocks in its hidden audit representation.
 
@@ -2544,7 +2557,7 @@ def build_preservation_ledger(data: dict[str, object]) -> str:
     }
     section_ids = set(SECTION_HEADINGS)
     lines = [
-        "# v2.0 physician prose preservation ledger",
+        "# v2.0.1 physician prose preservation ledger",
         "",
         f"- Source DOCX: `{SOURCE_DOCX.name}`",
         f"- Source SHA-256: `{data['source_docx_sha256']}`",
@@ -2653,20 +2666,41 @@ def validate_v2(document: str, markdown: str, ledger: str, data: dict[str, objec
     if parser.revision_highlights or 'class="focus-highlight"' in document:
         raise AssertionError("Legacy yellow body highlights remain")
     underline_matches = re.findall(
-        r'<span class="author-review-underline" id="([^"]+)"[^>]*>(.*?)</span>',
+        r'<span class="author-review-underline" id="([^"]+)"([^>]*)>(.*?)</span>',
         document,
         flags=re.S,
     )
     expected_specs = [spec for specs in AUTHOR_REVIEW_SPECS.values() for spec in specs]
     actual_underlines = [
         (anchor_id, html.unescape(re.sub(r"<[^>]+>", "", body)))
-        for anchor_id, body in underline_matches
+        for anchor_id, _, body in underline_matches
     ]
-    expected_underlines = [(anchor_id, phrase) for anchor_id, phrase, _ in expected_specs]
+    expected_underlines = [(anchor_id, phrase) for anchor_id, phrase, _, _ in expected_specs]
     if actual_underlines != expected_underlines:
         raise AssertionError(f"Author review underlines changed: {actual_underlines}")
     if len(actual_underlines) != 16 or any(len(text) > 180 for _, text in actual_underlines):
         raise AssertionError("Author review underlines are not phrase sized")
+    actual_details = []
+    for anchor_id, attributes, _ in underline_matches:
+        reason_match = re.search(r'\bdata-review-reason="([^"]*)"', attributes)
+        suggestion_match = re.search(r'\bdata-review-suggestion="([^"]*)"', attributes)
+        actual_details.append(
+            (
+                anchor_id,
+                html.unescape(reason_match.group(1)) if reason_match else "",
+                html.unescape(suggestion_match.group(1)) if suggestion_match else "",
+                'data-review-paired="true"' in attributes,
+            )
+        )
+        for required_attribute in ['tabindex="0"', 'aria-describedby="author-review-tooltip"']:
+            if required_attribute not in attributes:
+                raise AssertionError(f"Author review accessibility attribute is missing from {anchor_id}: {required_attribute}")
+    expected_details = [
+        (anchor_id, reason, suggestion, anchor_id in AUTHOR_REVIEW_PAIRED)
+        for anchor_id, _, reason, suggestion in expected_specs
+    ]
+    if actual_details != expected_details or any(not reason or not suggestion for _, reason, suggestion, _ in actual_details):
+        raise AssertionError(f"Author review tooltip metadata changed: {actual_details}")
     review_list = re.search(r'<details[^>]+id="author-review-list".*?</details>', document, flags=re.S)
     if not review_list or any(f'href="#{anchor_id}"' not in review_list.group() for anchor_id, _ in actual_underlines):
         raise AssertionError("Author review list is incomplete")
@@ -2675,6 +2709,9 @@ def validate_v2(document: str, markdown: str, ledger: str, data: dict[str, objec
     if document.count('href="#author-review-list"') != len(actual_underlines) + 1:
         raise AssertionError("Author review backlinks are incomplete")
     blocks = collect_review_blocks(document)
+    block_snapshot = "\n".join(f"{block_id}\t{block.text}" for block_id, block in blocks.items())
+    if hashlib.sha256(block_snapshot.encode("utf-8")).hexdigest() != EXPECTED_V200_MANUSCRIPT_BLOCK_TEXT_SHA256:
+        raise AssertionError("Visible manuscript text differs from the paper-html-v2.0 artifact")
     for paragraph in data["paragraphs"]:
         block_id = str(paragraph["id"])
         source_text = str(paragraph["raw_visible_text"])
@@ -2698,12 +2735,15 @@ def validate_v2(document: str, markdown: str, ledger: str, data: dict[str, objec
     for number in ["1", "2", "3", "4", "S1", "S2"]:
         if f'id="figure-{number.lower()}"' not in document:
             raise AssertionError(f"Figure is missing: {number}")
-    if "Version 2.0 · November 8, 2026" not in document or "draft v2.0" not in document:
-        raise AssertionError("v2.0 metadata is missing")
-    if 'id="version-2-0"' not in document or not re.search(r'<details class="version-entry" id="version-2-0"[^>]* open>', document):
-        raise AssertionError("v2.0 history entry is missing or closed")
-    if "doctor Word draft is now the prose authority" not in document or "Underlined phrases require author review" not in document:
-        raise AssertionError("v2.0 authority history is incomplete")
+    if "Version 2.0.1 · November 9, 2026" not in document or "draft v2.0.1" not in document:
+        raise AssertionError("v2.0.1 metadata is missing")
+    if 'id="version-2-0-1"' not in document or not re.search(r'<details class="version-entry" id="version-2-0-1"[^>]* open>', document):
+        raise AssertionError("v2.0.1 history entry is missing or closed")
+    if "Underlined phrases now show reasons and suggested revisions on hover/focus." not in document:
+        raise AssertionError("v2.0.1 tooltip history is incomplete")
+    for required_tooltip_code in ["initializeAuthorReviewTooltips", "role','tooltip", "为什么需要复核", "建议改为", "event.key==='Escape'", "window.innerWidth-width-margin"]:
+        if required_tooltip_code not in document:
+            raise AssertionError(f"Author review tooltip implementation is incomplete: {required_tooltip_code}")
     if "P080" not in document or re.search(r'<p[^>]+id="P080"', document):
         raise AssertionError("Duplicate Word Table 2 label was not retained only as source audit")
     if len(markdown.split()) < 3500 or len(ledger.splitlines()) < 200:

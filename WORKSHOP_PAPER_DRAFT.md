@@ -1,9 +1,9 @@
 <!-- GENERATED FILE. The canonical physician Word extraction is the prose authority. -->
 # Physician-authored manuscript draft
 
-English working manuscript. Version 2.0, November 8, 2026.
+English working manuscript. Version 2.0.1, November 9, 2026.
 
-Current change: the latest doctor Word draft is the prose authority. The HTML retains the current technical objects. Underlined phrases require author review.
+Current change: underlined phrases now show reasons and suggested revisions on hover/focus. The latest doctor Word draft remains the prose authority, and the HTML retains the current technical objects.
 
 The canonical physician blocks below mirror `202601102_Manuscript_JAMA.docx` for audit purposes. The clean HTML applies only the approved cross-reference and reporting edits while preserving all source blocks in its hidden audit representation.
 
