@@ -20,13 +20,13 @@ from pathlib import Path
 
 W_NS = "http://schemas.openxmlformats.org/wordprocessingml/2006/main"
 W = f"{{{W_NS}}}"
-EXPECTED_DOCX_SHA256 = "6a1ffc6809e66ad3861284274bdf001d110b4997bbdb053cdf666d4ef27e7066"
-EXPECTED_PARAGRAPH_COUNT = 127
-EXPECTED_NONEMPTY_PARAGRAPH_COUNT = 62
-EXPECTED_TABLE_COUNT = 2
+EXPECTED_DOCX_SHA256 = "780e6238f003f97a375b63fdd5d020108a4ef50c1e80f4f0f1b70209fbf1ab39"
+EXPECTED_PARAGRAPH_COUNT = 122
+EXPECTED_NONEMPTY_PARAGRAPH_COUNT = 65
+EXPECTED_TABLE_COUNT = 4
 EXPECTED_IMAGE_COUNT = 5
-EXPECTED_COMMENT_COUNT = 12
-EXPECTED_VISIBLE_BLOCK_SHA256 = "5adf3d6434992babecc631e584ff5ba925983bd5036a28995e90b48474c577e3"
+EXPECTED_COMMENT_COUNT = 9
+EXPECTED_VISIBLE_BLOCK_SHA256 = "dce2b66eed41af3769574b1a7750986abea9247e36f54e731537dbe0806cdcc5"
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -342,7 +342,9 @@ def extract(docx_path: Path) -> dict[str, object]:
     assert counts["images"] == EXPECTED_IMAGE_COUNT
     assert counts["comments"] == EXPECTED_COMMENT_COUNT
     assert counts["tracked_changes"] == 0
-    assert output["canonical_visible_block_sha256"] == EXPECTED_VISIBLE_BLOCK_SHA256
+    assert output["canonical_visible_block_sha256"] == EXPECTED_VISIBLE_BLOCK_SHA256, (
+        output["canonical_visible_block_sha256"]
+    )
     return output
 
 
@@ -352,12 +354,12 @@ def main() -> None:
         "docx",
         nargs="?",
         type=Path,
-        default=Path(__file__).with_name("202601023_Manuscript_JAMA.docx"),
+        default=Path(__file__).with_name("202601102_Manuscript_JAMA.docx"),
     )
     parser.add_argument(
         "--output",
         type=Path,
-        default=Path(__file__).with_name("202601023_Manuscript_JAMA.canonical.json"),
+        default=Path(__file__).with_name("202601102_Manuscript_JAMA.canonical.json"),
     )
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args()

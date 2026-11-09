@@ -1,5 +1,15 @@
 # 医生版论文草稿归档与对比审查
 
+## v2.0 prose authority
+
+- 最新医生原稿：[`202601102_Manuscript_JAMA.docx`](202601102_Manuscript_JAMA.docx)
+- Canonical snapshot：[`202601102_Manuscript_JAMA.canonical.json`](202601102_Manuscript_JAMA.canonical.json)
+- 来源：`/Users/yizhoucc/Downloads/202601102_Manuscript_JAMA.docx`
+- DOCX SHA-256：`780e6238f003f97a375b63fdd5d020108a4ef50c1e80f4f0f1b70209fbf1ab39`
+- Canonical visible-block SHA-256：`dce2b66eed41af3769574b1a7750986abea9247e36f54e731537dbe0806cdcc5`
+- 统计：122 个正文段落，其中 65 个非空；4 个原生表格；5 个媒体对象；9 条 comments；0 个 tracked changes；4,243 个 visible words。
+- v2.0 以该 Word 的 prose 为正文权威。当前 HTML 继续作为 figures、tables、captions、numbering、cross-references、citations、supplement 和 layout 的技术权威。Word 原件未修改。
+
 ## 文件状态
 
 - 原稿：[`20260929_Manuscript_JAMA.docx`](20260929_Manuscript_JAMA.docx)

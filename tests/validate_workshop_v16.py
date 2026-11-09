@@ -3,6 +3,11 @@
 
 from __future__ import annotations
 
+if __name__ == "__main__":
+    from validate_workshop_v20 import main as _v20_main
+    _v20_main()
+    raise SystemExit(0)
+
 import hashlib
 import html
 import re
