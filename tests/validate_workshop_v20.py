@@ -54,6 +54,8 @@ def main() -> None:
     assert actual == expected
     assert len(actual) == 16
     assert document.count('href="#author-review-list"') == 17
+    review_list_tag = re.search(r'<details[^>]+id="author-review-list"[^>]*>', document)
+    assert review_list_tag and not re.search(r'\sopen(?:\s|>)', review_list_tag.group())
 
     parser = renderer.PreservationParser()
     parser.feed(document)

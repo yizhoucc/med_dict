@@ -87,11 +87,25 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
             if (node.textContent.trim().length === 0 || node.textContent.trim().length > 180) return `author underline has invalid length: ${id}`;
           }
           const reviewList = document.getElementById('author-review-list');
-          if (!reviewList?.open) return 'author review list is not initially open';
+          if (!reviewList || reviewList.open) return 'author review list is not initially collapsed';
+          const reviewSummary = reviewList.querySelector(':scope > summary');
+          reviewSummary?.click();
+          if (!reviewList.open) return 'author review list did not open manually';
           for (const [id] of expectedUnderlines) {
             if (!reviewList.querySelector(`a[href="#${id}"]`)) return `author review link is missing: ${id}`;
             if (!document.getElementById(id)?.parentElement?.querySelector('a[href="#author-review-list"]')) return `author review backlink is missing: ${id}`;
           }
+          const discussion = document.getElementById('section-discussion');
+          const reviewTarget = document.getElementById('author-review-10');
+          discussion.open = false;
+          reviewList.querySelector('a[href="#author-review-10"]')?.click();
+          if (!discussion.open || document.activeElement !== reviewTarget) return 'author review link did not reveal its manuscript section';
+          reviewSummary?.click();
+          if (reviewList.open) return 'author review list did not close manually';
+          discussion.open = false;
+          window.history.replaceState(null, '', '#author-review-10');
+          window.dispatchEvent(new HashChangeEvent('hashchange'));
+          if (!discussion.open || document.activeElement !== reviewTarget) return 'author review URL did not reveal its manuscript section';
           if (document.querySelectorAll('.figure').length !== 6) return 'unexpected manuscript figure count';
           if (document.querySelectorAll('.table-wrap').length !== 8) return 'unexpected manuscript table count';
           if (document.querySelectorAll('#physician-comments .comment').length !== 0) return 'source comments remain visible';
