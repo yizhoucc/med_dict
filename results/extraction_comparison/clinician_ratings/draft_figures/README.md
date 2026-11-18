@@ -1,6 +1,6 @@
 # Workshop manuscript figures
 
-These are the canonical generated figures for manuscript version 2.1.0. The November 17 physician figures define the panel structures and information hierarchy. `plot_manuscript_figures.py` invokes the Matplotlib renderer and rebuilds all six SVG and PNG files from project data. The archived physician SVGs are provenance records, not runtime sources.
+These are the canonical generated figures for manuscript version 2.1.1. The November 17 physician figures define the panel structures and information hierarchy. `plot_manuscript_figures.py` invokes the Matplotlib renderer and rebuilds all six SVG and PNG files from project data. The archived physician SVGs are provenance records, not runtime sources.
 
 Figures 2-4 use the four physician datasets. Supplementary Figure S2 reads the locked counts in `../../../staged_ablation_annotated_20261001_093433/JUDGE_CODEX_DECODED_ANALYSIS.md`.
 

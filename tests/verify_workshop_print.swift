@@ -147,6 +147,11 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           if (!discussion.open || document.activeElement !== reviewTarget) return 'author review URL did not reveal its manuscript section';
           if (document.querySelectorAll('.figure').length !== 6) return 'unexpected manuscript figure count';
           if (document.querySelectorAll('.table-wrap').length !== 8) return 'unexpected manuscript table count';
+          const desktopFigure = document.getElementById('figure-4');
+          const desktopFigureImage = desktopFigure?.querySelector('.figure-screen');
+          if (!desktopFigure || !desktopFigureImage) return 'missing desktop figure layout target';
+          if (getComputedStyle(desktopFigure).overflowX !== 'visible') return 'desktop figure unexpectedly scrolls';
+          if (desktopFigureImage.getBoundingClientRect().width > desktopFigure.clientWidth + 3) return 'desktop figure retains mobile minimum width';
           if (document.querySelectorAll('#physician-comments .comment').length !== 0) return 'source comments remain visible';
           if (document.body.innerText.includes('Difference from 50%')) return 'deleted difference-from-50 wording remains';
           const visible = () => getComputedStyle(body).display !== 'none';
@@ -167,14 +172,14 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           if (!visible() || document.activeElement?.id !== 'figure-s1') return 'nested supplement link did not reveal and focus';
           button.click();
           const history = document.getElementById('version-history');
-          const current = document.getElementById('version-2-1-0');
+          const current = document.getElementById('version-2-1-1');
           const older = [...history.querySelectorAll('.version-entry')].filter(node => node !== current);
           if (history.open || !current?.open || older.some(node => node.open)) return 'unexpected initial version-history state';
           window.__workshopVersionHashState = 'waiting';
           window.addEventListener('hashchange', () => {
             setTimeout(() => { window.__workshopVersionHashState = 'settled'; }, 0);
           }, {once: true});
-          setTimeout(() => { location.hash='#version-2-0'; }, 0);
+          setTimeout(() => { location.hash='#version-2-1-0'; }, 0);
           return 'waiting-for-version-hash';
           }
         })()
@@ -207,10 +212,10 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
         let checks = #"""
         (() => {
           const history = document.getElementById('version-history');
-          const current = document.getElementById('version-2-1-0');
-          const prior = document.getElementById('version-2-0');
+          const current = document.getElementById('version-2-1-1');
+          const prior = document.getElementById('version-2-1-0');
           const older = [...history.querySelectorAll('.version-entry')].filter(node => node !== current);
-          if (location.hash !== '#version-2-0' || !history.open || current.open || !prior.open || older.some(node => node !== prior && node.open) || document.activeElement !== prior) {
+          if (location.hash !== '#version-2-1-0' || !history.open || current.open || !prior.open || older.some(node => node !== prior && node.open) || document.activeElement !== prior) {
             return 'version hash navigation did not isolate and focus prior entry';
           }
           for (const id of ['physician-comments', 'version-history', 'literature-workspace']) {
@@ -257,6 +262,30 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
               if (tooltip.hidden) return 'mobile focus event did not open tooltip';
               document.dispatchEvent(new KeyboardEvent('keydown', {key: 'Escape', bubbles: true}));
               if (!tooltip.hidden) return 'mobile Escape did not close tooltip';
+              document.getElementById('section-results').open = true;
+              const supplementBody = document.getElementById('supplement-body');
+              const supplementButton = document.querySelector('#supplementary-material > .fold-toggle');
+              if (getComputedStyle(supplementBody).display === 'none') supplementButton.click();
+              for (const id of ['figure-4', 'figure-s2']) {
+                const figure = document.getElementById(id);
+                const image = figure?.querySelector('.figure-screen');
+                if (!figure || !image) return `missing mobile figure target: ${id}`;
+                const figureStyle = getComputedStyle(figure);
+                const imageWidth = image.getBoundingClientRect().width;
+                if (!['auto', 'scroll'].includes(figureStyle.overflowX)) return `mobile figure is not a scroll container: ${id}`;
+                if (figure.clientWidth >= figure.scrollWidth - 2 || figure.scrollWidth < 699) return `mobile figure does not scroll internally: ${id}`;
+                if (imageWidth < 699 || 8 * imageWidth / 540 < 10) return `mobile figure text remains too small: ${id}`;
+              }
+              if (document.documentElement.scrollWidth > innerWidth + 1 || document.body.scrollWidth > innerWidth + 1) {
+                const offenders = [...document.body.querySelectorAll('*')].filter(node => {
+                  const scrollContainer = node.parentElement?.closest('.figure,.table-wrap');
+                  return !scrollContainer;
+                }).map(node => {
+                  const rect = node.getBoundingClientRect();
+                  return {tag: node.tagName, id: node.id, className: String(node.className || ''), text: String(node.textContent || '').trim().slice(0, 80), href: node.getAttribute?.('href') || '', left: Math.round(rect.left), right: Math.round(rect.right), width: Math.round(rect.width), scrollWidth: node.scrollWidth, clientWidth: node.clientWidth};
+                }).filter(item => item.right > innerWidth + 1 || item.left < -1).sort((a, b) => b.right - a.right).slice(0, 8);
+                return `mobile page overflows horizontally: ${document.documentElement.scrollWidth}/${document.body.scrollWidth}/${innerWidth}; ${JSON.stringify(offenders)}`;
+              }
               return 'ok';
             })()
             """#
@@ -309,6 +338,17 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           report.authorUnderlineCount = document.querySelectorAll('.author-review-underline').length;
           const tooltip = document.getElementById('author-review-tooltip');
           report.tooltipPrintHidden = Boolean(tooltip && getComputedStyle(tooltip).display === 'none');
+          const printFigure = document.getElementById('figure-4');
+          const printFigureImage = printFigure?.querySelector('.figure-print');
+          const screenFigureImage = printFigure?.querySelector('.figure-screen');
+          report.printFigureLayoutOK = Boolean(
+            printFigure && printFigureImage && screenFigureImage &&
+            getComputedStyle(printFigure).overflowX === 'visible' &&
+            getComputedStyle(screenFigureImage).display === 'none' &&
+            getComputedStyle(printFigureImage).display !== 'none' &&
+            printFigureImage.getBoundingClientRect().width <= printFigure.clientWidth + 1 &&
+            printFigureImage.getBoundingClientRect().width >= printFigure.clientWidth - 1
+          );
           const p114 = document.getElementById('P114');
           report.v2PrintContent = Boolean(
             p114 && getComputedStyle(p114).display !== 'none' &&
@@ -329,15 +369,17 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
                   let highlightPrintStyles = report["revisionHighlightPrintStyles"] as? [[String: Any]],
                   let authorUnderlineCount = report["authorUnderlineCount"] as? Int,
                   let tooltipPrintHidden = report["tooltipPrintHidden"] as? Bool,
+                  let printFigureLayoutOK = report["printFigureLayoutOK"] as? Bool,
                   let v2PrintContent = report["v2PrintContent"] as? Bool,
                   let items = report["items"] as? [[String: Any]],
                   let offenders = report["offenders"] as? [String] else {
                 self.fail("Invalid print-preparation report"); return
             }
             guard offenders.isEmpty else { self.fail("Page-boundary offenders: \(offenders)"); return }
-            guard v2PrintContent else { self.fail("v2.1.0 Discussion text is missing from print export"); return }
+            guard v2PrintContent else { self.fail("v2.1.1 Discussion text is missing from print export"); return }
             guard authorUnderlineCount == 14 else { self.fail("Author review underline count changed in print export: \(authorUnderlineCount)"); return }
             guard tooltipPrintHidden else { self.fail("Author review tooltip remains visible in print export"); return }
+            guard printFigureLayoutOK else { self.fail("Mobile figure scrolling leaked into print export"); return }
             guard highlightCount == 0, highlightBackgrounds.isEmpty, highlightPrintStyles.isEmpty else {
                 self.fail("Legacy yellow revision marks remain in print export"); return
             }

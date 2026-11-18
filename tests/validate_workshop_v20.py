@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deterministic v2.1.0 manuscript and physician-source preservation checks."""
+"""Deterministic v2.1.1 manuscript and physician-source preservation checks."""
 
 from __future__ import annotations
 
@@ -96,11 +96,15 @@ def main() -> None:
         "supplementary-table-s1", "supplementary-table-s2", "supplementary-table-s3",
     }
     assert not parser.visible_comment_ids
+    assert 'id="version-2-1-1"' in document
     assert 'id="version-2-1-0"' in document
     assert 'id="version-2-0-1"' in document
     assert 'id="version-2-0"' in document
     assert 'id="version-1-8-1"' in document
-    assert "Version 2.1.0 · November 17, 2026" in document
+    assert "Version 2.1.1 · November 17, 2026" in document
+    assert ".figure{max-width:100%;margin-left:0;margin-right:0;overflow-x:auto" in document
+    assert ".figure .figure-screen{width:700px;max-width:none}" in document
+    assert ".figure{max-width:none;margin:14px 0 18px;overflow:visible}" in document
     assert "difference from 50%" not in parser.visible_text.lower()
     assert "fixed position mapping" not in parser.visible_text.lower()
     assert "randomized placement" not in parser.visible_text.lower()

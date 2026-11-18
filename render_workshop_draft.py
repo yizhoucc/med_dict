@@ -65,13 +65,13 @@ PRINT_FIGURE_DIMENSIONS = {
 }
 EXPECTED_FIGURE_SHA256 = {
     "figure1_development_pathway_rough.svg": "a2341a4dae0bf82d2dee83e65768d4b8d3b275de75d50ba0bdc19c417e3ba150",
-    "figure2_evaluator_distribution_rough.svg": "9a01aa82290eabe139c9e5f78cbcdeadf97b92c623e8744bc6c7915e55634e13",
+    "figure2_evaluator_distribution_rough.svg": "eb692e867e01962cfddda9e04b2d59ddde8adc66b7fb75aa3a19a2e590898ede",
     "figure3_interrater_matrix_rough.svg": "a4b20a78d3fe94cc84962a11599236c58bc94adbd0f0555e445cff869be3cfaf",
     "figure4_effect_profile.svg": "30d3c5eb5a88de2de08eb381b6492a5a04784ac6febfcce27d6401b05cc36679",
     "supplementary_figure_s1_note_margins.svg": "bd930ca51161a2e8923f5adae8eb910cc4642b1c8829739b4552b01f23faed52",
     "supplementary_figure_s2_staged_ablation.svg": "8775e6f8be4af4e848689d964d904e7f8848a1209d4fe2735f1541673615010c",
     "figure1_development_pathway_print.png": "89b0313ec873c356a8e5df75bf1bedc9b0fee1e2e6be830134826fa0a863b7d9",
-    "figure2_evaluator_distribution_print.png": "4e946f6b18260de4c490a53b61d36f6d9a0af6ad3e0a8e3b13f2e590865abd15",
+    "figure2_evaluator_distribution_print.png": "08d7e8d903386071dc800380e9f8f5f5ce5a50c47fe44691cd3953c7172ad90a",
     "figure3_interrater_matrix_print.png": "0ee2f76cdd0f7d36347461a238be5b004cdeaa210cea5122aa058b1b7c62d313",
     "figure4_effect_profile_print.png": "b4270efc12fdc3067e8291e0ac93890f10d3baa88eb6ee9223d3b6ec929954ea",
     "supplementary_figure_s1_note_margins_print.png": "7777f858528e0eea8073097f48c9d2c65f9493d344027fcaeb1de1bac05227a8",
@@ -550,9 +550,9 @@ details{border:0}summary{cursor:pointer}.fold>summary,.fold-toggle{padding:13px 
 .table-wrap{margin:20px 0 28px;overflow-x:auto}.table-caption,.figure-caption{margin:0 0 8px;color:#314452;font-size:13px}.table-caption strong,.figure-caption strong{color:var(--navy)}table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:8px 9px;border:1px solid #d6dde3;vertical-align:top}th{background:#e9f1f6;color:#173f5f;text-align:left}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}tbody tr:nth-child(even){background:#fafbfc}.physician-native-table th{background:#eaf4ef;color:#18533f}
 .figure{margin:24px 0 30px}.figure img{display:block;width:100%;height:auto;border:1px solid #e0e5e9;background:white}.figure-print{display:none!important}.figure-caption{margin-top:9px}.comment{margin:13px 0;padding:12px 14px;border:1px solid var(--line);border-radius:7px;background:#fafbfc}.comment-meta{font-size:12px;color:var(--muted)}.comment-text{margin:7px 0;white-space:pre-wrap}.comment-context{margin-top:7px;color:#4e5c67;font-size:12px}.literature-workspace li{margin:11px 0}.reference-note{display:block;margin-top:3px;color:#4e5c67;font-size:12px}.workspace-note{color:#4e5c67;font-size:13px}.version-list li{margin:6px 0}.source-hash{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;overflow-wrap:anywhere}
 @media(max-width:900px){.layout{display:block;width:min(100% - 18px,940px);margin:10px auto 40px}.toc{position:relative;top:auto;max-height:none;margin-bottom:12px}.toc a.sub{display:none}article{padding:30px 24px 48px}h1{font-size:30px}.metadata-grid{grid-template-columns:1fr}.table-wrap{margin-left:-8px;margin-right:-8px}.figure{margin-left:-8px;margin-right:-8px}}
-@media(max-width:440px){article{padding:24px 15px 40px}h1{font-size:27px}.fold>summary,.fold-toggle{font-size:22px}table{font-size:11px}th,td{padding:6px 5px}.figure-caption,.table-caption{padding:0 3px}.author-review-tooltip{max-width:calc(100vw - 16px);font-size:12px}}
-@media print{@page{margin:.62in}html{scroll-behavior:auto}body{background:#fff;font-family:Arial,sans-serif;font-size:10pt;line-height:1.42}.layout{display:block;width:auto;margin:0}.toc,.screen-only,#physician-comments,#version-history,#literature-workspace,.source-audit,.source-empty,.figure-screen,.author-review-tooltip{display:none!important}article{padding:0;border:0;box-shadow:none}.main-section,.supplement{display:block!important;border:0;margin:0}.main-section:not([open])>.fold-body,.supplement>.fold-body{display:block!important}.main-section>summary,.supplement>.fold-toggle{display:block!important;padding:16px 0 7px;list-style:none;break-after:avoid;font-size:19pt}.main-section>summary::before,.supplement>.fold-toggle::before{display:none!important}.physician-subheading{break-after:avoid}.figure,.table-wrap{break-inside:avoid;page-break-inside:avoid}.figure{margin:14px 0 18px}.figure .figure-print{display:block!important;width:100%;max-height:8.4in;object-fit:contain;border:0}.table-wrap{margin:12px 0 18px;overflow:visible}table{font-size:8.5pt}th,td{padding:5px 6px}.table-caption,.figure-caption{font-size:9pt}.comment-anchor{display:none!important}.focus-highlight{background:transparent!important;outline:0!important;color:inherit}}
-html.print-export{scroll-behavior:auto}html.print-export body{background:#fff;font-family:Arial,sans-serif;font-size:13.333px;line-height:1.42;margin:0}html.print-export .layout{display:block;width:720px;margin:0}html.print-export .toc,html.print-export .screen-only,html.print-export #physician-comments,html.print-export #version-history,html.print-export #literature-workspace,html.print-export .source-audit,html.print-export .source-empty,html.print-export .figure-screen,html.print-export .author-review-tooltip{display:none!important}html.print-export article{width:720px;padding:45px;box-sizing:border-box;border:0;box-shadow:none}html.print-export .main-section,html.print-export .supplement{display:block!important;border:0;margin:0}html.print-export .main-section>.fold-body,html.print-export .supplement>.fold-body{display:block!important}html.print-export .main-section>summary,html.print-export .supplement>.fold-toggle{display:block!important;padding:16px 0 7px;list-style:none;font-size:25px}html.print-export .main-section>summary::before,html.print-export .supplement>.fold-toggle::before{display:none!important}html.print-export .figure,html.print-export .table-wrap{break-inside:avoid}html.print-export .figure{margin:14px 0 18px}html.print-export .figure .figure-print{display:block!important;width:100%;max-height:806px;object-fit:contain;border:0}html.print-export .table-wrap{margin:12px 0 18px;overflow:visible}html.print-export table{font-size:11.333px}html.print-export th,html.print-export td{padding:5px 6px}html.print-export .table-caption,html.print-export .figure-caption{font-size:12px}html.print-export .comment-anchor{display:none!important}html.print-export .focus-highlight{background:transparent!important;outline:0!important;color:inherit}html.print-export .print-page-spacer{display:block!important;width:1px;visibility:hidden}
+@media(max-width:440px){article{padding:24px 15px 40px}h1{font-size:27px}.fold>summary,.fold-toggle{font-size:22px}table{font-size:11px}th,td{padding:6px 5px}.figure{max-width:100%;margin-left:0;margin-right:0;overflow-x:auto;overflow-y:hidden;overscroll-behavior-inline:contain;-webkit-overflow-scrolling:touch}.figure .figure-screen{width:700px;max-width:none}.literature-workspace a{overflow-wrap:anywhere}.figure-caption,.table-caption{padding:0 3px}.author-review-tooltip{max-width:calc(100vw - 16px);font-size:12px}}
+@media print{@page{margin:.62in}html{scroll-behavior:auto}body{background:#fff;font-family:Arial,sans-serif;font-size:10pt;line-height:1.42}.layout{display:block;width:auto;margin:0}.toc,.screen-only,#physician-comments,#version-history,#literature-workspace,.source-audit,.source-empty,.figure-screen,.author-review-tooltip{display:none!important}article{padding:0;border:0;box-shadow:none}.main-section,.supplement{display:block!important;border:0;margin:0}.main-section:not([open])>.fold-body,.supplement>.fold-body{display:block!important}.main-section>summary,.supplement>.fold-toggle{display:block!important;padding:16px 0 7px;list-style:none;break-after:avoid;font-size:19pt}.main-section>summary::before,.supplement>.fold-toggle::before{display:none!important}.physician-subheading{break-after:avoid}.figure,.table-wrap{break-inside:avoid;page-break-inside:avoid}.figure{max-width:none;margin:14px 0 18px;overflow:visible}.figure .figure-screen{width:100%;min-width:0;max-width:100%}.figure .figure-print{display:block!important;width:100%;min-width:0;max-width:100%;max-height:8.4in;object-fit:contain;border:0}.table-wrap{margin:12px 0 18px;overflow:visible}table{font-size:8.5pt}th,td{padding:5px 6px}.table-caption,.figure-caption{font-size:9pt}.comment-anchor{display:none!important}.focus-highlight{background:transparent!important;outline:0!important;color:inherit}}
+html.print-export{scroll-behavior:auto}html.print-export body{background:#fff;font-family:Arial,sans-serif;font-size:13.333px;line-height:1.42;margin:0}html.print-export .layout{display:block;width:720px;margin:0}html.print-export .toc,html.print-export .screen-only,html.print-export #physician-comments,html.print-export #version-history,html.print-export #literature-workspace,html.print-export .source-audit,html.print-export .source-empty,html.print-export .figure-screen,html.print-export .author-review-tooltip{display:none!important}html.print-export article{width:720px;padding:45px;box-sizing:border-box;border:0;box-shadow:none}html.print-export .main-section,html.print-export .supplement{display:block!important;border:0;margin:0}html.print-export .main-section>.fold-body,html.print-export .supplement>.fold-body{display:block!important}html.print-export .main-section>summary,html.print-export .supplement>.fold-toggle{display:block!important;padding:16px 0 7px;list-style:none;font-size:25px}html.print-export .main-section>summary::before,html.print-export .supplement>.fold-toggle::before{display:none!important}html.print-export .figure,html.print-export .table-wrap{break-inside:avoid}html.print-export .figure{max-width:none;margin:14px 0 18px;overflow:visible}html.print-export .figure .figure-screen{width:100%;min-width:0;max-width:100%}html.print-export .figure .figure-print{display:block!important;width:100%;min-width:0;max-width:100%;max-height:806px;object-fit:contain;border:0}html.print-export .table-wrap{margin:12px 0 18px;overflow:visible}html.print-export table{font-size:11.333px}html.print-export th,html.print-export td{padding:5px 6px}html.print-export .table-caption,html.print-export .figure-caption{font-size:12px}html.print-export .comment-anchor{display:none!important}html.print-export .focus-highlight{background:transparent!important;outline:0!important;color:inherit}html.print-export .print-page-spacer{display:block!important;width:1px;visibility:hidden}
 """
 
 SCRIPT = r"""
@@ -998,7 +998,7 @@ def link_crossrefs(text: str) -> str:
 
 
 def render_author_review_text(text: str, block_id: str) -> str:
-    """Render prose and wrap only the approved v2.1.0 review phrases."""
+    """Render prose and wrap only the approved v2.1.1 review phrases."""
 
     specs = AUTHOR_REVIEW_SPECS.get(block_id, [])
     if not specs:
@@ -1729,6 +1729,7 @@ def build_supplement() -> str:
 
 def version_history() -> str:
     entries = [
+        ("v2.1.1", "2026-11-17", "Mobile figure readability", "Corrected Figure 2 label clipping and added contained horizontal scrolling for figures on small screens."),
         ("v2.1.0", "2026-11-17", "Physician figure integration", "Integrated the physician author's figure structures and harmonized all six figures with one reproducible visual system."),
         ("v2.0.1", "2026-11-09", "Author review tooltips", "Underlined phrases now show reasons and suggested revisions on hover/focus."),
         ("v2.0", "2026-11-08", "Physician prose authority", "The latest doctor Word draft is now the prose authority. The current HTML retains the technical figures, tables, captions, numbering, cross references, citations, supplement, and layout. Underlined phrases require author review."),
@@ -1774,7 +1775,7 @@ def version_history() -> str:
         else:
             version, date, note = entry
             label = ""
-        current = version == "v2.1.0"
+        current = version == "v2.1.1"
         open_attr = " open" if current else ""
         summary = f"{version} · {label} · {date}" if label else f"{version} · {date}"
         rendered.append(
@@ -1800,7 +1801,7 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
     article = f"""
 <article>
   <h1 class="screen-only">Physician-authored manuscript draft</h1>
-  <p class="subtitle screen-only">English working manuscript · Version 2.1.0 · November 17, 2026</p>
+  <p class="subtitle screen-only">English working manuscript · Version 2.1.1 · November 17, 2026</p>
   <details class="fold" id="version-history"><summary>Version history</summary><div class="fold-body">{version_history()}</div></details>
   {author_review_list()}
   {sections}
@@ -1809,14 +1810,14 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
   {literature_workspace()}
 </article>
 """
-    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v2.1.0</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
+    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v2.1.1</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
     document = apply_review_block_metadata(document)
     markdown = f"""<!-- GENERATED FILE. The canonical physician Word extraction is the prose authority. -->
 # Physician-authored manuscript draft
 
-English working manuscript. Version 2.1.0, November 17, 2026.
+English working manuscript. Version 2.1.1, November 17, 2026.
 
-Current change: integrated the physician author's figure structures and harmonized all six figures with one reproducible visual system. The latest doctor Word draft remains the prose authority.
+Current change: corrected Figure 2 label clipping and added contained horizontal scrolling for figures on small screens. The latest doctor Word draft remains the prose authority.
 
 The canonical physician blocks below mirror `{SOURCE_DOCX.name}` for audit purposes. The clean HTML applies only the approved cross-reference and reporting edits while preserving all source blocks in its hidden audit representation.
 
@@ -2558,7 +2559,7 @@ def build_preservation_ledger(data: dict[str, object]) -> str:
     }
     section_ids = set(SECTION_HEADINGS)
     lines = [
-        "# v2.1.0 physician prose preservation ledger",
+        "# v2.1.1 physician prose preservation ledger",
         "",
         f"- Source DOCX: `{SOURCE_DOCX.name}`",
         f"- Source SHA-256: `{data['source_docx_sha256']}`",
@@ -2736,12 +2737,19 @@ def validate_v2(document: str, markdown: str, ledger: str, data: dict[str, objec
     for number in ["1", "2", "3", "4", "S1", "S2"]:
         if f'id="figure-{number.lower()}"' not in document:
             raise AssertionError(f"Figure is missing: {number}")
-    if "Version 2.1.0 · November 17, 2026" not in document or "draft v2.1.0" not in document:
-        raise AssertionError("v2.1.0 metadata is missing")
-    if 'id="version-2-1-0"' not in document or not re.search(r'<details class="version-entry" id="version-2-1-0"[^>]* open>', document):
-        raise AssertionError("v2.1.0 history entry is missing or closed")
-    if "figure structures and harmonized all six figures with one reproducible visual system" not in document:
-        raise AssertionError("v2.1.0 figure history is incomplete")
+    if "Version 2.1.1 · November 17, 2026" not in document or "draft v2.1.1" not in document:
+        raise AssertionError("v2.1.1 metadata is missing")
+    if 'id="version-2-1-1"' not in document or not re.search(r'<details class="version-entry" id="version-2-1-1"[^>]* open>', document):
+        raise AssertionError("v2.1.1 history entry is missing or closed")
+    if "Corrected Figure 2 label clipping and added contained horizontal scrolling for figures on small screens." not in document:
+        raise AssertionError("v2.1.1 history is incomplete")
+    for required_mobile_css in [
+        ".figure{max-width:100%;margin-left:0;margin-right:0;overflow-x:auto",
+        ".figure .figure-screen{width:700px;max-width:none}",
+        ".figure{max-width:none;margin:14px 0 18px;overflow:visible}",
+    ]:
+        if required_mobile_css not in document:
+            raise AssertionError(f"v2.1.1 figure overflow CSS is missing: {required_mobile_css}")
     for required_tooltip_code in ["initializeAuthorReviewTooltips", "role','tooltip", "为什么需要复核", "建议改为", "event.key==='Escape'", "window.innerWidth-width-margin"]:
         if required_tooltip_code not in document:
             raise AssertionError(f"Author review tooltip implementation is incomplete: {required_tooltip_code}")

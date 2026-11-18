@@ -444,7 +444,7 @@ def plot_figure_1() -> None:
 
 def plot_figure_2() -> None:
     fig = plt.figure(figsize=(FIGURE_WIDTH, 5.5))
-    grid = fig.add_gridspec(2, 1, height_ratios=[1.0, 1.75], hspace=0.55, left=0.14, right=0.965, top=0.94, bottom=0.09)
+    grid = fig.add_gridspec(2, 1, height_ratios=[1.0, 1.75], hspace=0.55, left=0.18, right=0.965, top=0.94, bottom=0.09)
     ax_a = fig.add_subplot(grid[0])
     ax_b = fig.add_subplot(grid[1])
     panel_title(ax_a, "A", "Full preference distribution")
@@ -503,6 +503,9 @@ def plot_figure_2() -> None:
     ax_b.tick_params(axis="y", length=0)
     ax_b.set_xlabel("Unadjusted harness share among directional judgments", fontsize=9)
     ax_b.text(50.3, -0.65, "Equal preference", fontsize=8, color=MUTED, ha="left")
+    fig.canvas.draw()
+    pooled_label_box = ax_b.get_yticklabels()[0].get_window_extent(fig.canvas.get_renderer())
+    assert pooled_label_box.x0 >= fig.bbox.x0, "Figure 2 pooled breast label is clipped"
     save_figure(fig, "figure2_evaluator_distribution_rough", "Panel A shows harness, tie, and baseline judgments overall and by cancer. Panel B shows the unadjusted directional harness share for pooled and individual physician results in each cancer.")
 
 
