@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check that v2.2.0 preserves the six physician SVG layouts exactly."""
+"""Check that v2.2.1 preserves the six physician SVG layouts exactly."""
 
 from __future__ import annotations
 
@@ -70,6 +70,33 @@ def assert_clear_border(path: Path) -> None:
 
 
 def main() -> None:
+    assert (
+        normalizer.HARNESS,
+        normalizer.BASELINE,
+        normalizer.TIE,
+        normalizer.PHYSICIAN,
+        normalizer.LLM_REVIEW,
+        normalizer.NEUTRAL,
+        normalizer.INK,
+        normalizer.GRID,
+    ) == (
+        "#2F6690",
+        "#B85C45",
+        "#C2C5C9",
+        "#4C8872",
+        "#766A91",
+        "#788692",
+        "#293741",
+        "#E7EAEC",
+    )
+    assert (
+        normalizer.HARNESS_TINT,
+        normalizer.BASELINE_TINT,
+        normalizer.PHYSICIAN_TINT,
+        normalizer.LLM_TINT,
+        normalizer.NEUTRAL_TINT,
+        normalizer.PANEL_FILL,
+    ) == ("#EAF0F4", "#F8EFEC", "#EDF3F1", "#F1F0F4", "#F2F3F4", "#FAFAFB")
     manifest = {
         name: digest
         for digest, name in (
@@ -161,6 +188,22 @@ def main() -> None:
     assert "diamond" not in output_svgs[1].decode("utf-8").lower()
     assert "lollipop" not in output_svgs[1].decode("utf-8").lower()
 
+    f3_root = ET.fromstring(output_svgs[2])
+    heatmap_scale = [
+        node.attrib["fill"].upper()
+        for node in f3_root.findall(f".//{namespace}rect")
+        if node.attrib.get("y") == "715"
+    ]
+    assert len(heatmap_scale) == 100
+    assert heatmap_scale == [
+        normalizer.interpolate_color(
+            normalizer.HEATMAP_LIGHT,
+            normalizer.HEATMAP_DARK,
+            index / 99,
+        )
+        for index in range(100)
+    ]
+
     combined = b"\n".join(output_svgs).decode("utf-8").upper()
     for color in [
         normalizer.HARNESS,
@@ -173,6 +216,8 @@ def main() -> None:
         normalizer.GRID,
     ]:
         assert color in combined, color
+    for rejected in ["#0072B2", "#D55E00", "#B8B8B8", "#009E73", "#7A5FA8", "#718096", "#243342", "#E6E6E6"]:
+        assert rejected not in combined, rejected
 
     document = (ROOT / "WORKSHOP_PAPER_DRAFT.html").read_text()
     embedded = re.findall(
@@ -182,8 +227,8 @@ def main() -> None:
     assert len(embedded) == 6
     assert [base64.b64decode(item) for item in embedded] == output_svgs
     print(
-        "PHYSICIAN_SVG_NORMALIZATION_OK masters=6 geometry=exact svg=6 "
-        "png=6 width=2250 dpi=300 embedded=6 borders=clear"
+        "PHYSICIAN_SVG_NORMALIZATION_OK masters=6 geometry=exact palette=clinical "
+        "svg=6 png=6 width=2250 dpi=300 embedded=6 borders=clear"
     )
 
 

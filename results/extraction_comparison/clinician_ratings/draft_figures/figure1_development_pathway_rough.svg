@@ -23,7 +23,7 @@
       }
 
       .st8 {
-        stroke: #7A5FA8;
+        stroke: #766A91;
       }
 
       .st8, .st9, .st10, .st11, .st12, .st13, .st14, .st15, .st16, .st17, .st18, .st19, .st20 {
@@ -31,7 +31,7 @@
       }
 
       .st8, .st10 {
-        fill: #F0ECF5;
+        fill: #F1F0F4;
       }
 
       .st8, .st16, .st17 {
@@ -39,11 +39,11 @@
       }
 
       .st9 {
-        fill: #F0ECF5;
+        fill: #F1F0F4;
       }
 
       .st9, .st10, .st20 {
-        stroke: #7A5FA8;
+        stroke: #766A91;
       }
 
       .st9, .st11, .st12, .st13, .st14, .st18, .st19, .st20 {
@@ -51,11 +51,11 @@
       }
 
       .st21 {
-        fill: #7A5FA8;
+        fill: #766A91;
       }
 
       .st22 {
-        fill: #D55E00;
+        fill: #B85C45;
       }
 
       .st10 {
@@ -63,7 +63,7 @@
       }
 
       .st23 {
-        fill: #009E73;
+        fill: #4C8872;
       }
 
       .st1 {
@@ -71,7 +71,7 @@
       }
 
       .st1, .st2, .st3, .st6 {
-        fill: #243342;
+        fill: #293741;
       }
 
       .st2 {
@@ -79,11 +79,11 @@
       }
 
       .st11 {
-        fill: #E9F6F2;
+        fill: #EDF3F1;
       }
 
       .st11, .st13 {
-        stroke: #009E73;
+        stroke: #4C8872;
       }
 
       .st3 {
@@ -91,53 +91,53 @@
       }
 
       .st12 {
-        fill: #E8F2F8;
+        fill: #EAF0F4;
       }
 
       .st12, .st14 {
-        stroke: #0072B2;
+        stroke: #2F6690;
       }
 
       .st13 {
-        fill: #E9F6F2;
+        fill: #EDF3F1;
       }
 
       .st14 {
-        fill: #E8F2F8;
+        fill: #EAF0F4;
       }
 
       .st4 {
-        fill: #718096;
+        fill: #788692;
         font-family: Arial, Helvetica, DejaVu Sans, sans-serif;
       }
 
       .st15 {
-        fill: #F0F2F3;
-        stroke: #718096;
+        fill: #F2F3F4;
+        stroke: #788692;
         stroke-width: 3.4px;
       }
 
       .st24 {
-        fill: #243342;
+        fill: #293741;
       }
 
       .st16 {
-        fill: #F0F2F3;
-        stroke: #718096;
+        fill: #F2F3F4;
+        stroke: #788692;
       }
 
       .st25 {
-        fill: #0072B2;
+        fill: #2F6690;
       }
 
       .st17 {
-        fill: #E8F2F8;
-        stroke: #718096;
+        fill: #EAF0F4;
+        stroke: #788692;
       }
 
       .st18 {
-        fill: #FCF0E9;
-        stroke: #D55E00;
+        fill: #F8EFEC;
+        stroke: #B85C45;
       }
 
       .st5, .st6 {
@@ -145,16 +145,16 @@
       }
 
       .st19 {
-        fill: #FAFBFC;
-        stroke: #E6E6E6;
+        fill: #FAFAFB;
+        stroke: #E7EAEC;
       }
 
       .st26 {
-        fill: #718096;
+        fill: #788692;
       }
 
       .st20 {
-        fill: #F0ECF5;
+        fill: #F1F0F4;
       }
     </style>
   </defs>
@@ -295,8 +295,8 @@
     <text class="st6" transform="translate(1641.9 1854)">
       <tspan x="0" y="0">B + Verification gates</tspan>
     </text>
-    <rect class="st11" x="2252" y="1694" width="620" height="222" rx="24" ry="24" style="fill:#E8F2F8;stroke:#0072B2" />
-    <path class="st23" d="M2276,1694h572c16,0,24,8,24,24v50h-620v-50c0-16,8-24,24-24Z" style="fill:#0072B2" />
+    <rect class="st11" x="2252" y="1694" width="620" height="222" rx="24" ry="24" style="fill:#EAF0F4;stroke:#2F6690" />
+    <path class="st23" d="M2276,1694h572c16,0,24,8,24,24v50h-620v-50c0-16,8-24,24-24Z" style="fill:#2F6690" />
     <text class="st0" transform="translate(2448.7 1748)">
       <tspan x="0" y="0">Condition D</tspan>
     </text>

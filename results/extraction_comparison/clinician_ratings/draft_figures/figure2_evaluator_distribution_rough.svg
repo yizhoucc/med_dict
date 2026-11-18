@@ -4,51 +4,51 @@
   <desc id="figure-description">Panel A shows harness preferred, tied, and baseline preferred judgments overall and by cancer. Panel B shows pooled harness preference in blue text and individual physician values as circles among directional judgments.</desc>
   <rect width="920" height="792" fill="#FFFFFF" />
   <g id="panel-a" font-family="Arial, Helvetica, DejaVu Sans, sans-serif">
-    <text x="22" y="38" fill="#243342" font-size="25" font-weight="700">A</text>
-    <text x="60" y="38" fill="#243342" font-size="24" font-weight="700">Physician preferences across all judgments</text>
-    <rect x="219" y="60" width="17" height="13" fill="#0072B2" />
-    <text x="244" y="73" fill="#243342" font-size="17">Harness preferred</text>
-    <rect x="445" y="60" width="17" height="13" fill="#B8B8B8" />
-    <text x="470" y="73" fill="#243342" font-size="17">Tie</text>
-    <rect x="554" y="60" width="17" height="13" fill="#D55E00" />
-    <text x="579" y="73" fill="#243342" font-size="17">Baseline preferred</text>
-    <text x="32" y="114" fill="#243342" font-size="18" font-weight="700">Overall</text>
-    <text x="32" y="133" fill="#718096" font-size="15">n = 2,160</text>
-    <rect x="219" y="98" width="216.8194" height="36" fill="#0072B2" />
-    <rect x="435.8194" y="98" width="400.1389" height="36" fill="#B8B8B8" />
-    <rect x="835.9583" y="98" width="53.0417" height="36" fill="#D55E00" />
+    <text x="22" y="38" fill="#293741" font-size="25" font-weight="700">A</text>
+    <text x="60" y="38" fill="#293741" font-size="24" font-weight="700">Physician preferences across all judgments</text>
+    <rect x="219" y="60" width="17" height="13" fill="#2F6690" />
+    <text x="244" y="73" fill="#293741" font-size="17">Harness preferred</text>
+    <rect x="445" y="60" width="17" height="13" fill="#C2C5C9" />
+    <text x="470" y="73" fill="#293741" font-size="17">Tie</text>
+    <rect x="554" y="60" width="17" height="13" fill="#B85C45" />
+    <text x="579" y="73" fill="#293741" font-size="17">Baseline preferred</text>
+    <text x="32" y="114" fill="#293741" font-size="18" font-weight="700">Overall</text>
+    <text x="32" y="133" fill="#788692" font-size="15">n = 2,160</text>
+    <rect x="219" y="98" width="216.8194" height="36" fill="#2F6690" />
+    <rect x="435.8194" y="98" width="400.1389" height="36" fill="#C2C5C9" />
+    <rect x="835.9583" y="98" width="53.0417" height="36" fill="#B85C45" />
     <text x="327.41" y="122" fill="#FFFFFF" font-size="15" font-weight="700" text-anchor="middle">32.4%</text>
-    <text x="635.89" y="122" fill="#243342" font-size="15" font-weight="700" text-anchor="middle">59.7%</text>
+    <text x="635.89" y="122" fill="#293741" font-size="15" font-weight="700" text-anchor="middle">59.7%</text>
     <text x="862.48" y="122" fill="#FFFFFF" font-size="15" font-weight="700" text-anchor="middle">7.9%</text>
-    <text x="32" y="171" fill="#243342" font-size="18" font-weight="700">Breast cancer</text>
-    <text x="32" y="190" fill="#718096" font-size="15">n = 1,120</text>
-    <rect x="219" y="155" width="217.1518" height="36" fill="#0072B2" />
-    <rect x="436.1518" y="155" width="404.9911" height="36" fill="#B8B8B8" />
-    <rect x="841.1429" y="155" width="47.8571" height="36" fill="#D55E00" />
+    <text x="32" y="171" fill="#293741" font-size="18" font-weight="700">Breast cancer</text>
+    <text x="32" y="190" fill="#788692" font-size="15">n = 1,120</text>
+    <rect x="219" y="155" width="217.1518" height="36" fill="#2F6690" />
+    <rect x="436.1518" y="155" width="404.9911" height="36" fill="#C2C5C9" />
+    <rect x="841.1429" y="155" width="47.8571" height="36" fill="#B85C45" />
     <text x="327.58" y="179" fill="#FFFFFF" font-size="15" font-weight="700" text-anchor="middle">32.4%</text>
-    <text x="638.65" y="179" fill="#243342" font-size="15" font-weight="700" text-anchor="middle">60.4%</text>
+    <text x="638.65" y="179" fill="#293741" font-size="15" font-weight="700" text-anchor="middle">60.4%</text>
     <text x="865.07" y="179" fill="#FFFFFF" font-size="15" font-weight="700" text-anchor="middle">7.1%</text>
-    <text x="32" y="228" fill="#243342" font-size="18" font-weight="700">PDAC</text>
-    <text x="32" y="247" fill="#718096" font-size="15">n = 1,040</text>
-    <rect x="219" y="212" width="216.4615" height="36" fill="#0072B2" />
-    <rect x="435.4615" y="212" width="394.9135" height="36" fill="#B8B8B8" />
-    <rect x="830.375" y="212" width="58.625" height="36" fill="#D55E00" />
+    <text x="32" y="228" fill="#293741" font-size="18" font-weight="700">PDAC</text>
+    <text x="32" y="247" fill="#788692" font-size="15">n = 1,040</text>
+    <rect x="219" y="212" width="216.4615" height="36" fill="#2F6690" />
+    <rect x="435.4615" y="212" width="394.9135" height="36" fill="#C2C5C9" />
+    <rect x="830.375" y="212" width="58.625" height="36" fill="#B85C45" />
     <text x="327.23" y="236" fill="#FFFFFF" font-size="15" font-weight="700" text-anchor="middle">32.3%</text>
-    <text x="632.92" y="236" fill="#243342" font-size="15" font-weight="700" text-anchor="middle">58.9%</text>
+    <text x="632.92" y="236" fill="#293741" font-size="15" font-weight="700" text-anchor="middle">58.9%</text>
     <text x="859.69" y="236" fill="#FFFFFF" font-size="15" font-weight="700" text-anchor="middle">8.8%</text>
-    <line x1="22" y1="278" x2="894" y2="278" stroke="#B8B8B8" />
+    <line x1="22" y1="278" x2="894" y2="278" stroke="#C2C5C9" />
   </g>
   <g id="panel-b" font-family="Arial, Helvetica, DejaVu Sans, sans-serif">
-    <text x="22" y="322" fill="#243342" font-size="25" font-weight="700">B</text>
-    <text x="60" y="322" fill="#243342" font-size="24" font-weight="700">Harness preference among non-tied judgments</text>
-    <text x="640" y="359" fill="#243342" font-size="17" font-weight="700">Harness preferred (%)</text>
-    <line x1="222" y1="381" x2="222" y2="708" stroke="#718096" stroke-dasharray="4 4" />
-    <line x1="298" y1="381" x2="298" y2="708" stroke="#E6E6E6" />
-    <line x1="374" y1="381" x2="374" y2="708" stroke="#E6E6E6" />
-    <line x1="450" y1="381" x2="450" y2="708" stroke="#E6E6E6" />
-    <line x1="526" y1="381" x2="526" y2="708" stroke="#E6E6E6" />
-    <line x1="602" y1="381" x2="602" y2="708" stroke="#E6E6E6" />
-    <g fill="#243342" font-size="15" text-anchor="middle">
+    <text x="22" y="322" fill="#293741" font-size="25" font-weight="700">B</text>
+    <text x="60" y="322" fill="#293741" font-size="24" font-weight="700">Harness preference among non-tied judgments</text>
+    <text x="640" y="359" fill="#293741" font-size="17" font-weight="700">Harness preferred (%)</text>
+    <line x1="222" y1="381" x2="222" y2="708" stroke="#788692" stroke-dasharray="4 4" />
+    <line x1="298" y1="381" x2="298" y2="708" stroke="#E7EAEC" />
+    <line x1="374" y1="381" x2="374" y2="708" stroke="#E7EAEC" />
+    <line x1="450" y1="381" x2="450" y2="708" stroke="#E7EAEC" />
+    <line x1="526" y1="381" x2="526" y2="708" stroke="#E7EAEC" />
+    <line x1="602" y1="381" x2="602" y2="708" stroke="#E7EAEC" />
+    <g fill="#293741" font-size="15" text-anchor="middle">
       <text x="222" y="375">50%</text>
       <text x="298" y="375">60%</text>
       <text x="374" y="375">70%</text>
@@ -56,9 +56,9 @@
       <text x="526" y="375">90%</text>
       <text x="602" y="375">100%</text>
     </g>
-    <text x="32" y="402" fill="#243342" font-size="18" font-weight="700">Breast cancer</text>
-    <text x="640" y="402" fill="#0072B2" font-size="16" font-weight="700">Pooled: 363/443 (81.9%)</text>
-    <g fill="#243342" font-size="17">
+    <text x="32" y="402" fill="#293741" font-size="18" font-weight="700">Breast cancer</text>
+    <text x="640" y="402" fill="#2F6690" font-size="16" font-weight="700">Pooled: 363/443 (81.9%)</text>
+    <g fill="#293741" font-size="17">
       <text x="51" y="435">Physician 1</text>
       <text x="51" y="467">Physician 2</text>
       <text x="51" y="499">Physician 3</text>
@@ -68,15 +68,15 @@
       <text x="640" y="499">119/143 (83.2%)</text>
       <text x="640" y="531">81/107 (75.7%)</text>
     </g>
-    <g fill="#0072B2">
+    <g fill="#2F6690">
       <circle cx="444.2642" cy="430" r="6.7" />
       <circle cx="532.1149" cy="462" r="6.7" />
       <circle cx="474.4476" cy="494" r="6.7" />
       <circle cx="417.3271" cy="526" r="6.7" />
     </g>
-    <text x="32" y="571" fill="#243342" font-size="18" font-weight="700">PDAC</text>
-    <text x="640" y="571" fill="#0072B2" font-size="16" font-weight="700">Pooled: 336/427 (78.7%)</text>
-    <g fill="#243342" font-size="17">
+    <text x="32" y="571" fill="#293741" font-size="18" font-weight="700">PDAC</text>
+    <text x="640" y="571" fill="#2F6690" font-size="16" font-weight="700">Pooled: 336/427 (78.7%)</text>
+    <g fill="#293741" font-size="17">
       <text x="51" y="604">Physician 1</text>
       <text x="51" y="636">Physician 2</text>
       <text x="51" y="668">Physician 3</text>
@@ -86,7 +86,7 @@
       <text x="640" y="668">103/133 (77.4%)</text>
       <text x="640" y="700">72/110 (65.5%)</text>
     </g>
-    <g fill="#0072B2">
+    <g fill="#2F6690">
       <circle cx="482.4494" cy="599" r="6.7" />
       <circle cx="530" cy="631" r="6.7" />
       <circle cx="430.5714" cy="663" r="6.7" />

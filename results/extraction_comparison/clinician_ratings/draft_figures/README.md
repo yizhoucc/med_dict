@@ -1,6 +1,6 @@
 # Workshop manuscript figures
 
-These are the canonical generated figures for manuscript version 2.2.0. The November 17 physician SVGs are the authoritative visual masters. `plot_manuscript_figures.py` invokes `physician_svg_normalizer.py`, which preserves their DOM order, text, geometry, markers, line styles, rounded nodes, arrows, and spatial layout. It changes only shared semantic colors, font-family declarations, and root accessibility or export metadata. The archived physician SVGs remain read-only.
+These are the canonical generated figures for manuscript version 2.2.1. The November 17 physician SVGs are the authoritative visual masters. `plot_manuscript_figures.py` invokes `physician_svg_normalizer.py`, which preserves their DOM order, text, geometry, markers, line styles, rounded nodes, arrows, and spatial layout. It changes only shared semantic colors, font-family declarations, and root accessibility or export metadata. The archived physician SVGs remain read-only.
 
 Figures 2-4 use the four physician datasets. Supplementary Figure S2 reads the locked counts in `../../../staged_ablation_annotated_20261001_093433/JUDGE_CODEX_DECODED_ANALYSIS.md`.
 

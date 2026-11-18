@@ -5,83 +5,83 @@
   <rect x="0" y="0" width="1500" height="360" fill="#FFFFFF" />
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0 0 L10 5 L0 10 z" fill="#718096" />
+      <path d="M0 0 L10 5 L0 10 z" fill="#788692" />
     </marker>
     <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0 0 L10 5 L0 10 z" fill="#0072B2" />
+      <path d="M0 0 L10 5 L0 10 z" fill="#2F6690" />
     </marker>
     <marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0 0 L10 5 L0 10 z" fill="#7A5FA8" />
+      <path d="M0 0 L10 5 L0 10 z" fill="#766A91" />
     </marker>
     <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0 0 L10 5 L0 10 z" fill="#009E73" />
+      <path d="M0 0 L10 5 L0 10 z" fill="#4C8872" />
     </marker>
     <marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0 0 L10 5 L0 10 z" fill="#D55E00" />
+      <path d="M0 0 L10 5 L0 10 z" fill="#B85C45" />
     </marker>
   </defs>
-  <g font-family="Arial, Helvetica, DejaVu Sans, sans-serif" fill="#243342">
-    <rect x="25.0" y="20.0" width="1450.0" height="315.0" rx="13" fill="#FAFBFC" stroke="#E6E6E6" stroke-width="1.5" />
-    <text x="60.0" y="62.0" text-anchor="start" font-size="21" font-weight="700" fill="#243342">Note-level preference-margin distribution</text>
-    <text x="1440.0" y="62.0" text-anchor="end" font-size="16" font-weight="400" fill="#718096">Pooled across four physicians</text>
-    <line x1="245.0" y1="95" x2="245.0" y2="230" stroke="#E6E6E6" stroke-dasharray="0" />
-    <text x="245.0" y="258.0" text-anchor="middle" font-size="16" font-weight="400" fill="#718096">-20%</text>
-    <line x1="474.0" y1="95" x2="474.0" y2="230" stroke="#718096" stroke-dasharray="6 5" />
-    <text x="474.0" y="258.0" text-anchor="middle" font-size="16" font-weight="400" fill="#718096">0%</text>
-    <line x1="703.0" y1="95" x2="703.0" y2="230" stroke="#E6E6E6" stroke-dasharray="0" />
-    <text x="703.0" y="258.0" text-anchor="middle" font-size="16" font-weight="400" fill="#718096">20%</text>
-    <line x1="932.0" y1="95" x2="932.0" y2="230" stroke="#E6E6E6" stroke-dasharray="0" />
-    <text x="932.0" y="258.0" text-anchor="middle" font-size="16" font-weight="400" fill="#718096">40%</text>
-    <line x1="1161.0" y1="95" x2="1161.0" y2="230" stroke="#E6E6E6" stroke-dasharray="0" />
-    <text x="1161.0" y="258.0" text-anchor="middle" font-size="16" font-weight="400" fill="#718096">60%</text>
-    <line x1="1390.0" y1="95" x2="1390.0" y2="230" stroke="#E6E6E6" stroke-dasharray="0" />
-    <text x="1390.0" y="258.0" text-anchor="middle" font-size="16" font-weight="400" fill="#718096">80%</text>
-    <text x="225.0" y="135.0" text-anchor="end" font-size="16" font-weight="700" fill="#243342">Breast cancer</text>
-    <text x="1390.0" y="106.0" text-anchor="end" font-size="16" font-weight="700" fill="#0072B2">20/20 positive</text>
-    <line x1="245" y1="130" x2="1390" y2="130" stroke="#718096" />
-    <circle cx="555.8" cy="130.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="576.2" cy="130.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="596.7" cy="130.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="617.1" cy="130.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="637.6" cy="130.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="678.5" cy="130.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="698.9" cy="122.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="698.9" cy="130.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="698.9" cy="138.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="719.4" cy="130.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="739.8" cy="126.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="739.8" cy="134.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="801.1" cy="130.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="862.5" cy="122.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="862.5" cy="130.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="862.5" cy="138.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="903.4" cy="130.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="964.7" cy="130.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="1005.6" cy="130.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="1046.5" cy="130.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <text x="225.0" y="205.0" text-anchor="end" font-size="16" font-weight="700" fill="#243342">PDAC</text>
-    <text x="1390.0" y="176.0" text-anchor="end" font-size="16" font-weight="700" fill="#0072B2">19/20 positive; 1 negative</text>
-    <line x1="245" y1="200" x2="1390" y2="200" stroke="#718096" />
-    <circle cx="452.0" cy="200.0" r="5.5" fill="#D55E00" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="496.0" cy="200.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="584.1" cy="196.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="584.1" cy="204.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="628.1" cy="200.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="650.2" cy="200.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="694.2" cy="196.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="694.2" cy="204.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="716.2" cy="196.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="716.2" cy="204.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="738.2" cy="200.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="760.2" cy="196.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="760.2" cy="204.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="804.3" cy="200.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="826.3" cy="200.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="848.3" cy="200.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="892.4" cy="200.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="958.4" cy="200.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="980.4" cy="200.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <circle cx="1090.5" cy="200.0" r="5.5" fill="#0072B2" stroke="#FFFFFF" stroke-width="1" />
-    <text x="750.0" y="288.0" text-anchor="middle" font-size="16" font-weight="400" fill="#718096">Normalized note margin</text>
+  <g font-family="Arial, Helvetica, DejaVu Sans, sans-serif" fill="#293741">
+    <rect x="25.0" y="20.0" width="1450.0" height="315.0" rx="13" fill="#FAFAFB" stroke="#E7EAEC" stroke-width="1.5" />
+    <text x="60.0" y="62.0" text-anchor="start" font-size="21" font-weight="700" fill="#293741">Note-level preference-margin distribution</text>
+    <text x="1440.0" y="62.0" text-anchor="end" font-size="16" font-weight="400" fill="#788692">Pooled across four physicians</text>
+    <line x1="245.0" y1="95" x2="245.0" y2="230" stroke="#E7EAEC" stroke-dasharray="0" />
+    <text x="245.0" y="258.0" text-anchor="middle" font-size="16" font-weight="400" fill="#788692">-20%</text>
+    <line x1="474.0" y1="95" x2="474.0" y2="230" stroke="#788692" stroke-dasharray="6 5" />
+    <text x="474.0" y="258.0" text-anchor="middle" font-size="16" font-weight="400" fill="#788692">0%</text>
+    <line x1="703.0" y1="95" x2="703.0" y2="230" stroke="#E7EAEC" stroke-dasharray="0" />
+    <text x="703.0" y="258.0" text-anchor="middle" font-size="16" font-weight="400" fill="#788692">20%</text>
+    <line x1="932.0" y1="95" x2="932.0" y2="230" stroke="#E7EAEC" stroke-dasharray="0" />
+    <text x="932.0" y="258.0" text-anchor="middle" font-size="16" font-weight="400" fill="#788692">40%</text>
+    <line x1="1161.0" y1="95" x2="1161.0" y2="230" stroke="#E7EAEC" stroke-dasharray="0" />
+    <text x="1161.0" y="258.0" text-anchor="middle" font-size="16" font-weight="400" fill="#788692">60%</text>
+    <line x1="1390.0" y1="95" x2="1390.0" y2="230" stroke="#E7EAEC" stroke-dasharray="0" />
+    <text x="1390.0" y="258.0" text-anchor="middle" font-size="16" font-weight="400" fill="#788692">80%</text>
+    <text x="225.0" y="135.0" text-anchor="end" font-size="16" font-weight="700" fill="#293741">Breast cancer</text>
+    <text x="1390.0" y="106.0" text-anchor="end" font-size="16" font-weight="700" fill="#2F6690">20/20 positive</text>
+    <line x1="245" y1="130" x2="1390" y2="130" stroke="#788692" />
+    <circle cx="555.8" cy="130.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="576.2" cy="130.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="596.7" cy="130.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="617.1" cy="130.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="637.6" cy="130.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="678.5" cy="130.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="698.9" cy="122.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="698.9" cy="130.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="698.9" cy="138.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="719.4" cy="130.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="739.8" cy="126.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="739.8" cy="134.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="801.1" cy="130.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="862.5" cy="122.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="862.5" cy="130.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="862.5" cy="138.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="903.4" cy="130.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="964.7" cy="130.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="1005.6" cy="130.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="1046.5" cy="130.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <text x="225.0" y="205.0" text-anchor="end" font-size="16" font-weight="700" fill="#293741">PDAC</text>
+    <text x="1390.0" y="176.0" text-anchor="end" font-size="16" font-weight="700" fill="#2F6690">19/20 positive; 1 negative</text>
+    <line x1="245" y1="200" x2="1390" y2="200" stroke="#788692" />
+    <circle cx="452.0" cy="200.0" r="5.5" fill="#B85C45" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="496.0" cy="200.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="584.1" cy="196.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="584.1" cy="204.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="628.1" cy="200.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="650.2" cy="200.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="694.2" cy="196.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="694.2" cy="204.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="716.2" cy="196.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="716.2" cy="204.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="738.2" cy="200.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="760.2" cy="196.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="760.2" cy="204.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="804.3" cy="200.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="826.3" cy="200.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="848.3" cy="200.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="892.4" cy="200.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="958.4" cy="200.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="980.4" cy="200.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <circle cx="1090.5" cy="200.0" r="5.5" fill="#2F6690" stroke="#FFFFFF" stroke-width="1" />
+    <text x="750.0" y="288.0" text-anchor="middle" font-size="16" font-weight="400" fill="#788692">Normalized note margin</text>
   </g>
 </svg>

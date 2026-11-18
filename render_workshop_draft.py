@@ -64,18 +64,18 @@ PRINT_FIGURE_DIMENSIONS = {
     "4": (2250, 727), "S1": (2250, 540), "S2": (2250, 959),
 }
 EXPECTED_FIGURE_SHA256 = {
-    "figure1_development_pathway_rough.svg": "9e33d0d85f32ea5ff8d915c3d10f4b08435053aed835d0cf06cb5ff3bfd27b69",
-    "figure2_evaluator_distribution_rough.svg": "9f307973f3705ea9ebbcb16f89e2ad156e1eb61581942659852efcbc2a28d9a8",
-    "figure3_interrater_matrix_rough.svg": "c713c68ff60d32b66a651e2e354e362e7595374f5ab8470d9bffda206bf2ba1a",
-    "figure4_effect_profile.svg": "fc0ec1b449b147edb22da42f66732c94f66ff5e691c30f550fc1fe356deffe04",
-    "supplementary_figure_s1_note_margins.svg": "f9859e21c26fa2043a74912cec9e28d3facf3d1d58a73e27fb1a2ac8769f80f3",
-    "supplementary_figure_s2_staged_ablation.svg": "d9b5b0db4ecef0d4518398a56d0bc54ed62a5662ed3111841f005ac52427549b",
-    "figure1_development_pathway_print.png": "f4022ffa3d772c54542cb763ea0fc5ba4d00bd2db67da9651b5bb17ac907df68",
-    "figure2_evaluator_distribution_print.png": "bb0b1d2b9b39a16d6cd6b91048af923b140cf9301d2ed6154c53269d5d829d03",
-    "figure3_interrater_matrix_print.png": "3426df7082877b570dc87915754f57d5c427d97c4dae6f02793dc7971c8b9785",
-    "figure4_effect_profile_print.png": "80ad277d9f7b41cf57244c75fb245ce6b687f67d04a3c978089815f2da0d2514",
-    "supplementary_figure_s1_note_margins_print.png": "226da20fd3d1fb84f017969a4e5790011aa468cfa4af3aa38838afbd2278003f",
-    "supplementary_figure_s2_staged_ablation_print.png": "03b264546cb3f62e20a6d4357904aabef317d7ba5ac376bef50e3a1cf250b1a8",
+    "figure1_development_pathway_rough.svg": "9155ce9746dd65699d6f093a5fb65facf0a33ea2e0b84c612d4c33f2c19001c8",
+    "figure2_evaluator_distribution_rough.svg": "cf8f02ad7af70170d61b51f0aea5e4481c145f429e8bb3937f40fc8e6dd25e71",
+    "figure3_interrater_matrix_rough.svg": "c5f847ebc8f048b4ca06fd968d92734e3b7f3eb7b0604571d456789418450ca1",
+    "figure4_effect_profile.svg": "475fc2aeb12aa035fea5c9ab390366beb1ede54e16e7d78db70b516eaac6bb8b",
+    "supplementary_figure_s1_note_margins.svg": "fca5c1e2e97f0f7e76343dcb41921874d7071827fee78bb7afe813c4ef986027",
+    "supplementary_figure_s2_staged_ablation.svg": "06ee8cc429fa5f65c8f0a924700ed5e199ceb63b231050e2c97777c287a0b018",
+    "figure1_development_pathway_print.png": "5d8ec15eb17b48509bc5e47354c95f10da39b98cafe7862f9e99851d4fd89b29",
+    "figure2_evaluator_distribution_print.png": "58bca171cfb0ebebd946f79b1186f33d6a64f969e9b460675c9e8b25218f00d9",
+    "figure3_interrater_matrix_print.png": "853196f34e89c0cc4b2195679f8d472e7281679f56e19ff9ff9cadab8534e28d",
+    "figure4_effect_profile_print.png": "fc66459b772e0e9c6d03bd0a8c5ee4082ae5b80966d8a24e7fe23edf13303d60",
+    "supplementary_figure_s1_note_margins_print.png": "7e462713687de225aa22831d6f9b58146b5dfdd5fcab61a3555e4d6b16aa4043",
+    "supplementary_figure_s2_staged_ablation_print.png": "eff28a2eee8ffab41a78b278ba620f28af059d1a5c0845d091ed051521b17e61",
 }
 
 SECTION_HEADINGS = {
@@ -1729,6 +1729,7 @@ def build_supplement() -> str:
 
 def version_history() -> str:
     entries = [
+        ("v2.2.1", "2026-11-18", "Clinical journal palette", "Applied the approved clinical journal palette to all six physician SVG layouts without changing their text or geometry."),
         ("v2.2.0", "2026-11-18", "Physician SVG layout authority", "Used the physician SVGs as the authoritative layouts and applied only shared colors, fonts, and export metadata."),
         ("v2.1.1", "2026-11-17", "Mobile figure readability", "Corrected Figure 2 label clipping and added contained horizontal scrolling for figures on small screens."),
         ("v2.1.0", "2026-11-17", "Physician figure integration", "Integrated the physician author's figure structures and harmonized all six figures with one reproducible visual system."),
@@ -1776,7 +1777,7 @@ def version_history() -> str:
         else:
             version, date, note = entry
             label = ""
-        current = version == "v2.2.0"
+        current = version == "v2.2.1"
         open_attr = " open" if current else ""
         summary = f"{version} · {label} · {date}" if label else f"{version} · {date}"
         rendered.append(
@@ -1802,7 +1803,7 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
     article = f"""
 <article>
   <h1 class="screen-only">Physician-authored manuscript draft</h1>
-  <p class="subtitle screen-only">English working manuscript · Version 2.2.0 · November 18, 2026</p>
+  <p class="subtitle screen-only">English working manuscript · Version 2.2.1 · November 18, 2026</p>
   <details class="fold" id="version-history"><summary>Version history</summary><div class="fold-body">{version_history()}</div></details>
   {author_review_list()}
   {sections}
@@ -1811,14 +1812,14 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
   {literature_workspace()}
 </article>
 """
-    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v2.2.0</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
+    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v2.2.1</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
     document = apply_review_block_metadata(document)
     markdown = f"""<!-- GENERATED FILE. The canonical physician Word extraction is the prose authority. -->
 # Physician-authored manuscript draft
 
-English working manuscript. Version 2.2.0, November 18, 2026.
+English working manuscript. Version 2.2.1, November 18, 2026.
 
-Current change: used the physician SVGs as the authoritative layouts and applied only shared colors, fonts, and export metadata. The latest doctor Word draft remains the prose authority.
+Current change: applied the approved clinical journal palette to all six physician SVG layouts. The latest doctor Word draft remains the prose authority.
 
 The canonical physician blocks below mirror `{SOURCE_DOCX.name}` for audit purposes. The clean HTML applies only the approved cross-reference and reporting edits while preserving all source blocks in its hidden audit representation.
 
@@ -2560,7 +2561,7 @@ def build_preservation_ledger(data: dict[str, object]) -> str:
     }
     section_ids = set(SECTION_HEADINGS)
     lines = [
-        "# v2.2.0 physician prose preservation ledger",
+        "# v2.2.1 physician prose preservation ledger",
         "",
         f"- Source DOCX: `{SOURCE_DOCX.name}`",
         f"- Source SHA-256: `{data['source_docx_sha256']}`",
@@ -2742,19 +2743,19 @@ def validate_v2(document: str, markdown: str, ledger: str, data: dict[str, objec
     for number in ["1", "2", "3", "4", "S1", "S2"]:
         if f'id="figure-{number.lower()}"' not in document:
             raise AssertionError(f"Figure is missing: {number}")
-    if "Version 2.2.0 · November 18, 2026" not in document or "draft v2.2.0" not in document:
-        raise AssertionError("v2.2.0 metadata is missing")
-    if 'id="version-2-2-0"' not in document or not re.search(r'<details class="version-entry" id="version-2-2-0"[^>]* open>', document):
-        raise AssertionError("v2.2.0 history entry is missing or closed")
-    if "Used the physician SVGs as the authoritative layouts and applied only shared colors, fonts, and export metadata." not in document:
-        raise AssertionError("v2.2.0 history is incomplete")
+    if "Version 2.2.1 · November 18, 2026" not in document or "draft v2.2.1" not in document:
+        raise AssertionError("v2.2.1 metadata is missing")
+    if 'id="version-2-2-1"' not in document or not re.search(r'<details class="version-entry" id="version-2-2-1"[^>]* open>', document):
+        raise AssertionError("v2.2.1 history entry is missing or closed")
+    if "Applied the approved clinical journal palette to all six physician SVG layouts without changing their text or geometry." not in document:
+        raise AssertionError("v2.2.1 history is incomplete")
     for required_mobile_css in [
         ".figure{max-width:100%;margin-left:0;margin-right:0;overflow-x:auto",
         ".figure .figure-screen{width:700px;max-width:none}",
         ".figure{max-width:none;margin:14px 0 18px;overflow:visible}",
     ]:
         if required_mobile_css not in document:
-            raise AssertionError(f"v2.2.0 figure overflow CSS is missing: {required_mobile_css}")
+            raise AssertionError(f"v2.2.1 figure overflow CSS is missing: {required_mobile_css}")
     for required_tooltip_code in ["initializeAuthorReviewTooltips", "role','tooltip", "为什么需要复核", "建议改为", "event.key==='Escape'", "window.innerWidth-width-margin"]:
         if required_tooltip_code not in document:
             raise AssertionError(f"Author review tooltip implementation is incomplete: {required_tooltip_code}")

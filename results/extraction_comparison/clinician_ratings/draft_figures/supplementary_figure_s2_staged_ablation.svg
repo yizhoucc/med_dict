@@ -4,66 +4,66 @@
   <desc id="figure-description">Panel A defines four cumulative harness configurations. Panel B reports the earlier, later, and tie counts and P values for three adjacent comparisons evaluated by an LLM judge.</desc>
   <rect width="1300" height="818" fill="#FFFFFF" />
   <g font-family="Arial, Helvetica, DejaVu Sans, sans-serif">
-    <text x="65" y="37" font-size="24" font-weight="700" fill="#243342" text-anchor="start">Harness configuration</text>
-    <text x="684" y="37" font-size="24" font-weight="700" fill="#243342" text-anchor="start">LLM judge preference</text>
-    <text x="1213" y="112" font-size="19" font-weight="700" fill="#243342" text-anchor="middle">P value</text>
-    <circle cx="62" cy="89" r="20" fill="#243342" />
+    <text x="65" y="37" font-size="24" font-weight="700" fill="#293741" text-anchor="start">Harness configuration</text>
+    <text x="684" y="37" font-size="24" font-weight="700" fill="#293741" text-anchor="start">LLM judge preference</text>
+    <text x="1213" y="112" font-size="19" font-weight="700" fill="#293741" text-anchor="middle">P value</text>
+    <circle cx="62" cy="89" r="20" fill="#293741" />
     <text x="62" y="96.0" font-size="21" font-weight="700" fill="#FFFFFF" text-anchor="middle">A</text>
-    <text x="100" y="96.0" font-size="24" font-weight="700" fill="#243342" text-anchor="start">Single-prompt baseline</text>
-    <text x="100" y="127.0" font-size="19" font-weight="400" fill="#243342" text-anchor="start">One inference request per note.</text>
-    <circle cx="62" cy="190" r="20" fill="#243342" />
+    <text x="100" y="96.0" font-size="24" font-weight="700" fill="#293741" text-anchor="start">Single-prompt baseline</text>
+    <text x="100" y="127.0" font-size="19" font-weight="400" fill="#293741" text-anchor="start">One inference request per note.</text>
+    <circle cx="62" cy="190" r="20" fill="#293741" />
     <text x="62" y="197.0" font-size="21" font-weight="700" fill="#FFFFFF" text-anchor="middle">B</text>
-    <text x="100" y="197.0" font-size="24" font-weight="700" fill="#243342" text-anchor="start">Decomposed extraction</text>
-    <text x="100" y="228.0" font-size="19" font-weight="400" fill="#243342" text-anchor="start">Field-specific prompts, cross-field routing, a bounded</text>
-    <text x="100" y="252.0" font-size="19" font-weight="400" fill="#243342" text-anchor="start">Assessment and Plan retry, and shared format and</text>
-    <text x="100" y="276.0" font-size="19" font-weight="400" fill="#243342" text-anchor="start">schema safeguards.</text>
-    <circle cx="62" cy="323" r="20" fill="#243342" />
+    <text x="100" y="197.0" font-size="24" font-weight="700" fill="#293741" text-anchor="start">Decomposed extraction</text>
+    <text x="100" y="228.0" font-size="19" font-weight="400" fill="#293741" text-anchor="start">Field-specific prompts, cross-field routing, a bounded</text>
+    <text x="100" y="252.0" font-size="19" font-weight="400" fill="#293741" text-anchor="start">Assessment and Plan retry, and shared format and</text>
+    <text x="100" y="276.0" font-size="19" font-weight="400" fill="#293741" text-anchor="start">schema safeguards.</text>
+    <circle cx="62" cy="323" r="20" fill="#293741" />
     <text x="62" y="330.0" font-size="21" font-weight="700" fill="#FFFFFF" text-anchor="middle">C</text>
-    <text x="100" y="330.0" font-size="24" font-weight="700" fill="#243342" text-anchor="start">Verified extraction</text>
-    <text x="100" y="361.0" font-size="19" font-weight="400" fill="#243342" text-anchor="start">Condition B plus semantic, faithfulness, and temporal</text>
-    <text x="100" y="385.0" font-size="19" font-weight="400" fill="#243342" text-anchor="start">verification gates.</text>
-    <circle cx="62" cy="441" r="20" fill="#243342" />
+    <text x="100" y="330.0" font-size="24" font-weight="700" fill="#293741" text-anchor="start">Verified extraction</text>
+    <text x="100" y="361.0" font-size="19" font-weight="400" fill="#293741" text-anchor="start">Condition B plus semantic, faithfulness, and temporal</text>
+    <text x="100" y="385.0" font-size="19" font-weight="400" fill="#293741" text-anchor="start">verification gates.</text>
+    <circle cx="62" cy="441" r="20" fill="#293741" />
     <text x="62" y="448.0" font-size="21" font-weight="700" fill="#FFFFFF" text-anchor="middle">D</text>
-    <text x="100" y="448.0" font-size="24" font-weight="700" fill="#243342" text-anchor="start">Full inference harness</text>
-    <text x="100" y="479.0" font-size="19" font-weight="400" fill="#243342" text-anchor="start">Condition C plus deterministic inline processing</text>
-    <text x="100" y="503.0" font-size="19" font-weight="400" fill="#243342" text-anchor="start">and the complete POST hook layer.</text>
-    <text x="906" y="145.0" font-size="21" font-weight="700" fill="#243342" text-anchor="middle">A vs B</text>
-    <rect x="682" y="160.0" width="190.39999999999998" height="39" fill="#718096" />
+    <text x="100" y="448.0" font-size="24" font-weight="700" fill="#293741" text-anchor="start">Full inference harness</text>
+    <text x="100" y="479.0" font-size="19" font-weight="400" fill="#293741" text-anchor="start">Condition C plus deterministic inline processing</text>
+    <text x="100" y="503.0" font-size="19" font-weight="400" fill="#293741" text-anchor="start">and the complete POST hook layer.</text>
+    <text x="906" y="145.0" font-size="21" font-weight="700" fill="#293741" text-anchor="middle">A vs B</text>
+    <rect x="682" y="160.0" width="190.39999999999998" height="39" fill="#788692" />
     <text x="777.2" y="186.0" font-size="20" font-weight="700" fill="#FFFFFF" text-anchor="middle">17</text>
-    <rect x="872.4" y="160.0" width="190.39999999999998" height="39" fill="#0072B2" />
+    <rect x="872.4" y="160.0" width="190.39999999999998" height="39" fill="#2F6690" />
     <text x="967.5999999999999" y="186.0" font-size="20" font-weight="700" fill="#FFFFFF" text-anchor="middle">17</text>
-    <rect x="1062.8" y="160.0" width="67.19999999999999" height="39" fill="#B8B8B8" />
-    <text x="1096.3999999999999" y="186.0" font-size="20" font-weight="700" fill="#243342" text-anchor="middle">6</text>
-    <text x="1213" y="185.0" font-size="22" font-weight="400" fill="#243342" text-anchor="middle">1.000</text>
-    <text x="906" y="300.0" font-size="21" font-weight="700" fill="#243342" text-anchor="middle">B vs C</text>
-    <rect x="682" y="315.0" width="22.4" height="39" fill="#718096" />
+    <rect x="1062.8" y="160.0" width="67.19999999999999" height="39" fill="#C2C5C9" />
+    <text x="1096.3999999999999" y="186.0" font-size="20" font-weight="700" fill="#293741" text-anchor="middle">6</text>
+    <text x="1213" y="185.0" font-size="22" font-weight="400" fill="#293741" text-anchor="middle">1.000</text>
+    <text x="906" y="300.0" font-size="21" font-weight="700" fill="#293741" text-anchor="middle">B vs C</text>
+    <rect x="682" y="315.0" width="22.4" height="39" fill="#788692" />
     <text x="693.2" y="341.0" font-size="20" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
-    <rect x="704.4" y="315.0" width="268.79999999999995" height="39" fill="#0072B2" />
+    <rect x="704.4" y="315.0" width="268.79999999999995" height="39" fill="#2F6690" />
     <text x="838.8" y="341.0" font-size="20" font-weight="700" fill="#FFFFFF" text-anchor="middle">24</text>
-    <rect x="973.1999999999999" y="315.0" width="156.79999999999998" height="39" fill="#B8B8B8" />
-    <text x="1051.6" y="341.0" font-size="20" font-weight="700" fill="#243342" text-anchor="middle">14</text>
-    <text x="1213" y="340.0" font-size="22" font-weight="400" fill="#243342" text-anchor="middle">&lt; .001</text>
-    <text x="906" y="455.0" font-size="21" font-weight="700" fill="#243342" text-anchor="middle">C vs D</text>
-    <rect x="682" y="470.0" width="212.79999999999998" height="39" fill="#718096" />
+    <rect x="973.1999999999999" y="315.0" width="156.79999999999998" height="39" fill="#C2C5C9" />
+    <text x="1051.6" y="341.0" font-size="20" font-weight="700" fill="#293741" text-anchor="middle">14</text>
+    <text x="1213" y="340.0" font-size="22" font-weight="400" fill="#293741" text-anchor="middle">&lt; .001</text>
+    <text x="906" y="455.0" font-size="21" font-weight="700" fill="#293741" text-anchor="middle">C vs D</text>
+    <rect x="682" y="470.0" width="212.79999999999998" height="39" fill="#788692" />
     <text x="788.4" y="496.0" font-size="20" font-weight="700" fill="#FFFFFF" text-anchor="middle">19</text>
-    <rect x="894.8" y="470.0" width="179.2" height="39" fill="#0072B2" />
+    <rect x="894.8" y="470.0" width="179.2" height="39" fill="#2F6690" />
     <text x="984.4" y="496.0" font-size="20" font-weight="700" fill="#FFFFFF" text-anchor="middle">16</text>
-    <rect x="1074" y="470.0" width="56" height="39" fill="#B8B8B8" />
-    <text x="1102" y="496.0" font-size="20" font-weight="700" fill="#243342" text-anchor="middle">5</text>
-    <text x="1213" y="495.0" font-size="22" font-weight="400" fill="#243342" text-anchor="middle">.736</text>
-    <rect x="682" y="69.0" width="15" height="15" fill="#718096" />
-    <text x="704" y="83.0" font-size="17" font-weight="400" fill="#243342" text-anchor="start">Earlier configuration</text>
-    <rect x="888" y="69.0" width="15" height="15" fill="#0072B2" />
-    <text x="910" y="83.0" font-size="17" font-weight="400" fill="#243342" text-anchor="start">Later configuration</text>
-    <rect x="1086" y="69.0" width="15" height="15" fill="#B8B8B8" />
-    <text x="1108" y="83.0" font-size="17" font-weight="400" fill="#243342" text-anchor="start">Tie</text>
-    <text x="22" y="38" fill="#243342" font-size="29" font-weight="700">A</text>
-    <text x="640" y="38" fill="#243342" font-size="29" font-weight="700">B</text>
-    <path d="M62 110 V159" stroke="#718096" fill="none" stroke-width="2" />
-    <path d="M56 157 h12 l-6 9 Z" fill="#718096" />
-    <path d="M62 211 V292" stroke="#718096" fill="none" stroke-width="2" />
-    <path d="M56 290 h12 l-6 9 Z" fill="#718096" />
-    <path d="M62 344 V410" stroke="#718096" fill="none" stroke-width="2" />
-    <path d="M56 408 h12 l-6 9 Z" fill="#718096" />
+    <rect x="1074" y="470.0" width="56" height="39" fill="#C2C5C9" />
+    <text x="1102" y="496.0" font-size="20" font-weight="700" fill="#293741" text-anchor="middle">5</text>
+    <text x="1213" y="495.0" font-size="22" font-weight="400" fill="#293741" text-anchor="middle">.736</text>
+    <rect x="682" y="69.0" width="15" height="15" fill="#788692" />
+    <text x="704" y="83.0" font-size="17" font-weight="400" fill="#293741" text-anchor="start">Earlier configuration</text>
+    <rect x="888" y="69.0" width="15" height="15" fill="#2F6690" />
+    <text x="910" y="83.0" font-size="17" font-weight="400" fill="#293741" text-anchor="start">Later configuration</text>
+    <rect x="1086" y="69.0" width="15" height="15" fill="#C2C5C9" />
+    <text x="1108" y="83.0" font-size="17" font-weight="400" fill="#293741" text-anchor="start">Tie</text>
+    <text x="22" y="38" fill="#293741" font-size="29" font-weight="700">A</text>
+    <text x="640" y="38" fill="#293741" font-size="29" font-weight="700">B</text>
+    <path d="M62 110 V159" stroke="#788692" fill="none" stroke-width="2" />
+    <path d="M56 157 h12 l-6 9 Z" fill="#788692" />
+    <path d="M62 211 V292" stroke="#788692" fill="none" stroke-width="2" />
+    <path d="M56 290 h12 l-6 9 Z" fill="#788692" />
+    <path d="M62 344 V410" stroke="#788692" fill="none" stroke-width="2" />
+    <path d="M56 408 h12 l-6 9 Z" fill="#788692" />
   </g>
 </svg>

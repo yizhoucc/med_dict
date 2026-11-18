@@ -172,14 +172,14 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           if (!visible() || document.activeElement?.id !== 'figure-s1') return 'nested supplement link did not reveal and focus';
           button.click();
           const history = document.getElementById('version-history');
-          const current = document.getElementById('version-2-2-0');
+          const current = document.getElementById('version-2-2-1');
           const older = [...history.querySelectorAll('.version-entry')].filter(node => node !== current);
           if (history.open || !current?.open || older.some(node => node.open)) return 'unexpected initial version-history state';
           window.__workshopVersionHashState = 'waiting';
           window.addEventListener('hashchange', () => {
             setTimeout(() => { window.__workshopVersionHashState = 'settled'; }, 0);
           }, {once: true});
-          setTimeout(() => { location.hash='#version-2-1-1'; }, 0);
+          setTimeout(() => { location.hash='#version-2-2-0'; }, 0);
           return 'waiting-for-version-hash';
           }
         })()
@@ -212,10 +212,10 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
         let checks = #"""
         (() => {
           const history = document.getElementById('version-history');
-          const current = document.getElementById('version-2-2-0');
-          const prior = document.getElementById('version-2-1-1');
+          const current = document.getElementById('version-2-2-1');
+          const prior = document.getElementById('version-2-2-0');
           const older = [...history.querySelectorAll('.version-entry')].filter(node => node !== current);
-          if (location.hash !== '#version-2-1-1' || !history.open || current.open || !prior.open || older.some(node => node !== prior && node.open) || document.activeElement !== prior) {
+          if (location.hash !== '#version-2-2-0' || !history.open || current.open || !prior.open || older.some(node => node !== prior && node.open) || document.activeElement !== prior) {
             return 'version hash navigation did not isolate and focus prior entry';
           }
           for (const id of ['physician-comments', 'version-history', 'literature-workspace']) {
@@ -376,7 +376,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
                 self.fail("Invalid print-preparation report"); return
             }
             guard offenders.isEmpty else { self.fail("Page-boundary offenders: \(offenders)"); return }
-            guard v2PrintContent else { self.fail("v2.2.0 Discussion text is missing from print export"); return }
+            guard v2PrintContent else { self.fail("v2.2.1 Discussion text is missing from print export"); return }
             guard authorUnderlineCount == 14 else { self.fail("Author review underline count changed in print export: \(authorUnderlineCount)"); return }
             guard tooltipPrintHidden else { self.fail("Author review tooltip remains visible in print export"); return }
             guard printFigureLayoutOK else { self.fail("Mobile figure scrolling leaked into print export"); return }

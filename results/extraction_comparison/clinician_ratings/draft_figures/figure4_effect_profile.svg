@@ -2,97 +2,97 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="7.5in" height="2.423149in" viewBox="0 0 1594 515" role="img" aria-labelledby="figure-title figure-description">
   <title id="figure-title">Physician preference by core oncology field</title>
   <desc id="figure-description">Panel A reports raw counts. Panel B shows complete physician preference distributions. Panel C shows adjusted harness preference estimates and confidence intervals.</desc>
-  <g font-family="Arial, Helvetica, DejaVu Sans, sans-serif" fill="#243342">
+  <g font-family="Arial, Helvetica, DejaVu Sans, sans-serif" fill="#293741">
     <rect x="0" y="0" width="1594" height="548" fill="#FFFFFF" />
-    <text x="637.0" y="39" font-size="28" font-weight="700" text-anchor="start" fill="#243342">B</text>
-    <text x="672.0" y="39" font-size="24" font-weight="700" text-anchor="start" fill="#243342">Observed physician preferences</text>
-    <text x="1147.0" y="39" font-size="28" font-weight="700" text-anchor="start" fill="#243342">C</text>
-    <text x="1183.0" y="39" font-size="24" font-weight="700" text-anchor="start" fill="#243342">Adjusted harness preference</text>
-    <rect x="640.0" y="61" width="15" height="15" fill="#0072B2" />
-    <text x="663.0" y="75" font-size="17" font-weight="400" text-anchor="start" fill="#243342">Harness preferred</text>
-    <rect x="842.0" y="61" width="15" height="15" fill="#B8B8B8" />
-    <text x="865.0" y="75" font-size="17" font-weight="400" text-anchor="start" fill="#243342">Tie</text>
-    <rect x="920.0" y="61" width="15" height="15" fill="#D55E00" />
-    <text x="943.0" y="75" font-size="17" font-weight="400" text-anchor="start" fill="#243342">Baseline preferred</text>
-    <text x="1183.0" y="75" font-size="17" font-weight="400" text-anchor="start" fill="#243342">GEE estimates among non-tied judgments</text>
-    <text x="636.0" y="118" font-size="16" font-weight="400" text-anchor="middle" fill="#243342">0%</text>
-    <text x="756.25" y="118" font-size="16" font-weight="400" text-anchor="middle" fill="#243342">25%</text>
-    <text x="876.5" y="118" font-size="16" font-weight="400" text-anchor="middle" fill="#243342">50%</text>
-    <text x="996.75" y="118" font-size="16" font-weight="400" text-anchor="middle" fill="#243342">75%</text>
-    <text x="1117.0" y="118" font-size="16" font-weight="400" text-anchor="middle" fill="#243342">100%</text>
-    <text x="1179.0" y="118" font-size="16" font-weight="400" text-anchor="middle" fill="#243342">30%</text>
-    <text x="1288.2" y="118" font-size="16" font-weight="400" text-anchor="middle" fill="#243342">50%</text>
-    <text x="1424.7" y="118" font-size="16" font-weight="400" text-anchor="middle" fill="#243342">75%</text>
-    <text x="1561.2" y="118" font-size="16" font-weight="400" text-anchor="middle" fill="#243342">100%</text>
-    <text x="20" y="157" font-size="18" font-weight="700" text-anchor="start" fill="#243342">Overall</text>
-    <rect x="636.0" y="139.0" width="193.325" height="24" fill="#0072B2" />
-    <rect x="829.325" y="139.0" width="252.0625" height="24" fill="#B8B8B8" />
-    <rect x="1081.3875" y="139.0" width="35.6125" height="24" fill="#D55E00" />
-    <text x="20" y="204" font-size="18" font-weight="400" text-anchor="start" fill="#243342">Active anticancer medications</text>
-    <rect x="636.0" y="186.0" width="396.825" height="24" fill="#0072B2" />
-    <rect x="1032.825" y="186.0" width="75.15625" height="24" fill="#B8B8B8" />
-    <rect x="1107.98125" y="186.0" width="9.01875" height="24" fill="#D55E00" />
-    <line x1="1288.2" y1="175" x2="1288.2" y2="222" stroke="#718096" stroke-width="1.5" stroke-dasharray="4 4" />
-    <line x1="1512.606" y1="198" x2="1557.924" y2="198" stroke="#0072B2" stroke-width="2.8" />
-    <line x1="1512.606" y1="193" x2="1512.606" y2="203" stroke="#0072B2" stroke-width="2" />
-    <line x1="1557.924" y1="193" x2="1557.924" y2="203" stroke="#0072B2" stroke-width="2" />
-    <circle cx="1548.642" cy="198" r="5.8" fill="#0072B2" />
-    <text x="20" y="251" font-size="18" font-weight="400" text-anchor="start" fill="#243342">Stage</text>
-    <rect x="636.0" y="233.0" width="207.43125" height="24" fill="#0072B2" />
-    <rect x="843.43125" y="233.0" width="252.525" height="24" fill="#B8B8B8" />
-    <rect x="1095.95625" y="233.0" width="21.04375" height="24" fill="#D55E00" />
-    <line x1="1288.2" y1="222" x2="1288.2" y2="269" stroke="#718096" stroke-width="1.5" stroke-dasharray="4 4" />
-    <line x1="1438.896" y1="245" x2="1536.084" y2="245" stroke="#0072B2" stroke-width="2.8" />
-    <line x1="1438.896" y1="240" x2="1438.896" y2="250" stroke="#0072B2" stroke-width="2" />
-    <line x1="1536.084" y1="240" x2="1536.084" y2="250" stroke="#0072B2" stroke-width="2" />
-    <circle cx="1503.324" cy="245" r="5.8" fill="#0072B2" />
-    <text x="20" y="298" font-size="18" font-weight="400" text-anchor="start" fill="#243342">Treatment response</text>
-    <rect x="636.0" y="280.0" width="186.3875" height="24" fill="#0072B2" />
-    <rect x="822.3875" y="280.0" width="258.5375" height="24" fill="#B8B8B8" />
-    <rect x="1080.925" y="280.0" width="36.075" height="24" fill="#D55E00" />
-    <line x1="1288.2" y1="269" x2="1288.2" y2="316" stroke="#718096" stroke-width="1.5" stroke-dasharray="4 4" />
-    <line x1="1397.946" y1="292" x2="1503.324" y2="292" stroke="#0072B2" stroke-width="2.8" />
-    <line x1="1397.946" y1="287" x2="1397.946" y2="297" stroke="#0072B2" stroke-width="2" />
-    <line x1="1503.324" y1="287" x2="1503.324" y2="297" stroke="#0072B2" stroke-width="2" />
-    <circle cx="1461.2820000000002" cy="292" r="5.8" fill="#0072B2" />
-    <text x="20" y="345" font-size="18" font-weight="400" text-anchor="start" fill="#243342">Distant metastasis</text>
-    <rect x="636.0" y="327.0" width="69.14375" height="24" fill="#0072B2" />
-    <rect x="705.14375" y="327.0" width="396.825" height="24" fill="#B8B8B8" />
-    <rect x="1101.96875" y="327.0" width="15.03125" height="24" fill="#D55E00" />
-    <line x1="1288.2" y1="316" x2="1288.2" y2="363" stroke="#718096" stroke-width="1.5" stroke-dasharray="4 4" />
-    <line x1="1315.5" y1="339" x2="1515.336" y2="339" stroke="#0072B2" stroke-width="2.8" />
-    <line x1="1315.5" y1="334" x2="1315.5" y2="344" stroke="#0072B2" stroke-width="2" />
-    <line x1="1515.336" y1="334" x2="1515.336" y2="344" stroke="#0072B2" stroke-width="2" />
-    <circle cx="1443.81" cy="339" r="5.8" fill="#0072B2" />
-    <text x="20" y="392" font-size="18" font-weight="400" text-anchor="start" fill="#243342">Molecular / genetic results</text>
-    <rect x="636.0" y="374.0" width="102.2125" height="24" fill="#0072B2" />
-    <rect x="738.2125" y="374.0" width="348.725" height="24" fill="#B8B8B8" />
-    <rect x="1086.9375" y="374.0" width="30.0625" height="24" fill="#D55E00" />
-    <line x1="1288.2" y1="363" x2="1288.2" y2="410" stroke="#718096" stroke-width="1.5" stroke-dasharray="4 4" />
-    <line x1="1348.806" y1="386" x2="1497.318" y2="386" stroke="#0072B2" stroke-width="2.8" />
-    <line x1="1348.806" y1="381" x2="1348.806" y2="391" stroke="#0072B2" stroke-width="2" />
-    <line x1="1497.318" y1="381" x2="1497.318" y2="391" stroke="#0072B2" stroke-width="2" />
-    <circle cx="1438.35" cy="386" r="5.8" fill="#0072B2" />
-    <text x="20" y="439" font-size="18" font-weight="400" text-anchor="start" fill="#243342">Regional / overall metastasis</text>
-    <rect x="636.0" y="421.0" width="222.4625" height="24" fill="#0072B2" />
-    <rect x="858.4625" y="421.0" width="180.375" height="24" fill="#B8B8B8" />
-    <rect x="1038.8375" y="421.0" width="78.1625" height="24" fill="#D55E00" />
-    <line x1="1288.2" y1="410" x2="1288.2" y2="457" stroke="#718096" stroke-width="1.5" stroke-dasharray="4 4" />
-    <line x1="1375.0140000000001" y1="433" x2="1459.644" y2="433" stroke="#0072B2" stroke-width="2.8" />
-    <line x1="1375.0140000000001" y1="428" x2="1375.0140000000001" y2="438" stroke="#0072B2" stroke-width="2" />
-    <line x1="1459.644" y1="428" x2="1459.644" y2="438" stroke="#0072B2" stroke-width="2" />
-    <circle cx="1421.424" cy="433" r="5.8" fill="#0072B2" />
-    <text x="20" y="479" font-size="18" font-weight="400" text-anchor="start" fill="#243342">Breast cancer type and</text>
-    <text x="20" y="499" font-size="18" font-weight="400" text-anchor="start" fill="#243342">receptor status</text>
-    <rect x="636.0" y="468.0" width="144.3" height="24" fill="#0072B2" />
-    <rect x="780.3" y="468.0" width="252.525" height="24" fill="#B8B8B8" />
-    <rect x="1032.825" y="468.0" width="84.175" height="24" fill="#D55E00" />
-    <line x1="1288.2" y1="457" x2="1288.2" y2="504" stroke="#718096" stroke-width="1.5" stroke-dasharray="4 4" />
-    <line x1="1225.9560000000001" y1="480" x2="1460.19" y2="480" stroke="#0072B2" stroke-width="2.8" />
-    <line x1="1225.9560000000001" y1="475" x2="1225.9560000000001" y2="485" stroke="#0072B2" stroke-width="2" />
-    <line x1="1460.19" y1="475" x2="1460.19" y2="485" stroke="#0072B2" stroke-width="2" />
-    <circle cx="1355.904" cy="480" r="5.8" fill="#0072B2" />
-    <text x="1288.2" y="162" font-size="15" font-weight="400" text-anchor="middle" fill="#718096">Equal preference</text>
+    <text x="637.0" y="39" font-size="28" font-weight="700" text-anchor="start" fill="#293741">B</text>
+    <text x="672.0" y="39" font-size="24" font-weight="700" text-anchor="start" fill="#293741">Observed physician preferences</text>
+    <text x="1147.0" y="39" font-size="28" font-weight="700" text-anchor="start" fill="#293741">C</text>
+    <text x="1183.0" y="39" font-size="24" font-weight="700" text-anchor="start" fill="#293741">Adjusted harness preference</text>
+    <rect x="640.0" y="61" width="15" height="15" fill="#2F6690" />
+    <text x="663.0" y="75" font-size="17" font-weight="400" text-anchor="start" fill="#293741">Harness preferred</text>
+    <rect x="842.0" y="61" width="15" height="15" fill="#C2C5C9" />
+    <text x="865.0" y="75" font-size="17" font-weight="400" text-anchor="start" fill="#293741">Tie</text>
+    <rect x="920.0" y="61" width="15" height="15" fill="#B85C45" />
+    <text x="943.0" y="75" font-size="17" font-weight="400" text-anchor="start" fill="#293741">Baseline preferred</text>
+    <text x="1183.0" y="75" font-size="17" font-weight="400" text-anchor="start" fill="#293741">GEE estimates among non-tied judgments</text>
+    <text x="636.0" y="118" font-size="16" font-weight="400" text-anchor="middle" fill="#293741">0%</text>
+    <text x="756.25" y="118" font-size="16" font-weight="400" text-anchor="middle" fill="#293741">25%</text>
+    <text x="876.5" y="118" font-size="16" font-weight="400" text-anchor="middle" fill="#293741">50%</text>
+    <text x="996.75" y="118" font-size="16" font-weight="400" text-anchor="middle" fill="#293741">75%</text>
+    <text x="1117.0" y="118" font-size="16" font-weight="400" text-anchor="middle" fill="#293741">100%</text>
+    <text x="1179.0" y="118" font-size="16" font-weight="400" text-anchor="middle" fill="#293741">30%</text>
+    <text x="1288.2" y="118" font-size="16" font-weight="400" text-anchor="middle" fill="#293741">50%</text>
+    <text x="1424.7" y="118" font-size="16" font-weight="400" text-anchor="middle" fill="#293741">75%</text>
+    <text x="1561.2" y="118" font-size="16" font-weight="400" text-anchor="middle" fill="#293741">100%</text>
+    <text x="20" y="157" font-size="18" font-weight="700" text-anchor="start" fill="#293741">Overall</text>
+    <rect x="636.0" y="139.0" width="193.325" height="24" fill="#2F6690" />
+    <rect x="829.325" y="139.0" width="252.0625" height="24" fill="#C2C5C9" />
+    <rect x="1081.3875" y="139.0" width="35.6125" height="24" fill="#B85C45" />
+    <text x="20" y="204" font-size="18" font-weight="400" text-anchor="start" fill="#293741">Active anticancer medications</text>
+    <rect x="636.0" y="186.0" width="396.825" height="24" fill="#2F6690" />
+    <rect x="1032.825" y="186.0" width="75.15625" height="24" fill="#C2C5C9" />
+    <rect x="1107.98125" y="186.0" width="9.01875" height="24" fill="#B85C45" />
+    <line x1="1288.2" y1="175" x2="1288.2" y2="222" stroke="#788692" stroke-width="1.5" stroke-dasharray="4 4" />
+    <line x1="1512.606" y1="198" x2="1557.924" y2="198" stroke="#2F6690" stroke-width="2.8" />
+    <line x1="1512.606" y1="193" x2="1512.606" y2="203" stroke="#2F6690" stroke-width="2" />
+    <line x1="1557.924" y1="193" x2="1557.924" y2="203" stroke="#2F6690" stroke-width="2" />
+    <circle cx="1548.642" cy="198" r="5.8" fill="#2F6690" />
+    <text x="20" y="251" font-size="18" font-weight="400" text-anchor="start" fill="#293741">Stage</text>
+    <rect x="636.0" y="233.0" width="207.43125" height="24" fill="#2F6690" />
+    <rect x="843.43125" y="233.0" width="252.525" height="24" fill="#C2C5C9" />
+    <rect x="1095.95625" y="233.0" width="21.04375" height="24" fill="#B85C45" />
+    <line x1="1288.2" y1="222" x2="1288.2" y2="269" stroke="#788692" stroke-width="1.5" stroke-dasharray="4 4" />
+    <line x1="1438.896" y1="245" x2="1536.084" y2="245" stroke="#2F6690" stroke-width="2.8" />
+    <line x1="1438.896" y1="240" x2="1438.896" y2="250" stroke="#2F6690" stroke-width="2" />
+    <line x1="1536.084" y1="240" x2="1536.084" y2="250" stroke="#2F6690" stroke-width="2" />
+    <circle cx="1503.324" cy="245" r="5.8" fill="#2F6690" />
+    <text x="20" y="298" font-size="18" font-weight="400" text-anchor="start" fill="#293741">Treatment response</text>
+    <rect x="636.0" y="280.0" width="186.3875" height="24" fill="#2F6690" />
+    <rect x="822.3875" y="280.0" width="258.5375" height="24" fill="#C2C5C9" />
+    <rect x="1080.925" y="280.0" width="36.075" height="24" fill="#B85C45" />
+    <line x1="1288.2" y1="269" x2="1288.2" y2="316" stroke="#788692" stroke-width="1.5" stroke-dasharray="4 4" />
+    <line x1="1397.946" y1="292" x2="1503.324" y2="292" stroke="#2F6690" stroke-width="2.8" />
+    <line x1="1397.946" y1="287" x2="1397.946" y2="297" stroke="#2F6690" stroke-width="2" />
+    <line x1="1503.324" y1="287" x2="1503.324" y2="297" stroke="#2F6690" stroke-width="2" />
+    <circle cx="1461.2820000000002" cy="292" r="5.8" fill="#2F6690" />
+    <text x="20" y="345" font-size="18" font-weight="400" text-anchor="start" fill="#293741">Distant metastasis</text>
+    <rect x="636.0" y="327.0" width="69.14375" height="24" fill="#2F6690" />
+    <rect x="705.14375" y="327.0" width="396.825" height="24" fill="#C2C5C9" />
+    <rect x="1101.96875" y="327.0" width="15.03125" height="24" fill="#B85C45" />
+    <line x1="1288.2" y1="316" x2="1288.2" y2="363" stroke="#788692" stroke-width="1.5" stroke-dasharray="4 4" />
+    <line x1="1315.5" y1="339" x2="1515.336" y2="339" stroke="#2F6690" stroke-width="2.8" />
+    <line x1="1315.5" y1="334" x2="1315.5" y2="344" stroke="#2F6690" stroke-width="2" />
+    <line x1="1515.336" y1="334" x2="1515.336" y2="344" stroke="#2F6690" stroke-width="2" />
+    <circle cx="1443.81" cy="339" r="5.8" fill="#2F6690" />
+    <text x="20" y="392" font-size="18" font-weight="400" text-anchor="start" fill="#293741">Molecular / genetic results</text>
+    <rect x="636.0" y="374.0" width="102.2125" height="24" fill="#2F6690" />
+    <rect x="738.2125" y="374.0" width="348.725" height="24" fill="#C2C5C9" />
+    <rect x="1086.9375" y="374.0" width="30.0625" height="24" fill="#B85C45" />
+    <line x1="1288.2" y1="363" x2="1288.2" y2="410" stroke="#788692" stroke-width="1.5" stroke-dasharray="4 4" />
+    <line x1="1348.806" y1="386" x2="1497.318" y2="386" stroke="#2F6690" stroke-width="2.8" />
+    <line x1="1348.806" y1="381" x2="1348.806" y2="391" stroke="#2F6690" stroke-width="2" />
+    <line x1="1497.318" y1="381" x2="1497.318" y2="391" stroke="#2F6690" stroke-width="2" />
+    <circle cx="1438.35" cy="386" r="5.8" fill="#2F6690" />
+    <text x="20" y="439" font-size="18" font-weight="400" text-anchor="start" fill="#293741">Regional / overall metastasis</text>
+    <rect x="636.0" y="421.0" width="222.4625" height="24" fill="#2F6690" />
+    <rect x="858.4625" y="421.0" width="180.375" height="24" fill="#C2C5C9" />
+    <rect x="1038.8375" y="421.0" width="78.1625" height="24" fill="#B85C45" />
+    <line x1="1288.2" y1="410" x2="1288.2" y2="457" stroke="#788692" stroke-width="1.5" stroke-dasharray="4 4" />
+    <line x1="1375.0140000000001" y1="433" x2="1459.644" y2="433" stroke="#2F6690" stroke-width="2.8" />
+    <line x1="1375.0140000000001" y1="428" x2="1375.0140000000001" y2="438" stroke="#2F6690" stroke-width="2" />
+    <line x1="1459.644" y1="428" x2="1459.644" y2="438" stroke="#2F6690" stroke-width="2" />
+    <circle cx="1421.424" cy="433" r="5.8" fill="#2F6690" />
+    <text x="20" y="479" font-size="18" font-weight="400" text-anchor="start" fill="#293741">Breast cancer type and</text>
+    <text x="20" y="499" font-size="18" font-weight="400" text-anchor="start" fill="#293741">receptor status</text>
+    <rect x="636.0" y="468.0" width="144.3" height="24" fill="#2F6690" />
+    <rect x="780.3" y="468.0" width="252.525" height="24" fill="#C2C5C9" />
+    <rect x="1032.825" y="468.0" width="84.175" height="24" fill="#B85C45" />
+    <line x1="1288.2" y1="457" x2="1288.2" y2="504" stroke="#788692" stroke-width="1.5" stroke-dasharray="4 4" />
+    <line x1="1225.9560000000001" y1="480" x2="1460.19" y2="480" stroke="#2F6690" stroke-width="2.8" />
+    <line x1="1225.9560000000001" y1="475" x2="1225.9560000000001" y2="485" stroke="#2F6690" stroke-width="2" />
+    <line x1="1460.19" y1="475" x2="1460.19" y2="485" stroke="#2F6690" stroke-width="2" />
+    <circle cx="1355.904" cy="480" r="5.8" fill="#2F6690" />
+    <text x="1288.2" y="162" font-size="15" font-weight="400" text-anchor="middle" fill="#788692">Equal preference</text>
     <text x="20" y="39" font-size="28" font-weight="700" text-anchor="start">A</text>
     <text x="55" y="39" font-size="24" font-weight="700" text-anchor="start">Physician preference counts</text>
     <text x="20" y="118" font-size="17" font-weight="700" text-anchor="start">Core field</text>

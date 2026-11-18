@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the v2.2.0 manuscript figure assets and embedded copies."""
+"""Validate the v2.2.1 manuscript figure assets and embedded copies."""
 
 from __future__ import annotations
 

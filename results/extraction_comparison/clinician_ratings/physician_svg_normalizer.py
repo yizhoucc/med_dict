@@ -115,21 +115,96 @@ ASSETS = (
 )
 
 
-HARNESS = "#0072B2"
-BASELINE = "#D55E00"
-TIE = "#B8B8B8"
-PHYSICIAN = "#009E73"
-LLM_REVIEW = "#7A5FA8"
-NEUTRAL = "#718096"
-INK = "#243342"
-GRID = "#E6E6E6"
-PANEL_FILL = "#FAFBFC"
+def mix_with_white(color: str, white_fraction: float) -> str:
+    """Return a deterministic RGB mix of one semantic color and white."""
+
+    if not 0 <= white_fraction <= 1:
+        raise ValueError(f"Invalid white fraction: {white_fraction}")
+    value = color.removeprefix("#")
+    channels = [int(value[index : index + 2], 16) for index in (0, 2, 4)]
+    mixed = [round(channel * (1 - white_fraction) + 255 * white_fraction) for channel in channels]
+    return "#" + "".join(f"{channel:02X}" for channel in mixed)
+
+
+def interpolate_color(start: str, end: str, position: float) -> str:
+    """Interpolate two RGB colors at a fixed scale position."""
+
+    if not 0 <= position <= 1:
+        raise ValueError(f"Invalid interpolation position: {position}")
+    start_value = start.removeprefix("#")
+    end_value = end.removeprefix("#")
+    start_channels = [int(start_value[index : index + 2], 16) for index in (0, 2, 4)]
+    end_channels = [int(end_value[index : index + 2], 16) for index in (0, 2, 4)]
+    mixed = [
+        round(start_channel * (1 - position) + end_channel * position)
+        for start_channel, end_channel in zip(start_channels, end_channels)
+    ]
+    return "#" + "".join(f"{channel:02X}" for channel in mixed)
+
+
+HARNESS = "#2F6690"
+BASELINE = "#B85C45"
+TIE = "#C2C5C9"
+PHYSICIAN = "#4C8872"
+LLM_REVIEW = "#766A91"
+NEUTRAL = "#788692"
+INK = "#293741"
+GRID = "#E7EAEC"
+HEATMAP_LIGHT = "#EDF5F1"
+HEATMAP_DARK = PHYSICIAN
 WHITE = "#FFFFFF"
-HARNESS_TINT = "#E8F2F8"
-BASELINE_TINT = "#FCF0E9"
-PHYSICIAN_TINT = "#E9F6F2"
-LLM_TINT = "#F0ECF5"
-NEUTRAL_TINT = "#F0F2F3"
+TINT_WHITE_FRACTION = 0.90
+PANEL_WHITE_FRACTION = 0.96
+HARNESS_TINT = mix_with_white(HARNESS, TINT_WHITE_FRACTION)
+BASELINE_TINT = mix_with_white(BASELINE, TINT_WHITE_FRACTION)
+PHYSICIAN_TINT = mix_with_white(PHYSICIAN, TINT_WHITE_FRACTION)
+LLM_TINT = mix_with_white(LLM_REVIEW, TINT_WHITE_FRACTION)
+NEUTRAL_TINT = mix_with_white(NEUTRAL, TINT_WHITE_FRACTION)
+PANEL_FILL = mix_with_white(NEUTRAL, PANEL_WHITE_FRACTION)
+
+FIGURE3_SOURCE_GRADIENT = re.findall(
+    r'<rect\s+x="[0-9.]+"\s+y="715"[^>]+fill="(#[0-9A-Fa-f]{6})"',
+    (MASTER_DIR / "Figure_3.svg").read_text(encoding="utf-8"),
+)
+if len(FIGURE3_SOURCE_GRADIENT) != 100:
+    raise AssertionError(
+        f"Expected 100 physician heatmap colors, found {len(FIGURE3_SOURCE_GRADIENT)}"
+    )
+FIGURE3_GRADIENT_MAP = {
+    source.lower(): interpolate_color(
+        HEATMAP_LIGHT,
+        HEATMAP_DARK,
+        index / (len(FIGURE3_SOURCE_GRADIENT) - 1),
+    )
+    for index, source in enumerate(FIGURE3_SOURCE_GRADIENT)
+}
+
+
+def remap_figure3_gradient_color(value: str) -> str | None:
+    """Project a physician heatmap color onto the replacement green scale."""
+
+    if value in FIGURE3_GRADIENT_MAP:
+        return FIGURE3_GRADIENT_MAP[value]
+    if not re.fullmatch(r"#[0-9a-f]{6}", value):
+        return None
+    source_start = (230, 245, 240)
+    source_end = (0, 158, 115)
+    color = tuple(int(value[index : index + 2], 16) for index in (1, 3, 5))
+    direction = tuple(end - start for start, end in zip(source_start, source_end))
+    denominator = sum(channel**2 for channel in direction)
+    position = sum(
+        (channel - start) * delta
+        for channel, start, delta in zip(color, source_start, direction)
+    ) / denominator
+    if not 0 <= position <= 1:
+        return None
+    reconstructed = tuple(
+        round(start * (1 - position) + end * position)
+        for start, end in zip(source_start, source_end)
+    )
+    if max(abs(observed - expected) for observed, expected in zip(color, reconstructed)) > 1:
+        return None
+    return interpolate_color(HEATMAP_LIGHT, HEATMAP_DARK, position)
 
 
 COMMON_COLORS = {
@@ -248,6 +323,10 @@ def local_name(tag: object) -> str:
 
 def normalized_color(asset: FigureAsset, value: str) -> str:
     key = value.strip().lower()
+    if asset.master_name == "Figure_3.svg":
+        gradient_color = remap_figure3_gradient_color(key)
+        if gradient_color:
+            return gradient_color
     return COLOR_MAPS[asset.master_name].get(key, COMMON_COLORS.get(key, value))
 
 

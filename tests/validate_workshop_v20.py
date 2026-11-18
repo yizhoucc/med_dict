@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deterministic v2.2.0 manuscript and physician-source preservation checks."""
+"""Deterministic v2.2.1 manuscript and physician-source preservation checks."""
 
 from __future__ import annotations
 
@@ -96,14 +96,15 @@ def main() -> None:
         "supplementary-table-s1", "supplementary-table-s2", "supplementary-table-s3",
     }
     assert not parser.visible_comment_ids
+    assert 'id="version-2-2-1"' in document
     assert 'id="version-2-2-0"' in document
     assert 'id="version-2-1-1"' in document
     assert 'id="version-2-1-0"' in document
     assert 'id="version-2-0-1"' in document
     assert 'id="version-2-0"' in document
     assert 'id="version-1-8-1"' in document
-    assert "Version 2.2.0 · November 18, 2026" in document
-    assert "Used the physician SVGs as the authoritative layouts and applied only shared colors, fonts, and export metadata." in document
+    assert "Version 2.2.1 · November 18, 2026" in document
+    assert "Applied the approved clinical journal palette to all six physician SVG layouts without changing their text or geometry." in document
     assert ".figure{max-width:100%;margin-left:0;margin-right:0;overflow-x:auto" in document
     assert ".figure .figure-screen{width:700px;max-width:none}" in document
     assert ".figure{max-width:none;margin:14px 0 18px;overflow:visible}" in document

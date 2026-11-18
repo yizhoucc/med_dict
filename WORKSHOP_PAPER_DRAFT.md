@@ -1,9 +1,9 @@
 <!-- GENERATED FILE. The canonical physician Word extraction is the prose authority. -->
 # Physician-authored manuscript draft
 
-English working manuscript. Version 2.2.0, November 18, 2026.
+English working manuscript. Version 2.2.1, November 18, 2026.
 
-Current change: used the physician SVGs as the authoritative layouts and applied only shared colors, fonts, and export metadata. The latest doctor Word draft remains the prose authority.
+Current change: applied the approved clinical journal palette to all six physician SVG layouts. The latest doctor Word draft remains the prose authority.
 
 The canonical physician blocks below mirror `202601102_Manuscript_JAMA.docx` for audit purposes. The clean HTML applies only the approved cross-reference and reporting edits while preserving all source blocks in its hidden audit representation.
 
