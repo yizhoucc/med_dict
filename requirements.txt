@@ -17,4 +17,6 @@ tqdm>=4.60
 openai>=1.50,<2
 textstat>=0.7.4,<0.8
 matplotlib>=3.8,<4
+CairoSVG>=2.7,<3
+Pillow>=10,<14
 pytest>=8,<9

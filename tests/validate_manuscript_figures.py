@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the v2.1.1 manuscript figure assets and embedded copies."""
+"""Validate the v2.2.0 manuscript figure assets and embedded copies."""
 
 from __future__ import annotations
 
@@ -19,21 +19,20 @@ FIGURES = RATINGS / "draft_figures"
 MIRROR = ROOT / "manuscript/figures_svg"
 sys.path.insert(0, str(RATINGS))
 
-import manuscript_figure_renderer as renderer  # noqa: E402
+import physician_svg_normalizer as renderer  # noqa: E402
 
 
 ASSETS = {
-    "figure1_development_pathway_rough": ("Figure_1.svg", (2250, 1800), "7.5in", "6in"),
-    "figure2_evaluator_distribution_rough": ("Figure_2.svg", (2250, 1650), "7.5in", "5.5in"),
+    "figure1_development_pathway_rough": ("Figure_1.svg", (2250, 1650), "7.5in", "5.5in"),
+    "figure2_evaluator_distribution_rough": ("Figure_2.svg", (2250, 1780), "7.5in", "5.934783in"),
     "figure3_interrater_matrix_rough": ("Figure_3.svg", (2250, 1140), "7.5in", "3.8in"),
-    "figure4_effect_profile": ("Figure_4.svg", (2250, 900), "7.5in", "3in"),
+    "figure4_effect_profile": ("Figure_4.svg", (2250, 727), "7.5in", "2.423149in"),
     "supplementary_figure_s1_note_margins": ("Supplementary_Figure_S1.svg", (2250, 540), "7.5in", "1.8in"),
-    "supplementary_figure_s2_staged_ablation": ("Supplementary_Figure_S2.svg", (2250, 1020), "7.5in", "3.4in"),
+    "supplementary_figure_s2_staged_ablation": ("Supplementary_Figure_S2.svg", (2250, 959), "7.5in", "3.197674in"),
 }
 
 
 def main() -> None:
-    renderer.assert_data(renderer.load_raters())
     manifest = {
         name: digest
         for digest, name in (
@@ -70,7 +69,7 @@ def main() -> None:
         assert hashlib.sha256(png_path.read_bytes()).hexdigest() == manifest[png_path.name]
 
     combined = b"\n".join(svg_bytes).decode("utf-8")
-    for color in [renderer.HARNESS, renderer.BASELINE, renderer.TIE, renderer.PHYSICIAN, renderer.LLM_REVIEW, renderer.TEXT, renderer.GRID, renderer.PANEL_FILL]:
+    for color in [renderer.HARNESS, renderer.BASELINE, renderer.TIE, renderer.PHYSICIAN, renderer.LLM_REVIEW, renderer.INK, renderer.GRID, renderer.PANEL_FILL]:
         assert color.lower() in combined.lower(), color
     assert "hatch" not in combined.lower() or "pattern" in combined.lower()
 

@@ -60,22 +60,22 @@ PRINT_FIGURES = {
     "S2": FIGURE_DIR / "supplementary_figure_s2_staged_ablation_print.png",
 }
 PRINT_FIGURE_DIMENSIONS = {
-    "1": (2250, 1800), "2": (2250, 1650), "3": (2250, 1140),
-    "4": (2250, 900), "S1": (2250, 540), "S2": (2250, 1020),
+    "1": (2250, 1650), "2": (2250, 1780), "3": (2250, 1140),
+    "4": (2250, 727), "S1": (2250, 540), "S2": (2250, 959),
 }
 EXPECTED_FIGURE_SHA256 = {
-    "figure1_development_pathway_rough.svg": "a2341a4dae0bf82d2dee83e65768d4b8d3b275de75d50ba0bdc19c417e3ba150",
-    "figure2_evaluator_distribution_rough.svg": "eb692e867e01962cfddda9e04b2d59ddde8adc66b7fb75aa3a19a2e590898ede",
-    "figure3_interrater_matrix_rough.svg": "a4b20a78d3fe94cc84962a11599236c58bc94adbd0f0555e445cff869be3cfaf",
-    "figure4_effect_profile.svg": "30d3c5eb5a88de2de08eb381b6492a5a04784ac6febfcce27d6401b05cc36679",
-    "supplementary_figure_s1_note_margins.svg": "bd930ca51161a2e8923f5adae8eb910cc4642b1c8829739b4552b01f23faed52",
-    "supplementary_figure_s2_staged_ablation.svg": "8775e6f8be4af4e848689d964d904e7f8848a1209d4fe2735f1541673615010c",
-    "figure1_development_pathway_print.png": "89b0313ec873c356a8e5df75bf1bedc9b0fee1e2e6be830134826fa0a863b7d9",
-    "figure2_evaluator_distribution_print.png": "08d7e8d903386071dc800380e9f8f5f5ce5a50c47fe44691cd3953c7172ad90a",
-    "figure3_interrater_matrix_print.png": "0ee2f76cdd0f7d36347461a238be5b004cdeaa210cea5122aa058b1b7c62d313",
-    "figure4_effect_profile_print.png": "b4270efc12fdc3067e8291e0ac93890f10d3baa88eb6ee9223d3b6ec929954ea",
-    "supplementary_figure_s1_note_margins_print.png": "7777f858528e0eea8073097f48c9d2c65f9493d344027fcaeb1de1bac05227a8",
-    "supplementary_figure_s2_staged_ablation_print.png": "9620b9bcad90e18aaa3887508ed5368aa6b2c9adafe5e0aee6266fbea74a5776",
+    "figure1_development_pathway_rough.svg": "9e33d0d85f32ea5ff8d915c3d10f4b08435053aed835d0cf06cb5ff3bfd27b69",
+    "figure2_evaluator_distribution_rough.svg": "9f307973f3705ea9ebbcb16f89e2ad156e1eb61581942659852efcbc2a28d9a8",
+    "figure3_interrater_matrix_rough.svg": "c713c68ff60d32b66a651e2e354e362e7595374f5ab8470d9bffda206bf2ba1a",
+    "figure4_effect_profile.svg": "fc0ec1b449b147edb22da42f66732c94f66ff5e691c30f550fc1fe356deffe04",
+    "supplementary_figure_s1_note_margins.svg": "f9859e21c26fa2043a74912cec9e28d3facf3d1d58a73e27fb1a2ac8769f80f3",
+    "supplementary_figure_s2_staged_ablation.svg": "d9b5b0db4ecef0d4518398a56d0bc54ed62a5662ed3111841f005ac52427549b",
+    "figure1_development_pathway_print.png": "f4022ffa3d772c54542cb763ea0fc5ba4d00bd2db67da9651b5bb17ac907df68",
+    "figure2_evaluator_distribution_print.png": "bb0b1d2b9b39a16d6cd6b91048af923b140cf9301d2ed6154c53269d5d829d03",
+    "figure3_interrater_matrix_print.png": "3426df7082877b570dc87915754f57d5c427d97c4dae6f02793dc7971c8b9785",
+    "figure4_effect_profile_print.png": "80ad277d9f7b41cf57244c75fb245ce6b687f67d04a3c978089815f2da0d2514",
+    "supplementary_figure_s1_note_margins_print.png": "226da20fd3d1fb84f017969a4e5790011aa468cfa4af3aa38838afbd2278003f",
+    "supplementary_figure_s2_staged_ablation_print.png": "03b264546cb3f62e20a6d4357904aabef317d7ba5ac376bef50e3a1cf250b1a8",
 }
 
 SECTION_HEADINGS = {
@@ -116,8 +116,8 @@ REVISED_PARAGRAPHS = {
     "P008": "LLMs can extract information from clinical notes, but their outputs can vary. They may omit details, confuse past findings with current findings, or add information that is not supported by the original note ([[cite:sushil]]; [[cite:huang]]). A reviewer may be able to identify these errors, but checking every field in every output can approach the cost of manual extraction. Commercial models perform better on some clinical extraction tasks, but sending protected health information (PHI) to externally hosted services raises privacy and governance concerns, including HIPAA compliance ([[cite:huang]]; [[cite:wiest]]). Local deployment avoids external transfer of PHI, but local models can still produce unstable or incorrect extractions ([[cite:wiest]]). A useful clinical workflow must therefore improve reliability without depending on external processing or case by case manual review.",
     "P010": "How an LLM is used may be as important as the model itself. Additional training can adapt model weights to a clinical task. When the weights are unchanged, prompt design, task decomposition, verification, and clinical rules can organize the extraction process. Huang et al. iteratively refined prompts on expert curated lung pathology data and later applied the same prompt engineering strategy to osteosarcoma reports. Hein et al. used a human in the loop process to refine prompts, output schemas, and an error ontology, then applied the resulting templates to breast and prostate pathology reports ([[cite:huang]]; [[cite:hein]]). These studies focused on pathology reports and prompt or schema refinement. It remains unclear whether a broader multistep workflow developed from physician feedback can be used to improve note extraction.",
     "P012": "To address this gap, we built a locally deployable inference harness around a frozen LLM for extracting information from real-world unstructured oncology notes. The harness divides extraction into smaller tasks and applies checks and clinical rules without changing the model weights. We developed the breast cancer harness with physician input. We then adapted it to pancreatic ductal adenocarcinoma (PDAC) notes using LLM-assisted review and regression tests without physician review of the PDAC development outputs. Four physicians compared the final harness with a one prompt baseline that used the same model. Our results showed that the output from the harness was favored over that from a single-prompt baseline.",
-    "P017": "The study comprised two development stages followed by an independent physician evaluation. In Stage 1, a physician and an investigator developed the breast cancer inference harness through review of selected outputs. In Stage 2, the investigator adapted the harness to pancreatic ductal adenocarcinoma (PDAC) using LLM review and regression tests, without physician review of the PDAC development outputs. Four physicians then compared the final systems on an untouched holdout set (Figure 1A-D).",
-    "P021": "We separately conducted an ablation study of four cumulative harness configurations using an OpenAI LLM judge (Figure 1E; Table 2).",
+    "P017": "The study comprised two development stages followed by an independent physician evaluation. In Stage 1, a physician and an investigator developed the breast cancer inference harness through review of selected outputs. In Stage 2, the investigator adapted the harness to pancreatic ductal adenocarcinoma (PDAC) using LLM review and regression tests, without physician review of the PDAC development outputs (Figure 1A-C). Four physicians then compared the final systems on an untouched holdout set.",
+    "P021": "We separately conducted an ablation study of four cumulative harness configurations using an OpenAI LLM judge (Figure 1D; Table 2).",
     "P063": "For the physician evaluation, interrater agreement was assessed pairwise using exact agreement and Cohen’s κ for each physician pair. Results from the 8 completed physician-by-cancer evaluations were summarized separately. Pooled counts were reported descriptively and were not treated as independent field-level observations.",
     "P067": "The primary outcome was the adjusted probability of harness preference among directional judgments. Predicted probabilities were standardized over the observed covariate distribution, and 95% confidence intervals (CIs) were calculated using the delta method on the logit scale. Adjusted odds ratios (ORs) were reported as secondary measures.",
     "P077": "For breast cancer notes, all four physicians independently favored the harness on the breast cancer set. Their pooled breast result was 363 harness preferences, 80 baseline preferences, and 677 ties. The first physician's result by note was 18 harness wins, one baseline win, and one tie. The second and third physicians each recorded a harness win in all 20 notes. The fourth recorded 16 harness wins, two baseline wins, and two ties. When the four breast evaluations were combined within each note, all 20 notes had a positive difference between harness and baseline preferences (Supplementary Figure S1).",
@@ -290,7 +290,7 @@ EXPECTED_V180_SUPPLEMENT_SHA256 = "13492a199535133aacb87d878627d78653f454eac04c3
 EXPECTED_V180_P109_TEXT_SHA256 = "ef2a49bc6b7e82351ce18b84d7474fe1f537822b17aa3ee9996b05dafe7030f3"
 EXPECTED_V181_VISIBLE_MANUSCRIPT_TEXT_SHA256 = "1233212fc75362d570651f4beee1c3d139d6533da95584c41dfd3d3139ecf2da"
 EXPECTED_V181_P109_TEXT_SHA256 = "6713da1cfc322cc59d62e8e625c5321b0adc21ec0c2c19b778100ae5672cc0df"
-EXPECTED_V200_MANUSCRIPT_BLOCK_TEXT_SHA256 = "8ca62db679732204886dc05554113b875abc170d464624cfe5720aa031949d57"
+EXPECTED_V200_MANUSCRIPT_BLOCK_TEXT_SHA256 = "ca3443dc074ae326666d462525a6fe4737acea85227e23014ce3a942527bb778"
 EXPECTED_CANONICAL_SHA256 = "8b9a152d06791ca4e073ca42fa8641789229e287f7b2518b5d0661fa7f08cbf5"
 
 
@@ -551,8 +551,8 @@ details{border:0}summary{cursor:pointer}.fold>summary,.fold-toggle{padding:13px 
 .figure{margin:24px 0 30px}.figure img{display:block;width:100%;height:auto;border:1px solid #e0e5e9;background:white}.figure-print{display:none!important}.figure-caption{margin-top:9px}.comment{margin:13px 0;padding:12px 14px;border:1px solid var(--line);border-radius:7px;background:#fafbfc}.comment-meta{font-size:12px;color:var(--muted)}.comment-text{margin:7px 0;white-space:pre-wrap}.comment-context{margin-top:7px;color:#4e5c67;font-size:12px}.literature-workspace li{margin:11px 0}.reference-note{display:block;margin-top:3px;color:#4e5c67;font-size:12px}.workspace-note{color:#4e5c67;font-size:13px}.version-list li{margin:6px 0}.source-hash{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;overflow-wrap:anywhere}
 @media(max-width:900px){.layout{display:block;width:min(100% - 18px,940px);margin:10px auto 40px}.toc{position:relative;top:auto;max-height:none;margin-bottom:12px}.toc a.sub{display:none}article{padding:30px 24px 48px}h1{font-size:30px}.metadata-grid{grid-template-columns:1fr}.table-wrap{margin-left:-8px;margin-right:-8px}.figure{margin-left:-8px;margin-right:-8px}}
 @media(max-width:440px){article{padding:24px 15px 40px}h1{font-size:27px}.fold>summary,.fold-toggle{font-size:22px}table{font-size:11px}th,td{padding:6px 5px}.figure{max-width:100%;margin-left:0;margin-right:0;overflow-x:auto;overflow-y:hidden;overscroll-behavior-inline:contain;-webkit-overflow-scrolling:touch}.figure .figure-screen{width:700px;max-width:none}.literature-workspace a{overflow-wrap:anywhere}.figure-caption,.table-caption{padding:0 3px}.author-review-tooltip{max-width:calc(100vw - 16px);font-size:12px}}
-@media print{@page{margin:.62in}html{scroll-behavior:auto}body{background:#fff;font-family:Arial,sans-serif;font-size:10pt;line-height:1.42}.layout{display:block;width:auto;margin:0}.toc,.screen-only,#physician-comments,#version-history,#literature-workspace,.source-audit,.source-empty,.figure-screen,.author-review-tooltip{display:none!important}article{padding:0;border:0;box-shadow:none}.main-section,.supplement{display:block!important;border:0;margin:0}.main-section:not([open])>.fold-body,.supplement>.fold-body{display:block!important}.main-section>summary,.supplement>.fold-toggle{display:block!important;padding:16px 0 7px;list-style:none;break-after:avoid;font-size:19pt}.main-section>summary::before,.supplement>.fold-toggle::before{display:none!important}.physician-subheading{break-after:avoid}.figure,.table-wrap{break-inside:avoid;page-break-inside:avoid}.figure{max-width:none;margin:14px 0 18px;overflow:visible}.figure .figure-screen{width:100%;min-width:0;max-width:100%}.figure .figure-print{display:block!important;width:100%;min-width:0;max-width:100%;max-height:8.4in;object-fit:contain;border:0}.table-wrap{margin:12px 0 18px;overflow:visible}table{font-size:8.5pt}th,td{padding:5px 6px}.table-caption,.figure-caption{font-size:9pt}.comment-anchor{display:none!important}.focus-highlight{background:transparent!important;outline:0!important;color:inherit}}
-html.print-export{scroll-behavior:auto}html.print-export body{background:#fff;font-family:Arial,sans-serif;font-size:13.333px;line-height:1.42;margin:0}html.print-export .layout{display:block;width:720px;margin:0}html.print-export .toc,html.print-export .screen-only,html.print-export #physician-comments,html.print-export #version-history,html.print-export #literature-workspace,html.print-export .source-audit,html.print-export .source-empty,html.print-export .figure-screen,html.print-export .author-review-tooltip{display:none!important}html.print-export article{width:720px;padding:45px;box-sizing:border-box;border:0;box-shadow:none}html.print-export .main-section,html.print-export .supplement{display:block!important;border:0;margin:0}html.print-export .main-section>.fold-body,html.print-export .supplement>.fold-body{display:block!important}html.print-export .main-section>summary,html.print-export .supplement>.fold-toggle{display:block!important;padding:16px 0 7px;list-style:none;font-size:25px}html.print-export .main-section>summary::before,html.print-export .supplement>.fold-toggle::before{display:none!important}html.print-export .figure,html.print-export .table-wrap{break-inside:avoid}html.print-export .figure{max-width:none;margin:14px 0 18px;overflow:visible}html.print-export .figure .figure-screen{width:100%;min-width:0;max-width:100%}html.print-export .figure .figure-print{display:block!important;width:100%;min-width:0;max-width:100%;max-height:806px;object-fit:contain;border:0}html.print-export .table-wrap{margin:12px 0 18px;overflow:visible}html.print-export table{font-size:11.333px}html.print-export th,html.print-export td{padding:5px 6px}html.print-export .table-caption,html.print-export .figure-caption{font-size:12px}html.print-export .comment-anchor{display:none!important}html.print-export .focus-highlight{background:transparent!important;outline:0!important;color:inherit}html.print-export .print-page-spacer{display:block!important;width:1px;visibility:hidden}
+@media print{@page{margin:.62in}html{scroll-behavior:auto}body{background:#fff;font-family:Arial,sans-serif;font-size:10pt;line-height:1.35}.layout{display:block;width:auto;margin:0}.toc,.screen-only,#physician-comments,#version-history,#literature-workspace,.source-audit,.source-empty,.figure-screen,.author-review-tooltip{display:none!important}article{padding:0;border:0;box-shadow:none}.main-section,.supplement{display:block!important;border:0;margin:0}.main-section:not([open])>.fold-body,.supplement>.fold-body{display:block!important}.main-section>summary,.supplement>.fold-toggle{display:block!important;padding:16px 0 7px;list-style:none;break-after:avoid;font-size:19pt}.main-section>summary::before,.supplement>.fold-toggle::before{display:none!important}.physician-subheading{break-after:avoid}.figure,.table-wrap{break-inside:avoid;page-break-inside:avoid}.figure{max-width:none;margin:14px 0 18px;overflow:visible}.figure .figure-screen{width:100%;min-width:0;max-width:100%}.figure .figure-print{display:block!important;width:100%;min-width:0;max-width:100%;max-height:8.4in;object-fit:contain;border:0}.table-wrap{margin:12px 0 18px;overflow:visible}table{font-size:8.5pt}th,td{padding:5px 6px}.table-caption,.figure-caption{font-size:9pt}.comment-anchor{display:none!important}.focus-highlight{background:transparent!important;outline:0!important;color:inherit}}
+html.print-export{scroll-behavior:auto}html.print-export body{background:#fff;font-family:Arial,sans-serif;font-size:13.333px;line-height:1.35;margin:0}html.print-export .layout{display:block;width:720px;margin:0}html.print-export .toc,html.print-export .screen-only,html.print-export #physician-comments,html.print-export #version-history,html.print-export #literature-workspace,html.print-export .source-audit,html.print-export .source-empty,html.print-export .figure-screen,html.print-export .author-review-tooltip{display:none!important}html.print-export article{width:720px;padding:45px;box-sizing:border-box;border:0;box-shadow:none}html.print-export .main-section,html.print-export .supplement{display:block!important;border:0;margin:0}html.print-export .main-section>.fold-body,html.print-export .supplement>.fold-body{display:block!important}html.print-export .main-section>summary,html.print-export .supplement>.fold-toggle{display:block!important;padding:16px 0 7px;list-style:none;font-size:25px}html.print-export .main-section>summary::before,html.print-export .supplement>.fold-toggle::before{display:none!important}html.print-export .figure,html.print-export .table-wrap{break-inside:avoid}html.print-export .figure{max-width:none;margin:14px 0 18px;overflow:visible}html.print-export .figure .figure-screen{width:100%;min-width:0;max-width:100%}html.print-export .figure .figure-print{display:block!important;width:100%;min-width:0;max-width:100%;max-height:806px;object-fit:contain;border:0}html.print-export .table-wrap{margin:12px 0 18px;overflow:visible}html.print-export table{font-size:11.333px}html.print-export th,html.print-export td{padding:5px 6px}html.print-export .table-caption,html.print-export .figure-caption{font-size:12px}html.print-export .comment-anchor{display:none!important}html.print-export .focus-highlight{background:transparent!important;outline:0!important;color:inherit}html.print-export .print-page-spacer{display:block!important;width:1px;visibility:hidden}
 """
 
 SCRIPT = r"""
@@ -998,7 +998,7 @@ def link_crossrefs(text: str) -> str:
 
 
 def render_author_review_text(text: str, block_id: str) -> str:
-    """Render prose and wrap only the approved v2.1.1 review phrases."""
+    """Render prose and wrap only the approved review phrases."""
 
     specs = AUTHOR_REVIEW_SPECS.get(block_id, [])
     if not specs:
@@ -1548,11 +1548,11 @@ def literature_workspace() -> str:
 
 def technical_inserts_after(block_id: str) -> str:
     inserts = {
-        "P038": figure("1", "Development, adaptation, and evaluation workflow", "Development, adaptation, and evaluation workflow. Panel A shows the breast cancer development set, PDAC adaptation set, and locked holdout set. Panel B shows physician informed breast cancer development. Panel C shows LLM assisted PDAC adaptation without physician review of PDAC outputs. Panel D shows the independent physician comparison on the locked holdout set. Panel E shows the separate cumulative ablation evaluated by a blinded nonphysician LLM judge."),
+        "P038": figure("1", "Development and adaptation workflow", "Development and adaptation workflow. Panel A shows the breast cancer development set, PDAC adaptation set, and locked holdout set. Panel B shows physician informed breast cancer harness development. Panel C shows LLM assisted PDAC adaptation without physician review of PDAC outputs. Panel D shows the four cumulative configurations in the blinded LLM ablation."),
         "P074": table_3() + table_4(),
-        "P082": figure("2", "Physician preference overview", "Physician preference overview. Panel A shows the full distribution of harness, tie, and baseline judgments overall and by cancer type. Panel B shows the pooled and individual physician harness shares among directional judgments for each cancer type. Panel B values are unadjusted."),
+        "P082": figure("2", "Physician preferences across all judgments", "Physician preferences across all judgments. Panel A shows harness preferred, tied, and baseline preferred judgments overall and by cancer type. Panel B shows pooled harness preference in blue text and individual physician values as circles among judgments without ties. Panel B values are unadjusted."),
         "P084": table_5(),
-        "P092": figure("3", "Agreement among physicians", "Pairwise exact agreement and Cohen's kappa among four physicians in breast cancer and PDAC. Each breast cancer pair shared 280 judgments, and each PDAC pair shared 260 judgments."),
+        "P092": figure("3", "Agreement among physicians", "Pairwise exact agreement and Cohen's kappa among four physicians in breast cancer and PDAC. Each breast cancer pair shared 280 judgments, and each PDAC pair shared 260 judgments. The green scale encodes kappa, and each populated cell reports exact agreement."),
         "P096": figure("4", "Physician preference by core oncology field", "Physician preference by core oncology field. Panel A reports the raw harness, tie, and baseline counts overall and for seven fields. Panel B shows the complete preference distribution for each field. Panel C shows adjusted probabilities of harness preference with 95% confidence intervals from one joint exploratory GEE fitted to 495 directional judgments. The model included field, physician, and cancer fixed effects, clustered repeated judgments by note with an exchangeable working correlation, and standardized each field over its observed physician and cancer distribution. Breast cancer type and receptor status applied only to breast cancer notes. Ties were excluded from Panel C. The estimates report preference, not accuracy. The analysis did not perform pairwise field tests or make multiplicity adjusted claims."),
     }
     return inserts.get(block_id, "")
@@ -1719,7 +1719,7 @@ def build_supplement() -> str:
         + figure(
             "S2",
             "Ablation study",
-            "Three adjacent comparisons across four cumulative configurations and 120 judgments. A was the single-prompt baseline with one inference request per note. B added field decomposition. C added semantic refinement, faithfulness review, and temporal verification. D added deterministic inline processing and the complete POST hook layer. One blinded nonphysician OpenAI LLM judge evaluated all comparisons. Ties were excluded from two sided exact sign tests. The three unadjusted P values were 1.000, 1.05 × 10⁻⁵, and .736.",
+            "Panel A shows four cumulative configurations. A was the single-prompt baseline with one inference request per note. B added field decomposition. C added semantic refinement, faithfulness review, and temporal verification. D added deterministic inline processing and the complete POST hook layer. Panel B reports three adjacent comparisons across 120 judgments. One blinded nonphysician OpenAI LLM judge evaluated all comparisons. Ties were excluded from two sided exact sign tests. The three unadjusted P values were 1.000, 1.05 × 10⁻⁵, and .736.",
             supplementary=True,
         )
         + supplementary_table_3()
@@ -1729,6 +1729,7 @@ def build_supplement() -> str:
 
 def version_history() -> str:
     entries = [
+        ("v2.2.0", "2026-11-18", "Physician SVG layout authority", "Used the physician SVGs as the authoritative layouts and applied only shared colors, fonts, and export metadata."),
         ("v2.1.1", "2026-11-17", "Mobile figure readability", "Corrected Figure 2 label clipping and added contained horizontal scrolling for figures on small screens."),
         ("v2.1.0", "2026-11-17", "Physician figure integration", "Integrated the physician author's figure structures and harmonized all six figures with one reproducible visual system."),
         ("v2.0.1", "2026-11-09", "Author review tooltips", "Underlined phrases now show reasons and suggested revisions on hover/focus."),
@@ -1775,7 +1776,7 @@ def version_history() -> str:
         else:
             version, date, note = entry
             label = ""
-        current = version == "v2.1.1"
+        current = version == "v2.2.0"
         open_attr = " open" if current else ""
         summary = f"{version} · {label} · {date}" if label else f"{version} · {date}"
         rendered.append(
@@ -1801,7 +1802,7 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
     article = f"""
 <article>
   <h1 class="screen-only">Physician-authored manuscript draft</h1>
-  <p class="subtitle screen-only">English working manuscript · Version 2.1.1 · November 17, 2026</p>
+  <p class="subtitle screen-only">English working manuscript · Version 2.2.0 · November 18, 2026</p>
   <details class="fold" id="version-history"><summary>Version history</summary><div class="fold-body">{version_history()}</div></details>
   {author_review_list()}
   {sections}
@@ -1810,14 +1811,14 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
   {literature_workspace()}
 </article>
 """
-    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v2.1.1</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
+    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v2.2.0</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
     document = apply_review_block_metadata(document)
     markdown = f"""<!-- GENERATED FILE. The canonical physician Word extraction is the prose authority. -->
 # Physician-authored manuscript draft
 
-English working manuscript. Version 2.1.1, November 17, 2026.
+English working manuscript. Version 2.2.0, November 18, 2026.
 
-Current change: corrected Figure 2 label clipping and added contained horizontal scrolling for figures on small screens. The latest doctor Word draft remains the prose authority.
+Current change: used the physician SVGs as the authoritative layouts and applied only shared colors, fonts, and export metadata. The latest doctor Word draft remains the prose authority.
 
 The canonical physician blocks below mirror `{SOURCE_DOCX.name}` for audit purposes. The clean HTML applies only the approved cross-reference and reporting edits while preserving all source blocks in its hidden audit representation.
 
@@ -2559,7 +2560,7 @@ def build_preservation_ledger(data: dict[str, object]) -> str:
     }
     section_ids = set(SECTION_HEADINGS)
     lines = [
-        "# v2.1.1 physician prose preservation ledger",
+        "# v2.2.0 physician prose preservation ledger",
         "",
         f"- Source DOCX: `{SOURCE_DOCX.name}`",
         f"- Source SHA-256: `{data['source_docx_sha256']}`",
@@ -2712,8 +2713,12 @@ def validate_v2(document: str, markdown: str, ledger: str, data: dict[str, objec
         raise AssertionError("Author review backlinks are incomplete")
     blocks = collect_review_blocks(document)
     block_snapshot = "\n".join(f"{block_id}\t{block.text}" for block_id, block in blocks.items())
-    if hashlib.sha256(block_snapshot.encode("utf-8")).hexdigest() != EXPECTED_V200_MANUSCRIPT_BLOCK_TEXT_SHA256:
-        raise AssertionError("Visible manuscript text differs from the paper-html-v2.0 artifact")
+    block_snapshot_sha256 = hashlib.sha256(block_snapshot.encode("utf-8")).hexdigest()
+    if block_snapshot_sha256 != EXPECTED_V200_MANUSCRIPT_BLOCK_TEXT_SHA256:
+        raise AssertionError(
+            "Visible manuscript text differs from the approved v2.2.0 boundary: "
+            f"{block_snapshot_sha256}"
+        )
     for paragraph in data["paragraphs"]:
         block_id = str(paragraph["id"])
         source_text = str(paragraph["raw_visible_text"])
@@ -2737,19 +2742,19 @@ def validate_v2(document: str, markdown: str, ledger: str, data: dict[str, objec
     for number in ["1", "2", "3", "4", "S1", "S2"]:
         if f'id="figure-{number.lower()}"' not in document:
             raise AssertionError(f"Figure is missing: {number}")
-    if "Version 2.1.1 · November 17, 2026" not in document or "draft v2.1.1" not in document:
-        raise AssertionError("v2.1.1 metadata is missing")
-    if 'id="version-2-1-1"' not in document or not re.search(r'<details class="version-entry" id="version-2-1-1"[^>]* open>', document):
-        raise AssertionError("v2.1.1 history entry is missing or closed")
-    if "Corrected Figure 2 label clipping and added contained horizontal scrolling for figures on small screens." not in document:
-        raise AssertionError("v2.1.1 history is incomplete")
+    if "Version 2.2.0 · November 18, 2026" not in document or "draft v2.2.0" not in document:
+        raise AssertionError("v2.2.0 metadata is missing")
+    if 'id="version-2-2-0"' not in document or not re.search(r'<details class="version-entry" id="version-2-2-0"[^>]* open>', document):
+        raise AssertionError("v2.2.0 history entry is missing or closed")
+    if "Used the physician SVGs as the authoritative layouts and applied only shared colors, fonts, and export metadata." not in document:
+        raise AssertionError("v2.2.0 history is incomplete")
     for required_mobile_css in [
         ".figure{max-width:100%;margin-left:0;margin-right:0;overflow-x:auto",
         ".figure .figure-screen{width:700px;max-width:none}",
         ".figure{max-width:none;margin:14px 0 18px;overflow:visible}",
     ]:
         if required_mobile_css not in document:
-            raise AssertionError(f"v2.1.1 figure overflow CSS is missing: {required_mobile_css}")
+            raise AssertionError(f"v2.2.0 figure overflow CSS is missing: {required_mobile_css}")
     for required_tooltip_code in ["initializeAuthorReviewTooltips", "role','tooltip", "为什么需要复核", "建议改为", "event.key==='Escape'", "window.innerWidth-width-margin"]:
         if required_tooltip_code not in document:
             raise AssertionError(f"Author review tooltip implementation is incomplete: {required_tooltip_code}")

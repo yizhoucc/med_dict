@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Generate publication figures for the manuscript.
 
-SVG primitives keep the output deterministic across machines. The lightweight
-XLSX reader is sufficient for the two physician workbooks and avoids requiring
-openpyxl for figure regeneration.
+The current publication figures preserve the physician SVG masters exactly and
+apply only shared colors, fonts, and export metadata. Legacy data and drawing
+helpers remain in this module for statistical regression checks.
 """
 
 from __future__ import annotations
@@ -875,10 +875,10 @@ def _legacy_main() -> None:
 
 
 def main() -> None:
-    """Run the canonical Matplotlib renderer for all manuscript figures."""
-    from manuscript_figure_renderer import main as render_publication_figures
+    """Normalize the six physician SVG masters and render print PNGs."""
+    from physician_svg_normalizer import main as normalize_physician_figures
 
-    render_publication_figures()
+    normalize_physician_figures()
 
 
 if __name__ == "__main__":
