@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate four main figures and two supplementary figures for the manuscript.
+"""Generate publication figures for the manuscript.
 
 SVG primitives keep the output deterministic across machines. The lightweight
 XLSX reader is sufficient for the two physician workbooks and avoids requiring
@@ -819,7 +819,7 @@ def plot_human_model_complementarity(raters: dict[str, list[dict[str, str]]]) ->
     svg_end(out, OUTPUT / "figure6_clinical_handoff.svg")
 
 
-def main() -> None:
+def _legacy_main() -> None:
     OUTPUT.mkdir(parents=True, exist_ok=True)
     raters = load_raters()
     required = completed_rows(raters, BREAST_FIELDS, PDAC_FIELDS)
@@ -872,6 +872,13 @@ def main() -> None:
     plot_staged_ablation()
     plot_supplementary_note_margins(raters)
     print(f"Wrote 4 main SVG figures and 2 supplementary SVG figures to {OUTPUT}")
+
+
+def main() -> None:
+    """Run the canonical Matplotlib renderer for all manuscript figures."""
+    from manuscript_figure_renderer import main as render_publication_figures
+
+    render_publication_figures()
 
 
 if __name__ == "__main__":

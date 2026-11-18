@@ -60,22 +60,22 @@ PRINT_FIGURES = {
     "S2": FIGURE_DIR / "supplementary_figure_s2_staged_ablation_print.png",
 }
 PRINT_FIGURE_DIMENSIONS = {
-    "1": (1500, 1180), "2": (1500, 720), "3": (1500, 760),
-    "4": (1500, 940), "S1": (1500, 360), "S2": (1500, 1120),
+    "1": (2250, 1800), "2": (2250, 1650), "3": (2250, 1140),
+    "4": (2250, 900), "S1": (2250, 540), "S2": (2250, 1020),
 }
 EXPECTED_FIGURE_SHA256 = {
-    "figure1_development_pathway_rough.svg": "597ef83181cbb4c080c236f8c2568ad11320cf2bc7627766f43a95f146349b15",
-    "figure2_evaluator_distribution_rough.svg": "0a4e013e7d7d8c4f9f358de3104b2bb8b3dfc43a7943f0c16ff2e4c60d756682",
-    "figure3_interrater_matrix_rough.svg": "55d0e996a3d4622e44a6a4581c56983b8fbfe4828f4f081e4f079a7779806a54",
-    "figure4_effect_profile.svg": "1245d80c1f06333233fded624f3c6fa573b0c1bf574faee903a82bdda84cfa03",
-    "supplementary_figure_s1_note_margins.svg": "ac9998447b8fb77c9bf6a53cbfbc459542fe07a6f10d53e3041d40648dad84d0",
-    "supplementary_figure_s2_staged_ablation.svg": "dce5d30b3f595f855cf3b57935ddd89eae25e1df5a49357f511115d3e50b047e",
-    "figure1_development_pathway_print.png": "8ca61a861af3a78f870a58defa94bb2d54d8d09bd5c7c84802d780daed473b2b",
-    "figure2_evaluator_distribution_print.png": "7bdc48f3eff05f26d1f272a5afbb454fdad9c5d8b1679407945592af0027e372",
-    "figure3_interrater_matrix_print.png": "f09f4a215ce9699358b785603f1ca33a87333b6b28178acd7acda07f84d12fcb",
-    "figure4_effect_profile_print.png": "afabeb331e0189f21b685112201ce491030adb0e7023205d1a460171c1321183",
-    "supplementary_figure_s1_note_margins_print.png": "85b0096242ef36193477048fc46cd85637807b29cdb65a34d18e49f63133cd5b",
-    "supplementary_figure_s2_staged_ablation_print.png": "3ffb43b96b400d0cd0fe43ef1afd450d10ea0dc32d4222ad160ea6d54cee1fb1",
+    "figure1_development_pathway_rough.svg": "a2341a4dae0bf82d2dee83e65768d4b8d3b275de75d50ba0bdc19c417e3ba150",
+    "figure2_evaluator_distribution_rough.svg": "9a01aa82290eabe139c9e5f78cbcdeadf97b92c623e8744bc6c7915e55634e13",
+    "figure3_interrater_matrix_rough.svg": "a4b20a78d3fe94cc84962a11599236c58bc94adbd0f0555e445cff869be3cfaf",
+    "figure4_effect_profile.svg": "30d3c5eb5a88de2de08eb381b6492a5a04784ac6febfcce27d6401b05cc36679",
+    "supplementary_figure_s1_note_margins.svg": "bd930ca51161a2e8923f5adae8eb910cc4642b1c8829739b4552b01f23faed52",
+    "supplementary_figure_s2_staged_ablation.svg": "8775e6f8be4af4e848689d964d904e7f8848a1209d4fe2735f1541673615010c",
+    "figure1_development_pathway_print.png": "89b0313ec873c356a8e5df75bf1bedc9b0fee1e2e6be830134826fa0a863b7d9",
+    "figure2_evaluator_distribution_print.png": "4e946f6b18260de4c490a53b61d36f6d9a0af6ad3e0a8e3b13f2e590865abd15",
+    "figure3_interrater_matrix_print.png": "0ee2f76cdd0f7d36347461a238be5b004cdeaa210cea5122aa058b1b7c62d313",
+    "figure4_effect_profile_print.png": "b4270efc12fdc3067e8291e0ac93890f10d3baa88eb6ee9223d3b6ec929954ea",
+    "supplementary_figure_s1_note_margins_print.png": "7777f858528e0eea8073097f48c9d2c65f9493d344027fcaeb1de1bac05227a8",
+    "supplementary_figure_s2_staged_ablation_print.png": "9620b9bcad90e18aaa3887508ed5368aa6b2c9adafe5e0aee6266fbea74a5776",
 }
 
 SECTION_HEADINGS = {
@@ -116,11 +116,15 @@ REVISED_PARAGRAPHS = {
     "P008": "LLMs can extract information from clinical notes, but their outputs can vary. They may omit details, confuse past findings with current findings, or add information that is not supported by the original note ([[cite:sushil]]; [[cite:huang]]). A reviewer may be able to identify these errors, but checking every field in every output can approach the cost of manual extraction. Commercial models perform better on some clinical extraction tasks, but sending protected health information (PHI) to externally hosted services raises privacy and governance concerns, including HIPAA compliance ([[cite:huang]]; [[cite:wiest]]). Local deployment avoids external transfer of PHI, but local models can still produce unstable or incorrect extractions ([[cite:wiest]]). A useful clinical workflow must therefore improve reliability without depending on external processing or case by case manual review.",
     "P010": "How an LLM is used may be as important as the model itself. Additional training can adapt model weights to a clinical task. When the weights are unchanged, prompt design, task decomposition, verification, and clinical rules can organize the extraction process. Huang et al. iteratively refined prompts on expert curated lung pathology data and later applied the same prompt engineering strategy to osteosarcoma reports. Hein et al. used a human in the loop process to refine prompts, output schemas, and an error ontology, then applied the resulting templates to breast and prostate pathology reports ([[cite:huang]]; [[cite:hein]]). These studies focused on pathology reports and prompt or schema refinement. It remains unclear whether a broader multistep workflow developed from physician feedback can be used to improve note extraction.",
     "P012": "To address this gap, we built a locally deployable inference harness around a frozen LLM for extracting information from real-world unstructured oncology notes. The harness divides extraction into smaller tasks and applies checks and clinical rules without changing the model weights. We developed the breast cancer harness with physician input. We then adapted it to pancreatic ductal adenocarcinoma (PDAC) notes using LLM-assisted review and regression tests without physician review of the PDAC development outputs. Four physicians compared the final harness with a one prompt baseline that used the same model. Our results showed that the output from the harness was favored over that from a single-prompt baseline.",
+    "P017": "The study comprised two development stages followed by an independent physician evaluation. In Stage 1, a physician and an investigator developed the breast cancer inference harness through review of selected outputs. In Stage 2, the investigator adapted the harness to pancreatic ductal adenocarcinoma (PDAC) using LLM review and regression tests, without physician review of the PDAC development outputs. Four physicians then compared the final systems on an untouched holdout set (Figure 1A-D).",
+    "P021": "We separately conducted an ablation study of four cumulative harness configurations using an OpenAI LLM judge (Figure 1E; Table 2).",
     "P063": "For the physician evaluation, interrater agreement was assessed pairwise using exact agreement and Cohen’s κ for each physician pair. Results from the 8 completed physician-by-cancer evaluations were summarized separately. Pooled counts were reported descriptively and were not treated as independent field-level observations.",
     "P067": "The primary outcome was the adjusted probability of harness preference among directional judgments. Predicted probabilities were standardized over the observed covariate distribution, and 95% confidence intervals (CIs) were calculated using the delta method on the logit scale. Adjusted odds ratios (ORs) were reported as secondary measures.",
     "P077": "For breast cancer notes, all four physicians independently favored the harness on the breast cancer set. Their pooled breast result was 363 harness preferences, 80 baseline preferences, and 677 ties. The first physician's result by note was 18 harness wins, one baseline win, and one tie. The second and third physicians each recorded a harness win in all 20 notes. The fourth recorded 16 harness wins, two baseline wins, and two ties. When the four breast evaluations were combined within each note, all 20 notes had a positive difference between harness and baseline preferences (Supplementary Figure S1).",
     "P097": "We also analyzed physician preferences for each individual note to determine whether the overall advantage was consistent across cases. After combining physician ratings for each note, the harness was preferred in all 20 breast cancer notes and 19 of 20 pancreatic cancer notes. The overall ratings also favored the harness in each physician-by-cancer group. These findings were consistent with the primary analysis and suggest that the observed advantage was not driven by a small number of clinical notes (Supplementary Figure S1).",
-    "P099": "A separate technical ablation comprised 120 adjacent comparisons across the same 40 notes. A single nonphysician LLM judge, blinded to configuration identity, evaluated the comparisons. The four configurations are defined in Table 2. The one prompt versus decomposed comparison yielded 17 preferences for each, 6 ties, and P = 1.000. With verification added, the result was 24 preferences for verified extraction, 2 for decomposed extraction, 14 ties (P < 0.05). This suggests the verified extraction step significantly affected the LLM judge’s preference. After the full inference harness was added, the result was 19 preferences for verified extraction versus 16 for the full harness, with 5 ties and a P value of 0.736. The three unadjusted two-sided exact sign tests excluded ties. See Supplementary Figure S2 for the full roadmap.",
+    "P074": "All four physicians evaluated both cancer types. Across 2,160 required judgments for each note and field, the harness was preferred 699 times, 1,290 comparisons were ties, and the baseline was preferred 171 times. See Table 3, Table 4, and Figure 2. These correspond to 32.36%, 59.72%, and 7.92% of all judgments. Among the 870 directional judgments, the crude harness share was 80.34% (note cluster robust 95% CI 76.14% to 83.96%). The unadjusted harness share among directional judgments ranged from 65.5% to 90.8% across the eight physician-by-cancer groups (Figure 2B).",
+    "P094": "We examined physician preferences across the seven prespecified clinical extraction fields. In all the 1,040 evaluations, physicians preferred the harness in 418 comparisons (40.2%), the baseline in 77 (7.4%), and 545 (52.4%) were ties. When ties were excluded, 84.4% favored the harness. The harness was preferred more often than the baseline across all 7 fields, with the largest difference seen in identifying active anticancer medications (132 vs 3). Differences were smaller for distant metastasis and breast cancer type and receptor status, where ties were more common (Figure 4). The adjusted point estimate exceeded 50% for each field; the 95% CI for breast cancer type and receptor status included 50% (62.4%; 95% CI, 38.6% to 81.5%) (Figure 4C).",
+    "P099": "A separate technical ablation comprised 120 adjacent comparisons across the same 40 notes. A single nonphysician LLM judge, blinded to configuration identity, evaluated the comparisons. The four configurations are defined in Table 2. The A to B comparison yielded 17 preferences for each configuration and 6 ties (P = 1.000). The B to C comparison yielded 24 preferences for verified extraction and 2 for decomposed extraction, with 14 ties (P = 1.05 × 10⁻⁵). The C to D comparison yielded 19 preferences for verified extraction and 16 for the full harness, with 5 ties (P = .736). The three unadjusted two sided exact sign tests excluded ties. See Supplementary Figure S2 for the full roadmap.",
     "P104": "In this study, the inference harness was preferred over a one prompt baseline using the same underlying LLM. This advantage was observed in both breast and pancreatic cancer and remained consistent in sensitivity analyses. These findings suggest that a structured inference harness can improve the clinical quality of extracted information without additional model training. The note level results also indicate that the observed preference was not driven by a small number of clinical notes.",
     "P106": "Structured extraction can convert long, complex, free-text notes into a compact set of fields that can be checked, searched, and reused downstream. In oncology, this is useful as clinical notes can be complex and contain multiple diagnoses, prior and future treatments, and changes in disease status. Prior studies have demonstrated the potential of LLMs for extracting structured information from clinical notes. However, the CORAL study showed that advanced, commercialized models could have omissions or could generate unsupported findings ([[cite:sushil]]). [[cite:huang_named]] demonstrated that iterative prompt engineering with ChatGPT using an API could improve extraction of free-text pathology notes. Similarly, [[cite:hein_named]] showed that iterative refinement guided by physicians and systematic error analysis could improve structured extraction and could be adapted to other cancer types.",
     "P108": "Our study built on these studies by using physician feedback to identify recurring errors and develop clinical rules during breast cancer note development. Rather than producing a large, supervised training set, we used the feedback to develop prompts for each field, verification steps, and clinical rules. This approach incorporated physician knowledge into the inference harness for reuse in subsequent extraction tasks. Instead of asking physicians to perform iterative evaluation, we used ChatGPT to organize the established criteria from breast cancer development, and used Qwen2.5-32B as a judge. LLM-as-a-judge has been reported in prior studies, which showed high concordance on text-comparison rubrics such as faithfulness and completeness ([[cite:gershon]]; [[cite:williams]]). The final harness was preferred over the baseline by independent physicians in pancreatic cancer. This finding suggests that criteria established through physician feedback may be transferable to other cancer types and may reduce the need for repeated physician review during development.",
@@ -286,7 +290,7 @@ EXPECTED_V180_SUPPLEMENT_SHA256 = "13492a199535133aacb87d878627d78653f454eac04c3
 EXPECTED_V180_P109_TEXT_SHA256 = "ef2a49bc6b7e82351ce18b84d7474fe1f537822b17aa3ee9996b05dafe7030f3"
 EXPECTED_V181_VISIBLE_MANUSCRIPT_TEXT_SHA256 = "1233212fc75362d570651f4beee1c3d139d6533da95584c41dfd3d3139ecf2da"
 EXPECTED_V181_P109_TEXT_SHA256 = "6713da1cfc322cc59d62e8e625c5321b0adc21ec0c2c19b778100ae5672cc0df"
-EXPECTED_V200_MANUSCRIPT_BLOCK_TEXT_SHA256 = "2193c1f2da3814e36c56b64696c5e3e764a508bf219b65660f1279be37f19458"
+EXPECTED_V200_MANUSCRIPT_BLOCK_TEXT_SHA256 = "8ca62db679732204886dc05554113b875abc170d464624cfe5720aa031949d57"
 EXPECTED_CANONICAL_SHA256 = "8b9a152d06791ca4e073ca42fa8641789229e287f7b2518b5d0661fa7f08cbf5"
 
 
@@ -447,7 +451,9 @@ REVISED_TABLE_CELLS = {
     "T2R2C2": "Decomposed extraction with separate prompts for each field, routing across fields, bounded Assessment and Plan retry, and the shared format and schema safeguards.",
     "T2R4C2": "Condition C plus deterministic inline processing and the complete POST hook layer used by the full inference harness.",
 }
-REVISED_TABLE_CELLS = {}
+REVISED_TABLE_CELLS = {
+    "T2R1C2": "A single-prompt baseline with one inference request per note.",
+}
 
 XREF_TARGETS = {
     "Table 1": "table-1",
@@ -486,10 +492,6 @@ AUTHOR_REVIEW_SPECS: dict[str, list[tuple[str, str, str, str]]] = {
         ("author-review-5b", "p < 0.05", "Table 5 已提供 breast cancer estimate 的精确 P 值。", "P = 7.04 × 10⁻¹⁸"),
         ("author-review-5c", "p < 0.05", "Table 5 已提供 pancreatic cancer estimate 的精确 P 值。", "P = 2.30 × 10⁻¹²"),
     ],
-    "P099": [
-        ("author-review-6", "P < 0.05", "Supplementary Figure S2 已报告 exact sign test 的精确结果。", "P = 1.05 × 10⁻⁵"),
-        ("author-review-7", "significantly affected the LLM judge’s preference", "累计配置比较支持偏好差异，但不能隔离单一步骤的因果效应。", "In the B versus C comparison, the LLM judge preferred verified extraction over decomposed extraction."),
-    ],
     "P104": [
         ("author-review-2d", "one prompt baseline", "系统名称与全文其他位置不一致。", "single-prompt baseline"),
         ("author-review-8", "improve the clinical quality of extracted information", "主要 endpoint 是 physician preference，不是 absolute clinical quality。", "These findings indicate that physicians more often preferred inference harness outputs than same-model baseline outputs."),
@@ -515,8 +517,6 @@ AUTHOR_REVIEW_GROUPS = [
     ("GEE model description", ["author-review-3"]),
     ("GEE clustering rationale", ["author-review-4"]),
     ("Three threshold-only P values in the adjusted results", ["author-review-5a", "author-review-5b", "author-review-5c"]),
-    ("Threshold-only P value in the technical ablation", ["author-review-6"]),
-    ("Causal wording for the LLM judge preference", ["author-review-7"]),
     ("Clinical-quality interpretation", ["author-review-8"]),
     ("LLM-as-a-judge terminology and citations", ["author-review-9"]),
     ("Cross-cancer rule result", ["author-review-10"]),
@@ -998,7 +998,7 @@ def link_crossrefs(text: str) -> str:
 
 
 def render_author_review_text(text: str, block_id: str) -> str:
-    """Render prose and wrap only the approved v2.0.1 review phrases."""
+    """Render prose and wrap only the approved v2.1.0 review phrases."""
 
     specs = AUTHOR_REVIEW_SPECS.get(block_id, [])
     if not specs:
@@ -1548,12 +1548,12 @@ def literature_workspace() -> str:
 
 def technical_inserts_after(block_id: str) -> str:
     inserts = {
-        "P038": figure("1", "Development, adaptation, and evaluation workflow", "Development, transfer, and evaluation pathway. Physician review of breast cancer outputs informed the inference harness. The failure history and clinical rubric then supported investigator controlled PDAC adaptation without physician review of PDAC outputs. Four physicians compared the final harness with the same model one prompt baseline on the holdout set of 40 notes."),
+        "P038": figure("1", "Development, adaptation, and evaluation workflow", "Development, adaptation, and evaluation workflow. Panel A shows the breast cancer development set, PDAC adaptation set, and locked holdout set. Panel B shows physician informed breast cancer development. Panel C shows LLM assisted PDAC adaptation without physician review of PDAC outputs. Panel D shows the independent physician comparison on the locked holdout set. Panel E shows the separate cumulative ablation evaluated by a blinded nonphysician LLM judge."),
         "P074": table_3() + table_4(),
-        "P082": figure("2", "Physician preference overview", "Physician preferences across eight combinations of physician and cancer type. Panel A retains harness, baseline, and tie judgments. Panel B shows the harness share among directional judgments."),
+        "P082": figure("2", "Physician preference overview", "Physician preference overview. Panel A shows the full distribution of harness, tie, and baseline judgments overall and by cancer type. Panel B shows the pooled and individual physician harness shares among directional judgments for each cancer type. Panel B values are unadjusted."),
         "P084": table_5(),
         "P092": figure("3", "Agreement among physicians", "Pairwise exact agreement and Cohen's kappa among four physicians in breast cancer and PDAC. Each breast cancer pair shared 280 judgments, and each PDAC pair shared 260 judgments."),
-        "P096": figure("4", "Raw and adjusted preference estimates for core fields", "Preference results for core fields. Panel A retains the raw distribution with ties for seven fields prioritized by physicians. Panel B shows adjusted probabilities of harness preference for each core field with 95% confidence intervals from one joint exploratory GEE fitted to 495 directional judgments. The model included field, physician, and cancer fixed effects, clustered repeated judgments by note with an exchangeable working correlation, and standardized each field over its observed physician and cancer distribution. Breast type and receptor status applied only to breast cancer notes. Ties were excluded from Panel B. The estimates report preference, not accuracy. No pairwise field tests or multiplicity claims were made."),
+        "P096": figure("4", "Physician preference by core oncology field", "Physician preference by core oncology field. Panel A reports the raw harness, tie, and baseline counts overall and for seven fields. Panel B shows the complete preference distribution for each field. Panel C shows adjusted probabilities of harness preference with 95% confidence intervals from one joint exploratory GEE fitted to 495 directional judgments. The model included field, physician, and cancer fixed effects, clustered repeated judgments by note with an exchangeable working correlation, and standardized each field over its observed physician and cancer distribution. Breast cancer type and receptor status applied only to breast cancer notes. Ties were excluded from Panel C. The estimates report preference, not accuracy. The analysis did not perform pairwise field tests or make multiplicity adjusted claims."),
     }
     return inserts.get(block_id, "")
 
@@ -1715,11 +1715,11 @@ def build_supplement() -> str:
         + supplementary_methods()
         + supplementary_table_1()
         + supplementary_table_2()
-        + figure("S1", "Distribution of preference margins by note", "This figure shows the distribution by note after pooling all four physicians within each cancer type, previously drafted as Panel C of the main figure. The margin is the difference between harness and baseline preferences divided by completed judgments for that note. All 20 breast cancer notes and 19 of 20 PDAC notes had positive margins. One PDAC note had a negative margin. The prior detailed breast and PDAC note panels are not retained. This is a supporting preference sensitivity analysis, not an accuracy estimate.", supplementary=True)
+        + figure("S1", "Distribution of preference margins by note", "Note level preference margins after pooling all four physicians within each cancer type. The margin is the difference between harness and baseline preferences divided by completed judgments for that note. All 20 breast cancer notes and 19 of 20 PDAC notes had positive margins. One PDAC note had a negative margin. This is a preference sensitivity analysis, not an accuracy estimate.", supplementary=True)
         + figure(
             "S2",
             "Ablation study",
-            "Comparisons across three transitions between four cumulative configurations. A was the one prompt baseline. B added decomposition and orchestration. C added semantic, accuracy, source support, and temporal verification. D added deterministic inline processing and the complete POST hook layer. One OpenAI LLM judge produced the judgments. Exact two sided sign tests exclude ties.",
+            "Three adjacent comparisons across four cumulative configurations and 120 judgments. A was the single-prompt baseline with one inference request per note. B added field decomposition. C added semantic refinement, faithfulness review, and temporal verification. D added deterministic inline processing and the complete POST hook layer. One blinded nonphysician OpenAI LLM judge evaluated all comparisons. Ties were excluded from two sided exact sign tests. The three unadjusted P values were 1.000, 1.05 × 10⁻⁵, and .736.",
             supplementary=True,
         )
         + supplementary_table_3()
@@ -1729,6 +1729,7 @@ def build_supplement() -> str:
 
 def version_history() -> str:
     entries = [
+        ("v2.1.0", "2026-11-17", "Physician figure integration", "Integrated the physician author's figure structures and harmonized all six figures with one reproducible visual system."),
         ("v2.0.1", "2026-11-09", "Author review tooltips", "Underlined phrases now show reasons and suggested revisions on hover/focus."),
         ("v2.0", "2026-11-08", "Physician prose authority", "The latest doctor Word draft is now the prose authority. The current HTML retains the technical figures, tables, captions, numbering, cross references, citations, supplement, and layout. Underlined phrases require author review."),
         ("v1.8.1", "2026-11-01", "Discussion wording", "Removed a repeated findings suggest construction from the note level interpretation moved to P109. No other manuscript wording, data, tables, figures, or captions changed."),
@@ -1773,7 +1774,7 @@ def version_history() -> str:
         else:
             version, date, note = entry
             label = ""
-        current = version == "v2.0.1"
+        current = version == "v2.1.0"
         open_attr = " open" if current else ""
         summary = f"{version} · {label} · {date}" if label else f"{version} · {date}"
         rendered.append(
@@ -1799,7 +1800,7 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
     article = f"""
 <article>
   <h1 class="screen-only">Physician-authored manuscript draft</h1>
-  <p class="subtitle screen-only">English working manuscript · Version 2.0.1 · November 9, 2026</p>
+  <p class="subtitle screen-only">English working manuscript · Version 2.1.0 · November 17, 2026</p>
   <details class="fold" id="version-history"><summary>Version history</summary><div class="fold-body">{version_history()}</div></details>
   {author_review_list()}
   {sections}
@@ -1808,14 +1809,14 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
   {literature_workspace()}
 </article>
 """
-    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v2.0.1</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
+    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v2.1.0</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
     document = apply_review_block_metadata(document)
     markdown = f"""<!-- GENERATED FILE. The canonical physician Word extraction is the prose authority. -->
 # Physician-authored manuscript draft
 
-English working manuscript. Version 2.0.1, November 9, 2026.
+English working manuscript. Version 2.1.0, November 17, 2026.
 
-Current change: underlined phrases now show reasons and suggested revisions on hover/focus. The latest doctor Word draft remains the prose authority, and the HTML retains the current technical objects.
+Current change: integrated the physician author's figure structures and harmonized all six figures with one reproducible visual system. The latest doctor Word draft remains the prose authority.
 
 The canonical physician blocks below mirror `{SOURCE_DOCX.name}` for audit purposes. The clean HTML applies only the approved cross-reference and reporting edits while preserving all source blocks in its hidden audit representation.
 
@@ -2557,7 +2558,7 @@ def build_preservation_ledger(data: dict[str, object]) -> str:
     }
     section_ids = set(SECTION_HEADINGS)
     lines = [
-        "# v2.0.1 physician prose preservation ledger",
+        "# v2.1.0 physician prose preservation ledger",
         "",
         f"- Source DOCX: `{SOURCE_DOCX.name}`",
         f"- Source SHA-256: `{data['source_docx_sha256']}`",
@@ -2678,7 +2679,7 @@ def validate_v2(document: str, markdown: str, ledger: str, data: dict[str, objec
     expected_underlines = [(anchor_id, phrase) for anchor_id, phrase, _, _ in expected_specs]
     if actual_underlines != expected_underlines:
         raise AssertionError(f"Author review underlines changed: {actual_underlines}")
-    if len(actual_underlines) != 16 or any(len(text) > 180 for _, text in actual_underlines):
+    if len(actual_underlines) != 14 or any(len(text) > 180 for _, text in actual_underlines):
         raise AssertionError("Author review underlines are not phrase sized")
     actual_details = []
     for anchor_id, attributes, _ in underline_matches:
@@ -2735,12 +2736,12 @@ def validate_v2(document: str, markdown: str, ledger: str, data: dict[str, objec
     for number in ["1", "2", "3", "4", "S1", "S2"]:
         if f'id="figure-{number.lower()}"' not in document:
             raise AssertionError(f"Figure is missing: {number}")
-    if "Version 2.0.1 · November 9, 2026" not in document or "draft v2.0.1" not in document:
-        raise AssertionError("v2.0.1 metadata is missing")
-    if 'id="version-2-0-1"' not in document or not re.search(r'<details class="version-entry" id="version-2-0-1"[^>]* open>', document):
-        raise AssertionError("v2.0.1 history entry is missing or closed")
-    if "Underlined phrases now show reasons and suggested revisions on hover/focus." not in document:
-        raise AssertionError("v2.0.1 tooltip history is incomplete")
+    if "Version 2.1.0 · November 17, 2026" not in document or "draft v2.1.0" not in document:
+        raise AssertionError("v2.1.0 metadata is missing")
+    if 'id="version-2-1-0"' not in document or not re.search(r'<details class="version-entry" id="version-2-1-0"[^>]* open>', document):
+        raise AssertionError("v2.1.0 history entry is missing or closed")
+    if "figure structures and harmonized all six figures with one reproducible visual system" not in document:
+        raise AssertionError("v2.1.0 figure history is incomplete")
     for required_tooltip_code in ["initializeAuthorReviewTooltips", "role','tooltip", "为什么需要复核", "建议改为", "event.key==='Escape'", "window.innerWidth-width-margin"]:
         if required_tooltip_code not in document:
             raise AssertionError(f"Author review tooltip implementation is incomplete: {required_tooltip_code}")

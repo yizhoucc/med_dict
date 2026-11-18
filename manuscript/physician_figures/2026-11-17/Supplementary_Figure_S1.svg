@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="360" viewBox="0 0 1500 360">
+<rect x="0" y="0" width="1500" height="360" fill="#FFFFFF"/>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#65737E"/></marker>
+<marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#0072B2"/></marker>
+<marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#7A5FA8"/></marker>
+<marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#009E73"/></marker>
+<marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#D55E00"/></marker>
+</defs>
+<g font-family="Arial, Helvetica, sans-serif" fill="#222222">
+<rect x="25.0" y="20.0" width="1450.0" height="315.0" rx="13" fill="#FAFBFC" stroke="#D7DEE3" stroke-width="1.5"/>
+<text x="60.0" y="62.0" text-anchor="start" font-size="21" font-weight="700" fill="#222222">Note-level preference-margin distribution</text>
+<text x="1440.0" y="62.0" text-anchor="end" font-size="16" font-weight="400" fill="#5E6870">Pooled across four physicians</text>
+<line x1="245.0" y1="95" x2="245.0" y2="230" stroke="#E6E6E6" stroke-dasharray="0"/>
+<text x="245.0" y="258.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">-20%</text>
+<line x1="474.0" y1="95" x2="474.0" y2="230" stroke="#59656D" stroke-dasharray="6 5"/>
+<text x="474.0" y="258.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">0%</text>
+<line x1="703.0" y1="95" x2="703.0" y2="230" stroke="#E6E6E6" stroke-dasharray="0"/>
+<text x="703.0" y="258.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">20%</text>
+<line x1="932.0" y1="95" x2="932.0" y2="230" stroke="#E6E6E6" stroke-dasharray="0"/>
+<text x="932.0" y="258.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">40%</text>
+<line x1="1161.0" y1="95" x2="1161.0" y2="230" stroke="#E6E6E6" stroke-dasharray="0"/>
+<text x="1161.0" y="258.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">60%</text>
+<line x1="1390.0" y1="95" x2="1390.0" y2="230" stroke="#E6E6E6" stroke-dasharray="0"/>
+<text x="1390.0" y="258.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">80%</text>
+<text x="225.0" y="135.0" text-anchor="end" font-size="16" font-weight="700" fill="#222222">Breast cancer</text>
+<text x="1390.0" y="106.0" text-anchor="end" font-size="16" font-weight="700" fill="#0072B2">20/20 positive</text>
+<line x1="245" y1="130" x2="1390" y2="130" stroke="#AEB7BD"/>
+<circle cx="555.8" cy="130.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="576.2" cy="130.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="596.7" cy="130.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="617.1" cy="130.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="637.6" cy="130.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="678.5" cy="130.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="698.9" cy="122.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="698.9" cy="130.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="698.9" cy="138.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="719.4" cy="130.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="739.8" cy="126.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="739.8" cy="134.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="801.1" cy="130.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="862.5" cy="122.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="862.5" cy="130.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="862.5" cy="138.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="903.4" cy="130.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="964.7" cy="130.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="1005.6" cy="130.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="1046.5" cy="130.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<text x="225.0" y="205.0" text-anchor="end" font-size="16" font-weight="700" fill="#222222">PDAC</text>
+<text x="1390.0" y="176.0" text-anchor="end" font-size="16" font-weight="700" fill="#0072B2">19/20 positive; 1 negative</text>
+<line x1="245" y1="200" x2="1390" y2="200" stroke="#AEB7BD"/>
+<circle cx="452.0" cy="200.0" r="5.5" fill="#D55E00" stroke="white" stroke-width="1"/>
+<circle cx="496.0" cy="200.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="584.1" cy="196.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="584.1" cy="204.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="628.1" cy="200.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="650.2" cy="200.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="694.2" cy="196.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="694.2" cy="204.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="716.2" cy="196.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="716.2" cy="204.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="738.2" cy="200.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="760.2" cy="196.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="760.2" cy="204.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="804.3" cy="200.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="826.3" cy="200.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="848.3" cy="200.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="892.4" cy="200.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="958.4" cy="200.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="980.4" cy="200.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<circle cx="1090.5" cy="200.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
+<text x="750.0" y="288.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">Normalized note margin</text>
+</g>
+</svg>

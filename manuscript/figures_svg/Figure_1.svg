@@ -1,135 +1,311 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1180" viewBox="0 0 1500 1180">
-<rect x="0" y="0" width="1500" height="1180" fill="#FFFFFF"/>
-<defs>
-<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#65737E"/></marker>
-<marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#0072B2"/></marker>
-<marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#7A5FA8"/></marker>
-<marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#009E73"/></marker>
-<marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#D55E00"/></marker>
-</defs>
-<g font-family="Arial, Helvetica, sans-serif" fill="#222222">
-<rect x="30.0" y="25.0" width="1440.0" height="200.0" rx="13" fill="#FAFBFC" stroke="#D7DEE3" stroke-width="1.5"/>
-<circle cx="57.0" cy="53.0" r="17" fill="#263C4A"/>
-<text x="57.0" y="60.0" text-anchor="middle" font-size="20" font-weight="700" fill="white">A</text>
-<text x="85.0" y="60.0" text-anchor="start" font-size="21" font-weight="700" fill="#222222">Data partitions and isolation</text>
-<rect x="90.0" y="78.0" width="390.0" height="92.0" rx="9" fill="#F0F2F3" stroke="#65737E" stroke-width="1.5"/>
-<text x="285.0" y="109.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">Breast development</text>
-<text x="285.0" y="129.0" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">100 unannotated notes</text>
-<text x="285.0" y="149.0" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">Harness development</text>
-<text x="285.0" y="197.0" text-anchor="middle" font-size="16" font-weight="700" fill="#65737E">to panel B</text>
-<rect x="545.0" y="78.0" width="390.0" height="92.0" rx="9" fill="#F0F2F3" stroke="#65737E" stroke-width="1.5"/>
-<text x="740.0" y="109.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">PDAC development</text>
-<text x="740.0" y="129.0" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">100 unannotated notes</text>
-<text x="740.0" y="149.0" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">Cross-cancer adaptation</text>
-<text x="740.0" y="197.0" text-anchor="middle" font-size="16" font-weight="700" fill="#65737E">to panel C</text>
-<rect x="1000.0" y="78.0" width="390.0" height="92.0" rx="9" fill="#F0F2F3" stroke="#65737E" stroke-width="1.5"/>
-<text x="1195.0" y="109.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">Locked holdout</text>
-<text x="1195.0" y="129.0" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">20 breast + 20 PDAC</text>
-<text x="1195.0" y="149.0" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">No development use</text>
-<text x="1195.0" y="197.0" text-anchor="middle" font-size="16" font-weight="700" fill="#65737E">to panel D</text>
-<rect x="30.0" y="250.0" width="700.0" height="480.0" rx="13" fill="#FAFBFC" stroke="#D7DEE3" stroke-width="1.5"/>
-<circle cx="57.0" cy="278.0" r="17" fill="#263C4A"/>
-<text x="57.0" y="285.0" text-anchor="middle" font-size="20" font-weight="700" fill="white">B</text>
-<text x="85.0" y="285.0" text-anchor="start" font-size="21" font-weight="700" fill="#222222">Physician-informed breast-cancer development</text>
-<rect x="70.0" y="322.0" width="140.0" height="82.0" rx="9" fill="white" stroke="#D7DEE3" stroke-width="1.5"/>
-<text x="140.0" y="358.2" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">Development</text>
-<text x="140.0" y="378.2" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">note</text>
-<rect x="237.0" y="322.0" width="140.0" height="82.0" rx="9" fill="#E7F2F8" stroke="#0072B2" stroke-width="1.5"/>
-<text x="307.0" y="358.2" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">Frozen model</text>
-<text x="307.0" y="378.2" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">+ harness</text>
-<line x1="215.0" y1="363.0" x2="232.0" y2="363.0" stroke="#65737E" stroke-width="2.2" marker-end="url(#arrow)"/>
-<rect x="404.0" y="322.0" width="140.0" height="82.0" rx="9" fill="white" stroke="#0072B2" stroke-width="1.5"/>
-<text x="474.0" y="358.2" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">Structured</text>
-<text x="474.0" y="378.2" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">outputs</text>
-<line x1="382.0" y1="363.0" x2="399.0" y2="363.0" stroke="#65737E" stroke-width="2.2" marker-end="url(#arrow)"/>
-<rect x="571.0" y="322.0" width="140.0" height="82.0" rx="9" fill="#E6F5F0" stroke="#009E73" stroke-width="1.5"/>
-<text x="641.0" y="348.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">Physician +</text>
-<text x="641.0" y="368.0" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">investigator</text>
-<text x="641.0" y="388.0" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">source review</text>
-<line x1="549.0" y1="363.0" x2="566.0" y2="363.0" stroke="#65737E" stroke-width="2.2" marker-end="url(#arrow)"/>
-<rect x="500.0" y="486.0" width="190.0" height="82.0" rx="9" fill="#E6F5F0" stroke="#009E73" stroke-width="1.5"/>
-<text x="595.0" y="522.2" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">Failure taxonomy</text>
-<text x="595.0" y="542.2" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">+ clinical rubric</text>
-<rect x="285.0" y="486.0" width="190.0" height="82.0" rx="9" fill="#E7F2F8" stroke="#0072B2" stroke-width="1.5"/>
-<text x="380.0" y="522.2" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">Prompt, gate, hook</text>
-<text x="380.0" y="542.2" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">revision</text>
-<rect x="70.0" y="486.0" width="190.0" height="82.0" rx="9" fill="white" stroke="#0072B2" stroke-width="1.5"/>
-<text x="165.0" y="532.4" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">Regression testing</text>
-<line x1="641.0" y1="404.0" x2="595.0" y2="486.0" stroke="#65737E" stroke-width="2.2" marker-end="url(#arrow)"/>
-<line x1="500.0" y1="527.0" x2="475.0" y2="527.0" stroke="#65737E" stroke-width="2.2" marker-end="url(#arrow)"/>
-<line x1="285.0" y1="527.0" x2="260.0" y2="527.0" stroke="#65737E" stroke-width="2.2" marker-end="url(#arrow)"/>
-<path d="M165,568 V605 H487 V425 C487,410 400,404 307,404" fill="none" stroke="#0072B2" stroke-width="2.2" marker-end="url(#arrow-blue)"/>
-<text x="377.0" y="710.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">Iterative review; model weights remain frozen</text>
-<rect x="770.0" y="250.0" width="700.0" height="480.0" rx="13" fill="#FAFBFC" stroke="#D7DEE3" stroke-width="1.5"/>
-<circle cx="797.0" cy="278.0" r="17" fill="#263C4A"/>
-<text x="797.0" y="285.0" text-anchor="middle" font-size="20" font-weight="700" fill="white">C</text>
-<text x="825.0" y="285.0" text-anchor="start" font-size="21" font-weight="700" fill="#222222">Model-assisted PDAC adaptation</text>
-<rect x="800.0" y="300.0" width="640.0" height="62.0" rx="9" fill="#F0ECF5" stroke="#7A5FA8" stroke-width="1.5"/>
-<text x="1120.0" y="336.4" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">Transferred failure history + clinical rubric + reusable harness</text>
-<text x="1118.0" y="385.0" text-anchor="middle" font-size="16" font-weight="700" fill="#7A5FA8">knowledge transfer from B</text>
-<line x1="730" y1="515" x2="800" y2="331" stroke="#7A5FA8" stroke-width="2.3" stroke-dasharray="8 7" marker-end="url(#arrow-purple)"/>
-<rect x="802.0" y="416.0" width="142.0" height="78.0" rx="9" fill="white" stroke="#D7DEE3" stroke-width="1.5"/>
-<text x="873.0" y="450.2" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">100 PDAC</text>
-<text x="873.0" y="470.2" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">dev notes</text>
-<rect x="969.0" y="416.0" width="142.0" height="78.0" rx="9" fill="#E7F2F8" stroke="#0072B2" stroke-width="1.5"/>
-<text x="1040.0" y="450.2" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">Harness</text>
-<text x="1040.0" y="470.2" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">outputs</text>
-<line x1="948.0" y1="455.0" x2="965.0" y2="455.0" stroke="#0072B2" stroke-width="2.2" marker-end="url(#arrow-blue)"/>
-<rect x="1136.0" y="416.0" width="142.0" height="78.0" rx="9" fill="#F0ECF5" stroke="#7A5FA8" stroke-width="1.5"/>
-<text x="1207.0" y="450.2" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">Source-grounded</text>
-<text x="1207.0" y="470.2" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">LLM review</text>
-<line x1="1115.0" y1="455.0" x2="1132.0" y2="455.0" stroke="#7A5FA8" stroke-width="2.2" marker-end="url(#arrow-purple)"/>
-<rect x="1303.0" y="416.0" width="142.0" height="78.0" rx="9" fill="#F0ECF5" stroke="#7A5FA8" stroke-width="1.5"/>
-<text x="1374.0" y="450.2" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">Candidate</text>
-<text x="1374.0" y="470.2" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">revision</text>
-<line x1="1282.0" y1="455.0" x2="1299.0" y2="455.0" stroke="#7A5FA8" stroke-width="2.2" marker-end="url(#arrow-purple)"/>
-<rect x="980.0" y="560.0" width="200.0" height="75.0" rx="9" fill="white" stroke="#65737E" stroke-width="1.5"/>
-<text x="1080.0" y="592.7" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">Investigator</text>
-<text x="1080.0" y="612.7" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">decision</text>
-<rect x="1240.0" y="560.0" width="180.0" height="75.0" rx="9" fill="#E7F2F8" stroke="#0072B2" stroke-width="1.5"/>
-<text x="1330.0" y="592.7" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">Regression</text>
-<text x="1330.0" y="612.7" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">testing</text>
-<line x1="1315.0" y1="494.0" x2="1110.0" y2="560.0" stroke="#65737E" stroke-width="2.2" marker-end="url(#arrow)"/>
-<line x1="1180.0" y1="598.0" x2="1240.0" y2="598.0" stroke="#65737E" stroke-width="2.2" marker-end="url(#arrow)"/>
-<path d="M1330,635 C1330,645 1320,648 1310,648 H890 C880,648 873,640 873,630 V494" fill="none" stroke="#0072B2" stroke-width="2.2" marker-end="url(#arrow-blue)"/>
-<rect x="840.0" y="658.0" width="560.0" height="48.0" rx="7" fill="white" stroke="#65737E" stroke-width="1.5"/>
-<circle cx="870" cy="682" r="15" fill="#009E73"/>
-<text x="870.0" y="688.0" text-anchor="middle" font-size="16" font-weight="700" fill="white">P</text>
-<text x="1125.0" y="688.0" text-anchor="middle" font-size="16" font-weight="700" fill="#009E73">No target-domain physician review of PDAC outputs</text>
-<rect x="30.0" y="755.0" width="1440.0" height="390.0" rx="13" fill="#FAFBFC" stroke="#D7DEE3" stroke-width="1.5"/>
-<circle cx="57.0" cy="783.0" r="17" fill="#263C4A"/>
-<text x="57.0" y="790.0" text-anchor="middle" font-size="20" font-weight="700" fill="white">D</text>
-<text x="85.0" y="790.0" text-anchor="start" font-size="21" font-weight="700" fill="#222222">Independent holdout evaluation</text>
-<rect x="75.0" y="842.0" width="230.0" height="88.0" rx="9" fill="#F0F2F3" stroke="#65737E" stroke-width="1.5"/>
-<text x="190.0" y="881.2" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">40 locked notes</text>
-<text x="190.0" y="901.2" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">20 breast + 20 PDAC</text>
-<rect x="365.0" y="825.0" width="260.0" height="120.0" rx="9" fill="white" stroke="#65737E" stroke-width="1.5"/>
-<text x="495.0" y="870.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">Same frozen</text>
-<text x="495.0" y="890.0" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">Qwen2.5-32B</text>
-<text x="495.0" y="910.0" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">+ same schema</text>
-<line x1="305.0" y1="886.0" x2="365.0" y2="886.0" stroke="#65737E" stroke-width="2.2" marker-end="url(#arrow)"/>
-<rect x="705.0" y="795.0" width="235.0" height="100.0" rx="9" fill="#E7F2F8" stroke="#0072B2" stroke-width="1.5"/>
-<text x="822.5" y="840.2" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">Inference harness</text>
-<text x="822.5" y="860.2" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">+ supporting excerpts</text>
-<rect x="705.0" y="935.0" width="235.0" height="100.0" rx="9" fill="#FBECE5" stroke="#D55E00" stroke-width="1.5"/>
-<text x="822.5" y="980.2" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">Single-prompt</text>
-<text x="822.5" y="1000.2" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">baseline</text>
-<line x1="625.0" y1="875.0" x2="705.0" y2="845.0" stroke="#0072B2" stroke-width="2.2" marker-end="url(#arrow-blue)"/>
-<line x1="625.0" y1="895.0" x2="705.0" y2="985.0" stroke="#D55E00" stroke-width="2.2" marker-end="url(#arrow-orange)"/>
-<rect x="1010.0" y="842.0" width="220.0" height="112.0" rx="9" fill="white" stroke="#65737E" stroke-width="1.5"/>
-<text x="1120.0" y="883.0" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">Identity-masked</text>
-<text x="1120.0" y="903.0" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">fixed A/B</text>
-<text x="1120.0" y="923.0" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">field comparison</text>
-<line x1="940.0" y1="845.0" x2="1010.0" y2="885.0" stroke="#0072B2" stroke-width="2.2" marker-end="url(#arrow-blue)"/>
-<line x1="940.0" y1="985.0" x2="1010.0" y2="915.0" stroke="#D55E00" stroke-width="2.2" marker-end="url(#arrow-orange)"/>
-<rect x="1290.0" y="795.0" width="130.0" height="100.0" rx="9" fill="#E6F5F0" stroke="#009E73" stroke-width="1.5"/>
-<text x="1355.0" y="840.2" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">4</text>
-<text x="1355.0" y="860.2" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">physicians</text>
-<rect x="1290.0" y="935.0" width="130.0" height="100.0" rx="9" fill="white" stroke="#009E73" stroke-width="1.5"/>
-<text x="1355.0" y="980.2" text-anchor="middle" font-size="16" font-weight="700" fill="#222222">2,160 field</text>
-<text x="1355.0" y="1000.2" text-anchor="middle" font-size="16" font-weight="400" fill="#222222">judgments</text>
-<line x1="1230.0" y1="898.0" x2="1290.0" y2="845.0" stroke="#009E73" stroke-width="2.2" marker-end="url(#arrow-green)"/>
-<line x1="1355.0" y1="895.0" x2="1355.0" y2="935.0" stroke="#009E73" stroke-width="2.2" marker-end="url(#arrow-green)"/>
-<text x="750.0" y="1110.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">Primary analysis: logistic GEE on non-tie judgments, clustered by note</text>
-</g>
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns2="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" width="7.5in" height="6in" viewBox="0 0 540 432" version="1.1" role="img" aria-labelledby="figure-title figure-description">
+ <title id="figure-title">Development, adaptation, and evaluation workflow</title><desc id="figure-description">Five panels show the study datasets, physician informed breast cancer development, LLM assisted PDAC adaptation without target domain physician review, independent physician holdout evaluation, and a separate cumulative technical ablation.</desc><metadata>
+  <rdf:RDF>
+   <ns2:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+    <dc:title>Development, adaptation, and evaluation workflow</dc:title>
+    <dc:description>Five panels show the study datasets, physician informed breast cancer development, LLM assisted PDAC adaptation without target domain physician review, independent physician holdout evaluation, and a separate cumulative technical ablation.</dc:description>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <ns2:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </ns2:Agent>
+    </dc:creator>
+   </ns2:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 432  L 540 432  L 540 0  L 0 0  z " style="fill: #ffffff" />
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 23.76 78.192  L 516.24 78.192  Q 524.34 78.192 524.34 71.712  L 524.34 16.848  Q 524.34 10.368 516.24 10.368  L 23.76 10.368  Q 15.66 10.368 15.66 16.848  L 15.66 71.712  Q 15.66 78.192 23.76 78.192  z " clip-path="url(#pc17544576e)" style="fill: #fafbfc; stroke: #cfd8de; stroke-width: 1.2; stroke-linejoin: miter" />
+   </g>
+   <g id="patch_3">
+    <path d="M 23.76 216.432  L 257.04 216.432  Q 265.14 216.432 265.14 209.952  L 265.14 94.608  Q 265.14 88.128 257.04 88.128  L 23.76 88.128  Q 15.66 88.128 15.66 94.608  L 15.66 209.952  Q 15.66 216.432 23.76 216.432  z " clip-path="url(#pc17544576e)" style="fill: #fafbfc; stroke: #cfd8de; stroke-width: 1.2; stroke-linejoin: miter" />
+   </g>
+   <g id="patch_4">
+    <path d="M 282.96 216.432  L 516.24 216.432  Q 524.34 216.432 524.34 209.952  L 524.34 94.608  Q 524.34 88.128 516.24 88.128  L 282.96 88.128  Q 274.86 88.128 274.86 94.608  L 274.86 209.952  Q 274.86 216.432 282.96 216.432  z " clip-path="url(#pc17544576e)" style="fill: #fafbfc; stroke: #cfd8de; stroke-width: 1.2; stroke-linejoin: miter" />
+   </g>
+   <g id="patch_5">
+    <path d="M 23.76 346.032  L 516.24 346.032  Q 524.34 346.032 524.34 339.552  L 524.34 235.008  Q 524.34 228.528 516.24 228.528  L 23.76 228.528  Q 15.66 228.528 15.66 235.008  L 15.66 339.552  Q 15.66 346.032 23.76 346.032  z " clip-path="url(#pc17544576e)" style="fill: #fafbfc; stroke: #cfd8de; stroke-width: 1.2; stroke-linejoin: miter" />
+   </g>
+   <g id="patch_6">
+    <path d="M 23.76 419.472  L 516.24 419.472  Q 524.34 419.472 524.34 412.992  L 524.34 364.608  Q 524.34 358.128 516.24 358.128  L 23.76 358.128  Q 15.66 358.128 15.66 364.608  L 15.66 412.992  Q 15.66 419.472 23.76 419.472  z " clip-path="url(#pc17544576e)" style="fill: #fafbfc; stroke: #cfd8de; stroke-width: 1.2; stroke-linejoin: miter" />
+   </g>
+   <g id="patch_7">
+    <path d="M 46.98 69.12  L 169.02 69.12  Q 179.82 69.12 179.82 60.48  L 179.82 43.632  Q 179.82 34.992 169.02 34.992  L 46.98 34.992  Q 36.18 34.992 36.18 43.632  L 36.18 60.48  Q 36.18 69.12 46.98 69.12  z " style="fill: #ffffff; stroke: #5f6d78; stroke-width: 1.4; stroke-linejoin: miter" />
+   </g>
+   <g id="patch_8">
+    <path d="M 208.98 69.12  L 331.02 69.12  Q 341.82 69.12 341.82 60.48  L 341.82 43.632  Q 341.82 34.992 331.02 34.992  L 208.98 34.992  Q 198.18 34.992 198.18 43.632  L 198.18 60.48  Q 198.18 69.12 208.98 69.12  z " style="fill: #ffffff; stroke: #5f6d78; stroke-width: 1.4; stroke-linejoin: miter" />
+   </g>
+   <g id="patch_9">
+    <path d="M 370.98 69.12  L 493.02 69.12  Q 503.82 69.12 503.82 60.48  L 503.82 43.632  Q 503.82 34.992 493.02 34.992  L 370.98 34.992  Q 360.18 34.992 360.18 43.632  L 360.18 60.48  Q 360.18 69.12 370.98 69.12  z " style="fill: #ffffff; stroke: #5f6d78; stroke-width: 1.4; stroke-linejoin: miter" />
+   </g>
+   <g id="patch_10">
+    <path d="M 36.18 180.576  L 82.62 180.576  Q 93.42 180.576 93.42 171.936  L 93.42 147.744  Q 93.42 139.104 82.62 139.104  L 36.18 139.104  Q 25.38 139.104 25.38 147.744  L 25.38 171.936  Q 25.38 180.576 36.18 180.576  z " style="fill: #ffffff; stroke: #0072b2; stroke-width: 1.4; stroke-linejoin: miter" />
+   </g>
+   <g id="patch_11">
+    <path d="M 117.18 180.576  L 163.62 180.576  Q 174.42 180.576 174.42 171.936  L 174.42 147.744  Q 174.42 139.104 163.62 139.104  L 117.18 139.104  Q 106.38 139.104 106.38 147.744  L 106.38 171.936  Q 106.38 180.576 117.18 180.576  z " style="fill: #e9f6f2; stroke: #009e73; stroke-width: 1.4; stroke-linejoin: miter" />
+   </g>
+   <g id="patch_12">
+    <path d="M 93.798501 159.84  Q 100.170528 159.84 104.753701 159.84  " style="fill: none; stroke: #009e73; stroke-width: 1.6; stroke-linecap: round" />
+    <path d="M 100.753701 157.84  L 104.753701 159.84  L 100.753701 161.84  z " style="fill: #009e73; stroke: #009e73; stroke-width: 1.6; stroke-linecap: round" />
+   </g>
+   <g id="patch_13">
+    <path d="M 198.18 180.576  L 244.62 180.576  Q 255.42 180.576 255.42 171.936  L 255.42 147.744  Q 255.42 139.104 244.62 139.104  L 198.18 139.104  Q 187.38 139.104 187.38 147.744  L 187.38 171.936  Q 187.38 180.576 198.18 180.576  z " style="fill: #e8f2f8; stroke: #0072b2; stroke-width: 1.4; stroke-linejoin: miter" />
+   </g>
+   <g id="patch_14">
+    <path d="M 174.798501 159.84  Q 181.170528 159.84 185.753701 159.84  " style="fill: none; stroke: #0072b2; stroke-width: 1.6; stroke-linecap: round" />
+    <path d="M 181.753701 157.84  L 185.753701 159.84  L 181.753701 161.84  z " style="fill: #0072b2; stroke: #0072b2; stroke-width: 1.6; stroke-linecap: round" />
+   </g>
+   <g id="patch_15">
+    <path d="M 219.756224 180.418457  Q 141.120799 234.322779 62.671956 183.568357  " style="fill: none; stroke: #009e73; stroke-width: 1.7; stroke-linecap: round" />
+    <path d="M 64.943962 187.420368  L 62.671956 183.568357  L 67.116768 184.061958  z " style="fill: #009e73; stroke: #009e73; stroke-width: 1.7; stroke-linecap: round" />
+   </g>
+   <g id="patch_16">
+    <path d="M 295.38 180.576  L 341.82 180.576  Q 352.62 180.576 352.62 171.936  L 352.62 147.744  Q 352.62 139.104 341.82 139.104  L 295.38 139.104  Q 284.58 139.104 284.58 147.744  L 284.58 171.936  Q 284.58 180.576 295.38 180.576  z " style="fill: #e8f2f8; stroke: #0072b2; stroke-width: 1.4; stroke-linejoin: miter" />
+   </g>
+   <g id="patch_17">
+    <path d="M 376.38 180.576  L 422.82 180.576  Q 433.62 180.576 433.62 171.936  L 433.62 147.744  Q 433.62 139.104 422.82 139.104  L 376.38 139.104  Q 365.58 139.104 365.58 147.744  L 365.58 171.936  Q 365.58 180.576 376.38 180.576  z " style="fill: #f0ecf5; stroke: #7a5fa8; stroke-width: 1.4; stroke-linejoin: miter" />
+   </g>
+   <g id="patch_18">
+    <path d="M 352.998501 159.84  Q 359.370528 159.84 363.953701 159.84  " style="fill: none; stroke: #7a5fa8; stroke-width: 1.6; stroke-linecap: round" />
+    <path d="M 359.953701 157.84  L 363.953701 159.84  L 359.953701 161.84  z " style="fill: #7a5fa8; stroke: #7a5fa8; stroke-width: 1.6; stroke-linecap: round" />
+   </g>
+   <g id="patch_19">
+    <path d="M 457.38 180.576  L 503.82 180.576  Q 514.62 180.576 514.62 171.936  L 514.62 147.744  Q 514.62 139.104 503.82 139.104  L 457.38 139.104  Q 446.58 139.104 446.58 147.744  L 446.58 171.936  Q 446.58 180.576 457.38 180.576  z " style="fill: #e8f2f8; stroke: #0072b2; stroke-width: 1.4; stroke-linejoin: miter" />
+   </g>
+   <g id="patch_20">
+    <path d="M 433.998501 159.84  Q 440.370528 159.84 444.953701 159.84  " style="fill: none; stroke: #0072b2; stroke-width: 1.6; stroke-linecap: round" />
+    <path d="M 440.953701 157.84  L 444.953701 159.84  L 440.953701 161.84  z " style="fill: #0072b2; stroke: #0072b2; stroke-width: 1.6; stroke-linecap: round" />
+   </g>
+   <g id="patch_21">
+    <path d="M 308.88 210.816  L 490.32 210.816  Q 501.12 210.816 501.12 202.176  L 501.12 195.264  Q 501.12 186.624 490.32 186.624  L 308.88 186.624  Q 298.08 186.624 298.08 195.264  L 298.08 202.176  Q 298.08 210.816 308.88 210.816  z " style="fill: #ffffff; stroke: #009e73; stroke-width: 1.4; stroke-linejoin: miter" />
+   </g>
+   <g id="patch_22">
+    <path d="M 36.18 318.816  L 85.32 318.816  Q 96.12 318.816 96.12 310.176  L 96.12 283.824  Q 96.12 275.184 85.32 275.184  L 36.18 275.184  Q 25.38 275.184 25.38 283.824  L 25.38 310.176  Q 25.38 318.816 36.18 318.816  z " style="fill: #ffffff; stroke: #5f6d78; stroke-width: 1.4; stroke-linejoin: miter" />
+   </g>
+   <g id="patch_23">
+    <path d="M 94.343643 297.216  Q 101.521512 297.216 106.910527 297.216  " style="fill: none; stroke: #5f6d78; stroke-width: 1.6; stroke-linecap: round" />
+    <path d="M 102.910527 295.216  L 106.910527 297.216  L 102.910527 299.216  z " style="fill: #5f6d78; stroke: #5f6d78; stroke-width: 1.6; stroke-linecap: round" />
+   </g>
+   <g id="patch_24">
+    <path d="M 117.18 323.136  L 174.42 323.136  Q 185.22 323.136 185.22 314.496  L 185.22 279.504  Q 185.22 270.864 174.42 270.864  L 117.18 270.864  Q 106.38 270.864 106.38 279.504  L 106.38 314.496  Q 106.38 323.136 117.18 323.136  z " style="fill: #ffffff; stroke: #5f6d78; stroke-width: 1.4; stroke-linejoin: miter" />
+   </g>
+   <g id="patch_25">
+    <path d="M 183.246416 288.589922  Q 190.619955 285.120021 196.374904 282.41181  " style="fill: none; stroke: #0072b2; stroke-width: 1.6; stroke-linecap: round" />
+    <path d="M 191.904035 282.305361  L 196.374904 282.41181  L 193.607224 285.924635  z " style="fill: #0072b2; stroke: #0072b2; stroke-width: 1.6; stroke-linecap: round" />
+   </g>
+   <g id="patch_26">
+    <path d="M 183.282275 307.500258  Q 190.619678 310.607864 196.309871 313.017828  " style="fill: none; stroke: #d55e00; stroke-width: 1.6; stroke-linecap: round" />
+    <path d="M 193.406587 309.616219  L 196.309871 313.017828  L 191.846614 313.29949  z " style="fill: #d55e00; stroke: #d55e00; stroke-width: 1.6; stroke-linecap: round" />
+   </g>
+   <g id="patch_27">
+    <path d="M 206.28 297.216  L 279.72 297.216  Q 290.52 297.216 290.52 288.576  L 290.52 270.864  Q 290.52 262.224 279.72 262.224  L 206.28 262.224  Q 195.48 262.224 195.48 270.864  L 195.48 288.576  Q 195.48 297.216 206.28 297.216  z " style="fill: #e8f2f8; stroke: #0072b2; stroke-width: 1.4; stroke-linejoin: miter" />
+   </g>
+   <g id="patch_28">
+    <path d="M 206.28 329.616  L 279.72 329.616  Q 290.52 329.616 290.52 320.976  L 290.52 308.88  Q 290.52 300.24 279.72 300.24  L 206.28 300.24  Q 195.48 300.24 195.48 308.88  L 195.48 320.976  Q 195.48 329.616 206.28 329.616  z " style="fill: #fbede7; stroke: #d55e00; stroke-width: 1.4; stroke-linejoin: miter" />
+   </g>
+   <g id="patch_29">
+    <path d="M 289.121089 281.575195  Q 297.537088 285.118774 304.304415 287.968175  " style="fill: none; stroke: #0072b2; stroke-width: 1.6; stroke-linecap: round" />
+    <path d="M 301.393987 284.572676  L 304.304415 287.968175  L 299.841759 288.259217  z " style="fill: #0072b2; stroke: #0072b2; stroke-width: 1.6; stroke-linecap: round" />
+   </g>
+   <g id="patch_30">
+    <path d="M 289.000854 313.481602  Q 297.538723 308.448753 304.535552 304.324306  " style="fill: none; stroke: #d55e00; stroke-width: 1.6; stroke-linecap: round" />
+    <path d="M 300.074056 304.632621  L 304.535552 304.324306  L 302.105306 308.078491  z " style="fill: #d55e00; stroke: #d55e00; stroke-width: 1.6; stroke-linecap: round" />
+   </g>
+   <g id="patch_31">
+    <path d="M 314.28 318.816  L 374.22 318.816  Q 385.02 318.816 385.02 310.176  L 385.02 283.824  Q 385.02 275.184 374.22 275.184  L 314.28 275.184  Q 303.48 275.184 303.48 283.824  L 303.48 310.176  Q 303.48 318.816 314.28 318.816  z " style="fill: #ffffff; stroke: #5f6d78; stroke-width: 1.4; stroke-linejoin: miter" />
+   </g>
+   <g id="patch_32">
+    <path d="M 383.776919 297.216  Q 390.689859 297.216 395.813945 297.216  " style="fill: none; stroke: #009e73; stroke-width: 1.6; stroke-linecap: round" />
+    <path d="M 391.813945 295.216  L 395.813945 297.216  L 391.813945 299.216  z " style="fill: #009e73; stroke: #009e73; stroke-width: 1.6; stroke-linecap: round" />
+   </g>
+   <g id="patch_33">
+    <path d="M 406.08 318.816  L 447.12 318.816  Q 457.92 318.816 457.92 310.176  L 457.92 283.824  Q 457.92 275.184 447.12 275.184  L 406.08 275.184  Q 395.28 275.184 395.28 283.824  L 395.28 310.176  Q 395.28 318.816 406.08 318.816  z " style="fill: #e9f6f2; stroke: #009e73; stroke-width: 1.4; stroke-linejoin: miter" />
+   </g>
+   <g id="patch_34">
+    <path d="M 456.676919 297.216  Q 463.589859 297.216 468.713945 297.216  " style="fill: none; stroke: #009e73; stroke-width: 1.6; stroke-linecap: round" />
+    <path d="M 464.713945 295.216  L 468.713945 297.216  L 464.713945 299.216  z " style="fill: #009e73; stroke: #009e73; stroke-width: 1.6; stroke-linecap: round" />
+   </g>
+   <g id="patch_35">
+    <path d="M 478.98 327.456  L 503.82 327.456  Q 514.62 327.456 514.62 318.816  L 514.62 275.184  Q 514.62 266.544 503.82 266.544  L 478.98 266.544  Q 468.18 266.544 468.18 275.184  L 468.18 318.816  Q 468.18 327.456 478.98 327.456  z " style="fill: #ffffff; stroke: #5f6d78; stroke-width: 1.4; stroke-linejoin: miter" />
+   </g>
+   <g id="patch_36">
+    <path d="M 46.98 412.992  L 96.12 412.992  Q 106.92 412.992 106.92 404.352  L 106.92 397.44  Q 106.92 388.8 96.12 388.8  L 46.98 388.8  Q 36.18 388.8 36.18 397.44  L 36.18 404.352  Q 36.18 412.992 46.98 412.992  z " style="fill: #ffffff; stroke: #d55e00; stroke-width: 1.4; stroke-linejoin: miter" />
+   </g>
+   <g id="patch_37">
+    <path d="M 125.28 412.992  L 174.42 412.992  Q 185.22 412.992 185.22 404.352  L 185.22 397.44  Q 185.22 388.8 174.42 388.8  L 125.28 388.8  Q 114.48 388.8 114.48 397.44  L 114.48 404.352  Q 114.48 412.992 125.28 412.992  z " style="fill: #ffffff; stroke: #718096; stroke-width: 1.4; stroke-linejoin: miter" />
+   </g>
+   <g id="patch_38">
+    <path d="M 105.138369 400.896  Q 110.158165 400.896 113.389107 400.896  " style="fill: none; stroke: #718096; stroke-width: 1.6; stroke-linecap: round" />
+    <path d="M 109.389107 398.896  L 113.389107 400.896  L 109.389107 402.896  z " style="fill: #718096; stroke: #718096; stroke-width: 1.6; stroke-linecap: round" />
+   </g>
+   <g id="patch_39">
+    <path d="M 203.58 412.992  L 252.72 412.992  Q 263.52 412.992 263.52 404.352  L 263.52 397.44  Q 263.52 388.8 252.72 388.8  L 203.58 388.8  Q 192.78 388.8 192.78 397.44  L 192.78 404.352  Q 192.78 412.992 203.58 412.992  z " style="fill: #ffffff; stroke: #4a5568; stroke-width: 1.4; stroke-linejoin: miter" />
+   </g>
+   <g id="patch_40">
+    <path d="M 183.438369 400.896  Q 188.458165 400.896 191.689107 400.896  " style="fill: none; stroke: #4a5568; stroke-width: 1.6; stroke-linecap: round" />
+    <path d="M 187.689107 398.896  L 191.689107 400.896  L 187.689107 402.896  z " style="fill: #4a5568; stroke: #4a5568; stroke-width: 1.6; stroke-linecap: round" />
+   </g>
+   <g id="patch_41">
+    <path d="M 281.88 412.992  L 331.02 412.992  Q 341.82 412.992 341.82 404.352  L 341.82 397.44  Q 341.82 388.8 331.02 388.8  L 281.88 388.8  Q 271.08 388.8 271.08 397.44  L 271.08 404.352  Q 271.08 412.992 281.88 412.992  z " style="fill: #ffffff; stroke: #0072b2; stroke-width: 1.4; stroke-linejoin: miter" />
+   </g>
+   <g id="patch_42">
+    <path d="M 261.738369 400.896  Q 266.758165 400.896 269.989107 400.896  " style="fill: none; stroke: #0072b2; stroke-width: 1.6; stroke-linecap: round" />
+    <path d="M 265.989107 398.896  L 269.989107 400.896  L 265.989107 402.896  z " style="fill: #0072b2; stroke: #0072b2; stroke-width: 1.6; stroke-linecap: round" />
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 11.5px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #243342" x="26.46" y="32.564314" transform="rotate(-0 26.46 32.564314)">A</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 11.5px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #243342" x="42.12" y="32.833677" transform="rotate(-0 42.12 32.833677)">Study datasets</text>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 11.5px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #243342" x="26.46" y="110.324314" transform="rotate(-0 26.46 110.324314)">B</text>
+   </g>
+   <g id="text_4">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #243342" transform="translate(42.12 109.842227)">Physician informed breast</text>
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #243342" transform="translate(42.12 120.193853)">cancer development</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 11.5px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #243342" x="285.66" y="110.324314" transform="rotate(-0 285.66 110.324314)">C</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #243342" transform="translate(301.32 110.883204)">LLM assisted PDAC</text>
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #243342" transform="translate(301.32 120.193853)">adaptation</text>
+   </g>
+   <g id="text_7">
+    <text style="font-weight: 700; font-size: 11.5px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #243342" x="26.46" y="250.724314" transform="rotate(-0 26.46 250.724314)">D</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 11.5px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #243342" x="42.12" y="250.923599" transform="rotate(-0 42.12 250.923599)">Independent physician holdout evaluation</text>
+   </g>
+   <g id="text_9">
+    <text style="font-weight: 700; font-size: 11.5px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #243342" x="26.46" y="380.324314" transform="rotate(-0 26.46 380.324314)">E</text>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 11.5px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #243342" x="42.12" y="380.593677" transform="rotate(-0 42.12 380.593677)">Staged technical ablation</text>
+   </g>
+   <g id="text_11">
+    <text style="font-weight: 700; font-size: 8.4px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #243342" transform="translate(67.856531 49.700596)">Breast development</text>
+    <text style="font-weight: 700; font-size: 8.4px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #243342" transform="translate(88.626188 59.556404)">100 notes</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #5f6d78" x="108" y="76.672219" transform="rotate(-0 108 76.672219)">Harness development</text>
+   </g>
+   <g id="text_13">
+    <text style="font-weight: 700; font-size: 8.4px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #243342" transform="translate(235.700437 49.751783)">PDAC adaptation</text>
+    <text style="font-weight: 700; font-size: 8.4px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #243342" transform="translate(250.626188 59.556404)">100 notes</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #5f6d78" x="270" y="76.672219" transform="rotate(-0 270 76.672219)">Cross cancer adaptation</text>
+   </g>
+   <g id="text_15">
+    <text style="font-weight: 700; font-size: 8.4px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #243342" transform="translate(400.738875 50.480221)">Locked holdout</text>
+    <text style="font-weight: 700; font-size: 8.4px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #243342" transform="translate(391.030969 59.595123)">20 breast + 20 PDAC</text>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #5f6d78" x="432" y="76.672219" transform="rotate(-0 432 76.672219)">No development use</text>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #243342" transform="translate(42.72375 158.386133)">Generate</text>
+    <text style="font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #243342" transform="translate(27.385 166.225117)">structured outputs</text>
+   </g>
+   <g id="text_18">
+    <text style="font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #243342" transform="translate(110.611875 157.544258)">Physician review</text>
+    <text style="font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #243342" transform="translate(106.824375 166.273867)">of selected outputs</text>
+   </g>
+   <g id="text_19">
+    <text style="font-weight: 700; font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #243342" transform="translate(197.39875 157.544258)">Error guided</text>
+    <text style="font-weight: 700; font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #243342" transform="translate(184.5 167.021992)">harness refinement</text>
+   </g>
+   <g id="text_20">
+    <text style="font-weight: 700; font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #009e73" x="140.4" y="193.536" transform="rotate(-0 140.4 193.536)">Feedback loop</text>
+   </g>
+   <g id="text_21">
+    <g id="patch_43">
+     <path d="M 88.70875 213.05975  L 192.09125 213.05975  L 192.09125 204.431781  L 88.70875 204.431781  z " style="fill: #fafbfc" />
+    </g>
+    <text style="font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #5f6d78" x="140.4" y="210.816" transform="rotate(-0 140.4 210.816)">Model weights remain frozen</text>
+   </g>
+   <g id="text_22">
+    <text style="font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #243342" transform="translate(291.629375 158.388008)">Transfer breast</text>
+    <text style="font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #243342" transform="translate(290.14125 166.973242)">derived harness</text>
+   </g>
+   <g id="text_23">
+    <text style="font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #243342" transform="translate(376.035 158.339258)">LLM assisted</text>
+    <text style="font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #243342" transform="translate(378.48625 166.973242)">error review</text>
+   </g>
+   <g id="text_24">
+    <text style="font-weight: 700; font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #243342" transform="translate(453.259375 157.645508)">PDAC specific</text>
+    <text style="font-weight: 700; font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #243342" transform="translate(443.7 167.021992)">harness refinement</text>
+   </g>
+   <g id="text_25">
+    <text style="font-weight: 700; font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #009e73" x="399.6" y="200.79" transform="rotate(-0 399.6 200.79)">No target-domain physician review of PDAC outputs</text>
+   </g>
+   <g id="text_26">
+    <text style="font-weight: 700; font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #243342" transform="translate(30.74125 295.509258)">40 locked notes</text>
+    <text style="font-weight: 700; font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #243342" transform="translate(21.731875 304.180117)">20 breast + 20 PDAC</text>
+   </g>
+   <g id="text_27">
+    <text style="font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #243342" transform="translate(123.12375 291.229141)">Same frozen</text>
+    <text style="font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #243342" transform="translate(121.3425 299.691875)">Qwen2.5-32B</text>
+    <text style="font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #243342" transform="translate(120.235 308.497109)">Same schema</text>
+   </g>
+   <g id="text_28">
+    <text style="font-weight: 700; font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #0072b2" transform="translate(218.105 278.219258)">Harness with</text>
+    <text style="font-weight: 700; font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #0072b2" transform="translate(204.551875 286.058242)">supporting excerpts</text>
+   </g>
+   <g id="text_29">
+    <text style="font-weight: 700; font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #d55e00" x="243" y="316.998" transform="rotate(-0 243 316.998)">Single prompt baseline</text>
+   </g>
+   <g id="text_30">
+    <text style="font-weight: 700; font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #243342" transform="translate(314.02 294.704258)">Identity masked</text>
+    <text style="font-weight: 700; font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #243342" transform="translate(321.579375 303.390742)">comparison</text>
+   </g>
+   <g id="text_31">
+    <text style="font-weight: 700; font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #009e73" transform="translate(402.590625 294.716133)">4 physicians</text>
+    <text style="font-weight: 700; font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #009e73" transform="translate(395.25875 303.350117)">2,160 judgments</text>
+   </g>
+   <g id="text_32">
+    <text style="font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #243342" transform="translate(468.279375 286.119023)">Logistic GEE</text>
+    <text style="font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #243342" transform="translate(476.50625 295.499258)">Non-ties</text>
+    <text style="font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #243342" transform="translate(474.281875 304.180117)">Clustered</text>
+    <text style="font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; fill: #243342" transform="translate(478.28 311.972227)">by note</text>
+   </g>
+   <g id="text_33">
+    <text style="font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #5f6d78" x="270" y="334.8" transform="rotate(-0 270 334.8)">Independent physician evaluation of the locked holdout set</text>
+   </g>
+   <g id="text_34">
+    <text style="font-weight: 700; font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #d55e00" x="71.55" y="402.966" transform="rotate(-0 71.55 402.966)">A  Single prompt</text>
+   </g>
+   <g id="text_35">
+    <text style="font-weight: 700; font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #718096" x="149.85" y="402.96975" transform="rotate(-0 149.85 402.96975)">B  Decomposed</text>
+   </g>
+   <g id="text_36">
+    <text style="font-weight: 700; font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #4a5568" x="228.15" y="403.759125" transform="rotate(-0 228.15 403.759125)">C  Verified</text>
+   </g>
+   <g id="text_37">
+    <text style="font-weight: 700; font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #0072b2" x="306.45" y="403.71225" transform="rotate(-0 306.45 403.71225)">D  Full harness</text>
+   </g>
+   <g id="text_38">
+    <text style="font-weight: 700; font-size: 8.2px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #5f6d78" x="372.6" y="396.576" transform="rotate(-0 372.6 396.576)">40 locked notes</text>
+   </g>
+   <g id="text_39">
+    <text style="font-size: 8.2px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #7a5fa8" x="372.6" y="408.24" transform="rotate(-0 372.6 408.24)">Blinded nonphysician LLM judge</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pc17544576e">
+   <rect x="0" y="0" width="540" height="432" />
+  </clipPath>
+ </defs>
 </svg>

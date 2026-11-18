@@ -1,74 +1,360 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="360" viewBox="0 0 1500 360">
-<rect x="0" y="0" width="1500" height="360" fill="#FFFFFF"/>
-<defs>
-<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#65737E"/></marker>
-<marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#0072B2"/></marker>
-<marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#7A5FA8"/></marker>
-<marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#009E73"/></marker>
-<marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#D55E00"/></marker>
-</defs>
-<g font-family="Arial, Helvetica, sans-serif" fill="#222222">
-<rect x="25.0" y="20.0" width="1450.0" height="315.0" rx="13" fill="#FAFBFC" stroke="#D7DEE3" stroke-width="1.5"/>
-<text x="60.0" y="62.0" text-anchor="start" font-size="21" font-weight="700" fill="#222222">Note-level preference-margin distribution</text>
-<text x="1440.0" y="62.0" text-anchor="end" font-size="16" font-weight="400" fill="#5E6870">Pooled across four physicians</text>
-<line x1="245.0" y1="95" x2="245.0" y2="230" stroke="#E6E6E6" stroke-dasharray="0"/>
-<text x="245.0" y="258.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">-20%</text>
-<line x1="474.0" y1="95" x2="474.0" y2="230" stroke="#59656D" stroke-dasharray="6 5"/>
-<text x="474.0" y="258.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">0%</text>
-<line x1="703.0" y1="95" x2="703.0" y2="230" stroke="#E6E6E6" stroke-dasharray="0"/>
-<text x="703.0" y="258.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">20%</text>
-<line x1="932.0" y1="95" x2="932.0" y2="230" stroke="#E6E6E6" stroke-dasharray="0"/>
-<text x="932.0" y="258.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">40%</text>
-<line x1="1161.0" y1="95" x2="1161.0" y2="230" stroke="#E6E6E6" stroke-dasharray="0"/>
-<text x="1161.0" y="258.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">60%</text>
-<line x1="1390.0" y1="95" x2="1390.0" y2="230" stroke="#E6E6E6" stroke-dasharray="0"/>
-<text x="1390.0" y="258.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">80%</text>
-<text x="225.0" y="135.0" text-anchor="end" font-size="16" font-weight="700" fill="#222222">Breast cancer</text>
-<text x="1390.0" y="106.0" text-anchor="end" font-size="16" font-weight="700" fill="#0072B2">20/20 positive</text>
-<line x1="245" y1="130" x2="1390" y2="130" stroke="#AEB7BD"/>
-<circle cx="555.8" cy="130.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="576.2" cy="130.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="596.7" cy="130.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="617.1" cy="130.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="637.6" cy="130.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="678.5" cy="130.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="698.9" cy="122.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="698.9" cy="130.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="698.9" cy="138.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="719.4" cy="130.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="739.8" cy="126.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="739.8" cy="134.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="801.1" cy="130.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="862.5" cy="122.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="862.5" cy="130.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="862.5" cy="138.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="903.4" cy="130.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="964.7" cy="130.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="1005.6" cy="130.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="1046.5" cy="130.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<text x="225.0" y="205.0" text-anchor="end" font-size="16" font-weight="700" fill="#222222">PDAC</text>
-<text x="1390.0" y="176.0" text-anchor="end" font-size="16" font-weight="700" fill="#0072B2">19/20 positive; 1 negative</text>
-<line x1="245" y1="200" x2="1390" y2="200" stroke="#AEB7BD"/>
-<circle cx="452.0" cy="200.0" r="5.5" fill="#D55E00" stroke="white" stroke-width="1"/>
-<circle cx="496.0" cy="200.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="584.1" cy="196.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="584.1" cy="204.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="628.1" cy="200.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="650.2" cy="200.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="694.2" cy="196.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="694.2" cy="204.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="716.2" cy="196.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="716.2" cy="204.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="738.2" cy="200.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="760.2" cy="196.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="760.2" cy="204.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="804.3" cy="200.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="826.3" cy="200.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="848.3" cy="200.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="892.4" cy="200.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="958.4" cy="200.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="980.4" cy="200.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<circle cx="1090.5" cy="200.0" r="5.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<text x="750.0" y="288.0" text-anchor="middle" font-size="16" font-weight="400" fill="#5E6870">Normalized note margin</text>
-</g>
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns2="http://creativecommons.org/ns#" xmlns:ns4="http://www.w3.org/1999/xlink" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" width="7.5in" height="1.8in" viewBox="0 0 540 129.6" version="1.1" role="img" aria-labelledby="figure-title figure-description">
+ <title id="figure-title">Note level preference margins</title><desc id="figure-description">Note level preference margins are positive for all 20 breast cancer notes and 19 of 20 PDAC notes; one PDAC note is negative and none are at the reference line. Position, marker direction, and color provide redundant encoding.</desc><metadata>
+  <rdf:RDF>
+   <ns2:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+    <dc:title>Note level preference margins</dc:title>
+    <dc:description>Note level preference margins are positive for all 20 breast cancer notes and 19 of 20 PDAC notes; one PDAC note is negative and none are at the reference line. Position, marker direction, and color provide redundant encoding.</dc:description>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <ns2:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </ns2:Agent>
+    </dc:creator>
+   </ns2:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 129.6  L 540 129.6  L 540 0  L 0 0  z " style="fill: #ffffff" />
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 91.8 88.128  L 526.5 88.128  L 526.5 28.512  L 91.8 28.512  z " style="fill: #ffffff" />
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <path d="M 91.8 88.128  L 91.8 28.512  " clip-path="url(#p45d727ea2d)" style="fill: none; stroke: #e6e6e6; stroke-width: 0.8; stroke-linecap: square" />
+     </g>
+     <g id="line2d_2">
+      <defs>
+       <path id="m5224a1bbbb" d="M 0 0  L 0 3  " style="stroke: #243342; stroke-width: 2" />
+      </defs>
+      <g>
+       <use ns4:href="#m5224a1bbbb" x="91.8" y="88.128" style="fill: #243342; stroke: #243342; stroke-width: 2" />
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #243342" x="91.8" y="100.452219" transform="rotate(-0 91.8 100.452219)">-20%</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_3">
+      <path d="M 178.74 88.128  L 178.74 28.512  " clip-path="url(#p45d727ea2d)" style="fill: none; stroke: #e6e6e6; stroke-width: 0.8; stroke-linecap: square" />
+     </g>
+     <g id="line2d_4">
+      <g>
+       <use ns4:href="#m5224a1bbbb" x="178.74" y="88.128" style="fill: #243342; stroke: #243342; stroke-width: 2" />
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #243342" x="178.74" y="100.452219" transform="rotate(-0 178.74 100.452219)">0%</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_5">
+      <path d="M 265.68 88.128  L 265.68 28.512  " clip-path="url(#p45d727ea2d)" style="fill: none; stroke: #e6e6e6; stroke-width: 0.8; stroke-linecap: square" />
+     </g>
+     <g id="line2d_6">
+      <g>
+       <use ns4:href="#m5224a1bbbb" x="265.68" y="88.128" style="fill: #243342; stroke: #243342; stroke-width: 2" />
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #243342" x="265.68" y="100.452219" transform="rotate(-0 265.68 100.452219)">20%</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_7">
+      <path d="M 352.62 88.128  L 352.62 28.512  " clip-path="url(#p45d727ea2d)" style="fill: none; stroke: #e6e6e6; stroke-width: 0.8; stroke-linecap: square" />
+     </g>
+     <g id="line2d_8">
+      <g>
+       <use ns4:href="#m5224a1bbbb" x="352.62" y="88.128" style="fill: #243342; stroke: #243342; stroke-width: 2" />
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #243342" x="352.62" y="100.452219" transform="rotate(-0 352.62 100.452219)">40%</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_9">
+      <path d="M 439.56 88.128  L 439.56 28.512  " clip-path="url(#p45d727ea2d)" style="fill: none; stroke: #e6e6e6; stroke-width: 0.8; stroke-linecap: square" />
+     </g>
+     <g id="line2d_10">
+      <g>
+       <use ns4:href="#m5224a1bbbb" x="439.56" y="88.128" style="fill: #243342; stroke: #243342; stroke-width: 2" />
+      </g>
+     </g>
+     <g id="text_5">
+      <text style="font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #243342" x="439.56" y="100.452219" transform="rotate(-0 439.56 100.452219)">60%</text>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_11">
+      <path d="M 526.5 88.128  L 526.5 28.512  " clip-path="url(#p45d727ea2d)" style="fill: none; stroke: #e6e6e6; stroke-width: 0.8; stroke-linecap: square" />
+     </g>
+     <g id="line2d_12">
+      <g>
+       <use ns4:href="#m5224a1bbbb" x="526.5" y="88.128" style="fill: #243342; stroke: #243342; stroke-width: 2" />
+      </g>
+     </g>
+     <g id="text_6">
+      <text style="font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #243342" x="526.5" y="100.452219" transform="rotate(-0 526.5 100.452219)">80%</text>
+     </g>
+    </g>
+    <g id="text_7">
+     <text style="font-size: 9px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #243342" x="309.15" y="112.688059" transform="rotate(-0 309.15 112.688059)">Normalized note margin</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_13" />
+     <g id="text_8">
+      <text style="font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #243342" x="88.3" y="35.936182" transform="rotate(-0 88.3 35.936182)">Breast cancer</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_14" />
+     <g id="text_9">
+      <text style="font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #243342" x="88.3" y="87.429164" transform="rotate(-0 88.3 87.429164)">PDAC</text>
+     </g>
+    </g>
+   </g>
+   <g id="line2d_15">
+    <path d="M 178.74 88.128  L 178.74 28.512  " clip-path="url(#p45d727ea2d)" style="fill: none; stroke-dasharray: 3.7,1.6; stroke-dashoffset: 0; stroke: #5f6d78" />
+   </g>
+   <g id="patch_3">
+    <path d="M 91.8 88.128  L 526.5 88.128  " style="fill: none; stroke: #243342; stroke-width: 2; stroke-linejoin: miter; stroke-linecap: square" />
+   </g>
+   <g id="PathCollection_1">
+    <defs>
+     <path id="m5574ae0506" d="M 2.645751 0  L -2.645751 -2.645751  L -2.645751 2.645751  z " style="stroke: #ffffff; stroke-width: 0.6" />
+    </defs>
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="209.79" y="33.024073" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_2">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="217.5525" y="33.024073" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_3">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="225.315" y="33.024073" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_4">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="233.0775" y="33.024073" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_5">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="240.84" y="33.024073" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_6">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="256.365" y="33.024073" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_7">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="264.1275" y="31.221818" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_8">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="264.1275" y="33.024073" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_9">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="264.1275" y="34.826327" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_10">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="271.89" y="33.024073" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_11">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="279.6525" y="32.122945" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_12">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="279.6525" y="33.9252" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_13">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="302.94" y="33.024073" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_14">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="326.2275" y="31.221818" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_15">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="326.2275" y="33.024073" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_16">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="326.2275" y="34.826327" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_17">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="341.7525" y="33.024073" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_18">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="365.04" y="33.024073" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_19">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="380.565" y="33.024073" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_20">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="396.09" y="33.024073" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_21">
+    <defs>
+     <path id="m3f1f0f2110" d="M -2.645751 -0  L 2.645751 2.645751  L 2.645751 -2.645751  z " style="stroke: #ffffff; stroke-width: 0.6" />
+    </defs>
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m3f1f0f2110" x="170.380385" y="84.517055" style="fill: #d55e00; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_22">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="187.099615" y="84.517055" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_23">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="220.538077" y="83.615927" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_24">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="220.538077" y="85.418182" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_25">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="237.257308" y="84.517055" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_26">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="245.616923" y="84.517055" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_27">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="262.336154" y="83.615927" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_28">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="262.336154" y="85.418182" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_29">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="270.695769" y="83.615927" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_30">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="270.695769" y="85.418182" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_31">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="279.055385" y="84.517055" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_32">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="287.415" y="83.615927" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_33">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="287.415" y="85.418182" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_34">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="304.134231" y="84.517055" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_35">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="312.493846" y="84.517055" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_36">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="320.853462" y="84.517055" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_37">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="337.572692" y="84.517055" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_38">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="362.651538" y="84.517055" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_39">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="371.011154" y="84.517055" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="PathCollection_40">
+    <g clip-path="url(#p45d727ea2d)">
+     <use ns4:href="#m5574ae0506" x="412.809231" y="84.517055" style="fill: #0072b2; stroke: #ffffff; stroke-width: 0.6" />
+    </g>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #0072b2" x="522.153" y="35.094385" transform="rotate(-0 522.153 35.094385)">20/20 positive</text>
+   </g>
+   <g id="text_11">
+    <text style="font-weight: 700; font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #0072b2" x="522.153" y="86.587289" transform="rotate(-0 522.153 86.587289)">19/20 positive, 1 negative</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 8px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: end; fill: #5f6d78" x="517.806" y="17.78112" transform="rotate(-0 517.806 17.78112)">Pooled across four physicians</text>
+   </g>
+   <g id="text_13">
+    <text style="font-weight: 700; font-size: 11.5px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #243342" x="91.8" y="18.512" transform="rotate(-0 91.8 18.512)">Note level preference margins</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p45d727ea2d">
+   <rect x="91.8" y="28.512" width="434.7" height="59.616" />
+  </clipPath>
+ </defs>
 </svg>

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deterministic v2.0.1 manuscript and physician-source preservation checks."""
+"""Deterministic v2.1.0 manuscript and physician-source preservation checks."""
 
 from __future__ import annotations
 
@@ -26,8 +26,6 @@ EXPECTED_REVIEW_METADATA = [
     ("author-review-5a", "p < 0.05", "Table 5 已提供 overall estimate 的精确 P 值。", "P = 2.67 × 10⁻²⁸"),
     ("author-review-5b", "p < 0.05", "Table 5 已提供 breast cancer estimate 的精确 P 值。", "P = 7.04 × 10⁻¹⁸"),
     ("author-review-5c", "p < 0.05", "Table 5 已提供 pancreatic cancer estimate 的精确 P 值。", "P = 2.30 × 10⁻¹²"),
-    ("author-review-6", "P < 0.05", "Supplementary Figure S2 已报告 exact sign test 的精确结果。", "P = 1.05 × 10⁻⁵"),
-    ("author-review-7", "significantly affected the LLM judge’s preference", "累计配置比较支持偏好差异，但不能隔离单一步骤的因果效应。", "In the B versus C comparison, the LLM judge preferred verified extraction over decomposed extraction."),
     ("author-review-2d", "one prompt baseline", "系统名称与全文其他位置不一致。", "single-prompt baseline"),
     ("author-review-8", "improve the clinical quality of extracted information", "主要 endpoint 是 physician preference，不是 absolute clinical quality。", "These findings indicate that physicians more often preferred inference harness outputs than same-model baseline outputs."),
     ("author-review-9", "LLM-as-a-judge", "既往研究中的 agreement 会随 rubric、模型和应用场景变化。", "Prior studies have examined LLM-as-a-judge evaluation in clinical generative AI, with agreement varying by rubric and setting (Gershon et al., 2026; Williams et al., 2026)."),
@@ -84,8 +82,8 @@ def main() -> None:
         assert 'aria-describedby="author-review-tooltip"' in attributes
         assert ('data-review-paired="true"' in attributes) == (anchor in EXPECTED_PAIRED)
     assert actual == EXPECTED_REVIEW_METADATA
-    assert len(actual) == 16
-    assert document.count('href="#author-review-list"') == 17
+    assert len(actual) == 14
+    assert document.count('href="#author-review-list"') == 15
     review_list_tag = re.search(r'<details[^>]+id="author-review-list"[^>]*>', document)
     assert review_list_tag and not re.search(r'\sopen(?:\s|>)', review_list_tag.group())
 
@@ -98,10 +96,11 @@ def main() -> None:
         "supplementary-table-s1", "supplementary-table-s2", "supplementary-table-s3",
     }
     assert not parser.visible_comment_ids
+    assert 'id="version-2-1-0"' in document
     assert 'id="version-2-0-1"' in document
     assert 'id="version-2-0"' in document
     assert 'id="version-1-8-1"' in document
-    assert "Version 2.0.1 · November 9, 2026" in document
+    assert "Version 2.1.0 · November 17, 2026" in document
     assert "difference from 50%" not in parser.visible_text.lower()
     assert "fixed position mapping" not in parser.visible_text.lower()
     assert "randomized placement" not in parser.visible_text.lower()
@@ -118,7 +117,7 @@ def main() -> None:
     assert '<p class="physician-paragraph" id="P080"' not in document
     print(
         "V2_VALIDATION_OK "
-        "paragraphs=122 cells=107 comments=9 figures=6 tables=8 underlines=16"
+        "paragraphs=122 cells=107 comments=9 figures=6 tables=8 underlines=14"
     )
 
 

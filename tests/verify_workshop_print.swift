@@ -66,8 +66,6 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
             ['author-review-5a', 'p < 0.05', 'Table 5 已提供 overall estimate 的精确 P 值。', 'P = 2.67 × 10⁻²⁸'],
             ['author-review-5b', 'p < 0.05', 'Table 5 已提供 breast cancer estimate 的精确 P 值。', 'P = 7.04 × 10⁻¹⁸'],
             ['author-review-5c', 'p < 0.05', 'Table 5 已提供 pancreatic cancer estimate 的精确 P 值。', 'P = 2.30 × 10⁻¹²'],
-            ['author-review-6', 'P < 0.05', 'Supplementary Figure S2 已报告 exact sign test 的精确结果。', 'P = 1.05 × 10⁻⁵'],
-            ['author-review-7', 'significantly affected the LLM judge’s preference', '累计配置比较支持偏好差异，但不能隔离单一步骤的因果效应。', 'In the B versus C comparison, the LLM judge preferred verified extraction over decomposed extraction.'],
             ['author-review-2d', 'one prompt baseline', '系统名称与全文其他位置不一致。', 'single-prompt baseline'],
             ['author-review-8', 'improve the clinical quality of extracted information', '主要 endpoint 是 physician preference，不是 absolute clinical quality。', 'These findings indicate that physicians more often preferred inference harness outputs than same-model baseline outputs.'],
             ['author-review-9', 'LLM-as-a-judge', '既往研究中的 agreement 会随 rubric、模型和应用场景变化。', 'Prior studies have examined LLM-as-a-judge evaluation in clinical generative AI, with agreement varying by rubric and setting (Gershon et al., 2026; Williams et al., 2026).'],
@@ -169,7 +167,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           if (!visible() || document.activeElement?.id !== 'figure-s1') return 'nested supplement link did not reveal and focus';
           button.click();
           const history = document.getElementById('version-history');
-          const current = document.getElementById('version-2-0-1');
+          const current = document.getElementById('version-2-1-0');
           const older = [...history.querySelectorAll('.version-entry')].filter(node => node !== current);
           if (history.open || !current?.open || older.some(node => node.open)) return 'unexpected initial version-history state';
           window.__workshopVersionHashState = 'waiting';
@@ -209,7 +207,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
         let checks = #"""
         (() => {
           const history = document.getElementById('version-history');
-          const current = document.getElementById('version-2-0-1');
+          const current = document.getElementById('version-2-1-0');
           const prior = document.getElementById('version-2-0');
           const older = [...history.querySelectorAll('.version-entry')].filter(node => node !== current);
           if (location.hash !== '#version-2-0' || !history.open || current.open || !prior.open || older.some(node => node !== prior && node.open) || document.activeElement !== prior) {
@@ -337,8 +335,8 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
                 self.fail("Invalid print-preparation report"); return
             }
             guard offenders.isEmpty else { self.fail("Page-boundary offenders: \(offenders)"); return }
-            guard v2PrintContent else { self.fail("v2.0.1 Discussion text is missing from print export"); return }
-            guard authorUnderlineCount == 16 else { self.fail("Author review underline count changed in print export: \(authorUnderlineCount)"); return }
+            guard v2PrintContent else { self.fail("v2.1.0 Discussion text is missing from print export"); return }
+            guard authorUnderlineCount == 14 else { self.fail("Author review underline count changed in print export: \(authorUnderlineCount)"); return }
             guard tooltipPrintHidden else { self.fail("Author review tooltip remains visible in print export"); return }
             guard highlightCount == 0, highlightBackgrounds.isEmpty, highlightPrintStyles.isEmpty else {
                 self.fail("Legacy yellow revision marks remain in print export"); return

@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" version="1.1" viewBox="0 0 3000 2200">
+  <!-- Generator: Adobe Illustrator 29.3.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 146)  -->
+  <defs>
+    <style>
+      .st0, .st1, .st2, .st3, .st4, .st5, .st6 {
+        isolation: isolate;
+      }
+
+      .st0, .st1, .st2, .st3, .st5, .st6 {
+        font-family: Arial-BoldMT, Arial;
+        font-weight: 700;
+      }
+
+      .st0, .st7, .st5 {
+        fill: #fff;
+      }
+
+      .st0, .st4 {
+        font-size: 40px;
+      }
+
+      .st8 {
+        stroke: #a69ac2;
+      }
+
+      .st8, .st9, .st10, .st11, .st12, .st13, .st14, .st15, .st16, .st17, .st18, .st19, .st20 {
+        stroke-miterlimit: 8;
+      }
+
+      .st8, .st10 {
+        fill: #f2eef8;
+      }
+
+      .st8, .st16, .st17 {
+        stroke-width: 3.2px;
+      }
+
+      .st9 {
+        fill: #f1edf8;
+      }
+
+      .st9, .st10, .st20 {
+        stroke: #7a5fa8;
+      }
+
+      .st9, .st11, .st12, .st13, .st14, .st18, .st19, .st20 {
+        stroke-width: 4px;
+      }
+
+      .st21 {
+        fill: #7a5fa8;
+      }
+
+      .st22 {
+        fill: #d55e00;
+      }
+
+      .st10 {
+        stroke-width: 3.6px;
+      }
+
+      .st23 {
+        fill: #009e73;
+      }
+
+      .st1 {
+        font-size: 50px;
+      }
+
+      .st1, .st2, .st3, .st6 {
+        fill: #24313b;
+      }
+
+      .st2 {
+        font-size: 44px;
+      }
+
+      .st11 {
+        fill: #e7f5ef;
+      }
+
+      .st11, .st13 {
+        stroke: #009e73;
+      }
+
+      .st3 {
+        font-size: 48px;
+      }
+
+      .st12 {
+        fill: #e8f3fb;
+      }
+
+      .st12, .st14 {
+        stroke: #0072b2;
+      }
+
+      .st13 {
+        fill: #e8f5f0;
+      }
+
+      .st14 {
+        fill: #e5f2fa;
+      }
+
+      .st4 {
+        fill: #4f626f;
+        font-family: ArialMT, Arial;
+      }
+
+      .st15 {
+        fill: #f0f3f5;
+        stroke: #9daeb9;
+        stroke-width: 3.4px;
+      }
+
+      .st24 {
+        fill: #243946;
+      }
+
+      .st16 {
+        fill: #f3f5f6;
+        stroke: #9eadb7;
+      }
+
+      .st25 {
+        fill: #0072b2;
+      }
+
+      .st17 {
+        fill: #edf4f8;
+        stroke: #8ba9bc;
+      }
+
+      .st18 {
+        fill: #fcf0e9;
+        stroke: #d55e00;
+      }
+
+      .st5, .st6 {
+        font-size: 42px;
+      }
+
+      .st19 {
+        fill: #fbfcfd;
+        stroke: #d9e1e7;
+      }
+
+      .st26 {
+        fill: #6c7c88;
+      }
+
+      .st20 {
+        fill: #f1ecf8;
+      }
+    </style>
+  </defs>
+  <rect class="st7" width="3000" height="2200"/>
+  <g>
+    <g id="data-partitions" inkscape:groupmode="layer" inkscape:label="A - Study datasets">
+      <rect class="st19" x="60" y="50" width="2880" height="364" rx="30" ry="30"/>
+      <circle class="st24" cx="118" cy="124" r="34"/>
+      <text class="st5" transform="translate(102.8 138)"><tspan x="0" y="0">A</tspan></text>
+      <text class="st1" transform="translate(182 140)"><tspan x="0" y="0">Study datasets</tspan></text>
+      <rect class="st17" x="152" y="188" width="810" height="162" rx="22" ry="22"/>
+      <text class="st2" transform="translate(269.7 256)"><tspan x="0" y="0">Breast cancer development</tspan></text>
+      <text class="st4" transform="translate(469.1 312)"><tspan x="0" y="0">100 notes</tspan></text>
+      <rect class="st8" x="1096" y="188" width="810" height="162" rx="22" ry="22"/>
+      <text class="st2" transform="translate(1321.3 256)"><tspan x="0" y="0">PDAC adaptation</tspan></text>
+      <text class="st4" transform="translate(1413.1 312)"><tspan x="0" y="0">100 notes</tspan></text>
+      <rect class="st16" x="2040" y="188" width="810" height="162" rx="22" ry="22"/>
+      <text class="st2" transform="translate(2281.2 256)"><tspan x="0" y="0">Locked holdout</tspan></text>
+      <text class="st4" transform="translate(2201 312)"><tspan x="0" y="0">20 breast + 20 PDAC notes</tspan></text>
+      <g id="dataset-arrow-1">
+        <rect class="st26" x="980" y="266.2" width="70" height="5.6"/>
+        <polygon class="st26" points="1044 250 1078 269 1044 288 1044 250"/>
+      </g>
+      <g id="dataset-arrow-2">
+        <rect class="st26" x="1924" y="266.2" width="70" height="5.6"/>
+        <polygon class="st26" points="1988 250 2022 269 1988 288 1988 250"/>
+      </g>
+    </g>
+    <g id="breast-development" inkscape:groupmode="layer" inkscape:label="B - Breast development">
+      <rect class="st19" x="60" y="476" width="1400" height="878" rx="30" ry="30"/>
+      <circle class="st24" cx="118" cy="550" r="34"/>
+      <text class="st5" transform="translate(102.8 564)"><tspan x="0" y="0">B</tspan></text>
+      <text class="st3" transform="translate(182 566)"><tspan x="0" y="0">Breast cancer harness development</tspan></text>
+      <rect class="st14" x="240" y="624" width="1040" height="150" rx="22" ry="22"/>
+      <text class="st2" transform="translate(463 714)"><tspan x="0" y="0">Generate structured outputs</tspan></text>
+      <g id="breast-arrow-1">
+        <rect class="st25" x="757.2" y="778" width="5.6" height="68"/>
+        <polygon class="st25" points="740 838 780 838 760 872 740 838"/>
+      </g>
+      <rect class="st13" x="240" y="888" width="1040" height="150" rx="22" ry="22"/>
+      <text class="st2" transform="translate(374.9 978)"><tspan x="0" y="0">Physician review of selected outputs</tspan></text>
+      <g id="breast-arrow-2">
+        <rect class="st26" x="757.2" y="1042" width="5.6" height="68"/>
+        <polygon class="st26" points="740 1102 780 1102 760 1136 740 1102"/>
+      </g>
+      <rect class="st14" x="240" y="1152" width="1040" height="150" rx="22" ry="22"/>
+      <text class="st2" transform="translate(417.7 1242)"><tspan x="0" y="0">Error-guided harness refinement</tspan></text>
+    </g>
+    <g id="pdac-adaptation" inkscape:groupmode="layer" inkscape:label="C - PDAC adaptation">
+      <rect class="st19" x="1540" y="476" width="1400" height="878" rx="30" ry="30"/>
+      <circle class="st24" cx="1598" cy="550" r="34"/>
+      <text class="st5" transform="translate(1582.8 564)"><tspan x="0" y="0">C</tspan></text>
+      <text class="st3" transform="translate(1662 566)"><tspan x="0" y="0">LLM-assisted PDAC adaptation</tspan></text>
+      <rect class="st14" x="1720" y="624" width="1040" height="150" rx="22" ry="22"/>
+      <text class="st2" transform="translate(1905 714)"><tspan x="0" y="0">Transfer breast-derived harness</tspan></text>
+      <g id="pdac-arrow-1">
+        <rect class="st25" x="2237.2" y="778" width="5.6" height="68"/>
+        <polygon class="st25" points="2220 838 2260 838 2240 872 2220 838"/>
+      </g>
+      <rect class="st20" x="1720" y="888" width="1040" height="150" rx="22" ry="22"/>
+      <text class="st2" transform="translate(1967.3 978)"><tspan x="0" y="0">LLM-assisted error review</tspan></text>
+      <g id="pdac-arrow-2">
+        <rect class="st21" x="2237.2" y="1042" width="5.6" height="68"/>
+        <polygon class="st21" points="2220 1102 2260 1102 2240 1136 2220 1102"/>
+      </g>
+      <rect class="st14" x="1720" y="1152" width="1040" height="150" rx="22" ry="22"/>
+      <text class="st2" transform="translate(1879.3 1242)"><tspan x="0" y="0">PDAC-specific harness refinement</tspan></text>
+    </g>
+    <rect class="st19" x="60" y="1416" width="2880" height="716" rx="30" ry="30"/>
+    <circle class="st24" cx="118" cy="1490" r="34"/>
+    <text class="st5" transform="translate(102.8 1504)"><tspan x="0" y="0">D</tspan></text>
+    <text class="st1" transform="translate(182 1506)"><tspan x="0" y="0">Ablation study</tspan></text>
+    <rect class="st15" x="660" y="1552" width="1680" height="94" rx="20" ry="20"/>
+    <text class="st6" transform="translate(1077.6 1614)"><tspan x="0" y="0">40 locked holdout notes · 4 configurations</tspan></text>
+    <rect class="st18" x="128" y="1694" width="620" height="222" rx="24" ry="24"/>
+    <path class="st22" d="M152,1694h572c16,0,24,8,24,24v50H128v-50c0-16,8-24,24-24Z"/>
+    <text class="st0" transform="translate(325.4 1748)"><tspan x="0" y="0">Condition A</tspan></text>
+    <text class="st2" transform="translate(290.1 1854)"><tspan x="0" y="0">Single prompt</tspan></text>
+    <rect class="st12" x="836" y="1694" width="620" height="222" rx="24" ry="24"/>
+    <path class="st25" d="M860,1694h572c16,0,24,8,24,24v50h-620v-50c0-16,8-24,24-24Z"/>
+    <text class="st0" transform="translate(1032.7 1748)"><tspan x="0" y="0">Condition B</tspan></text>
+    <text class="st2" transform="translate(932.1 1854)"><tspan x="0" y="0">Field decomposition</tspan></text>
+    <rect class="st9" x="1544" y="1694" width="620" height="222" rx="24" ry="24"/>
+    <path class="st21" d="M1568,1694h572c16,0,24,8,24,24v50h-620v-50c0-16,8-24,24-24Z"/>
+    <text class="st0" transform="translate(1740.7 1748)"><tspan x="0" y="0">Condition C</tspan></text>
+    <text class="st6" transform="translate(1641.9 1854)"><tspan x="0" y="0">B + Verification gates</tspan></text>
+    <rect class="st11" x="2252" y="1694" width="620" height="222" rx="24" ry="24"/>
+    <path class="st23" d="M2276,1694h572c16,0,24,8,24,24v50h-620v-50c0-16,8-24,24-24Z"/>
+    <text class="st0" transform="translate(2448.7 1748)"><tspan x="0" y="0">Condition D</tspan></text>
+    <text class="st6" transform="translate(2356.8 1844.9)"><tspan x="0" y="0">C + Deterministic rules</tspan></text>
+    <rect class="st26" x="758" y="1805.2" width="40" height="5.6"/>
+    <polygon class="st26" points="792 1790 820 1808 792 1826 792 1790"/>
+    <rect class="st26" x="1466" y="1805.2" width="40" height="5.6"/>
+    <polygon class="st26" points="1500 1790 1528 1808 1500 1826 1500 1790"/>
+    <rect class="st26" x="2174" y="1805.2" width="40" height="5.6"/>
+    <polygon class="st26" points="2208 1790 2236 1808 2208 1826 2208 1790"/>
+    <rect class="st10" x="552.3" y="1999" width="1896" height="107.4" rx="22" ry="22"/>
+    <text class="st6" transform="translate(1180.6 2061)"><tspan x="0" y="0">Blinded LLM pairwise comparison</tspan></text>
+    <g>
+      <rect class="st26" x="1477.5" y="1940.8" width="40" height="5.6" transform="translate(3441.2 446.1) rotate(90)"/>
+      <polygon class="st26" points="1515.5 1957.6 1497.5 1985.6 1479.5 1957.6 1515.5 1957.6"/>
+    </g>
+  </g>
+</svg>
