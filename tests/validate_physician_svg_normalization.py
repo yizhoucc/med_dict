@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check that v2.2.1 preserves the six physician SVG layouts exactly."""
+"""Check that v2.3.0 preserves the six physician SVG layouts exactly."""
 
 from __future__ import annotations
 
@@ -97,6 +97,8 @@ def main() -> None:
         normalizer.NEUTRAL_TINT,
         normalizer.PANEL_FILL,
     ) == ("#EAF0F4", "#F8EFEC", "#EDF3F1", "#F1F0F4", "#F2F3F4", "#FAFAFB")
+    assert normalizer.HEATMAP_LIGHT == normalizer.HARNESS_TINT == "#EAF0F4"
+    assert normalizer.HEATMAP_DARK == normalizer.HARNESS == "#2F6690"
     manifest = {
         name: digest
         for digest, name in (
@@ -189,6 +191,10 @@ def main() -> None:
     assert "lollipop" not in output_svgs[1].decode("utf-8").lower()
 
     f3_root = ET.fromstring(output_svgs[2])
+    f3_description = f3_root.find(f"{namespace}desc")
+    assert f3_description is not None
+    assert "continuous blue scale" in (f3_description.text or "")
+    assert "continuous green scale" not in (f3_description.text or "")
     heatmap_scale = [
         node.attrib["fill"].upper()
         for node in f3_root.findall(f".//{namespace}rect")
@@ -203,6 +209,14 @@ def main() -> None:
         )
         for index in range(100)
     ]
+    assert heatmap_scale[0] == "#EAF0F4"
+    assert heatmap_scale[-1] == "#2F6690"
+    assert normalizer.PHYSICIAN not in heatmap_scale
+    figure3_visible_svg = output_svgs[2].decode("utf-8").split("</defs>", 1)[1]
+    assert normalizer.PHYSICIAN not in figure3_visible_svg
+    assert "#EDF5F1" not in figure3_visible_svg
+    for figure_index in (1, 3):
+        assert normalizer.PHYSICIAN not in output_svgs[figure_index].decode("utf-8")
 
     combined = b"\n".join(output_svgs).decode("utf-8").upper()
     for color in [

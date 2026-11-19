@@ -1,4 +1,4 @@
-# v2.2.1 physician prose preservation ledger
+# v2.3.0 physician prose preservation ledger
 
 - Source DOCX: `202601102_Manuscript_JAMA.docx`
 - Source SHA-256: `780e6238f003f97a375b63fdd5d020108a4ef50c1e80f4f0f1b70209fbf1ab39`
@@ -18,7 +18,7 @@
 | P005 | Canonical source audit | Empty Word paragraph; not displayed. |
 | P006 | Visible manuscript prose | Applied the four approved grammar and punctuation fixes and restored the Kong, Wiest, and Rule citation links. |
 | P007 | Canonical source audit | Empty Word paragraph; not displayed. |
-| P008 | Visible manuscript prose | Prose is unchanged; existing author-year citations are rendered as verified links. |
+| P008 | Visible manuscript prose | Reframed the review burden as study motivation, bounded the commercial-model comparison to CORAL, removed the unsupported HIPAA-specific claim, and aligned citations with each source. |
 | P009 | Canonical source audit | Empty Word paragraph; not displayed. |
 | P010 | Visible manuscript prose | Prose is unchanged; the Huang and Hein citations are rendered as verified links. |
 | P011 | Canonical source audit | Empty Word paragraph; not displayed. |

@@ -112,12 +112,14 @@ REVISED_HEADINGS: dict[str, str] = {}
 
 REVISED_PARAGRAPHS = {
     "P004": "Large language models (LLMs) are increasingly used for clinical documentation, patient communication, and administrative tasks. Many of these applications depend on identifying relevant information in electronic health record (EHR) notes before those facts can be summarized, analyzed, or used in another task. Reliable extraction from those notes is therefore an important step for many uses of LLMs in oncology care and research. This study focuses on that extraction task.",
-    "P006": "It is estimated that 80% of clinical data in EHR exist in unstructured form ([[cite:kong]]), with a large proportion of clinically relevant information encoded in free-text narratives ([[cite:wiest]]). Oncology notes are particularly challenging because a patient can have a complex medical history that contains multiple diagnoses, prior and future treatments, and changes in disease status. Key information may be distributed across different sections, expressed with uncertainty, linked through complex timelines, or even documented incorrectly. As commonly seen in real-world practice, laboratory, imaging, and genomic results copied from earlier notes lengthen notes and further complicate the extraction task. A study of outpatient documentation across a decade found that notes became longer and more redundant, with much of the increase attributable to templates or copied and pasted text ([[cite:rule]]). LLMs must therefore not only identify the relevant information, but also determine its relationship to the patient’s current diseases.",
-    "P008": "LLMs can extract information from clinical notes, but their outputs can vary. They may omit details, confuse past findings with current findings, or add information that is not supported by the original note ([[cite:sushil]]; [[cite:huang]]). A reviewer may be able to identify these errors, but checking every field in every output can approach the cost of manual extraction. Commercial models perform better on some clinical extraction tasks, but sending protected health information (PHI) to externally hosted services raises privacy and governance concerns, including HIPAA compliance ([[cite:huang]]; [[cite:wiest]]). Local deployment avoids external transfer of PHI, but local models can still produce unstable or incorrect extractions ([[cite:wiest]]). A useful clinical workflow must therefore improve reliability without depending on external processing or case by case manual review.",
+    "P006": "It is estimated that about 80% of healthcare data are unstructured ([[cite:kong]]), with a large proportion of clinically relevant information encoded in free-text narratives ([[cite:wiest]]). Oncology notes are particularly challenging because a patient can have a complex medical history that contains multiple diagnoses, prior and future treatments, and changes in disease status. Key information may be distributed across different sections, expressed with uncertainty, linked through complex timelines, or even documented incorrectly. As commonly seen in real-world practice, laboratory, imaging, and genomic results copied from earlier notes lengthen notes and further complicate the extraction task. A study of outpatient documentation across a decade found that notes became longer and more redundant, with much of the increase attributable to templates or copied and pasted text ([[cite:rule]]). LLMs must therefore not only identify the relevant information, but also determine its relationship to the patient’s current diseases.",
+    "P008": "LLMs can extract information from clinical notes, but their outputs can vary. They may omit details, confuse past findings with current findings, or add information that is not supported by the original note ([[cite:sushil]]; [[cite:huang]]). Reviewing every extracted field may be impractical in routine use, which motivated the verification steps in this workflow. In the CORAL benchmark, commercial models outperformed the open model evaluated in that study ([[cite:sushil]]). Sending protected health information (PHI) to externally hosted services raises privacy and governance concerns ([[cite:wiest]]). Local deployment can keep PHI within the institution, but it does not by itself ensure accurate extraction. A useful clinical workflow must therefore improve reliability without depending on external processing or case by case manual review.",
     "P010": "How an LLM is used may be as important as the model itself. Additional training can adapt model weights to a clinical task. When the weights are unchanged, prompt design, task decomposition, verification, and clinical rules can organize the extraction process. Huang et al. iteratively refined prompts on expert curated lung pathology data and later applied the same prompt engineering strategy to osteosarcoma reports. Hein et al. used a human in the loop process to refine prompts, output schemas, and an error ontology, then applied the resulting templates to breast and prostate pathology reports ([[cite:huang]]; [[cite:hein]]). These studies focused on pathology reports and prompt or schema refinement. It remains unclear whether a broader multistep workflow developed from physician feedback can be used to improve note extraction.",
     "P012": "To address this gap, we built a locally deployable inference harness around a frozen LLM for extracting information from real-world unstructured oncology notes. The harness divides extraction into smaller tasks and applies checks and clinical rules without changing the model weights. We developed the breast cancer harness with physician input. We then adapted it to pancreatic ductal adenocarcinoma (PDAC) notes using LLM-assisted review and regression tests without physician review of the PDAC development outputs. Four physicians compared the final harness with a one prompt baseline that used the same model. Our results showed that the output from the harness was favored over that from a single-prompt baseline.",
     "P017": "The study comprised two development stages followed by an independent physician evaluation. In Stage 1, a physician and an investigator developed the breast cancer inference harness through review of selected outputs. In Stage 2, the investigator adapted the harness to pancreatic ductal adenocarcinoma (PDAC) using LLM review and regression tests, without physician review of the PDAC development outputs (Figure 1A-C). Four physicians then compared the final systems on an untouched holdout set.",
     "P021": "We separately conducted an ablation study of four cumulative harness configurations using an OpenAI LLM judge (Figure 1D; Table 2).",
+    "P024": "We used CORAL, a PhysioNet dataset of deidentified medical oncology notes obtained from the University of California, San Francisco ([[cite:sushil]]; [[cite:coral_dataset]]). The development process used 100 unannotated breast cancer notes and 100 unannotated pancreatic cancer notes. A separate untouched holdout set of 40 notes annotated by experts consisted of 20 breast cancer notes and 20 PDAC notes. The holdout note texts were not used for development. The annotations were not provided to the model or used during development, and they were not used to calculate the primary endpoint based on physician preference. They were not shown to the physicians in the evaluation interface.",
+    "P027": "We used Qwen2.5-32B-Instruct ([[cite:qwen]]) with AWQ quantization, served locally through vLLM. The baseline used the complete note and all extraction questions in one prompt and requested the full target schema in one response. Each note was processed in one chat completion request. This describes the application-level request and does not make a claim about internal server execution or forward passes. In the physician review, the baseline and harness used the same field definitions and output contract.",
     "P063": "For the physician evaluation, interrater agreement was assessed pairwise using exact agreement and Cohen’s κ for each physician pair. Results from the 8 completed physician-by-cancer evaluations were summarized separately. Pooled counts were reported descriptively and were not treated as independent field-level observations.",
     "P067": "The primary outcome was the adjusted probability of harness preference among directional judgments. Predicted probabilities were standardized over the observed covariate distribution, and 95% confidence intervals (CIs) were calculated using the delta method on the logit scale. Adjusted odds ratios (ORs) were reported as secondary measures.",
     "P077": "For breast cancer notes, all four physicians independently favored the harness on the breast cancer set. Their pooled breast result was 363 harness preferences, 80 baseline preferences, and 677 ties. The first physician's result by note was 18 harness wins, one baseline win, and one tie. The second and third physicians each recorded a harness win in all 20 notes. The fourth recorded 16 harness wins, two baseline wins, and two ties. When the four breast evaluations were combined within each note, all 20 notes had a positive difference between harness and baseline preferences (Supplementary Figure S1).",
@@ -127,10 +129,10 @@ REVISED_PARAGRAPHS = {
     "P099": "A separate technical ablation comprised 120 adjacent comparisons across the same 40 notes. A single nonphysician LLM judge, blinded to configuration identity, evaluated the comparisons. The four configurations are defined in Table 2. The A to B comparison yielded 17 preferences for each configuration and 6 ties (P = 1.000). The B to C comparison yielded 24 preferences for verified extraction and 2 for decomposed extraction, with 14 ties (P = 1.05 × 10⁻⁵). The C to D comparison yielded 19 preferences for verified extraction and 16 for the full harness, with 5 ties (P = .736). The three unadjusted two sided exact sign tests excluded ties. See Supplementary Figure S2 for the full roadmap.",
     "P104": "In this study, the inference harness was preferred over a one prompt baseline using the same underlying LLM. This advantage was observed in both breast and pancreatic cancer and remained consistent in sensitivity analyses. These findings suggest that a structured inference harness can improve the clinical quality of extracted information without additional model training. The note level results also indicate that the observed preference was not driven by a small number of clinical notes.",
     "P106": "Structured extraction can convert long, complex, free-text notes into a compact set of fields that can be checked, searched, and reused downstream. In oncology, this is useful as clinical notes can be complex and contain multiple diagnoses, prior and future treatments, and changes in disease status. Prior studies have demonstrated the potential of LLMs for extracting structured information from clinical notes. However, the CORAL study showed that advanced, commercialized models could have omissions or could generate unsupported findings ([[cite:sushil]]). [[cite:huang_named]] demonstrated that iterative prompt engineering with ChatGPT using an API could improve extraction of free-text pathology notes. Similarly, [[cite:hein_named]] showed that iterative refinement guided by physicians and systematic error analysis could improve structured extraction and could be adapted to other cancer types.",
-    "P108": "Our study built on these studies by using physician feedback to identify recurring errors and develop clinical rules during breast cancer note development. Rather than producing a large, supervised training set, we used the feedback to develop prompts for each field, verification steps, and clinical rules. This approach incorporated physician knowledge into the inference harness for reuse in subsequent extraction tasks. Instead of asking physicians to perform iterative evaluation, we used ChatGPT to organize the established criteria from breast cancer development, and used Qwen2.5-32B as a judge. LLM-as-a-judge has been reported in prior studies, which showed high concordance on text-comparison rubrics such as faithfulness and completeness ([[cite:gershon]]; [[cite:williams]]). The final harness was preferred over the baseline by independent physicians in pancreatic cancer. This finding suggests that criteria established through physician feedback may be transferable to other cancer types and may reduce the need for repeated physician review during development.",
+    "P108": "Our study built on these studies by using physician feedback to identify recurring errors and develop clinical rules during breast cancer note development. Rather than producing a large, supervised training set, we used the feedback to develop prompts for each field, verification steps, and clinical rules. This approach incorporated physician knowledge into the inference harness for reuse in subsequent extraction tasks. Instead of asking physicians to perform iterative evaluation, we used ChatGPT to organize the established criteria from breast cancer development, and used Qwen2.5-32B as a judge. Prior studies have examined LLM-as-a-judge evaluation in clinical generative AI, with agreement varying by rubric and setting ([[cite:gershon]]; [[cite:williams]]). The final harness was preferred over the baseline by independent physicians in pancreatic cancer. This finding suggests that criteria established through physician feedback may be transferable to other cancer types and may reduce the need for repeated physician review during development.",
     "P110": "One recurring challenge we identified was the interpretation of temporal relationships in oncology notes, as reported by prior studies ([[cite:kruse]]; [[cite:kougia]]). Although the LLM could identify treatment responses documented in the clinical history, it sometimes failed to associate them with the correct disease status. For example, a response to a previous treatment could be incorrectly attributed to the current regimen. This was particularly important for patients who had received multiple lines of therapy, where each treatment response must be associated with treatment history. To reduce this risk, we first revised the prompt to instruct the model to distinguish evidence recorded before and after a regimen change. Beyond the prompt, the response extraction step used the complete note together with structured context on current medications and recent treatment changes. The extracted response then underwent semantic and source support checks. These temporal controls were embedded across the prompt, structured context, and downstream checks, which made their independent contribution difficult to isolate. The physician ratings therefore support the complete workflow but do not determine how much of the observed preference came from the temporal controls alone.",
     "P112": "Our ablation analysis suggested that verification was an important component of the inference harness (Supplementary Figure S2). Adding decomposed extraction alone did not produce an overall improvement while adding layers of verification gates resulted in significantly more favorable evaluations. Additionally, we found that the clinical rules developed from breast cancer did not provide further improvement for pancreatic cancer. This suggests that restrictive rules that performed well in one cancer type may not improve performance in another. More restrictive rules may introduce tradeoffs, especially when the terminology or treatment differs between cancer types. For example, some rules developed for breast cancer were specific to estrogen receptor (ER), progesterone receptor (PR), and HER2 status, which are used to classify breast cancer subtypes but are not applicable to PDAC.",
-    "P114": "This study has several limitations. First, our primary outcome was physician preference rather than absolute extraction accuracy. A tie could indicate that both systems produced acceptable outputs or that both contained errors. Although physician ratings consistently favored the harness, the evaluation included only four physicians and 40 clinical notes from two cancer types within a dataset from a single source. It is worth noting that these notes were real clinical notes rather than synthetic cases or narratives generated by models. They contain repeated information copied from earlier notes, uncertain findings, treatment plans, or even typographical errors that make the extraction task challenging. Nevertheless, further studies are needed to investigate whether the results can be generalized to other cancer types or language models. The observed preference consistently favored the complete harness output as presented in both cancer types and sensitivity analyses. The current design cannot separate the effects of extraction quality, the surrounding workflow, source attribution, and display position. Second, the exploratory ablation was evaluated by a single LLM judge that was not a physician and compared cumulative stages rather than individual components. Therefore, it could not determine the independent contribution of each verification step or clinical rule. Future studies should evaluate extraction accuracy against expert reference standards, include larger and more diverse clinical datasets, and assess the generalizability of the harness across different open-weight models.",
+    "P114": "This study has several limitations. First, our primary outcome was physician preference rather than absolute extraction accuracy. A tie could indicate that both systems produced acceptable outputs or that both contained errors. Although physician ratings consistently favored the harness, the evaluation included only four physicians and 40 clinical notes from two cancer types within a dataset from a single source. It is worth noting that these notes were real clinical notes rather than synthetic cases or narratives generated by models. They contain repeated information copied from earlier notes, uncertain findings, treatment plans, or even typographical errors that make the extraction task challenging. Nevertheless, further studies are needed to investigate whether the results can be generalized to other cancer types or language models. The observed preference consistently favored the complete harness output as presented in both cancer types and sensitivity analyses. The current design cannot separate the effects of extraction quality, the surrounding workflow, source attribution, and display position. Second, the exploratory ablation was evaluated by a single LLM judge that was not a physician and compared cumulative stages rather than individual components. Therefore, it could not determine the independent contribution of each verification step or clinical rule. Future studies should follow reporting guidance for model and evaluation procedures ([[cite:tripod]]), use structured approaches to human evaluation ([[cite:quest]]), and evaluate extraction accuracy against expert reference standards ([[cite:valid]]). Larger and more diverse clinical datasets are also needed to assess whether the harness generalizes across open-weight models.",
 }
 
 
@@ -290,7 +292,7 @@ EXPECTED_V180_SUPPLEMENT_SHA256 = "13492a199535133aacb87d878627d78653f454eac04c3
 EXPECTED_V180_P109_TEXT_SHA256 = "ef2a49bc6b7e82351ce18b84d7474fe1f537822b17aa3ee9996b05dafe7030f3"
 EXPECTED_V181_VISIBLE_MANUSCRIPT_TEXT_SHA256 = "1233212fc75362d570651f4beee1c3d139d6533da95584c41dfd3d3139ecf2da"
 EXPECTED_V181_P109_TEXT_SHA256 = "6713da1cfc322cc59d62e8e625c5321b0adc21ec0c2c19b778100ae5672cc0df"
-EXPECTED_V200_MANUSCRIPT_BLOCK_TEXT_SHA256 = "ca3443dc074ae326666d462525a6fe4737acea85227e23014ce3a942527bb778"
+EXPECTED_V200_MANUSCRIPT_BLOCK_TEXT_SHA256 = "481c3601f916e269cca7cd1027053b965a8438a84ca2b956e4d710e1ee7fbd58"
 EXPECTED_CANONICAL_SHA256 = "8b9a152d06791ca4e073ca42fa8641789229e287f7b2518b5d0661fa7f08cbf5"
 
 
@@ -320,9 +322,10 @@ MANUAL_FOCUS_PHRASES = {
     "P004": ["focuses on that extraction task"],
     "P008": [
         "outputs can vary",
-        "checking every field in every output can approach the cost of manual extraction",
+        "Reviewing every extracted field may be impractical in routine use",
+        "In the CORAL benchmark, commercial models outperformed the open model evaluated in that study",
         "privacy and governance concerns",
-        "local models can still produce unstable or incorrect extractions",
+        "Local deployment can keep PHI within the institution, but it does not by itself ensure accurate extraction",
     ],
     "P010": [
         "Additional training can adapt model weights",
@@ -473,6 +476,15 @@ XREF_TARGETS = {
 }
 
 AUTHOR_REVIEW_SPECS: dict[str, list[tuple[str, str, str, str]]] = {
+    "P006": [
+        ("author-review-12", "about 80% of healthcare data are unstructured", "Kong 支持的是 healthcare data 的约 80% 估计，不是更窄的 EHR clinical data 精确比例。", 'Original: "80% of clinical data in EHR exist in unstructured form." Revised: "about 80% of healthcare data are unstructured."'),
+    ],
+    "P008": [
+        ("author-review-13a", "Reviewing every extracted field may be impractical in routine use, which motivated the verification steps in this workflow.", "原句把逐字段核查成本与人工抽取成本相比，现有研究没有提供这一成本比较。", 'Original: "checking every field in every output can approach the cost of manual extraction." Revised: "Reviewing every extracted field may be impractical in routine use, which motivated the verification steps in this workflow."'),
+        ("author-review-13b", "In the CORAL benchmark, commercial models outperformed the open model evaluated in that study", "CORAL 支持该研究内部的模型比较，不支持笼统声称 commercial models 在临床抽取中普遍更好。", 'Original: "Commercial models perform better on some clinical extraction tasks." Revised: "In the CORAL benchmark, commercial models outperformed the open model evaluated in that study."'),
+        ("author-review-13c", "raises privacy and governance concerns", "现有引用没有直接建立 HIPAA-specific compliance 结论，因此只删除该限定语。", 'Original: "raises privacy and governance concerns, including HIPAA compliance." Revised: "raises privacy and governance concerns."'),
+        ("author-review-13d", "Local deployment can keep PHI within the institution, but it does not by itself ensure accurate extraction.", "Wiest 支持本地处理的 privacy 逻辑；accuracy 仍需要单独验证，不能由部署位置推定。", 'Original: "Local deployment avoids external transfer of PHI, but local models can still produce unstable or incorrect extractions." Revised: "Local deployment can keep PHI within the institution, but it does not by itself ensure accurate extraction."'),
+    ],
     "P010": [
         ("author-review-1", "a broader multistep workflow developed from physician feedback can be used to improve note extraction", "研究缺口可以更具体地对应跨癌种适应过程。", "We therefore examined whether a multistep workflow refined with physician feedback on breast cancer notes could be adapted to longitudinal PDAC notes without physician review during PDAC development."),
     ],
@@ -482,6 +494,9 @@ AUTHOR_REVIEW_SPECS: dict[str, list[tuple[str, str, str, str]]] = {
     ],
     "P019": [
         ("author-review-2c", "one prompt baseline", "系统名称与全文其他位置不一致。", "single-prompt baseline"),
+    ],
+    "P027": [
+        ("author-review-14", "with AWQ quantization, served locally through vLLM", "Qwen technical report 支持模型家族；AWQ quantization 和 vLLM 是本研究的实现配置。", 'Original: "Qwen2.5-32B-Instruct-AWQ served locally through vLLM (Qwen et al., 2025)." Revised: "Qwen2.5-32B-Instruct (Qwen et al., 2025) with AWQ quantization, served locally through vLLM."'),
     ],
     "P065": [
         ("author-review-3", "population-averaged logistic generalized estimating equation (GEE) with an exchangeable working correlation structure at the note level", "当前句子重复说明 note-level correlation 和 clustering。", "population-averaged logistic GEE with an exchangeable working correlation"),
@@ -497,11 +512,17 @@ AUTHOR_REVIEW_SPECS: dict[str, list[tuple[str, str, str, str]]] = {
         ("author-review-8", "improve the clinical quality of extracted information", "主要 endpoint 是 physician preference，不是 absolute clinical quality。", "These findings indicate that physicians more often preferred inference harness outputs than same-model baseline outputs."),
     ],
     "P108": [
-        ("author-review-9", "LLM-as-a-judge", "既往研究中的 agreement 会随 rubric、模型和应用场景变化。", "Prior studies have examined LLM-as-a-judge evaluation in clinical generative AI, with agreement varying by rubric and setting (Gershon et al., 2026; Williams et al., 2026)."),
+        ("author-review-9", "Prior studies have examined LLM-as-a-judge evaluation in clinical generative AI, with agreement varying by rubric and setting", "既往研究中的 agreement 会随 rubric、模型和应用场景变化，不能概括为共同显示 high concordance。", 'Original: "LLM-as-a-judge has been reported in prior studies, which showed high concordance on text-comparison rubrics such as faithfulness and completeness." Revised: "Prior studies have examined LLM-as-a-judge evaluation in clinical generative AI, with agreement varying by rubric and setting."'),
     ],
     "P112": [
         ("author-review-10", "the clinical rules developed from breast cancer did not provide further improvement for pancreatic cancer", "C versus D 是累计配置比较，不能把结果单独归因于 breast cancer clinical rules。", "The C versus D comparison did not provide evidence of a directional preference between verified extraction and the full inference harness (19 vs 16 preferences; 5 ties; P = .736)."),
         ("author-review-11", "some rules developed for breast cancer were specific to estrogen receptor (ER), progesterone receptor (PR), and HER2 status", "实现中确有 receptor-specific prompts 和 checks，但 ablation 没有单独验证这一机制。", "For example, the breast cancer workflow included receptor-specific prompts and post-processing checks for estrogen receptor (ER), progesterone receptor (PR), and HER2 status."),
+    ],
+    "P114": [
+        ("author-review-15a", "follow reporting guidance for model and evaluation procedures", "TRIPOD-LLM 支持 reporting guidance，不直接支持扩大数据集或跨模型 generalizability。", 'Original: "TRIPOD-LLM was cited after all future-study recommendations." Revised: "follow reporting guidance for model and evaluation procedures."'),
+        ("author-review-15b", "use structured approaches to human evaluation", "QUEST 支持 human evaluation 的设计与实施，不直接支持 expert-reference accuracy 结论。", 'Original: "QUEST was cited after all future-study recommendations." Revised: "use structured approaches to human evaluation."'),
+        ("author-review-15c", "evaluate extraction accuracy against expert reference standards", "VALID 支持将模型提取与 expert reference standard 比较。", 'Original: "evaluate extraction accuracy against expert reference standards" with three citations at the end of the sentence. Revised: retain the clause and cite VALID directly.'),
+        ("author-review-15d", "Larger and more diverse clinical datasets are also needed to assess whether the harness generalizes across open-weight models.", "现有三篇 framework 文献不直接证明本研究需要的样本规模或跨模型 generalizability，因此该建议不附这些引用。", 'Original: "include larger and more diverse clinical datasets, and assess the generalizability of the harness across different open-weight models" with three citations. Revised: "Larger and more diverse clinical datasets are also needed to assess whether the harness generalizes across open-weight models."'),
     ],
 }
 
@@ -509,11 +530,15 @@ AUTHOR_REVIEW_PAIRED = {
     "author-review-3", "author-review-4",
     "author-review-5a", "author-review-5b", "author-review-5c",
     "author-review-10", "author-review-11",
+    "author-review-15a", "author-review-15b", "author-review-15c", "author-review-15d",
 }
 
 AUTHOR_REVIEW_GROUPS = [
+    ("Healthcare data estimate", ["author-review-12"]),
+    ("Clinical motivation and source boundaries", ["author-review-13a", "author-review-13b", "author-review-13c", "author-review-13d"]),
     ("Research-gap wording", ["author-review-1"]),
     ("Inconsistent baseline system name", ["author-review-2a", "author-review-2b", "author-review-2c", "author-review-2d"]),
+    ("Qwen model citation and local serving configuration", ["author-review-14"]),
     ("GEE model description", ["author-review-3"]),
     ("GEE clustering rationale", ["author-review-4"]),
     ("Three threshold-only P values in the adjusted results", ["author-review-5a", "author-review-5b", "author-review-5c"]),
@@ -521,21 +546,39 @@ AUTHOR_REVIEW_GROUPS = [
     ("LLM-as-a-judge terminology and citations", ["author-review-9"]),
     ("Cross-cancer rule result", ["author-review-10"]),
     ("Breast-specific rule example", ["author-review-11"]),
+    ("Future-study citation boundaries", ["author-review-15a", "author-review-15b", "author-review-15c", "author-review-15d"]),
 ]
 
 EXTERNAL_CITATIONS = {
-    "kong": ("Kong, 2019", "https://e-hir.org/journal/view.php?id=10.4258/hir.2019.25.1.1", "Kong HJ. Managing Unstructured Big Data in Healthcare System. Healthcare Informatics Research. 2019;25(1):1-2."),
-    "wiest": ("Wiest et al., 2024", "https://www.nature.com/articles/s41746-024-01233-2", "Wiest IC, Ferber D, Zhu J, et al. Privacy-preserving large language models for structured medical information retrieval. npj Digital Medicine. 2024;7:257."),
-    "rule": ("Rule et al., 2021", "https://pmc.ncbi.nlm.nih.gov/articles/PMC8290305/", "Rule A, Bedrick S, Chiang MF, Hribar MR. Length and Redundancy of Outpatient Progress Notes Across a Decade at an Academic Medical Center. JAMA Network Open. 2021;4(7):e2115334."),
-    "huang": ("Huang et al., 2024", "https://www.nature.com/articles/s41746-024-01079-8", "Huang J, Yang DM, Rong R, et al. A critical assessment of using ChatGPT for extracting structured data from clinical notes. npj Digital Medicine. 2024;7:106."),
-    "huang_named": ("Huang et al. (2024)", "https://www.nature.com/articles/s41746-024-01079-8", "Huang J, Yang DM, Rong R, et al. A critical assessment of using ChatGPT for extracting structured data from clinical notes. npj Digital Medicine. 2024;7:106."),
-    "hein": ("Hein et al., 2025", "https://www.nature.com/articles/s41746-025-01686-z", "Hein D, Christie A, Holcomb M, et al. Iterative refinement and goal articulation to optimize large language models for clinical information extraction. npj Digital Medicine. 2025;8:301."),
-    "hein_named": ("Hein et al. (2025)", "https://www.nature.com/articles/s41746-025-01686-z", "Hein D, Christie A, Holcomb M, et al. Iterative refinement and goal articulation to optimize large language models for clinical information extraction. npj Digital Medicine. 2025;8:301."),
+    "kong": ("Kong, 2019", "https://doi.org/10.4258/hir.2019.25.1.1", "Kong HJ. Managing Unstructured Big Data in Healthcare System. Healthcare Informatics Research. 2019;25(1):1-2."),
+    "wiest": ("Wiest et al., 2024", "https://doi.org/10.1038/s41746-024-01233-2", "Wiest IC, Ferber D, Zhu J, et al. Privacy-preserving large language models for structured medical information retrieval. npj Digital Medicine. 2024;7:257."),
+    "rule": ("Rule et al., 2021", "https://doi.org/10.1001/jamanetworkopen.2021.15334", "Rule A, Bedrick S, Chiang MF, Hribar MR. Length and Redundancy of Outpatient Progress Notes Across a Decade at an Academic Medical Center. JAMA Network Open. 2021;4(7):e2115334."),
+    "huang": ("Huang et al., 2024", "https://doi.org/10.1038/s41746-024-01079-8", "Huang J, Yang DM, Rong R, et al. A critical assessment of using ChatGPT for extracting structured data from clinical notes. npj Digital Medicine. 2024;7:106."),
+    "huang_named": ("Huang et al. (2024)", "https://doi.org/10.1038/s41746-024-01079-8", "Huang J, Yang DM, Rong R, et al. A critical assessment of using ChatGPT for extracting structured data from clinical notes. npj Digital Medicine. 2024;7:106."),
+    "hein": ("Hein et al., 2025", "https://doi.org/10.1038/s41746-025-01686-z", "Hein D, Christie A, Holcomb M, et al. Iterative refinement and goal articulation to optimize large language models for clinical information extraction. npj Digital Medicine. 2025;8:301."),
+    "hein_named": ("Hein et al. (2025)", "https://doi.org/10.1038/s41746-025-01686-z", "Hein D, Christie A, Holcomb M, et al. Iterative refinement and goal articulation to optimize large language models for clinical information extraction. npj Digital Medicine. 2025;8:301."),
     "sushil": ("Sushil et al., 2024", "https://doi.org/10.1056/AIdbp2300110", "Sushil M, Kennedy VE, Mandair D, et al. CORAL: Expert-Curated Oncology Reports to Advance Language Model Inference. NEJM AI. 2024;1(4)."),
-    "gershon": ("Gershon et al., 2026", "https://www.nature.com/articles/s41746-026-03248-3", "Gershon R, Ben-Shlomo Y, Yitzhaki S, et al. Large language models as judges for clinical generative AI evaluation. npj Digital Medicine. Published online September 25, 2026."),
-    "williams": ("Williams et al., 2026", "https://www.nature.com/articles/s41746-026-02992-w", "Williams G, Rutunda S, Nzabakira F, Mateen BA. Human evaluators vs. LLM-as-a-Judge: toward scalable evaluation of GenAI in global health. npj Digital Medicine. Published online July 20, 2026."),
-    "kruse": ("Kruse et al., 2025", "https://aclanthology.org/2025.findings-emnlp.1128/", "Kruse M, Hu S, Derby N, et al. Large Language Models with Temporal Reasoning for Longitudinal Clinical Summarization and Prediction. Findings of ACL: EMNLP 2025. 2025:20715-20735."),
-    "kougia": ("Kougia et al., 2024", "https://aclanthology.org/2024.bionlp-1.6/", "Kougia V, Sedova A, Stephan AJ, Zaporojets K, Roth B. Analysing zero-shot temporal relation extraction on clinical notes using temporal consistency. Proceedings of BioNLP 2024. 2024:72-84."),
+    "coral_dataset": ("CORAL dataset, 2024", "https://doi.org/10.13026/v69y-xa45", "Sushil M, Kennedy VE, Mandair D, et al. CORAL: expert-Curated medical Oncology Reports to Advance Language model inference. PhysioNet. Version 1.0. 2024."),
+    "qwen": ("Qwen et al., 2025", "https://arxiv.org/abs/2412.15115", "Qwen, Yang A, Yang B, et al. Qwen2.5 Technical Report. arXiv:2412.15115. 2025."),
+    "gershon": ("Gershon et al., 2026", "https://doi.org/10.1038/s41746-026-03248-3", "Gershon R, Ben-Shlomo Y, Yitzhaki S, Sberro A, Tausky O, Golan N, Rabinovitch M, Hasidim AAA, Arianu I, Dagan M, Balicer R, Dagan N. Large language models as judges for clinical generative AI evaluation. npj Digital Medicine. Published online September 25, 2026."),
+    "williams": ("Williams et al., 2026", "https://doi.org/10.1038/s41746-026-02992-w", "Williams G, Rutunda S, Nzabakira F, Mateen BA. Human evaluators vs. LLM-as-a-Judge: toward scalable evaluation of GenAI in global health. npj Digital Medicine. 2026;9(1):878."),
+    "kruse": ("Kruse et al., 2025", "https://doi.org/10.18653/v1/2025.findings-emnlp.1128", "Kruse M, Hu S, Derby N, Wu Y, Stonbraker S, Yao B, Wang D, Goldberg EM, Gao Y. Large Language Models with Temporal Reasoning for Longitudinal Clinical Summarization and Prediction. In: Findings of the Association for Computational Linguistics: EMNLP 2025. Association for Computational Linguistics; 2025:20715-20735."),
+    "kougia": ("Kougia et al., 2024", "https://doi.org/10.18653/v1/2024.bionlp-1.6", "Kougia V, Sedova A, Stephan AJ, Zaporojets K, Roth B. Analysing zero-shot temporal relation extraction on clinical notes using temporal consistency. In: Proceedings of the 23rd Workshop on Biomedical Natural Language Processing. Association for Computational Linguistics; 2024:72-84."),
+    "tripod": ("Gallifant et al., 2025", "https://doi.org/10.1038/s41591-024-03425-5", "Gallifant J, Afshar M, Ameen S, et al. The TRIPOD-LLM reporting guideline for studies using large language models. Nature Medicine. 2025;31:60-69."),
+    "quest": ("Tam et al., 2024", "https://doi.org/10.1038/s41746-024-01258-7", "Tam TYC, Sivarajkumar S, Kapoor S, et al. A framework for human evaluation of large language models in healthcare derived from literature review. npj Digital Medicine. 2024;7:258."),
+    "valid": ("Estevez et al., 2026", "https://doi.org/10.1200/CCI-25-00215", "Estevez M, Singh N, Dyson L, et al. Ensuring Reliability of Curated Electronic Health Record-Derived Data: The Validation of Accuracy for Large Language Model-/Machine Learning-Extracted Information and Data (VALID) Framework. JCO Clinical Cancer Informatics. 2026;10:e2500215."),
+}
+
+CITATION_REFERENCE_KEYS = {
+    "huang_named": "huang",
+    "hein_named": "hein",
+}
+FORMAL_REFERENCE_ORDER = (
+    "kong", "wiest", "rule", "sushil", "huang", "hein", "coral_dataset", "qwen",
+    "gershon", "williams", "kruse", "kougia", "tripod", "quest", "valid",
+)
+FORMAL_REFERENCE_NUMBERS = {
+    key: index for index, key in enumerate(FORMAL_REFERENCE_ORDER, 1)
 }
 
 
@@ -551,8 +594,10 @@ details{border:0}summary{cursor:pointer}.fold>summary,.fold-toggle{padding:13px 
 .figure{margin:24px 0 30px}.figure img{display:block;width:100%;height:auto;border:1px solid #e0e5e9;background:white}.figure-print{display:none!important}.figure-caption{margin-top:9px}.comment{margin:13px 0;padding:12px 14px;border:1px solid var(--line);border-radius:7px;background:#fafbfc}.comment-meta{font-size:12px;color:var(--muted)}.comment-text{margin:7px 0;white-space:pre-wrap}.comment-context{margin-top:7px;color:#4e5c67;font-size:12px}.literature-workspace li{margin:11px 0}.reference-note{display:block;margin-top:3px;color:#4e5c67;font-size:12px}.workspace-note{color:#4e5c67;font-size:13px}.version-list li{margin:6px 0}.source-hash{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;overflow-wrap:anywhere}
 @media(max-width:900px){.layout{display:block;width:min(100% - 18px,940px);margin:10px auto 40px}.toc{position:relative;top:auto;max-height:none;margin-bottom:12px}.toc a.sub{display:none}article{padding:30px 24px 48px}h1{font-size:30px}.metadata-grid{grid-template-columns:1fr}.table-wrap{margin-left:-8px;margin-right:-8px}.figure{margin-left:-8px;margin-right:-8px}}
 @media(max-width:440px){article{padding:24px 15px 40px}h1{font-size:27px}.fold>summary,.fold-toggle{font-size:22px}table{font-size:11px}th,td{padding:6px 5px}.figure{max-width:100%;margin-left:0;margin-right:0;overflow-x:auto;overflow-y:hidden;overscroll-behavior-inline:contain;-webkit-overflow-scrolling:touch}.figure .figure-screen{width:700px;max-width:none}.literature-workspace a{overflow-wrap:anywhere}.figure-caption,.table-caption{padding:0 3px}.author-review-tooltip{max-width:calc(100vw - 16px);font-size:12px}}
-@media print{@page{margin:.62in}html{scroll-behavior:auto}body{background:#fff;font-family:Arial,sans-serif;font-size:10pt;line-height:1.35}.layout{display:block;width:auto;margin:0}.toc,.screen-only,#physician-comments,#version-history,#literature-workspace,.source-audit,.source-empty,.figure-screen,.author-review-tooltip{display:none!important}article{padding:0;border:0;box-shadow:none}.main-section,.supplement{display:block!important;border:0;margin:0}.main-section:not([open])>.fold-body,.supplement>.fold-body{display:block!important}.main-section>summary,.supplement>.fold-toggle{display:block!important;padding:16px 0 7px;list-style:none;break-after:avoid;font-size:19pt}.main-section>summary::before,.supplement>.fold-toggle::before{display:none!important}.physician-subheading{break-after:avoid}.figure,.table-wrap{break-inside:avoid;page-break-inside:avoid}.figure{max-width:none;margin:14px 0 18px;overflow:visible}.figure .figure-screen{width:100%;min-width:0;max-width:100%}.figure .figure-print{display:block!important;width:100%;min-width:0;max-width:100%;max-height:8.4in;object-fit:contain;border:0}.table-wrap{margin:12px 0 18px;overflow:visible}table{font-size:8.5pt}th,td{padding:5px 6px}.table-caption,.figure-caption{font-size:9pt}.comment-anchor{display:none!important}.focus-highlight{background:transparent!important;outline:0!important;color:inherit}}
-html.print-export{scroll-behavior:auto}html.print-export body{background:#fff;font-family:Arial,sans-serif;font-size:13.333px;line-height:1.35;margin:0}html.print-export .layout{display:block;width:720px;margin:0}html.print-export .toc,html.print-export .screen-only,html.print-export #physician-comments,html.print-export #version-history,html.print-export #literature-workspace,html.print-export .source-audit,html.print-export .source-empty,html.print-export .figure-screen,html.print-export .author-review-tooltip{display:none!important}html.print-export article{width:720px;padding:45px;box-sizing:border-box;border:0;box-shadow:none}html.print-export .main-section,html.print-export .supplement{display:block!important;border:0;margin:0}html.print-export .main-section>.fold-body,html.print-export .supplement>.fold-body{display:block!important}html.print-export .main-section>summary,html.print-export .supplement>.fold-toggle{display:block!important;padding:16px 0 7px;list-style:none;font-size:25px}html.print-export .main-section>summary::before,html.print-export .supplement>.fold-toggle::before{display:none!important}html.print-export .figure,html.print-export .table-wrap{break-inside:avoid}html.print-export .figure{max-width:none;margin:14px 0 18px;overflow:visible}html.print-export .figure .figure-screen{width:100%;min-width:0;max-width:100%}html.print-export .figure .figure-print{display:block!important;width:100%;min-width:0;max-width:100%;max-height:806px;object-fit:contain;border:0}html.print-export .table-wrap{margin:12px 0 18px;overflow:visible}html.print-export table{font-size:11.333px}html.print-export th,html.print-export td{padding:5px 6px}html.print-export .table-caption,html.print-export .figure-caption{font-size:12px}html.print-export .comment-anchor{display:none!important}html.print-export .focus-highlight{background:transparent!important;outline:0!important;color:inherit}html.print-export .print-page-spacer{display:block!important;width:1px;visibility:hidden}
+@media print{@page{margin:.62in}html{scroll-behavior:auto}body{background:#fff;font-family:Arial,sans-serif;font-size:10pt;line-height:1.35}.layout{display:block;width:auto;margin:0}.toc,.screen-only,#physician-comments,#version-history,#literature-workspace,.source-audit,.source-empty,.figure-screen,.author-review-tooltip{display:none!important}article{padding:0;border:0;box-shadow:none}.main-section,.references,.supplement{display:block!important;border:0;margin:0}.main-section:not([open])>.fold-body,.references>.fold-body,.supplement>.fold-body{display:block!important}.main-section>summary,.references>summary,.supplement>.fold-toggle{display:block!important;padding:16px 0 7px;list-style:none;break-after:avoid;font-size:19pt}.main-section>summary::before,.references>summary::before,.supplement>.fold-toggle::before{display:none!important}.physician-subheading{break-after:avoid}.figure,.table-wrap{break-inside:avoid;page-break-inside:avoid}.figure{max-width:none;margin:14px 0 18px;overflow:visible}.figure .figure-screen{width:100%;min-width:0;max-width:100%}.figure .figure-print{display:block!important;width:100%;min-width:0;max-width:100%;max-height:8.4in;object-fit:contain;border:0}.table-wrap{margin:12px 0 18px;overflow:visible}table{font-size:8.5pt}th,td{padding:5px 6px}.table-caption,.figure-caption{font-size:9pt}.comment-anchor{display:none!important}.focus-highlight{background:transparent!important;outline:0!important;color:inherit}}
+html.print-export{scroll-behavior:auto}html.print-export body{background:#fff;font-family:Arial,sans-serif;font-size:13.333px;line-height:1.35;margin:0}html.print-export .layout{display:block;width:720px;margin:0}html.print-export .toc,html.print-export .screen-only,html.print-export #physician-comments,html.print-export #version-history,html.print-export #literature-workspace,html.print-export .source-audit,html.print-export .source-empty,html.print-export .figure-screen,html.print-export .author-review-tooltip{display:none!important}html.print-export article{width:720px;padding:45px;box-sizing:border-box;border:0;box-shadow:none}html.print-export .main-section,html.print-export .references,html.print-export .supplement{display:block!important;border:0;margin:0}html.print-export .main-section>.fold-body,html.print-export .references>.fold-body,html.print-export .supplement>.fold-body{display:block!important}html.print-export .main-section>summary,html.print-export .references>summary,html.print-export .supplement>.fold-toggle{display:block!important;padding:16px 0 7px;list-style:none;font-size:25px}html.print-export .main-section>summary::before,html.print-export .references>summary::before,html.print-export .supplement>.fold-toggle::before{display:none!important}html.print-export .figure,html.print-export .table-wrap{break-inside:avoid}html.print-export .figure{max-width:none;margin:14px 0 18px;overflow:visible}html.print-export .figure .figure-screen{width:100%;min-width:0;max-width:100%}html.print-export .figure .figure-print{display:block!important;width:100%;min-width:0;max-width:100%;max-height:806px;object-fit:contain;border:0}html.print-export .table-wrap{margin:12px 0 18px;overflow:visible}html.print-export table{font-size:11.333px}html.print-export th,html.print-export td{padding:5px 6px}html.print-export .table-caption,html.print-export .figure-caption{font-size:12px}html.print-export .comment-anchor{display:none!important}html.print-export .focus-highlight{background:transparent!important;outline:0!important;color:inherit}html.print-export .print-page-spacer{display:block!important;width:1px;visibility:hidden}
+@media print{.references>.fold-toggle{display:block!important;padding:16px 0 7px;list-style:none;break-after:avoid;font-size:19pt}.references>.fold-toggle::before{display:none!important}}
+html.print-export .references>.fold-toggle{display:block!important;padding:16px 0 7px;list-style:none;font-size:25px}html.print-export .references>.fold-toggle::before{display:none!important}
 """
 
 SCRIPT = r"""
@@ -562,6 +607,7 @@ function initializeAuthorReviewTooltips(){const targets=[...document.querySelect
 document.addEventListener('click',e=>{const toggle=e.target.closest('.fold-toggle');if(toggle){const fold=toggle.closest('.custom-fold');setCustomFold(fold,!fold.classList.contains('is-expanded'));return}const a=e.target.closest('a[href^="#"]');if(!a)return;const id=decodeURIComponent(a.getAttribute('href').slice(1));revealTarget(document.getElementById(id))});
 window.addEventListener('hashchange',()=>revealTarget(document.getElementById(decodeURIComponent(location.hash.slice(1)))));window.addEventListener('DOMContentLoaded',()=>{initializeAuthorReviewTooltips();if(location.hash)revealTarget(document.getElementById(decodeURIComponent(location.hash.slice(1))))});
 window.preparePrintExport=function(pageHeight=960){if(!Number.isFinite(pageHeight)||pageHeight<400)throw new Error('Invalid page height');document.querySelectorAll('.print-page-spacer').forEach(node=>node.remove());document.documentElement.classList.add('print-export');void document.documentElement.offsetHeight;const candidates=[...document.querySelectorAll('.figure,.table-wrap')].filter(node=>getComputedStyle(node).display!=='none');for(const node of candidates){const rect=node.getBoundingClientRect();const top=rect.top+window.scrollY;const offset=((top%pageHeight)+pageHeight)%pageHeight;if(rect.height<pageHeight&&offset>0&&offset+rect.height>pageHeight-.5){const spacer=document.createElement('div');spacer.className='print-page-spacer';spacer.setAttribute('aria-hidden','true');spacer.style.height=`${Math.ceil(pageHeight-offset)+1}px`;node.before(spacer);void spacer.offsetHeight}}const items=candidates.map(node=>{const rect=node.getBoundingClientRect();const top=rect.top+window.scrollY;const bottom=rect.bottom+window.scrollY;return{id:node.id,kind:node.classList.contains('figure')?'figure':'table',top,bottom,height:rect.height,crosses:Math.floor((top+.5)/pageHeight)!==Math.floor((bottom-.5)/pageHeight)}});const printable=[...document.querySelectorAll('article>.main-section>.fold-body>*,#supplement-body>*')].filter(node=>!node.classList.contains('print-page-spacer')&&getComputedStyle(node).display!=='none');const contentBottom=Math.ceil(Math.max(0,...printable.map(node=>node.getBoundingClientRect().bottom+window.scrollY)));const focusHighlights=[...document.querySelectorAll('.focus-highlight')];return{pageHeight,documentHeight:document.documentElement.scrollHeight,contentBottom,supplementVisible:getComputedStyle(document.getElementById('supplement-body')).display!=='none',revisionHighlightCount:focusHighlights.length,revisionHighlightBackgrounds:focusHighlights.map(node=>getComputedStyle(node).backgroundColor),items,offenders:items.filter(item=>item.crosses).map(item=>item.id)}};
+const prepareManuscriptPrint=window.preparePrintExport;window.preparePrintExport=function(pageHeight=960){const report=prepareManuscriptPrint(pageHeight);const referenceNodes=[...document.querySelectorAll('#references-body>*')].filter(node=>!node.classList.contains('print-page-spacer')&&getComputedStyle(node).display!=='none');report.referencesVisible=getComputedStyle(document.getElementById('references-body')).display!=='none';report.contentBottom=Math.ceil(Math.max(report.contentBottom,...referenceNodes.map(node=>node.getBoundingClientRect().bottom+window.scrollY)));return report};
 window.resetPrintExport=function(){document.querySelectorAll('.print-page-spacer').forEach(node=>node.remove());document.documentElement.classList.remove('print-export')};
 """
 
@@ -985,10 +1031,13 @@ def link_crossrefs(text: str) -> str:
         if citation_key:
             if citation_key not in EXTERNAL_CITATIONS:
                 raise KeyError(f"Unknown external citation token: {citation_key}")
-            citation_label, url, title = EXTERNAL_CITATIONS[citation_key]
+            citation_label, _, title = EXTERNAL_CITATIONS[citation_key]
+            reference_key = CITATION_REFERENCE_KEYS.get(citation_key, citation_key)
+            reference_number = FORMAL_REFERENCE_NUMBERS[reference_key]
             parts.append(
-                f'<a class="citation external-citation" href="{esc(url)}" target="_blank" rel="noopener" '
-                f'title="{esc(title)}" aria-label="Open source: {esc(title)}">{esc(citation_label)}</a>'
+                f'<a class="citation" href="#reference-{reference_number}" '
+                f'title="Reference {reference_number}: {esc(title)}" '
+                f'aria-label="Go to reference {reference_number}: {esc(title)}">{esc(citation_label)}</a>'
             )
         else:
             parts.append(f'<a class="xref" href="#{XREF_TARGETS[label]}">{esc(label)}</a>')
@@ -1430,7 +1479,7 @@ def load_agreement_rows() -> list[list[str]]:
 
 def supplementary_table_1() -> str:
     return result_table(
-        "Supplementary Table S1", "Core fields used in the primary clinical comparison",
+        "Supplementary Table S1", "Prespecified core fields used in the exploratory field analysis",
         ["Core field", "Applicability", "Rating field", "Evaluation definition"],
         [
             ["Active anticancer medications", "Breast cancer and PDAC", "Current_Medications.current_meds", "Anticancer drugs currently being taken or administered. Supportive or home medications, completed or stopped drugs, and drugs that are only planned are excluded."],
@@ -1523,26 +1572,78 @@ LITERATURE_ENTRIES = [
     ("Van Veen D, Van Uden C, Blankemeier L, et al. Adapted large language models can outperform medical experts in clinical text summarization. Nature Medicine. 2024;30:1134-1142.", "https://doi.org/10.1038/s41591-024-02855-5", "Its blinded reader study used a scale with an equivalent midpoint, supporting retention of ties in comparative clinical evaluation."),
     ("Ayers JW, Poliak A, Dredze M, et al. Comparing Physician and Artificial Intelligence Chatbot Responses to Patient Questions Posted to a Public Social Media Forum. JAMA Internal Medicine. 2023;183(6):589-596.", "https://doi.org/10.1001/jamainternmed.2023.1838", "This physician-rated comparison reported the preference proportion with a confidence interval, providing a clear precedent for probability-scale reporting."),
     ("Goh E, Gallo R, Hom J, et al. Large Language Model Influence on Diagnostic Reasoning. JAMA Network Open. 2024;7(10):e2440969.", "https://doi.org/10.1001/jamanetworkopen.2024.40969", "Its mixed-effects analysis included participant and case effects, illustrating how repeated clinical observations should be modeled rather than treated as independent."),
-    ("Gershon R, Ben-Shlomo Y, Yitzhaki S, et al. Large language models as judges for clinical generative AI evaluation. npj Digital Medicine. Published online September 25, 2026. doi:10.1038/s41746-026-03248-3.", "https://www.nature.com/articles/s41746-026-03248-3", "This study supports rubric-specific LLM judging for faithfulness and completeness while showing weaker agreement for reasoning and safety."),
-    ("Williams G, Rutunda S, Nzabakira F, Mateen BA. Human evaluators vs. LLM-as-a-Judge: toward scalable evaluation of GenAI in global health. npj Digital Medicine. Published online July 20, 2026. doi:10.1038/s41746-026-02992-w.", "https://www.nature.com/articles/s41746-026-02992-w", "This study shows that LLM-judge agreement depends on the model, rubric, language, and clinical setting and does not replace final physician evaluation."),
-    ("Kruse M, Hu S, Derby N, et al. Large Language Models with Temporal Reasoning for Longitudinal Clinical Summarization and Prediction. Findings of ACL: EMNLP 2025. 2025:20715-20735. doi:10.18653/v1/2025.findings-emnlp.1128.", "https://aclanthology.org/2025.findings-emnlp.1128/", "This study supports the statement that temporal progression across long clinical records remains difficult for LLMs."),
-    ("Kougia V, Sedova A, Stephan AJ, Zaporojets K, Roth B. Analysing zero-shot temporal relation extraction on clinical notes using temporal consistency. Proceedings of BioNLP 2024. 2024:72-84. doi:10.18653/v1/2024.bionlp-1.6.", "https://aclanthology.org/2024.bionlp-1.6/", "This study documents difficulty in clinical temporal-relation extraction and shows that temporal consistency alone does not establish accuracy."),
+    ("Gershon R, Ben-Shlomo Y, Yitzhaki S, Sberro A, Tausky O, Golan N, Rabinovitch M, Hasidim AAA, Arianu I, Dagan M, Balicer R, Dagan N. Large language models as judges for clinical generative AI evaluation. npj Digital Medicine. Published online September 25, 2026. doi:10.1038/s41746-026-03248-3.", "https://www.nature.com/articles/s41746-026-03248-3", "This study examines clinical LLM judging across rubrics and reports that agreement varies by task and criterion."),
+    ("Williams G, Rutunda S, Nzabakira F, Mateen BA. Human evaluators vs. LLM-as-a-Judge: toward scalable evaluation of GenAI in global health. npj Digital Medicine. 2026;9(1):878. doi:10.1038/s41746-026-02992-w.", "https://www.nature.com/articles/s41746-026-02992-w", "This study shows that LLM-judge agreement depends on the model, rubric, language, and clinical setting and does not replace final physician evaluation."),
+    ("Kruse M, Hu S, Derby N, Wu Y, Stonbraker S, Yao B, Wang D, Goldberg EM, Gao Y. Large Language Models with Temporal Reasoning for Longitudinal Clinical Summarization and Prediction. In: Findings of the Association for Computational Linguistics: EMNLP 2025. Association for Computational Linguistics; 2025:20715-20735. doi:10.18653/v1/2025.findings-emnlp.1128.", "https://aclanthology.org/2025.findings-emnlp.1128/", "This study supports the statement that temporal progression across long clinical records remains difficult for LLMs."),
+    ("Kougia V, Sedova A, Stephan AJ, Zaporojets K, Roth B. Analysing zero-shot temporal relation extraction on clinical notes using temporal consistency. In: Proceedings of the 23rd Workshop on Biomedical Natural Language Processing. Association for Computational Linguistics; 2024:72-84. doi:10.18653/v1/2024.bionlp-1.6.", "https://aclanthology.org/2024.bionlp-1.6/", "This study documents difficulty in clinical temporal-relation extraction and shows that temporal consistency alone does not establish accuracy."),
 ]
+
+USED_LITERATURE_ENTRY_NUMBERS = {
+    2, 3, 9, 10, 18, 19, 20, 21, 22, 23, 27, 28, 29, 30,
+}
+
+
+def reference_link_label(url: str) -> str:
+    if url.startswith("https://doi.org/"):
+        return "doi:" + url.removeprefix("https://doi.org/")
+    if "arxiv.org/abs/" in url:
+        return "arXiv:" + url.rsplit("/", 1)[-1]
+    return "Source"
+
+
+def formal_references() -> str:
+    entries = []
+    for reference_number, reference_key in enumerate(FORMAL_REFERENCE_ORDER, 1):
+        _, url, citation = EXTERNAL_CITATIONS[reference_key]
+        link_label = reference_link_label(url)
+        entries.append(
+            f'<li id="reference-{reference_number}" data-reference-key="{esc(reference_key)}">'
+            f'{esc(citation)} '
+            f'<a class="reference-link" href="{esc(url)}" target="_blank" rel="noopener" '
+            f'title="Open reference {reference_number}" aria-label="Open reference {reference_number}: {esc(citation)}">'
+            f'{esc(link_label)}</a></li>'
+        )
+    return (
+        '<section class="fold references custom-fold is-collapsed" id="references" data-origin="technical-insert">'
+        '<button class="fold-toggle" type="button" aria-expanded="false" aria-controls="references-body">References</button>'
+        '<div class="fold-body" id="references-body">'
+        f'<ol>{"".join(entries)}</ol></div></section>'
+    )
+
+
+def formal_references_markdown() -> str:
+    lines = ["## References", ""]
+    for reference_number, reference_key in enumerate(FORMAL_REFERENCE_ORDER, 1):
+        _, url, citation = EXTERNAL_CITATIONS[reference_key]
+        lines.append(f'{reference_number}. {citation} [{reference_link_label(url)}]({url})')
+    lines.append("")
+    return "\n".join(lines)
 
 
 def literature_workspace() -> str:
-    entries = "".join(
-        f'<li id="lit-{index}" data-literature-entry="{index}">{esc(citation)} '
-        f'<a href="{esc(url)}" target="_blank" rel="noopener" title="Open verified source for literature entry {index}" '
-        f'aria-label="Open verified source for literature entry {index}">{esc(url)}</a>'
-        f'<span class="reference-note"><strong>Draft relevance:</strong> {esc(relevance)}</span></li>'
-        for index, (citation, url, relevance) in enumerate(LITERATURE_ENTRIES, 1)
+    def entry(index: int) -> str:
+        citation, url, relevance = LITERATURE_ENTRIES[index - 1]
+        return (
+            f'<li id="lit-{index}" data-literature-entry="{index}">{esc(citation)} '
+            f'<a href="{esc(url)}" target="_blank" rel="noopener" title="Open verified source for literature entry {index}" '
+            f'aria-label="Open verified source for literature entry {index}">{esc(url)}</a>'
+            f'<span class="reference-note"><strong>Draft relevance:</strong> {esc(relevance)}</span></li>'
+        )
+
+    used_entries = "".join(entry(index) for index in sorted(USED_LITERATURE_ENTRY_NUMBERS))
+    background_entries = "".join(
+        entry(index)
+        for index in range(1, len(LITERATURE_ENTRIES) + 1)
+        if index not in USED_LITERATURE_ENTRY_NUMBERS
     )
     return (
         '<details class="fold literature-workspace" id="literature-workspace">'
         '<summary>Author literature-review workspace (not manuscript body)</summary><div class="fold-body">'
-        '<p class="workspace-note">These historical entries support drafting and discussion development; every citation and link requires pre-submission verification.</p>'
-        f'<ol>{entries}</ol></div></details>'
+        '<p class="workspace-note">This unnumbered workspace is for authors and is not part of the manuscript reference list. Fourteen entries in this workspace are cited in the manuscript. The formal reference list also cites the CORAL dataset record, which is not a separate workspace entry.</p>'
+        '<h3>Used in the manuscript</h3>'
+        f'<ul>{used_entries}</ul>'
+        '<h3>Background, not cited</h3>'
+        f'<ul>{background_entries}</ul></div></details>'
     )
 
 
@@ -1552,7 +1653,7 @@ def technical_inserts_after(block_id: str) -> str:
         "P074": table_3() + table_4(),
         "P082": figure("2", "Physician preferences across all judgments", "Physician preferences across all judgments. Panel A shows harness preferred, tied, and baseline preferred judgments overall and by cancer type. Panel B shows pooled harness preference in blue text and individual physician values as circles among judgments without ties. Panel B values are unadjusted."),
         "P084": table_5(),
-        "P092": figure("3", "Agreement among physicians", "Pairwise exact agreement and Cohen's kappa among four physicians in breast cancer and PDAC. Each breast cancer pair shared 280 judgments, and each PDAC pair shared 260 judgments. The green scale encodes kappa, and each populated cell reports exact agreement."),
+        "P092": figure("3", "Agreement among physicians", "Pairwise exact agreement and Cohen's kappa among four physicians in breast cancer and PDAC. Each breast cancer pair shared 280 judgments, and each PDAC pair shared 260 judgments. The blue scale encodes kappa, and each populated cell reports exact agreement."),
         "P096": figure("4", "Physician preference by core oncology field", "Physician preference by core oncology field. Panel A reports the raw harness, tie, and baseline counts overall and for seven fields. Panel B shows the complete preference distribution for each field. Panel C shows adjusted probabilities of harness preference with 95% confidence intervals from one joint exploratory GEE fitted to 495 directional judgments. The model included field, physician, and cancer fixed effects, clustered repeated judgments by note with an exchangeable working correlation, and standardized each field over its observed physician and cancer distribution. Breast cancer type and receptor status applied only to breast cancer notes. Ties were excluded from Panel C. The estimates report preference, not accuracy. The analysis did not perform pairwise field tests or make multiplicity adjusted claims."),
     }
     return inserts.get(block_id, "")
@@ -1655,7 +1756,7 @@ def supplementary_methods() -> str:
         '<h3>Supplementary Methods</h3>'
         + f'<h4>{rendered_headings[0]}</h4>'
         + revision_inline_paragraph(
-            "CORAL access is governed by the PhysioNet credentialing and data use process specified by the dataset authors. The 40 holdout note texts and their existing expert annotations were excluded from development, error analysis, prompt revision, rule development, and regression testing before the final harness was frozen. The annotations were not provided to the models, not used during harness development, and not used to calculate the primary physician preference endpoint. They were not shown in the evaluation interface.",
+            "CORAL access is governed by the PhysioNet credentialing and data use process specified by the dataset authors ([[cite:coral_dataset]]). The 40 holdout note texts and their existing expert annotations were excluded from development, error analysis, prompt revision, rule development, and regression testing before the final harness was frozen. The annotations were not provided to the models, not used during harness development, and not used to calculate the primary physician preference endpoint. They were not shown in the evaluation interface.",
             paragraph_id="supplement-data-access",
             phrases=[
                 "not provided to the models",
@@ -1729,6 +1830,7 @@ def build_supplement() -> str:
 
 def version_history() -> str:
     entries = [
+        ("v2.3.0", "2026-11-18", "Figure and citation review", "Unified the palette across Figures 1 to 4, changed Figure 3 to a blue kappa scale, and completed the formal References and Supplement citation audit."),
         ("v2.2.1", "2026-11-18", "Clinical journal palette", "Applied the approved clinical journal palette to all six physician SVG layouts without changing their text or geometry."),
         ("v2.2.0", "2026-11-18", "Physician SVG layout authority", "Used the physician SVGs as the authoritative layouts and applied only shared colors, fonts, and export metadata."),
         ("v2.1.1", "2026-11-17", "Mobile figure readability", "Corrected Figure 2 label clipping and added contained horizontal scrolling for figures on small screens."),
@@ -1777,7 +1879,7 @@ def version_history() -> str:
         else:
             version, date, note = entry
             label = ""
-        current = version == "v2.2.1"
+        current = version == "v2.3.0"
         open_attr = " open" if current else ""
         summary = f"{version} · {label} · {date}" if label else f"{version} · {date}"
         rendered.append(
@@ -1794,7 +1896,7 @@ def toc() -> str:
     links.append(("#section-results", "Results", False))
     for heading in ["Sensitivity and physician agreement", "Performance across Clinical Extraction Fields", "Technical ablation"]:
         links.append(("#" + re.sub(r"[^a-z0-9]+", "-", heading.lower()).strip("-"), heading, True))
-    links.extend([("#section-discussion", "Discussion", False), ("#supplementary-material", "Supplementary material", False), ("#physician-comments", "Outstanding physician comments (0)", False), ("#version-history", "Version history", False), ("#literature-workspace", "Literature-review workspace", False)])
+    links.extend([("#section-discussion", "Discussion", False), ("#references", "References", False), ("#supplementary-material", "Supplementary material", False), ("#physician-comments", "Outstanding physician comments (0)", False), ("#version-history", "Version history", False), ("#literature-workspace", "Literature-review workspace", False)])
     return '<nav class="toc" data-origin="technical-insert"><strong>Contents</strong>' + "".join(f'<a class="{"sub" if sub else ""}" href="{href}" data-origin="technical-insert">{esc(label)}</a>' for href, label, sub in links) + "</nav>"
 
 
@@ -1803,27 +1905,30 @@ def build_html(data: dict[str, object]) -> tuple[str, str]:
     article = f"""
 <article>
   <h1 class="screen-only">Physician-authored manuscript draft</h1>
-  <p class="subtitle screen-only">English working manuscript · Version 2.2.1 · November 18, 2026</p>
+  <p class="subtitle screen-only">English working manuscript · Version 2.3.0 · November 18, 2026</p>
   <details class="fold" id="version-history"><summary>Version history</summary><div class="fold-body">{version_history()}</div></details>
   {author_review_list()}
   {sections}
+  {formal_references()}
   {build_supplement()}
   <details class="fold" id="physician-comments"><summary>Outstanding physician comments (0)</summary><div class="fold-body">{render_comments(data)}</div></details>
   {literature_workspace()}
 </article>
 """
-    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v2.2.1</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
+    document = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physician-authored manuscript draft v2.3.0</title><style>{CSS}</style></head><body><div class="layout">{toc()}{article}</div><script>{SCRIPT}</script></body></html>'
     document = apply_review_block_metadata(document)
     markdown = f"""<!-- GENERATED FILE. The canonical physician Word extraction is the prose authority. -->
 # Physician-authored manuscript draft
 
-English working manuscript. Version 2.2.1, November 18, 2026.
+English working manuscript. Version 2.3.0, November 18, 2026.
 
-Current change: applied the approved clinical journal palette to all six physician SVG layouts. The latest doctor Word draft remains the prose authority.
+Current change: unified the palette across Figures 1 to 4, changed Figure 3 to a blue kappa scale, and completed the formal References and Supplement citation audit. The latest doctor Word draft remains the prose authority.
 
 The canonical physician blocks below mirror `{SOURCE_DOCX.name}` for audit purposes. The clean HTML applies only the approved cross-reference and reporting edits while preserving all source blocks in its hidden audit representation.
 
 {markdown_body}
+
+{formal_references_markdown()}
 
 ## Supplementary material
 
@@ -2086,12 +2191,16 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     if parser.technical_table_containers != expected_table_containers: raise AssertionError(f"Unexpected generated table containers: {parser.technical_table_containers}")
     for label in ["Table 1", "Table 2", "Table 3", "Table 4", "Table 5", "Supplementary Table S1", "Supplementary Table S2", "Supplementary Table S3"]:
         if document.count(f"<strong>{label}.</strong>") != 1: raise AssertionError(f"Table label missing or duplicated: {label}")
-    if parser.literature_entries != [str(index) for index in range(1, 31)]: raise AssertionError("The 30-entry literature workspace is incomplete")
+    expected_literature_order = [str(index) for index in sorted(USED_LITERATURE_ENTRY_NUMBERS)] + [
+        str(index) for index in range(1, len(LITERATURE_ENTRIES) + 1)
+        if index not in USED_LITERATURE_ENTRY_NUMBERS
+    ]
+    if parser.literature_entries != expected_literature_order: raise AssertionError("The grouped 30-entry literature workspace is incomplete")
     if '<details class="fold literature-workspace" id="literature-workspace">' not in document: raise AssertionError("Literature workspace is missing")
     if "if(target instanceof HTMLDetailsElement||target.tagName==='DETAILS')target.open=true" not in document or "target.focus({preventScroll:true})" not in document:
         raise AssertionError("Closed-details target reveal behavior is missing")
     print_requirements = [
-        "@media print", ".main-section:not([open])>.fold-body,.supplement>.fold-body{display:block!important}",
+        "@media print", ".main-section:not([open])>.fold-body,.references>.fold-body,.supplement>.fold-body{display:block!important}",
         ".toc,.screen-only,#physician-comments,#version-history,#literature-workspace,.source-audit,.source-empty,.figure-screen{display:none!important}",
         ".figure .figure-print{display:block!important;width:100%;max-height:8.4in;object-fit:contain;border:0}",
         "window.preparePrintExport=function(pageHeight=960)", "contentBottom=Math.ceil", "offenders:items.filter(item=>item.crosses)",
@@ -2247,8 +2356,9 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
         )
     for required_phrase in [
         "focuses on that extraction task",
-        "outputs can vary", "checking every field in every output can approach the cost of manual extraction",
-        "privacy and governance concerns", "local models can still produce unstable or incorrect extractions",
+        "outputs can vary", "Reviewing every extracted field may be impractical in routine use",
+        "In the CORAL benchmark, commercial models outperformed the open model evaluated in that study",
+        "privacy and governance concerns", "Local deployment can keep PHI within the institution, but it does not by itself ensure accurate extraction",
         "without physician review", "No physician reviewed pancreatic cancer outputs",
         "System identities", "judge model and settings",
         "not provided to the models", "not used during harness development",
@@ -2440,7 +2550,7 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
     for cell_id, revised_cell in REVISED_TABLE_CELLS.items():
         rendered_cell, _ = word_diff_text(expected_cells[cell_id], revised_cell, block_id=cell_id)
         if rendered_cell not in document: raise AssertionError(f"Revised native-table text is missing: {revised_cell}")
-    expected_inline_urls = []
+    expected_inline_reference_numbers = []
     for paragraph in data["paragraphs"]:
         block_id = str(paragraph["id"])
         revised = (
@@ -2449,10 +2559,13 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
             else REVISED_PARAGRAPHS.get(block_id, "")
         )
         for citation_key in re.findall(r"\[\[cite:([a-z_]+)\]\]", revised):
-            expected_inline_urls.append(EXTERNAL_CITATIONS[citation_key][1])
-    actual_inline_urls = re.findall(r'<a class="citation external-citation" href="([^"]+)"', document)
-    if actual_inline_urls != expected_inline_urls: raise AssertionError("External author-year citation links are incomplete or out of order")
-    expected_external_urls = expected_inline_urls + [entry[1] for entry in LITERATURE_ENTRIES]
+            reference_key = CITATION_REFERENCE_KEYS.get(citation_key, citation_key)
+            expected_inline_reference_numbers.append(str(FORMAL_REFERENCE_NUMBERS[reference_key]))
+    expected_inline_reference_numbers.append(str(FORMAL_REFERENCE_NUMBERS["coral_dataset"]))
+    actual_inline_reference_numbers = re.findall(r'<a class="citation" href="#reference-(\d+)"', document)
+    if actual_inline_reference_numbers != expected_inline_reference_numbers:
+        raise AssertionError("Internal author-year citation links are incomplete or out of order")
+    expected_external_urls = [EXTERNAL_CITATIONS[key][1] for key in FORMAL_REFERENCE_ORDER] + [entry[1] for entry in LITERATURE_ENTRIES]
     actual_external_urls = [link["href"] for link in parser.external_links]
     if Counter(actual_external_urls) != Counter(expected_external_urls): raise AssertionError("External links differ from the verified URL registry")
     if "utm_source=" in document or "fromPaywallRec=" in document: raise AssertionError("Tracking parameters remain in rendered HTML")
@@ -2508,7 +2621,7 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
         raise AssertionError("Revised ablation purpose is missing or its block is not highlighted")
     required_plain_language = {
         "P004": "This study focuses on that extraction task.",
-        "P008": "checking every field in every output can approach the cost of manual extraction",
+        "P008": "Reviewing every extracted field may be impractical in routine use, which motivated the verification steps in this workflow.",
         "P010": "no physician reviews the PDAC development outputs",
         "P012": "To address this gap",
         "P017": "without physician review of the PDAC development outputs",
@@ -2530,7 +2643,7 @@ def validate(document: str, markdown: str, data: dict[str, object]) -> None:
 AUTHORIZED_EDIT_NOTES = {
     "P004": "Corrected `depend on on identifying` to `depend on identifying`.",
     "P006": "Applied the four approved grammar and punctuation fixes and restored the Kong, Wiest, and Rule citation links.",
-    "P008": "Prose is unchanged; existing author-year citations are rendered as verified links.",
+    "P008": "Reframed the review burden as study motivation, bounded the commercial-model comparison to CORAL, removed the unsupported HIPAA-specific claim, and aligned citations with each source.",
     "P010": "Prose is unchanged; the Huang and Hein citations are rendered as verified links.",
     "P012": "Split the approved comma splice and applied the approved PDAC-notes, LLM-assisted, and results-sentence corrections.",
     "P063": "Standardized evaluator and clinician role terms to physician.",
@@ -2561,7 +2674,7 @@ def build_preservation_ledger(data: dict[str, object]) -> str:
     }
     section_ids = set(SECTION_HEADINGS)
     lines = [
-        "# v2.2.1 physician prose preservation ledger",
+        "# v2.3.0 physician prose preservation ledger",
         "",
         f"- Source DOCX: `{SOURCE_DOCX.name}`",
         f"- Source SHA-256: `{data['source_docx_sha256']}`",
@@ -2679,10 +2792,12 @@ def validate_v2(document: str, markdown: str, ledger: str, data: dict[str, objec
         (anchor_id, html.unescape(re.sub(r"<[^>]+>", "", body)))
         for anchor_id, _, body in underline_matches
     ]
+    if any('class="citation"' in body for _, _, body in underline_matches):
+        raise AssertionError("A citation marker was included inside an author-review underline")
     expected_underlines = [(anchor_id, phrase) for anchor_id, phrase, _, _ in expected_specs]
     if actual_underlines != expected_underlines:
         raise AssertionError(f"Author review underlines changed: {actual_underlines}")
-    if len(actual_underlines) != 14 or any(len(text) > 180 for _, text in actual_underlines):
+    if len(actual_underlines) != 24 or any(len(text) > 180 for _, text in actual_underlines):
         raise AssertionError("Author review underlines are not phrase sized")
     actual_details = []
     for anchor_id, attributes, _ in underline_matches:
@@ -2730,6 +2845,38 @@ def validate_v2(document: str, markdown: str, ledger: str, data: dict[str, objec
         expected_text = _plain_display_text(REVISED_PARAGRAPHS.get(block_id, source_text))
         if blocks[block_id].text != " ".join(expected_text.split()):
             raise AssertionError(f"Unauthorized prose difference: {block_id}")
+    if not blocks["P006"].text.startswith("It is estimated that about 80% of healthcare data are unstructured (Kong, 2019)"):
+        raise AssertionError("P006 does not use the source-bounded healthcare data estimate")
+    for forbidden_p008 in ["including HIPAA compliance", "approach the cost of manual extraction"]:
+        if forbidden_p008 in blocks["P008"].text:
+            raise AssertionError(f"Unsupported P008 wording remains: {forbidden_p008}")
+    if "In the CORAL benchmark, commercial models outperformed the open model evaluated in that study (Sushil et al., 2024)" not in blocks["P008"].text:
+        raise AssertionError("P008 does not attach the model-comparison claim to CORAL")
+    if "raises privacy and governance concerns (Wiest et al., 2024)" not in blocks["P008"].text:
+        raise AssertionError("P008 did not retain the approved privacy and governance wording")
+    if "high concordance" in blocks["P108"].text or "agreement varying by rubric and setting" not in blocks["P108"].text:
+        raise AssertionError("P108 does not use the cautious LLM-judge evidence boundary")
+    p027_body = re.search(r'id="P027"[^>]*>(.*?)</p>', document, flags=re.S)
+    if not p027_body or not re.search(r'Qwen2\.5-32B-Instruct \(<a class="citation" href="#reference-8".*?</a>\) <span class="author-review-underline" id="author-review-14"', p027_body.group(1), flags=re.S):
+        raise AssertionError("P027 does not cite Qwen immediately after the model name and before local serving details")
+    p114_body = re.search(r'id="P114"[^>]*>(.*?)</p>', document, flags=re.S)
+    if not p114_body:
+        raise AssertionError("P114 is missing")
+    p114_html = p114_body.group(1)
+    boundary_checks = [
+        ("follow reporting guidance for model and evaluation procedures", 'href="#reference-13"'),
+        ("use structured approaches to human evaluation", 'href="#reference-14"'),
+        ("evaluate extraction accuracy against expert reference standards", 'href="#reference-15"'),
+    ]
+    cursor = 0
+    for phrase, citation_href in boundary_checks:
+        phrase_position = p114_html.find(phrase, cursor)
+        citation_position = p114_html.find(citation_href, phrase_position)
+        if phrase_position < 0 or citation_position < phrase_position:
+            raise AssertionError(f"P114 citation boundary is missing: {phrase}")
+        cursor = citation_position
+    if 'id="author-review-15d"' not in p114_html or 'href="#reference-' in p114_html[p114_html.find('id="author-review-15d"'):]:
+        raise AssertionError("P114 dataset and cross-model recommendation must remain uncited by the three frameworks")
     visible_lower = parser.visible_text.lower()
     if "difference from 50%" in visible_lower:
         raise AssertionError("Deleted difference-from-50-percent clause remains visible")
@@ -2737,25 +2884,118 @@ def validate_v2(document: str, markdown: str, ledger: str, data: dict[str, objec
         raise AssertionError("Deleted fixed A/B order disclosure remains visible")
     if "harness was always displayed as a" in visible_lower or "randomized placement" in visible_lower:
         raise AssertionError("The rejected long presentation limitation remains visible")
-    for key in ["kong", "wiest", "rule", "sushil", "huang", "hein", "gershon", "williams", "kruse", "kougia"]:
-        if EXTERNAL_CITATIONS[key][1] not in document:
-            raise AssertionError(f"Required citation link is missing: {key}")
+    reference_entries = re.findall(
+        r'<li id="reference-(\d+)" data-reference-key="([^"]+)">',
+        document,
+    )
+    expected_reference_entries = [
+        (str(index), key) for index, key in enumerate(FORMAL_REFERENCE_ORDER, 1)
+    ]
+    if reference_entries != expected_reference_entries:
+        raise AssertionError(f"Formal reference order changed: {reference_entries}")
+    citation_targets = re.findall(r'<a class="citation" href="#reference-(\d+)"', document)
+    valid_reference_targets = {str(index) for index in range(1, len(FORMAL_REFERENCE_ORDER) + 1)}
+    if not citation_targets or set(citation_targets) != valid_reference_targets:
+        raise AssertionError(
+            "Every formal reference must be cited and every citation must target a formal reference: "
+            f"{citation_targets}"
+        )
+    first_seen_targets = list(dict.fromkeys(citation_targets))
+    if first_seen_targets != [str(index) for index in range(1, len(FORMAL_REFERENCE_ORDER) + 1)]:
+        raise AssertionError(f"Formal references are not numbered by first citation: {first_seen_targets}")
+    if re.search(r'<a[^>]+class="[^"]*\bexternal-citation\b', document):
+        raise AssertionError("Inline citations must link to the formal reference list, not directly off site")
+    references_match = re.search(
+        r'<section class="fold references custom-fold is-collapsed" id="references" data-origin="technical-insert">.*?</section>',
+        document,
+        flags=re.S,
+    )
+    if (
+        not references_match
+        or '<button class="fold-toggle" type="button" aria-expanded="false" aria-controls="references-body">References</button>' not in references_match.group()
+        or '<div class="fold-body" id="references-body">' not in references_match.group()
+    ):
+        raise AssertionError("The formal reference list is missing or not collapsed by default")
+    discussion_position = document.find('id="section-discussion"')
+    references_position = document.find('id="references"')
+    supplement_position = document.find('id="supplementary-material"')
+    if not (discussion_position < references_position < supplement_position):
+        raise AssertionError("References must follow Discussion and precede Supplementary material")
+    expected_external_urls = [
+        EXTERNAL_CITATIONS[key][1] for key in FORMAL_REFERENCE_ORDER
+    ] + [entry[1] for entry in LITERATURE_ENTRIES]
+    actual_external_urls = [link["href"] for link in parser.external_links]
+    if Counter(actual_external_urls) != Counter(expected_external_urls):
+        raise AssertionError("External links differ from the formal-reference and author-workspace registries")
+    for link in parser.external_links:
+        if link.get("target") != "_blank" or link.get("rel") != "noopener" or not link.get("title") or not link.get("aria-label"):
+            raise AssertionError(f"External link lacks safe accessible attributes: {link.get('href')}")
+    formal_dois = [
+        EXTERNAL_CITATIONS[key][1].removeprefix("https://doi.org/").casefold()
+        for key in FORMAL_REFERENCE_ORDER
+        if EXTERNAL_CITATIONS[key][1].startswith("https://doi.org/")
+    ]
+    if len(formal_dois) != len(set(formal_dois)):
+        raise AssertionError("The formal reference list contains duplicate DOI values")
+    expected_literature_order = [str(index) for index in sorted(USED_LITERATURE_ENTRY_NUMBERS)] + [
+        str(index) for index in range(1, len(LITERATURE_ENTRIES) + 1)
+        if index not in USED_LITERATURE_ENTRY_NUMBERS
+    ]
+    if parser.literature_entries != expected_literature_order:
+        raise AssertionError("The grouped 30-entry author literature workspace is incomplete")
+    literature_match = re.search(
+        r'<details class="fold literature-workspace" id="literature-workspace">.*?</details>',
+        document,
+        flags=re.S,
+    )
+    if not literature_match or "<h3>Used in the manuscript</h3>" not in literature_match.group() or "<h3>Background, not cited</h3>" not in literature_match.group():
+        raise AssertionError("The author literature workspace groups are incomplete")
+    if "<ol>" in literature_match.group():
+        raise AssertionError("The author-only literature workspace must not create a second numbered reference list")
+    expected_citations_by_block = {
+        "P024": ["4", "7"],
+        "P027": ["8"],
+        "P114": ["13", "14", "15"],
+        "supplement-data-access": ["7"],
+    }
+    for block_id, expected_targets in expected_citations_by_block.items():
+        block_match = re.search(rf'id="{re.escape(block_id)}"[^>]*>(.*?)</p>', document, flags=re.S)
+        if not block_match:
+            raise AssertionError(f"Cited block is missing: {block_id}")
+        actual_targets = re.findall(r'href="#reference-(\d+)"', block_match.group(1))
+        if actual_targets != expected_targets:
+            raise AssertionError(f"Citation targets changed in {block_id}: {actual_targets}")
+    if "Prespecified core fields used in the exploratory field analysis" not in document:
+        raise AssertionError("Supplementary Table S1 retains the incorrect primary-analysis caption")
+    if "The blue scale encodes kappa" not in document or "The green scale encodes kappa" in document:
+        raise AssertionError("Figure 3 caption does not match the approved blue kappa scale")
+    if "Fourteen entries in this workspace are cited in the manuscript. The formal reference list also cites the CORAL dataset record" not in document:
+        raise AssertionError("The author literature workspace does not explain the 14 literature plus 1 dataset source split")
+    for required_reference_text in [
+        "Findings of the Association for Computational Linguistics: EMNLP 2025",
+        "Proceedings of the 23rd Workshop on Biomedical Natural Language Processing",
+        "2026;9(1):878",
+    ]:
+        if required_reference_text not in document:
+            raise AssertionError(f"Verified formal reference metadata is missing: {required_reference_text}")
+    if "utm_source=" in document or "fromPaywallRec=" in document:
+        raise AssertionError("Tracking parameters remain in rendered HTML")
     for number in ["1", "2", "3", "4", "S1", "S2"]:
         if f'id="figure-{number.lower()}"' not in document:
             raise AssertionError(f"Figure is missing: {number}")
-    if "Version 2.2.1 · November 18, 2026" not in document or "draft v2.2.1" not in document:
-        raise AssertionError("v2.2.1 metadata is missing")
-    if 'id="version-2-2-1"' not in document or not re.search(r'<details class="version-entry" id="version-2-2-1"[^>]* open>', document):
-        raise AssertionError("v2.2.1 history entry is missing or closed")
-    if "Applied the approved clinical journal palette to all six physician SVG layouts without changing their text or geometry." not in document:
-        raise AssertionError("v2.2.1 history is incomplete")
+    if "Version 2.3.0 · November 18, 2026" not in document or "draft v2.3.0" not in document:
+        raise AssertionError("v2.3.0 metadata is missing")
+    if 'id="version-2-3-0"' not in document or not re.search(r'<details class="version-entry" id="version-2-3-0"[^>]* open>', document):
+        raise AssertionError("v2.3.0 history entry is missing or closed")
+    if "Unified the palette across Figures 1 to 4, changed Figure 3 to a blue kappa scale, and completed the formal References and Supplement citation audit." not in document:
+        raise AssertionError("v2.3.0 history is incomplete")
     for required_mobile_css in [
         ".figure{max-width:100%;margin-left:0;margin-right:0;overflow-x:auto",
         ".figure .figure-screen{width:700px;max-width:none}",
         ".figure{max-width:none;margin:14px 0 18px;overflow:visible}",
     ]:
         if required_mobile_css not in document:
-            raise AssertionError(f"v2.2.1 figure overflow CSS is missing: {required_mobile_css}")
+            raise AssertionError(f"v2.3.0 figure overflow CSS is missing: {required_mobile_css}")
     for required_tooltip_code in ["initializeAuthorReviewTooltips", "role','tooltip", "为什么需要复核", "建议改为", "event.key==='Escape'", "window.innerWidth-width-margin"]:
         if required_tooltip_code not in document:
             raise AssertionError(f"Author review tooltip implementation is incomplete: {required_tooltip_code}")

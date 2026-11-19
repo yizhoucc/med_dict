@@ -1,9 +1,9 @@
 <!-- GENERATED FILE. The canonical physician Word extraction is the prose authority. -->
 # Physician-authored manuscript draft
 
-English working manuscript. Version 2.2.1, November 18, 2026.
+English working manuscript. Version 2.3.0, November 18, 2026.
 
-Current change: applied the approved clinical journal palette to all six physician SVG layouts. The latest doctor Word draft remains the prose authority.
+Current change: unified the palette across Figures 1 to 4, changed Figure 3 to a blue kappa scale, and completed the formal References and Supplement citation audit. The latest doctor Word draft remains the prose authority.
 
 The canonical physician blocks below mirror `202601102_Manuscript_JAMA.docx` for audit purposes. The clean HTML applies only the approved cross-reference and reporting edits while preserving all source blocks in its hidden audit representation.
 
@@ -400,6 +400,25 @@ This study has several limitations. First, our primary outcome was physician pre
 
 <!-- physician:P121 -->
 <!-- P121 empty -->
+
+
+## References
+
+1. Kong HJ. Managing Unstructured Big Data in Healthcare System. Healthcare Informatics Research. 2019;25(1):1-2. [doi:10.4258/hir.2019.25.1.1](https://doi.org/10.4258/hir.2019.25.1.1)
+2. Wiest IC, Ferber D, Zhu J, et al. Privacy-preserving large language models for structured medical information retrieval. npj Digital Medicine. 2024;7:257. [doi:10.1038/s41746-024-01233-2](https://doi.org/10.1038/s41746-024-01233-2)
+3. Rule A, Bedrick S, Chiang MF, Hribar MR. Length and Redundancy of Outpatient Progress Notes Across a Decade at an Academic Medical Center. JAMA Network Open. 2021;4(7):e2115334. [doi:10.1001/jamanetworkopen.2021.15334](https://doi.org/10.1001/jamanetworkopen.2021.15334)
+4. Sushil M, Kennedy VE, Mandair D, et al. CORAL: Expert-Curated Oncology Reports to Advance Language Model Inference. NEJM AI. 2024;1(4). [doi:10.1056/AIdbp2300110](https://doi.org/10.1056/AIdbp2300110)
+5. Huang J, Yang DM, Rong R, et al. A critical assessment of using ChatGPT for extracting structured data from clinical notes. npj Digital Medicine. 2024;7:106. [doi:10.1038/s41746-024-01079-8](https://doi.org/10.1038/s41746-024-01079-8)
+6. Hein D, Christie A, Holcomb M, et al. Iterative refinement and goal articulation to optimize large language models for clinical information extraction. npj Digital Medicine. 2025;8:301. [doi:10.1038/s41746-025-01686-z](https://doi.org/10.1038/s41746-025-01686-z)
+7. Sushil M, Kennedy VE, Mandair D, et al. CORAL: expert-Curated medical Oncology Reports to Advance Language model inference. PhysioNet. Version 1.0. 2024. [doi:10.13026/v69y-xa45](https://doi.org/10.13026/v69y-xa45)
+8. Qwen, Yang A, Yang B, et al. Qwen2.5 Technical Report. arXiv:2412.15115. 2025. [arXiv:2412.15115](https://arxiv.org/abs/2412.15115)
+9. Gershon R, Ben-Shlomo Y, Yitzhaki S, Sberro A, Tausky O, Golan N, Rabinovitch M, Hasidim AAA, Arianu I, Dagan M, Balicer R, Dagan N. Large language models as judges for clinical generative AI evaluation. npj Digital Medicine. Published online September 25, 2026. [doi:10.1038/s41746-026-03248-3](https://doi.org/10.1038/s41746-026-03248-3)
+10. Williams G, Rutunda S, Nzabakira F, Mateen BA. Human evaluators vs. LLM-as-a-Judge: toward scalable evaluation of GenAI in global health. npj Digital Medicine. 2026;9(1):878. [doi:10.1038/s41746-026-02992-w](https://doi.org/10.1038/s41746-026-02992-w)
+11. Kruse M, Hu S, Derby N, Wu Y, Stonbraker S, Yao B, Wang D, Goldberg EM, Gao Y. Large Language Models with Temporal Reasoning for Longitudinal Clinical Summarization and Prediction. In: Findings of the Association for Computational Linguistics: EMNLP 2025. Association for Computational Linguistics; 2025:20715-20735. [doi:10.18653/v1/2025.findings-emnlp.1128](https://doi.org/10.18653/v1/2025.findings-emnlp.1128)
+12. Kougia V, Sedova A, Stephan AJ, Zaporojets K, Roth B. Analysing zero-shot temporal relation extraction on clinical notes using temporal consistency. In: Proceedings of the 23rd Workshop on Biomedical Natural Language Processing. Association for Computational Linguistics; 2024:72-84. [doi:10.18653/v1/2024.bionlp-1.6](https://doi.org/10.18653/v1/2024.bionlp-1.6)
+13. Gallifant J, Afshar M, Ameen S, et al. The TRIPOD-LLM reporting guideline for studies using large language models. Nature Medicine. 2025;31:60-69. [doi:10.1038/s41591-024-03425-5](https://doi.org/10.1038/s41591-024-03425-5)
+14. Tam TYC, Sivarajkumar S, Kapoor S, et al. A framework for human evaluation of large language models in healthcare derived from literature review. npj Digital Medicine. 2024;7:258. [doi:10.1038/s41746-024-01258-7](https://doi.org/10.1038/s41746-024-01258-7)
+15. Estevez M, Singh N, Dyson L, et al. Ensuring Reliability of Curated Electronic Health Record-Derived Data: The Validation of Accuracy for Large Language Model-/Machine Learning-Extracted Information and Data (VALID) Framework. JCO Clinical Cancer Informatics. 2026;10:e2500215. [doi:10.1200/CCI-25-00215](https://doi.org/10.1200/CCI-25-00215)
 
 
 ## Supplementary material

@@ -82,7 +82,7 @@ ASSETS = (
         "figure3_interrater_matrix_print.png",
         "Figure_3.svg",
         "Agreement among physicians",
-        "Two matrices report exact pairwise agreement and Cohen's kappa for four physicians in breast cancer and PDAC. A continuous green scale encodes kappa.",
+        "Two matrices report exact pairwise agreement and Cohen's kappa for four physicians in breast cancer and PDAC. A continuous blue scale encodes kappa.",
         "55d0e996a3d4622e44a6a4581c56983b8fbfe4828f4f081e4f079a7779806a54",
     ),
     FigureAsset(
@@ -150,8 +150,6 @@ LLM_REVIEW = "#766A91"
 NEUTRAL = "#788692"
 INK = "#293741"
 GRID = "#E7EAEC"
-HEATMAP_LIGHT = "#EDF5F1"
-HEATMAP_DARK = PHYSICIAN
 WHITE = "#FFFFFF"
 TINT_WHITE_FRACTION = 0.90
 PANEL_WHITE_FRACTION = 0.96
@@ -161,6 +159,8 @@ PHYSICIAN_TINT = mix_with_white(PHYSICIAN, TINT_WHITE_FRACTION)
 LLM_TINT = mix_with_white(LLM_REVIEW, TINT_WHITE_FRACTION)
 NEUTRAL_TINT = mix_with_white(NEUTRAL, TINT_WHITE_FRACTION)
 PANEL_FILL = mix_with_white(NEUTRAL, PANEL_WHITE_FRACTION)
+HEATMAP_LIGHT = HARNESS_TINT
+HEATMAP_DARK = HARNESS
 
 FIGURE3_SOURCE_GRADIENT = re.findall(
     r'<rect\s+x="[0-9.]+"\s+y="715"[^>]+fill="(#[0-9A-Fa-f]{6})"',
@@ -181,7 +181,7 @@ FIGURE3_GRADIENT_MAP = {
 
 
 def remap_figure3_gradient_color(value: str) -> str | None:
-    """Project a physician heatmap color onto the replacement green scale."""
+    """Project a physician heatmap color onto the replacement blue scale."""
 
     if value in FIGURE3_GRADIENT_MAP:
         return FIGURE3_GRADIENT_MAP[value]

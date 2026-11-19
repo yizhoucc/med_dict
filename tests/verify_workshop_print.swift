@@ -55,12 +55,22 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           const body = document.getElementById('supplement-body');
           const button = supplement?.querySelector(':scope > .fold-toggle');
           if (!supplement || !body || !button) return 'missing custom supplement fold';
+          const references = document.getElementById('references');
+          const referencesBody = document.getElementById('references-body');
+          const referencesButton = references?.querySelector(':scope > .fold-toggle');
+          if (!references || !referencesBody || !referencesButton) return 'missing custom references fold';
           {
           const expectedUnderlines = [
+            ['author-review-12', 'about 80% of healthcare data are unstructured', 'Kong 支持的是 healthcare data 的约 80% 估计，不是更窄的 EHR clinical data 精确比例。', 'Original: "80% of clinical data in EHR exist in unstructured form." Revised: "about 80% of healthcare data are unstructured."'],
+            ['author-review-13a', 'Reviewing every extracted field may be impractical in routine use, which motivated the verification steps in this workflow.', '原句把逐字段核查成本与人工抽取成本相比，现有研究没有提供这一成本比较。', 'Original: "checking every field in every output can approach the cost of manual extraction." Revised: "Reviewing every extracted field may be impractical in routine use, which motivated the verification steps in this workflow."'],
+            ['author-review-13b', 'In the CORAL benchmark, commercial models outperformed the open model evaluated in that study', 'CORAL 支持该研究内部的模型比较，不支持笼统声称 commercial models 在临床抽取中普遍更好。', 'Original: "Commercial models perform better on some clinical extraction tasks." Revised: "In the CORAL benchmark, commercial models outperformed the open model evaluated in that study."'],
+            ['author-review-13c', 'raises privacy and governance concerns', '现有引用没有直接建立 HIPAA-specific compliance 结论，因此只删除该限定语。', 'Original: "raises privacy and governance concerns, including HIPAA compliance." Revised: "raises privacy and governance concerns."'],
+            ['author-review-13d', 'Local deployment can keep PHI within the institution, but it does not by itself ensure accurate extraction.', 'Wiest 支持本地处理的 privacy 逻辑；accuracy 仍需要单独验证，不能由部署位置推定。', 'Original: "Local deployment avoids external transfer of PHI, but local models can still produce unstable or incorrect extractions." Revised: "Local deployment can keep PHI within the institution, but it does not by itself ensure accurate extraction."'],
             ['author-review-1', 'a broader multistep workflow developed from physician feedback can be used to improve note extraction', '研究缺口可以更具体地对应跨癌种适应过程。', 'We therefore examined whether a multistep workflow refined with physician feedback on breast cancer notes could be adapted to longitudinal PDAC notes without physician review during PDAC development.'],
             ['author-review-2a', 'one prompt baseline', '系统名称与全文其他位置不一致。', 'single-prompt baseline'],
             ['author-review-2b', 'single-prompt baseline', '这里已经使用建议的系统名称，其他三处可与此统一。', 'Keep “single-prompt baseline” here and use the same term throughout.'],
             ['author-review-2c', 'one prompt baseline', '系统名称与全文其他位置不一致。', 'single-prompt baseline'],
+            ['author-review-14', 'with AWQ quantization, served locally through vLLM', 'Qwen technical report 支持模型家族；AWQ quantization 和 vLLM 是本研究的实现配置。', 'Original: "Qwen2.5-32B-Instruct-AWQ served locally through vLLM (Qwen et al., 2025)." Revised: "Qwen2.5-32B-Instruct (Qwen et al., 2025) with AWQ quantization, served locally through vLLM."'],
             ['author-review-3', 'population-averaged logistic generalized estimating equation (GEE) with an exchangeable working correlation structure at the note level', '当前句子重复说明 note-level correlation 和 clustering。', 'population-averaged logistic GEE with an exchangeable working correlation'],
             ['author-review-4', 'to account for clustering of repeated field-level judgments within the same note', '聚类单位是 note，表述可以更直接。', 'to account for repeated field-level judgments within each note'],
             ['author-review-5a', 'p < 0.05', 'Table 5 已提供 overall estimate 的精确 P 值。', 'P = 2.67 × 10⁻²⁸'],
@@ -68,9 +78,13 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
             ['author-review-5c', 'p < 0.05', 'Table 5 已提供 pancreatic cancer estimate 的精确 P 值。', 'P = 2.30 × 10⁻¹²'],
             ['author-review-2d', 'one prompt baseline', '系统名称与全文其他位置不一致。', 'single-prompt baseline'],
             ['author-review-8', 'improve the clinical quality of extracted information', '主要 endpoint 是 physician preference，不是 absolute clinical quality。', 'These findings indicate that physicians more often preferred inference harness outputs than same-model baseline outputs.'],
-            ['author-review-9', 'LLM-as-a-judge', '既往研究中的 agreement 会随 rubric、模型和应用场景变化。', 'Prior studies have examined LLM-as-a-judge evaluation in clinical generative AI, with agreement varying by rubric and setting (Gershon et al., 2026; Williams et al., 2026).'],
+            ['author-review-9', 'Prior studies have examined LLM-as-a-judge evaluation in clinical generative AI, with agreement varying by rubric and setting', '既往研究中的 agreement 会随 rubric、模型和应用场景变化，不能概括为共同显示 high concordance。', 'Original: "LLM-as-a-judge has been reported in prior studies, which showed high concordance on text-comparison rubrics such as faithfulness and completeness." Revised: "Prior studies have examined LLM-as-a-judge evaluation in clinical generative AI, with agreement varying by rubric and setting."'],
             ['author-review-10', 'the clinical rules developed from breast cancer did not provide further improvement for pancreatic cancer', 'C versus D 是累计配置比较，不能把结果单独归因于 breast cancer clinical rules。', 'The C versus D comparison did not provide evidence of a directional preference between verified extraction and the full inference harness (19 vs 16 preferences; 5 ties; P = .736).'],
             ['author-review-11', 'some rules developed for breast cancer were specific to estrogen receptor (ER), progesterone receptor (PR), and HER2 status', '实现中确有 receptor-specific prompts 和 checks，但 ablation 没有单独验证这一机制。', 'For example, the breast cancer workflow included receptor-specific prompts and post-processing checks for estrogen receptor (ER), progesterone receptor (PR), and HER2 status.'],
+            ['author-review-15a', 'follow reporting guidance for model and evaluation procedures', 'TRIPOD-LLM 支持 reporting guidance，不直接支持扩大数据集或跨模型 generalizability。', 'Original: "TRIPOD-LLM was cited after all future-study recommendations." Revised: "follow reporting guidance for model and evaluation procedures."'],
+            ['author-review-15b', 'use structured approaches to human evaluation', 'QUEST 支持 human evaluation 的设计与实施，不直接支持 expert-reference accuracy 结论。', 'Original: "QUEST was cited after all future-study recommendations." Revised: "use structured approaches to human evaluation."'],
+            ['author-review-15c', 'evaluate extraction accuracy against expert reference standards', 'VALID 支持将模型提取与 expert reference standard 比较。', 'Original: "evaluate extraction accuracy against expert reference standards" with three citations at the end of the sentence. Revised: retain the clause and cite VALID directly.'],
+            ['author-review-15d', 'Larger and more diverse clinical datasets are also needed to assess whether the harness generalizes across open-weight models.', '现有三篇 framework 文献不直接证明本研究需要的样本规模或跨模型 generalizability，因此该建议不附这些引用。', 'Original: "include larger and more diverse clinical datasets, and assess the generalizability of the harness across different open-weight models" with three citations. Revised: "Larger and more diverse clinical datasets are also needed to assess whether the harness generalizes across open-weight models."'],
           ];
           const underlines = [...document.querySelectorAll('.author-review-underline')];
           if (document.querySelector('.focus-highlight,.revision-legend,.revision-swatch,.revision-light,.revision-medium,.revision-strong')) {
@@ -86,7 +100,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
             if (!getComputedStyle(node).textDecorationLine.includes('underline')) return `author underline is not visible: ${id}`;
             if (node.textContent.trim().length === 0 || node.textContent.trim().length > 180) return `author underline has invalid length: ${id}`;
           }
-          const paired = new Set(['author-review-3', 'author-review-4', 'author-review-5a', 'author-review-5b', 'author-review-5c', 'author-review-10', 'author-review-11']);
+          const paired = new Set(['author-review-3', 'author-review-4', 'author-review-5a', 'author-review-5b', 'author-review-5c', 'author-review-10', 'author-review-11', 'author-review-15a', 'author-review-15b', 'author-review-15c', 'author-review-15d']);
           for (const node of underlines) {
             if ((node.dataset.reviewPaired === 'true') !== paired.has(node.id)) return `author review paired flag differs at ${node.id}`;
           }
@@ -154,6 +168,19 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           if (desktopFigureImage.getBoundingClientRect().width > desktopFigure.clientWidth + 3) return 'desktop figure retains mobile minimum width';
           if (document.querySelectorAll('#physician-comments .comment').length !== 0) return 'source comments remain visible';
           if (document.body.innerText.includes('Difference from 50%')) return 'deleted difference-from-50 wording remains';
+          const referencesVisible = () => getComputedStyle(referencesBody).display !== 'none';
+          if (!references.classList.contains('is-collapsed') || referencesVisible() || referencesButton.getAttribute('aria-expanded') !== 'false') {
+            return 'references were not initially collapsed';
+          }
+          referencesButton.click();
+          if (!references.classList.contains('is-expanded') || !referencesVisible() || referencesButton.getAttribute('aria-expanded') !== 'true') {
+            return 'references button did not expand';
+          }
+          referencesButton.click();
+          const firstCitation = document.querySelector('a.citation[href="#reference-1"]');
+          firstCitation?.click();
+          if (!referencesVisible() || document.activeElement?.id !== 'reference-1') return 'citation deep link did not reveal and focus References';
+          referencesButton.click();
           const visible = () => getComputedStyle(body).display !== 'none';
           if (!supplement.classList.contains('is-collapsed') || visible() || button.getAttribute('aria-expanded') !== 'false') {
             return 'supplement was not initially collapsed';
@@ -172,7 +199,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           if (!visible() || document.activeElement?.id !== 'figure-s1') return 'nested supplement link did not reveal and focus';
           button.click();
           const history = document.getElementById('version-history');
-          const current = document.getElementById('version-2-2-1');
+          const current = document.getElementById('version-2-3-0');
           const older = [...history.querySelectorAll('.version-entry')].filter(node => node !== current);
           if (history.open || !current?.open || older.some(node => node.open)) return 'unexpected initial version-history state';
           window.__workshopVersionHashState = 'waiting';
@@ -212,7 +239,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
         let checks = #"""
         (() => {
           const history = document.getElementById('version-history');
-          const current = document.getElementById('version-2-2-1');
+          const current = document.getElementById('version-2-3-0');
           const prior = document.getElementById('version-2-2-0');
           const older = [...history.querySelectorAll('.version-entry')].filter(node => node !== current);
           if (location.hash !== '#version-2-2-0' || !history.open || current.open || !prior.open || older.some(node => node !== prior && node.open) || document.activeElement !== prior) {
@@ -336,6 +363,13 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
           }
           report.printReviewRules = printReviewRules;
           report.authorUnderlineCount = document.querySelectorAll('.author-review-underline').length;
+          report.referenceCount = document.querySelectorAll('#references-body > ol > li').length;
+          const coralDatasetReference = document.getElementById('reference-7');
+          report.coralDatasetReferenceVisible = Boolean(
+            coralDatasetReference &&
+            getComputedStyle(coralDatasetReference).display !== 'none' &&
+            coralDatasetReference.textContent.includes('10.13026/v69y-xa45')
+          );
           const tooltip = document.getElementById('author-review-tooltip');
           report.tooltipPrintHidden = Boolean(tooltip && getComputedStyle(tooltip).display === 'none');
           const printFigure = document.getElementById('figure-4');
@@ -361,6 +395,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
         webView.evaluateJavaScript(printExportChecks) { value, error in
             if let error = error { self.fail(error.localizedDescription); return }
             guard let report = value as? [String: Any],
+                  let referencesVisible = report["referencesVisible"] as? Bool, referencesVisible,
                   let visible = report["supplementVisible"] as? Bool, visible,
                   let documentHeight = report["documentHeight"] as? Double,
                   let contentBottom = report["contentBottom"] as? Double,
@@ -368,6 +403,8 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
                   let highlightBackgrounds = report["revisionHighlightBackgrounds"] as? [String],
                   let highlightPrintStyles = report["revisionHighlightPrintStyles"] as? [[String: Any]],
                   let authorUnderlineCount = report["authorUnderlineCount"] as? Int,
+                  let referenceCount = report["referenceCount"] as? Int,
+                  let coralDatasetReferenceVisible = report["coralDatasetReferenceVisible"] as? Bool,
                   let tooltipPrintHidden = report["tooltipPrintHidden"] as? Bool,
                   let printFigureLayoutOK = report["printFigureLayoutOK"] as? Bool,
                   let v2PrintContent = report["v2PrintContent"] as? Bool,
@@ -376,8 +413,10 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
                 self.fail("Invalid print-preparation report"); return
             }
             guard offenders.isEmpty else { self.fail("Page-boundary offenders: \(offenders)"); return }
-            guard v2PrintContent else { self.fail("v2.2.1 Discussion text is missing from print export"); return }
-            guard authorUnderlineCount == 14 else { self.fail("Author review underline count changed in print export: \(authorUnderlineCount)"); return }
+            guard v2PrintContent else { self.fail("v2.3.0 Discussion text is missing from print export"); return }
+            guard authorUnderlineCount == 24 else { self.fail("Author review underline count changed in print export: \(authorUnderlineCount)"); return }
+            guard referenceCount == 15 else { self.fail("Formal reference count changed in print export: \(referenceCount)"); return }
+            guard coralDatasetReferenceVisible else { self.fail("CORAL dataset DOI is missing from print export"); return }
             guard tooltipPrintHidden else { self.fail("Author review tooltip remains visible in print export"); return }
             guard printFigureLayoutOK else { self.fail("Mobile figure scrolling leaked into print export"); return }
             guard highlightCount == 0, highlightBackgrounds.isEmpty, highlightPrintStyles.isEmpty else {
@@ -395,7 +434,7 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
             self.captureBottom = CGFloat(contentBottom)
             self.sourceDocumentHeight = CGFloat(documentHeight)
             self.pageCount = Int(ceil(self.captureBottom / pageHeight))
-            guard self.pageCount == 14 else { self.fail("Unexpected page count: \(self.pageCount), contentBottom: \(Int(self.captureBottom))"); return }
+            guard self.pageCount == 15 else { self.fail("Unexpected page count: \(self.pageCount), contentBottom: \(Int(self.captureBottom))"); return }
             let finalPageHeight = self.captureBottom - CGFloat(self.pageCount - 1) * pageHeight
             guard finalPageHeight >= 80 else { self.fail("Trailing page is effectively empty: \(finalPageHeight) px"); return }
             self.captureNextPage()
@@ -428,9 +467,10 @@ final class PrintVerifier: NSObject, WKNavigationDelegate {
         guard let data = outputDocument.dataRepresentation() else { fail("Could not encode combined PDF"); return }
         guard data.count < resultCapBytes else { fail("Regression PDF exceeded 10 MiB"); return }
         let text = outputDocument.string ?? ""
-        for required in ["Introduction", "This study has several limitations", "Supplementary Methods", "Supplementary Table S1", "Supplementary Table S2", "Supplementary Table S3", "Supplementary Figure S1", "Supplementary Figure S2"] {
+        for required in ["Introduction", "This study has several limitations", "References", "Supplementary Methods", "Supplementary Table S1", "Supplementary Table S2", "Supplementary Table S3", "Supplementary Figure S1", "Supplementary Figure S2"] {
             guard text.contains(required) else { fail("Missing printed content: \(required)"); return }
         }
+        guard text.contains("10.13026/v69y-xa45") else { fail("Printed PDF omitted the CORAL dataset DOI"); return }
         for excluded in ["Author literature-review workspace", "Back to comment anchor", "Version history", "Draft relevance:"] {
             guard !text.contains(excluded) else { fail("Non-paper content was printed: \(excluded)"); return }
         }
