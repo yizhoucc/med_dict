@@ -1,0 +1,1756 @@
+{
+  "schema_version": 1,
+  "purpose": "Auditable text authority for the physician Word review draft",
+  "authority": {
+    "physician_archive": "WORKSHOP_PAPER_EDITABLE.physician-original.txt",
+    "physician_sha256": "81f4fccf08b608aed229408919bfb90bddc9c7f68a0fb056e74a6f953eaedcc4",
+    "physician_size_bytes": 40142,
+    "encoding": "UTF-8 without BOM",
+    "locked_project_version": "v2.3.0",
+    "locked_project_commit": "98569a744d2cd40d43419aa1b6c21565b5be1835",
+    "locked_project_text_sha256": "f662c3a769a14ff1ffc5fef083ba6e69758599fe30143fb118abe7cfe0d7b754",
+    "policy": "Physician prose is authoritative. Only enumerated copyedits are applied directly. Content concerns remain as separate editorial annotations."
+  },
+  "counts": {
+    "blocks": 123,
+    "physician_content_blocks": 119,
+    "direct_copyedit_occurrences": 18,
+    "editorial_annotations": 4,
+    "tables": 8,
+    "figure_placeholders": 6,
+    "figure_legends": 6,
+    "references": 15,
+    "front_matter_todos": 3
+  },
+  "humanizer_review": {
+    "scope": "Proposed replacement text only",
+    "draft_audit_final_completed": true,
+    "audit": [
+      "The introduction replacement keeps the physician's order and removes the unsupported broad model comparison.",
+      "The LLM judge replacement uses the author-specified cautious evidence boundary.",
+      "The ablation replacement reports the observed comparison before stating what the cumulative design cannot isolate.",
+      "The proposed replacements contain no em dash or en dash and add no promotional or filler language."
+    ]
+  },
+  "outline": [
+    {
+      "text": "TITLE",
+      "kind": "front_heading",
+      "source_line": 1
+    },
+    {
+      "text": "AUTHORS",
+      "kind": "front_heading",
+      "source_line": 4
+    },
+    {
+      "text": "ABSTRACT",
+      "kind": "front_heading",
+      "source_line": 7
+    },
+    {
+      "text": "INTRODUCTION",
+      "kind": "section_heading",
+      "source_line": 10
+    },
+    {
+      "text": "METHODS",
+      "kind": "section_heading",
+      "source_line": 22
+    },
+    {
+      "text": "Study Design",
+      "kind": "subheading",
+      "source_line": 24
+    },
+    {
+      "text": "Dataset",
+      "kind": "subheading",
+      "source_line": 32
+    },
+    {
+      "text": "Baseline model and model development",
+      "kind": "subheading",
+      "source_line": 36
+    },
+    {
+      "text": "Inference Harness",
+      "kind": "subheading",
+      "source_line": 40
+    },
+    {
+      "text": "Breast cancer development with physician review",
+      "kind": "subheading",
+      "source_line": 63
+    },
+    {
+      "text": "PDAC adaptation with feedback from language models",
+      "kind": "subheading",
+      "source_line": 67
+    },
+    {
+      "text": "Clinical evaluation data collection and scoring rubric",
+      "kind": "subheading",
+      "source_line": 73
+    },
+    {
+      "text": "Ablation study",
+      "kind": "subheading",
+      "source_line": 77
+    },
+    {
+      "text": "Statistical analysis",
+      "kind": "subheading",
+      "source_line": 91
+    },
+    {
+      "text": "RESULTS",
+      "kind": "section_heading",
+      "source_line": 103
+    },
+    {
+      "text": "Sensitivity and physician agreement",
+      "kind": "subheading",
+      "source_line": 139
+    },
+    {
+      "text": "Performance across Clinical Extraction Fields",
+      "kind": "subheading",
+      "source_line": 149
+    },
+    {
+      "text": "Technical ablation",
+      "kind": "subheading",
+      "source_line": 159
+    },
+    {
+      "text": "DISCUSSION",
+      "kind": "section_heading",
+      "source_line": 163
+    },
+    {
+      "text": "REFERENCES",
+      "kind": "section_heading",
+      "source_line": 175
+    },
+    {
+      "text": "SUPPLEMENTARY MATERIAL",
+      "kind": "section_heading",
+      "source_line": 207
+    },
+    {
+      "text": "Supplementary Methods",
+      "kind": "subheading",
+      "source_line": 209
+    },
+    {
+      "text": "Data access and holdout definition",
+      "kind": "subheading",
+      "source_line": 211
+    },
+    {
+      "text": "Assessment and Plan identification",
+      "kind": "subheading",
+      "source_line": 215
+    },
+    {
+      "text": "Verification and post processing order",
+      "kind": "subheading",
+      "source_line": 219
+    },
+    {
+      "text": "Insufficient source information",
+      "kind": "subheading",
+      "source_line": 235
+    },
+    {
+      "text": "Model roles during PDAC adaptation",
+      "kind": "subheading",
+      "source_line": 239
+    },
+    {
+      "text": "Physician evaluation interface",
+      "kind": "subheading",
+      "source_line": 243
+    },
+    {
+      "text": "Ablation study judge",
+      "kind": "subheading",
+      "source_line": 247
+    }
+  ],
+  "direct_copyedits": [
+    {
+      "id": "CE001",
+      "source_line": 16,
+      "before": "concerns[4]",
+      "after": "concerns [4]",
+      "reason": "Add the missing space before citation [4]."
+    },
+    {
+      "id": "CE002",
+      "source_line": 16,
+      "before": "extraction[2]",
+      "after": "extraction [2]",
+      "reason": "Add the missing space before citation [2]."
+    },
+    {
+      "id": "CE003",
+      "source_line": 28,
+      "before": "sinlge prompt",
+      "after": "single prompt",
+      "reason": "Correct the spelling error in the baseline description."
+    },
+    {
+      "id": "CE004",
+      "source_line": 38,
+      "before": "in single prompt",
+      "after": "in a single prompt",
+      "reason": "Add the missing article."
+    },
+    {
+      "id": "CE005",
+      "source_line": 20,
+      "before": "single-prompt",
+      "after": "single prompt",
+      "reason": "Use the physician's preferred unhyphenated term throughout."
+    },
+    {
+      "id": "CE006",
+      "source_line": 84,
+      "before": "single-prompt",
+      "after": "single prompt",
+      "reason": "Use the physician's preferred unhyphenated term throughout."
+    },
+    {
+      "id": "CE007",
+      "source_line": 282,
+      "before": "single-prompt",
+      "after": "single prompt",
+      "reason": "Use the physician's preferred unhyphenated term throughout."
+    },
+    {
+      "id": "CE008",
+      "source_line": 167,
+      "before": "status.Huang",
+      "after": "status. Huang",
+      "reason": "Add the missing sentence space."
+    },
+    {
+      "id": "CE009",
+      "source_line": 167,
+      "before": "have showed",
+      "after": "have shown",
+      "reason": "Correct the verb form."
+    },
+    {
+      "id": "CE010",
+      "source_line": 167,
+      "before": "completeness.[9,10].",
+      "after": "completeness [9,10].",
+      "reason": "Correct citation spacing and duplicate punctuation."
+    },
+    {
+      "id": "CE011",
+      "source_line": 171,
+      "before": "deterministric",
+      "after": "deterministic",
+      "reason": "Correct the spelling error."
+    },
+    {
+      "id": "CE012",
+      "source_line": 171,
+      "before": "post-proccessing",
+      "after": "post processing",
+      "reason": "Correct the spelling and use the requested unhyphenated term."
+    },
+    {
+      "id": "CE013",
+      "source_line": 219,
+      "before": "Verification and postprocessing order",
+      "after": "Verification and post processing order",
+      "reason": "Use the requested spaced term in the Supplement heading."
+    },
+    {
+      "id": "CE014",
+      "source_line": 171,
+      "before": "rules, this suggests",
+      "after": "rules. This suggests",
+      "reason": "Repair the comma splice."
+    },
+    {
+      "id": "CE015",
+      "source_line": 171,
+      "before": "hormone status, which are used to classify breast cancer subtypes but are not applicable to PDAC",
+      "after": "hormone status, which is used to classify breast cancer subtypes but is not applicable to PDAC",
+      "reason": "Correct subject-verb agreement."
+    },
+    {
+      "id": "CE016",
+      "source_line": 151,
+      "before": "In all the 1,040 evaluations",
+      "after": "Across all 1,040 evaluations",
+      "reason": "Correct the sentence opening."
+    },
+    {
+      "id": "CE017",
+      "source_line": 131,
+      "before": "86.21%), the pancreatic cancer estimate",
+      "after": "86.21%). The pancreatic cancer estimate",
+      "reason": "Repair the comma splice between the two estimates."
+    },
+    {
+      "id": "CE018",
+      "source_line": 18,
+      "before": " ",
+      "after": "",
+      "reason": "Remove trailing whitespace."
+    }
+  ],
+  "editorial_annotations": [
+    {
+      "id": "AN001",
+      "kind": "proposed_replacement",
+      "anchor_source_line": 16,
+      "text": "(Proposed replacement: \"LLMs can extract information from clinical notes, but their outputs can vary. They may omit details, confuse past findings with current findings, or add information that is not supported by the original note [4,5]. In the CORAL benchmark, the commercial models outperformed the open model evaluated in that study [4]. Sending protected health information (PHI) to externally hosted services raises privacy and governance concerns [2]. Local deployment can keep PHI within the institution, but it does not by itself ensure accurate extraction. Although manual review can identify extraction errors, reviewing every output is impractical at scale. These challenges motivate an LLM-based extraction workflow that improves reliability, preserves data privacy, and reduces manual review.\")",
+      "reason": "Keep the physician's revised flow while limiting the CORAL comparison to that benchmark and assigning the privacy claim to reference 2."
+    },
+    {
+      "id": "AN002",
+      "kind": "proposed_replacement",
+      "anchor_source_line": 167,
+      "text": "(Proposed replacement: \"Prior studies have examined LLM as a judge evaluation in clinical generative AI, with agreement varying by rubric and setting [9,10].\")",
+      "reason": "Avoid a shared high-concordance claim that references 9 and 10 do not support across all rubrics and settings."
+    },
+    {
+      "id": "AN003",
+      "kind": "proposed_replacement",
+      "anchor_source_line": 171,
+      "text": "(Proposed replacement: \"The C versus D comparison did not show a significant directional preference (19 versus 16; P = .736). Condition D added deterministic inline processing and the full POST hook layer to Condition C, so this cumulative comparison cannot isolate the effect of any single component. Some breast cancer rules concerned ER, PR, and HER2 status and were not applicable to PDAC.\")",
+      "reason": "Describe the cumulative C versus D comparison without attributing the result to one component or calling HER2 hormone status."
+    },
+    {
+      "id": "AN004",
+      "kind": "reference_recommendation",
+      "anchor_source_line": 205,
+      "text": "(Reference recommendation: References 13 and 14 are not cited in the current text and could be removed. Reference 15 could be retained if VALID is cited after \"expert reference standards.\")",
+      "reason": "Keep all physician references in this review source while recording the current citation mismatch."
+    }
+  ],
+  "linear_text_sha256": "340f350bd2711c9ba545282e1bea81cfab68f1e5f0f4d9bc97a710922afbd2b3",
+  "blocks": [
+    {
+      "id": "B001",
+      "kind": "front_heading",
+      "origin": "physician_verbatim",
+      "source_line_start": 1,
+      "source_line_end": 1,
+      "text": "TITLE",
+      "level": 1
+    },
+    {
+      "id": "B002",
+      "kind": "placeholder",
+      "origin": "physician_verbatim",
+      "source_line_start": 2,
+      "source_line_end": 2,
+      "text": "[TODO]"
+    },
+    {
+      "id": "B003",
+      "kind": "front_heading",
+      "origin": "physician_verbatim",
+      "source_line_start": 4,
+      "source_line_end": 4,
+      "text": "AUTHORS",
+      "level": 1
+    },
+    {
+      "id": "B004",
+      "kind": "placeholder",
+      "origin": "physician_verbatim",
+      "source_line_start": 5,
+      "source_line_end": 5,
+      "text": "[TODO]"
+    },
+    {
+      "id": "B005",
+      "kind": "front_heading",
+      "origin": "physician_verbatim",
+      "source_line_start": 7,
+      "source_line_end": 7,
+      "text": "ABSTRACT",
+      "level": 1
+    },
+    {
+      "id": "B006",
+      "kind": "placeholder",
+      "origin": "physician_verbatim",
+      "source_line_start": 8,
+      "source_line_end": 8,
+      "text": "[TODO]"
+    },
+    {
+      "id": "B007",
+      "kind": "section_heading",
+      "origin": "physician_verbatim",
+      "source_line_start": 10,
+      "source_line_end": 10,
+      "text": "INTRODUCTION",
+      "level": 1
+    },
+    {
+      "id": "B008",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 12,
+      "source_line_end": 12,
+      "text": "Large language models (LLMs) are increasingly used for clinical documentation, patient communication, and administrative tasks. Many of these applications depend on identifying relevant information in electronic health record (EHR) notes before those facts can be summarized, analyzed, or used in another task. Reliable extraction from those notes is therefore an important step for many uses of LLMs in oncology care and research. This study focuses on that extraction task."
+    },
+    {
+      "id": "B009",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 14,
+      "source_line_end": 14,
+      "text": "It is estimated that about 80% of healthcare data are unstructured [1], with a large proportion of clinically relevant information encoded in free-text narratives [2]. Oncology notes are particularly challenging because a patient can have a complex medical history that contains multiple diagnoses, prior and future treatments, and changes in disease status. Key information may be distributed across different sections, expressed with uncertainty, linked through complex timelines, or even documented incorrectly. As commonly seen in real-world practice, laboratory, imaging, and genomic results copied from earlier notes lengthen notes and further complicate the extraction task. A study of outpatient documentation across a decade found that notes became longer and more redundant, with much of the increase attributable to templates or copied and pasted text [3]. LLMs must therefore not only identify the relevant information, but also determine its relationship to the patient’s current diseases."
+    },
+    {
+      "id": "B010",
+      "kind": "paragraph",
+      "origin": "physician_copyedited",
+      "source_line_start": 16,
+      "source_line_end": 16,
+      "text": "LLMs can extract information from clinical notes, but their outputs can vary. They may omit details, confuse past findings with current findings, or add information that is not supported by the original note [4,5]. Commercial models perform better on some clinical extraction tasks, but sending protected health information (PHI) to externally hosted services raises privacy and governance concerns [4]. Local deployment can keep PHI within the institution, but it does not by itself ensure accurate extraction [2]. Although manual review can identify extraction errors, reviewing every output is impractical at scale. These challenges highlight the need for an LLM-based extraction workflow that improves reliability while preserving data privacy and minimizing the need for manual review."
+    },
+    {
+      "id": "AN001",
+      "kind": "proposed_replacement",
+      "origin": "editorial_annotation",
+      "anchor_source_line": 16,
+      "text": "(Proposed replacement: \"LLMs can extract information from clinical notes, but their outputs can vary. They may omit details, confuse past findings with current findings, or add information that is not supported by the original note [4,5]. In the CORAL benchmark, the commercial models outperformed the open model evaluated in that study [4]. Sending protected health information (PHI) to externally hosted services raises privacy and governance concerns [2]. Local deployment can keep PHI within the institution, but it does not by itself ensure accurate extraction. Although manual review can identify extraction errors, reviewing every output is impractical at scale. These challenges motivate an LLM-based extraction workflow that improves reliability, preserves data privacy, and reduces manual review.\")",
+      "reason": "Keep the physician's revised flow while limiting the CORAL comparison to that benchmark and assigning the privacy claim to reference 2."
+    },
+    {
+      "id": "B012",
+      "kind": "paragraph",
+      "origin": "physician_copyedited",
+      "source_line_start": 18,
+      "source_line_end": 18,
+      "text": "How an LLM is used may be as important as the model itself. Additional training can adapt model weights to a clinical task. When the weights are unchanged, prompt design, task decomposition, verification, and clinical rules can organize the extraction process. Huang et al. iteratively refined prompts on expert curated lung pathology data and later applied the same prompt engineering strategy to osteosarcoma reports. Hein et al. used a human in the loop process to refine prompts, output schemas, and an error ontology, then applied the resulting templates to breast and prostate pathology reports [5,6]. These studies focused on pathology reports and prompt or schema refinement. It remains unclear whether a broader multistep workflow developed from physician feedback can be used to improve note extraction."
+    },
+    {
+      "id": "B013",
+      "kind": "paragraph",
+      "origin": "physician_copyedited",
+      "source_line_start": 20,
+      "source_line_end": 20,
+      "text": "To address this gap, we built a locally deployable inference harness around a frozen LLM for extracting information from real-world unstructured oncology notes. The harness divides extraction into smaller tasks and applies checks and clinical rules without changing the model weights. We developed the breast cancer harness with physician input. We then adapted it to pancreatic ductal adenocarcinoma (PDAC) notes using LLM-assisted review and regression tests without physician review of the PDAC development outputs. Four physicians compared the final harness with a single prompt baseline that used the same model. Our results showed that the output from the harness was favored over that from a single prompt baseline."
+    },
+    {
+      "id": "B014",
+      "kind": "section_heading",
+      "origin": "physician_verbatim",
+      "source_line_start": 22,
+      "source_line_end": 22,
+      "text": "METHODS",
+      "level": 1
+    },
+    {
+      "id": "B015",
+      "kind": "subheading",
+      "origin": "physician_verbatim",
+      "source_line_start": 24,
+      "source_line_end": 24,
+      "text": "Study Design",
+      "level": 2
+    },
+    {
+      "id": "B016",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 26,
+      "source_line_end": 26,
+      "text": "The study comprised two development stages followed by an independent physician evaluation. In Stage 1, a physician and an investigator developed the breast cancer inference harness through review of selected outputs. In Stage 2, the investigator adapted the harness to pancreatic ductal adenocarcinoma (PDAC) using LLM review and regression tests, without physician review of the PDAC development outputs (Figure 1A-C). Four physicians then compared the final systems on an untouched holdout set."
+    },
+    {
+      "id": "B017",
+      "kind": "paragraph",
+      "origin": "physician_copyedited",
+      "source_line_start": 28,
+      "source_line_end": 28,
+      "text": "The final harness was compared with a single prompt baseline using the same frozen model and field schema on an untouched holdout set of 40 CORAL notes annotated by experts. The set included 20 breast cancer notes and 20 PDAC notes. Four physicians completed evaluations for each field across both cancer types. System identities were not disclosed."
+    },
+    {
+      "id": "B018",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 30,
+      "source_line_end": 30,
+      "text": "We separately conducted an ablation study of four cumulative harness configurations using an OpenAI LLM judge (Figure 1D; Table 2)."
+    },
+    {
+      "id": "B019",
+      "kind": "subheading",
+      "origin": "physician_verbatim",
+      "source_line_start": 32,
+      "source_line_end": 32,
+      "text": "Dataset",
+      "level": 2
+    },
+    {
+      "id": "B020",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 34,
+      "source_line_end": 34,
+      "text": "We used CORAL, a PhysioNet dataset of deidentified medical oncology notes obtained from the University of California, San Francisco [4,7]. The development process used 100 unannotated breast cancer notes and 100 unannotated pancreatic cancer notes. A separate untouched holdout set of 40 notes annotated by experts consisted of 20 breast cancer notes and 20 PDAC notes. The holdout note texts were not used for development. The annotations were not provided to the model or used during development, and they were not used to calculate the primary endpoint based on physician preference. They were not shown to the physicians in the evaluation interface."
+    },
+    {
+      "id": "B021",
+      "kind": "subheading",
+      "origin": "physician_verbatim",
+      "source_line_start": 36,
+      "source_line_end": 36,
+      "text": "Baseline model and model development",
+      "level": 2
+    },
+    {
+      "id": "B022",
+      "kind": "paragraph",
+      "origin": "physician_copyedited",
+      "source_line_start": 38,
+      "source_line_end": 38,
+      "text": "We used Qwen2.5-32B-Instruct [8] with AWQ quantization, served locally through vLLM. The baseline used the complete note and all extraction questions in a single prompt and requested the full target schema in one response. Each note was processed in one chat completion request. This describes the application-level request and does not make a claim about internal server execution or forward passes. In the physician review, the baseline and harness used the same field definitions and output contract."
+    },
+    {
+      "id": "B023",
+      "kind": "subheading",
+      "origin": "physician_verbatim",
+      "source_line_start": 40,
+      "source_line_end": 40,
+      "text": "Inference Harness",
+      "level": 2
+    },
+    {
+      "id": "B024",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 42,
+      "source_line_end": 42,
+      "text": "The harness extracted clinical information in multiple steps because different fields required different clinical context, reasoning, processing, and validation. It first used regular expressions to identify the Assessment and Plan section for fields related to the plan. If this step failed, the model made up to three attempts to locate and reproduce the relevant text, and each attempt was checked against the original note. If all attempts failed, the harness skipped only the plan branch and continued extraction from the complete note. Separate prompts for each field identified the visit context, cancer diagnosis, laboratory results, objective findings, active medications, and recent treatment changes. Information extracted in earlier steps then guided dependent assessments. For example, cancer stage and metastatic status provided context for treatment intent, while current therapy and clinical findings provided context for treatment response. The plan branch used text from the Assessment and Plan section that was supported by the source note. Prompts instructed the model to leave a field empty when the note did not provide sufficient evidence."
+    },
+    {
+      "id": "B025",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 44,
+      "source_line_end": 44,
+      "text": "Outputs passed through structural checks for JSON and schema validity, followed by checks for specificity, semantic alignment, accuracy and support from the original note, and temporal consistency. Deterministic clinical rules and processing across fields were then applied to repeated extraction errors. Source attribution was added when enabled. See Table 1. Operational definitions and order are provided in Supplementary Methods."
+    },
+    {
+      "id": "B026",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 46,
+      "source_line_end": 46,
+      "text": "We included clinical rules to address repeated extraction errors. For example, these rules helped the system distinguish regional lymph node involvement from distant metastases, suspected metastatic disease from confirmed metastatic disease, and active anticancer treatment from supportive or home medications. They also prevented disease changes documented before treatment initiation from being misclassified as a treatment response. The system returned supporting excerpts from the original clinical note when available."
+    },
+    {
+      "id": "B027",
+      "kind": "table",
+      "origin": "physician_verbatim",
+      "source_line_start": 48,
+      "source_line_end": 57,
+      "text": "Table 1. Inference harness components\nHarness component\tFailure mode addressed\tExample\nExtraction with separate prompts for each field\tExtracting multiple fields in a single prompt may lead to missing or mixed information\tSeparate current medication from previous and future treatment plans.\nContext that accounts for dependencies\tRelated fields contradict one another\tUse metastatic status when interpreting stage and response\nSemantic verification\tThe model returns medically related answers that do not address the target question\tRemove a future treatment plan from current response\nFaithfulness trimming\tThe model infers a conclusion that is not supported by the note\tKeep a lesion classified as suspected rather than label it as confirmed when a biopsy is pending\nTemporal filtering\tConfusion among past, current, and future information.\tRemove a completed scan from the imaging plan\nDrug and context rules\tA medication may be misclassified when its clinical role is unclear from the drug name alone\tSeparate anticancer drugs from home and supportive medications\nClinical rules across fields\tStage, nodes, and distant disease become inconsistent\tKeep axillary nodes regional rather than distant\nSource attribution\tA reviewer cannot trace an extracted value\tReturn the supporting sentence from the note",
+      "caption": "Table 1. Inference harness components",
+      "rows": [
+        [
+          "Harness component",
+          "Failure mode addressed",
+          "Example"
+        ],
+        [
+          "Extraction with separate prompts for each field",
+          "Extracting multiple fields in a single prompt may lead to missing or mixed information",
+          "Separate current medication from previous and future treatment plans."
+        ],
+        [
+          "Context that accounts for dependencies",
+          "Related fields contradict one another",
+          "Use metastatic status when interpreting stage and response"
+        ],
+        [
+          "Semantic verification",
+          "The model returns medically related answers that do not address the target question",
+          "Remove a future treatment plan from current response"
+        ],
+        [
+          "Faithfulness trimming",
+          "The model infers a conclusion that is not supported by the note",
+          "Keep a lesion classified as suspected rather than label it as confirmed when a biopsy is pending"
+        ],
+        [
+          "Temporal filtering",
+          "Confusion among past, current, and future information.",
+          "Remove a completed scan from the imaging plan"
+        ],
+        [
+          "Drug and context rules",
+          "A medication may be misclassified when its clinical role is unclear from the drug name alone",
+          "Separate anticancer drugs from home and supportive medications"
+        ],
+        [
+          "Clinical rules across fields",
+          "Stage, nodes, and distant disease become inconsistent",
+          "Keep axillary nodes regional rather than distant"
+        ],
+        [
+          "Source attribution",
+          "A reviewer cannot trace an extracted value",
+          "Return the supporting sentence from the note"
+        ]
+      ]
+    },
+    {
+      "id": "B028",
+      "kind": "figure_placeholder",
+      "origin": "physician_verbatim",
+      "source_line_start": 59,
+      "source_line_end": 59,
+      "text": "[Insert Figure 1 here]"
+    },
+    {
+      "id": "B029",
+      "kind": "figure_legend",
+      "origin": "physician_verbatim",
+      "source_line_start": 61,
+      "source_line_end": 61,
+      "text": "Figure 1. Development and adaptation workflow. Panel A shows the breast cancer development set, PDAC adaptation set, and locked holdout set. Panel B shows physician informed breast cancer harness development. Panel C shows LLM assisted PDAC adaptation without physician review of PDAC outputs. Panel D shows the four cumulative configurations in the blinded LLM ablation."
+    },
+    {
+      "id": "B030",
+      "kind": "subheading",
+      "origin": "physician_verbatim",
+      "source_line_start": 63,
+      "source_line_end": 63,
+      "text": "Breast cancer development with physician review",
+      "level": 2
+    },
+    {
+      "id": "B031",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 65,
+      "source_line_end": 65,
+      "text": "Breast cancer development used all 100 development notes. Early and targeted iterations used smaller subsets to shorten the feedback cycle, while major and final runs covered all 100 notes to detect less frequent errors and check for regression. A physician reviewed selected outputs, and the investigators compared flagged outputs with the complete source note, grouped repeated errors, and translated them into general changes to prompts, verification logic, or deterministic rules. These changes were retained only after testing on affected examples. The objective was to encode repeated clinical distinctions rather than corrections for individual cases. For example, an error in which axillary nodal disease was classified as distant metastasis motivated a general rule for regional nodes. An error in which a planned drug was listed as active therapy motivated a temporal medication rule. This process did not produce a conventional supervised training set, and the model weights were not updated."
+    },
+    {
+      "id": "B032",
+      "kind": "subheading",
+      "origin": "physician_verbatim",
+      "source_line_start": 67,
+      "source_line_end": 67,
+      "text": "PDAC adaptation with feedback from language models",
+      "level": 2
+    },
+    {
+      "id": "B033",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 69,
+      "source_line_end": 69,
+      "text": "The harness developed from breast cancer notes was further adapted to pancreatic ductal adenocarcinoma using 100 additional pancreatic cancer notes. No physician reviewed pancreatic cancer outputs during this stage. ChatGPT organized the clinical error categories and clinical distinctions established during breast cancer development into a structured review rubric. The Qwen pipeline generated structured outputs, and a Qwen reviewer guided by the rubric compared them with the complete pancreatic source notes and flagged potential errors. Investigators assessed the flags, implemented selected revisions to prompts, clinical rules, or workflow logic, and retained changes only after regression testing."
+    },
+    {
+      "id": "B034",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 71,
+      "source_line_end": 71,
+      "text": "The adaptation retained the core framework while introducing modifications specific to pancreatic cancer, particularly for disease terminology, treatment regimens, and rules applied after extraction. The framework preserved its core approach to error detection and correction while accommodating differences between the two cancer types."
+    },
+    {
+      "id": "B035",
+      "kind": "subheading",
+      "origin": "physician_verbatim",
+      "source_line_start": 73,
+      "source_line_end": 73,
+      "text": "Clinical evaluation data collection and scoring rubric",
+      "level": 2
+    },
+    {
+      "id": "B036",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 75,
+      "source_line_end": 75,
+      "text": "The clinical evaluation presented the source note and two structured outputs through an A/B test interface. Four physicians selected A better, B better, or tie for each field. The physician who participated in Stage 1 development was not one of the four physicians. System identities were not disclosed. Source attribution was available only with the harness output when present, so physicians compared the full output packages rather than source attribution alone. Before evaluating the holdout set, the authors designated seven core fields as clinically important for understanding disease status and current management. Details of the interface are provided in Supplementary Methods. See Supplementary Table S1."
+    },
+    {
+      "id": "B037",
+      "kind": "subheading",
+      "origin": "physician_verbatim",
+      "source_line_start": 77,
+      "source_line_end": 77,
+      "text": "Ablation study",
+      "level": 2
+    },
+    {
+      "id": "B038",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 79,
+      "source_line_end": 79,
+      "text": "We conducted an ablation study on the same 20 breast cancer and 20 pancreatic cancer holdout notes to examine how output quality changed across successive harness configurations. All four conditions used Qwen2.5-32B-Instruct-AWQ, greedy decoding, and the same output contract with 31 fields. Attribution, tool calling, and letter generation were disabled."
+    },
+    {
+      "id": "B039",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 81,
+      "source_line_end": 81,
+      "text": "See Table 2 for the 4 conditions."
+    },
+    {
+      "id": "B040",
+      "kind": "table",
+      "origin": "physician_copyedited",
+      "source_line_start": 83,
+      "source_line_end": 87,
+      "text": "Table 2. Ablation study conditions\nA\tA single prompt baseline with one inference request per note.\nB\tDecomposed extraction with separate prompts for each field, routing across fields, bounded Assessment and Plan retry, and the shared format and schema safeguards.\nC\tCondition B plus the semantic, faithfulness, and temporal verification gates.\nD\tCondition C plus deterministic inline processing and the complete POST hook layer used by the full inference harness.",
+      "caption": "Table 2. Ablation study conditions",
+      "rows": [
+        [
+          "A",
+          "A single prompt baseline with one inference request per note."
+        ],
+        [
+          "B",
+          "Decomposed extraction with separate prompts for each field, routing across fields, bounded Assessment and Plan retry, and the shared format and schema safeguards."
+        ],
+        [
+          "C",
+          "Condition B plus the semantic, faithfulness, and temporal verification gates."
+        ],
+        [
+          "D",
+          "Condition C plus deterministic inline processing and the complete POST hook layer used by the full inference harness."
+        ]
+      ]
+    },
+    {
+      "id": "B041",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 89,
+      "source_line_end": 89,
+      "text": "We compared adjacent configurations (A vs B, B vs C, and C vs D), yielding 120 paired comparisons across 40 notes. A single OpenAI LLM judge received only the source note and the two outputs for each adjacent configuration pair. The judge had no access to the project code, development history, prior evaluations, or configuration identities. It was instructed to prioritize accuracy and support from the original note, then completeness, and to use TIE when differences were minor or offsetting. We compared adjacent configurations using two sided exact sign tests, excluding ties. Details of the judge model and settings are provided in Supplementary Methods."
+    },
+    {
+      "id": "B042",
+      "kind": "subheading",
+      "origin": "physician_verbatim",
+      "source_line_start": 91,
+      "source_line_end": 91,
+      "text": "Statistical analysis",
+      "level": 2
+    },
+    {
+      "id": "B043",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 93,
+      "source_line_end": 93,
+      "text": "For the physician evaluation, interrater agreement was assessed pairwise using exact agreement and Cohen’s κ for each physician pair. Results from the 8 completed physician-by-cancer evaluations were summarized separately. Pooled counts were reported descriptively and were not treated as independent field-level observations."
+    },
+    {
+      "id": "B044",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 95,
+      "source_line_end": 95,
+      "text": "For the primary inferential analysis, tied comparisons were excluded, and each remaining directional judgment was coded according to whether it favored the harness or the baseline. We fit a population-averaged logistic generalized estimating equation (GEE) with an exchangeable working correlation structure at the note level to account for clustering of repeated field-level judgments within the same note. Evaluator was included as a fixed effect, and cancer type was additionally included in the overall model. Cancer-specific models adjusted for evaluator."
+    },
+    {
+      "id": "B045",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 97,
+      "source_line_end": 97,
+      "text": "The primary outcome was the adjusted probability of harness preference among directional judgments. Predicted probabilities were standardized over the observed covariate distribution, and 95% confidence intervals (CIs) were calculated using the delta method on the logit scale. Adjusted odds ratios (ORs) were reported as secondary measures."
+    },
+    {
+      "id": "B046",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 99,
+      "source_line_end": 99,
+      "text": "For sensitivity analyses, we refitted the overall model four times after excluding one physician at a time. We also retained tied judgments by coding harness, tie, and baseline preferences as 1, 0, and −1, respectively, and calculated the mean net preference margin with 95% CIs using sandwich standard errors clustered by note. Finally, we aggregated preferences for each field within each note and performed an exact two-sided sign test comparing positive and negative margins by note."
+    },
+    {
+      "id": "B047",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 101,
+      "source_line_end": 101,
+      "text": "Exploratory analysis of core fields used one joint population averaged logistic GEE on 495 directional judgments. Field, physician, and cancer type were fixed effects. Repeated judgments were clustered by note with an exchangeable working correlation. Probabilities for each field were standardized over the physician and cancer distribution observed for that field. Breast type and receptor status applied only to breast cancer notes. Ties were excluded. These estimates describe preference rather than accuracy, and no pairwise field tests or multiplicity claims were made."
+    },
+    {
+      "id": "B048",
+      "kind": "section_heading",
+      "origin": "physician_verbatim",
+      "source_line_start": 103,
+      "source_line_end": 103,
+      "text": "RESULTS",
+      "level": 1
+    },
+    {
+      "id": "B049",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 105,
+      "source_line_end": 105,
+      "text": "All four physicians evaluated both cancer types. Across 2,160 required judgments for each note and field, the harness was preferred 699 times, 1,290 comparisons were ties, and the baseline was preferred 171 times. See Table 3, Table 4, and Figure 2. These correspond to 32.36%, 59.72%, and 7.92% of all judgments. Among the 870 directional judgments, the crude harness share was 80.34% (note cluster robust 95% CI 76.14% to 83.96%). The unadjusted harness share among directional judgments ranged from 65.5% to 90.8% across the eight physician-by-cancer groups (Figure 2B)."
+    },
+    {
+      "id": "B050",
+      "kind": "table",
+      "origin": "physician_verbatim",
+      "source_line_start": 107,
+      "source_line_end": 113,
+      "text": "Table 3. Physician preferences for breast cancer extraction\nPhysician\tRequired judgments\tHarness\tBaseline\tTie\tHarness share among directional judgments\n01\t280\t84\t22\t174\t79.2%\n02\t280\t79\t8\t193\t90.8%\n03\t280\t119\t24\t137\t83.2%\n04\t280\t81\t26\t173\t75.7%\nAll\t1,120\t363\t80\t677\t81.9%",
+      "caption": "Table 3. Physician preferences for breast cancer extraction",
+      "rows": [
+        [
+          "Physician",
+          "Required judgments",
+          "Harness",
+          "Baseline",
+          "Tie",
+          "Harness share among directional judgments"
+        ],
+        [
+          "01",
+          "280",
+          "84",
+          "22",
+          "174",
+          "79.2%"
+        ],
+        [
+          "02",
+          "280",
+          "79",
+          "8",
+          "193",
+          "90.8%"
+        ],
+        [
+          "03",
+          "280",
+          "119",
+          "24",
+          "137",
+          "83.2%"
+        ],
+        [
+          "04",
+          "280",
+          "81",
+          "26",
+          "173",
+          "75.7%"
+        ],
+        [
+          "All",
+          "1,120",
+          "363",
+          "80",
+          "677",
+          "81.9%"
+        ]
+      ]
+    },
+    {
+      "id": "B051",
+      "kind": "table",
+      "origin": "physician_verbatim",
+      "source_line_start": 115,
+      "source_line_end": 121,
+      "text": "Table 4. Physician preferences for PDAC extraction\nPhysician\tRequired judgments\tHarness\tBaseline\tTie\tHarness share among directional judgments\n01\t260\t75\t14\t171\t84.3%\n02\t260\t86\t9\t165\t90.5%\n03\t260\t103\t30\t127\t77.4%\n04\t260\t72\t38\t150\t65.5%\nAll\t1,040\t336\t91\t613\t78.7%",
+      "caption": "Table 4. Physician preferences for PDAC extraction",
+      "rows": [
+        [
+          "Physician",
+          "Required judgments",
+          "Harness",
+          "Baseline",
+          "Tie",
+          "Harness share among directional judgments"
+        ],
+        [
+          "01",
+          "260",
+          "75",
+          "14",
+          "171",
+          "84.3%"
+        ],
+        [
+          "02",
+          "260",
+          "86",
+          "9",
+          "165",
+          "90.5%"
+        ],
+        [
+          "03",
+          "260",
+          "103",
+          "30",
+          "127",
+          "77.4%"
+        ],
+        [
+          "04",
+          "260",
+          "72",
+          "38",
+          "150",
+          "65.5%"
+        ],
+        [
+          "All",
+          "1,040",
+          "336",
+          "91",
+          "613",
+          "78.7%"
+        ]
+      ]
+    },
+    {
+      "id": "B052",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 123,
+      "source_line_end": 123,
+      "text": "For breast cancer notes, all four physicians independently favored the harness on the breast cancer set. Their pooled breast result was 363 harness preferences, 80 baseline preferences, and 677 ties. The first physician's result by note was 18 harness wins, one baseline win, and one tie. The second and third physicians each recorded a harness win in all 20 notes. The fourth recorded 16 harness wins, two baseline wins, and two ties. When the four breast evaluations were combined within each note, all 20 notes had a positive difference between harness and baseline preferences (Supplementary Figure S1)."
+    },
+    {
+      "id": "B053",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 125,
+      "source_line_end": 125,
+      "text": "For pancreatic cancer notes, the evaluations produced 336 harness preferences, 91 baseline preferences, and 613 ties. The harness had a positive pooled margin in 19 pancreatic notes and a negative margin in one."
+    },
+    {
+      "id": "B054",
+      "kind": "figure_placeholder",
+      "origin": "physician_verbatim",
+      "source_line_start": 127,
+      "source_line_end": 127,
+      "text": "[Insert Figure 2 here]"
+    },
+    {
+      "id": "B055",
+      "kind": "figure_legend",
+      "origin": "physician_verbatim",
+      "source_line_start": 129,
+      "source_line_end": 129,
+      "text": "Figure 2. Physician preferences across all judgments. Panel A shows harness preferred, tied, and baseline preferred judgments overall and by cancer type. Panel B shows pooled harness preference in blue text and individual physician values as circles among judgments without ties. Panel B values are unadjusted."
+    },
+    {
+      "id": "B056",
+      "kind": "paragraph",
+      "origin": "physician_copyedited",
+      "source_line_start": 131,
+      "source_line_end": 131,
+      "text": "The adjusted probability of a harness preference among directional judgments was 79.98% (95% CI 75.75% to 83.63%). The breast cancer estimate was 81.66% (95% CI, 76.02% to 86.21%). The pancreatic cancer estimate was 78.15% (95% CI, 71.47% to 83.62%). The same standardized estimates on the odds scale were 3.995 overall (95% CI, 3.12 to 5.11; p < 0.05), 4.45 for breast cancer (95% CI, 3.17 to 6.25; p < 0.05), and 3.576 for pancreatic cancer (95% CI, 2.51 to 5.11; p < 0.05). See Table 5."
+    },
+    {
+      "id": "B057",
+      "kind": "table",
+      "origin": "physician_verbatim",
+      "source_line_start": 133,
+      "source_line_end": 137,
+      "text": "Table 5. Adjusted probability of inference harness preference among directional judgments\nScope\tDirectional judgments\tHarness\tBaseline\tNote clusters\tAdjusted probability (95% CI)\tAdjusted odds ratio (95% CI)\tP value\nOverall\t870\t699\t171\t40\t79.98% (75.75%-83.63%)\t3.995 (3.124-5.110)\t2.67e-28\nBreast cancer\t443\t363\t80\t20\t81.66% (76.02%-86.21%)\t4.452 (3.169-6.253)\t7.04e-18\nPDAC\t427\t336\t91\t20\t78.15% (71.47%-83.62%)\t3.576 (2.505-5.105)\t2.30e-12",
+      "caption": "Table 5. Adjusted probability of inference harness preference among directional judgments",
+      "rows": [
+        [
+          "Scope",
+          "Directional judgments",
+          "Harness",
+          "Baseline",
+          "Note clusters",
+          "Adjusted probability (95% CI)",
+          "Adjusted odds ratio (95% CI)",
+          "P value"
+        ],
+        [
+          "Overall",
+          "870",
+          "699",
+          "171",
+          "40",
+          "79.98% (75.75%-83.63%)",
+          "3.995 (3.124-5.110)",
+          "2.67e-28"
+        ],
+        [
+          "Breast cancer",
+          "443",
+          "363",
+          "80",
+          "20",
+          "81.66% (76.02%-86.21%)",
+          "4.452 (3.169-6.253)",
+          "7.04e-18"
+        ],
+        [
+          "PDAC",
+          "427",
+          "336",
+          "91",
+          "20",
+          "78.15% (71.47%-83.62%)",
+          "3.576 (2.505-5.105)",
+          "2.30e-12"
+        ]
+      ]
+    },
+    {
+      "id": "B058",
+      "kind": "subheading",
+      "origin": "physician_verbatim",
+      "source_line_start": 139,
+      "source_line_end": 139,
+      "text": "Sensitivity and physician agreement",
+      "level": 2
+    },
+    {
+      "id": "B059",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 141,
+      "source_line_end": 141,
+      "text": "Sensitivity analyses supported the primary findings. When ties were included, the net preference margin favored the harness (+24.4 percentage points; 95% CI, +20.4 to +28.5). At the note level, the harness was preferred in 39 of 40 cases (97.5%). When each physician was excluded individually, adjusted probabilities of harness preference ranged from 77.08% to 83.53% (Supplementary Table S3)."
+    },
+    {
+      "id": "B060",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 143,
+      "source_line_end": 143,
+      "text": "Pairwise exact agreement ranged from 73.1% to 82.9%, with Cohen's kappa ranging from 0.511 to 0.646 (Figure 3 and Supplementary Table S2)."
+    },
+    {
+      "id": "B061",
+      "kind": "figure_placeholder",
+      "origin": "physician_verbatim",
+      "source_line_start": 145,
+      "source_line_end": 145,
+      "text": "[Insert Figure 3 here]"
+    },
+    {
+      "id": "B062",
+      "kind": "figure_legend",
+      "origin": "physician_verbatim",
+      "source_line_start": 147,
+      "source_line_end": 147,
+      "text": "Figure 3. Pairwise exact agreement and Cohen's kappa among four physicians in breast cancer and PDAC. Each breast cancer pair shared 280 judgments, and each PDAC pair shared 260 judgments. The blue scale encodes kappa, and each populated cell reports exact agreement."
+    },
+    {
+      "id": "B063",
+      "kind": "subheading",
+      "origin": "physician_verbatim",
+      "source_line_start": 149,
+      "source_line_end": 149,
+      "text": "Performance across Clinical Extraction Fields",
+      "level": 2
+    },
+    {
+      "id": "B064",
+      "kind": "paragraph",
+      "origin": "physician_copyedited",
+      "source_line_start": 151,
+      "source_line_end": 151,
+      "text": "We examined physician preferences across the seven prespecified clinical extraction fields. Across all 1,040 evaluations, physicians preferred the harness in 418 comparisons (40.2%), the baseline in 77 (7.4%), and 545 (52.4%) were ties. When ties were excluded, 84.4% favored the harness. The harness was preferred more often than the baseline across all 7 fields, with the largest difference seen in identifying active anticancer medications (132 vs 3). Differences were smaller for distant metastasis and breast cancer type and receptor status, where ties were more common (Figure 4). The adjusted point estimate exceeded 50% for each field; the 95% CI for breast cancer type and receptor status included 50% (62.4%; 95% CI, 38.6% to 81.5%) (Figure 4C)."
+    },
+    {
+      "id": "B065",
+      "kind": "figure_placeholder",
+      "origin": "physician_verbatim",
+      "source_line_start": 153,
+      "source_line_end": 153,
+      "text": "[Insert Figure 4 here]"
+    },
+    {
+      "id": "B066",
+      "kind": "figure_legend",
+      "origin": "physician_verbatim",
+      "source_line_start": 155,
+      "source_line_end": 155,
+      "text": "Figure 4. Physician preference by core oncology field. Panel A reports the raw harness, tie, and baseline counts overall and for seven fields. Panel B shows the complete preference distribution for each field. Panel C shows adjusted probabilities of harness preference with 95% confidence intervals from one joint exploratory GEE fitted to 495 directional judgments. The model included field, physician, and cancer fixed effects, clustered repeated judgments by note with an exchangeable working correlation, and standardized each field over its observed physician and cancer distribution. Breast cancer type and receptor status applied only to breast cancer notes. Ties were excluded from Panel C. The estimates report preference, not accuracy. The analysis did not perform pairwise field tests or make multiplicity adjusted claims."
+    },
+    {
+      "id": "B067",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 157,
+      "source_line_end": 157,
+      "text": "We also analyzed physician preferences for each individual note to determine whether the overall advantage was consistent across cases. After combining physician ratings for each note, the harness was preferred in all 20 breast cancer notes and 19 of 20 pancreatic cancer notes. The overall ratings also favored the harness in each physician-by-cancer group. These findings were consistent with the primary analysis and suggest that the observed advantage was not driven by a small number of clinical notes (Supplementary Figure S1)."
+    },
+    {
+      "id": "B068",
+      "kind": "subheading",
+      "origin": "physician_verbatim",
+      "source_line_start": 159,
+      "source_line_end": 159,
+      "text": "Technical ablation",
+      "level": 2
+    },
+    {
+      "id": "B069",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 161,
+      "source_line_end": 161,
+      "text": "A separate technical ablation comprised 120 adjacent comparisons across the same 40 notes. A single nonphysician LLM judge, blinded to configuration identity, evaluated the comparisons. The four configurations are defined in Table 2. The A to B comparison yielded 17 preferences for each configuration and 6 ties (P = 1.000). The B to C comparison yielded 24 preferences for verified extraction and 2 for decomposed extraction, with 14 ties (P = 1.05 × 10⁻⁵). The C to D comparison yielded 19 preferences for verified extraction and 16 for the full harness, with 5 ties (P = .736). The three unadjusted two sided exact sign tests excluded ties. See Supplementary Figure S2 for the full roadmap."
+    },
+    {
+      "id": "B070",
+      "kind": "section_heading",
+      "origin": "physician_verbatim",
+      "source_line_start": 163,
+      "source_line_end": 163,
+      "text": "DISCUSSION",
+      "level": 1
+    },
+    {
+      "id": "B071",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 165,
+      "source_line_end": 165,
+      "text": "In this study, the inference harness was preferred over a single prompt baseline using the same underlying LLM. This advantage was observed in both breast and pancreatic cancer and remained consistent in sensitivity analyses. These findings suggest that a structured inference harness can improve the clinical quality of extracted information, as reflected in physician preferences, without additional model training. The note level results also indicate that the observed preference was not driven by a small number of clinical notes."
+    },
+    {
+      "id": "B072",
+      "kind": "paragraph",
+      "origin": "physician_copyedited",
+      "source_line_start": 167,
+      "source_line_end": 167,
+      "text": "Structured extraction can convert long, complex, free-text notes into a compact set of fields that can be checked, searched, and reused downstream. In oncology, this is useful as clinical notes can be complex and contain multiple diagnoses, prior and future treatments, and changes in disease status. Huang et al. [5] demonstrated that iterative prompt engineering with ChatGPT using an API could improve extraction of free-text pathology notes. Similarly, Hein et al. [6] showed that iterative refinement guided by physicians and systematic error analysis could improve structured extraction and could be adapted to other cancer types. Our study built on these studies by using physician feedback to identify recurring errors and develop clinical rules during breast cancer note development. Rather than producing a large, supervised training set, we used the feedback to develop prompts for each field, verification steps, and clinical rules. This approach incorporated physician knowledge into the inference harness for reuse in subsequent extraction tasks. Instead of asking physicians to perform iterative evaluation, we used ChatGPT to organize the established criteria from breast cancer development, and used Qwen2.5-32B as a judge. Prior studies have shown high concordance between LLM-as-judge evaluations and human assessments on text-comparison criteria such as faithfulness and completeness [9,10]. The final harness was preferred over the baseline by independent physicians in pancreatic cancer. This finding suggests that criteria established through physician feedback may be transferable to other cancer types and may reduce the need for repeated physician review during development."
+    },
+    {
+      "id": "AN002",
+      "kind": "proposed_replacement",
+      "origin": "editorial_annotation",
+      "anchor_source_line": 167,
+      "text": "(Proposed replacement: \"Prior studies have examined LLM as a judge evaluation in clinical generative AI, with agreement varying by rubric and setting [9,10].\")",
+      "reason": "Avoid a shared high-concordance claim that references 9 and 10 do not support across all rubrics and settings."
+    },
+    {
+      "id": "B074",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 169,
+      "source_line_end": 169,
+      "text": "One recurring challenge we identified was the interpretation of temporal relationships in oncology notes, as reported by prior studies [11,12]. Although the LLM could identify treatment responses documented in the clinical history, it sometimes failed to associate them with the correct disease status. For example, a response to a previous treatment could be incorrectly attributed to the current regimen. This was particularly important for patients who had received multiple lines of therapy, where each treatment response must be associated with treatment history. To reduce this risk, we first revised the prompt to instruct the model to distinguish evidence recorded before and after a regimen change. Beyond the prompt, the response extraction step used the complete note together with structured context on current medications and recent treatment changes. The extracted response then underwent semantic and source support checks. These temporal controls were embedded across the prompt, structured context, and downstream checks, which made their independent contribution difficult to isolate. The physician ratings therefore support the complete workflow but do not determine how much of the observed preference came from the temporal controls alone."
+    },
+    {
+      "id": "B075",
+      "kind": "paragraph",
+      "origin": "physician_copyedited",
+      "source_line_start": 171,
+      "source_line_end": 171,
+      "text": "Our ablation analysis suggested that verification was an important component of the inference harness (Supplementary Figure S2). Adding decomposed extraction alone did not produce an overall improvement while adding layers of verification gates resulted in significantly more favorable evaluations. Additionally, the C versus D comparison did not show significant improvement from adding deterministic post processing rules. This suggests that restrictive rules that performed well in one cancer type may not improve performance in another. More restrictive rules may introduce tradeoffs, especially when the terminology or treatment differs between cancer types. For example, some rules developed for breast cancer were specific to hormone status, which is used to classify breast cancer subtypes but is not applicable to PDAC."
+    },
+    {
+      "id": "AN003",
+      "kind": "proposed_replacement",
+      "origin": "editorial_annotation",
+      "anchor_source_line": 171,
+      "text": "(Proposed replacement: \"The C versus D comparison did not show a significant directional preference (19 versus 16; P = .736). Condition D added deterministic inline processing and the full POST hook layer to Condition C, so this cumulative comparison cannot isolate the effect of any single component. Some breast cancer rules concerned ER, PR, and HER2 status and were not applicable to PDAC.\")",
+      "reason": "Describe the cumulative C versus D comparison without attributing the result to one component or calling HER2 hormone status."
+    },
+    {
+      "id": "B077",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 173,
+      "source_line_end": 173,
+      "text": "This study has several limitations. First, our primary outcome was physician preference rather than absolute extraction accuracy. A tie could indicate that both systems produced acceptable outputs or that both contained errors. Although physician ratings consistently favored the harness, the evaluation included only four physicians and 40 clinical notes from two cancer types within a dataset from a single source. It is worth noting that these notes were real clinical notes rather than synthetic cases or narratives generated by models. They contain repeated information copied from earlier notes, uncertain findings, treatment plans, or even typographical errors that make the extraction task challenging. Nevertheless, further studies are needed to investigate whether the results can be generalized to other cancer types or language models. The observed preference consistently favored the complete harness output as presented in both cancer types and sensitivity analyses. The current design cannot separate the effects of extraction quality, the surrounding workflow, source attribution, and display position. Second, the exploratory ablation was evaluated by a single LLM judge that was not a physician and compared cumulative stages rather than individual components. Therefore, it could not determine the independent contribution of each verification step or clinical rule. Future studies should evaluate extraction accuracy against expert reference standards, include larger and more diverse clinical datasets, and assess the generalizability of the harness across different open-weight models."
+    },
+    {
+      "id": "B078",
+      "kind": "section_heading",
+      "origin": "physician_verbatim",
+      "source_line_start": 175,
+      "source_line_end": 175,
+      "text": "REFERENCES",
+      "level": 1
+    },
+    {
+      "id": "B079",
+      "kind": "reference",
+      "origin": "physician_verbatim",
+      "source_line_start": 177,
+      "source_line_end": 177,
+      "text": "1. Kong HJ. Managing Unstructured Big Data in Healthcare System. Healthcare Informatics Research. 2019;25(1):1-2. https://doi.org/10.4258/hir.2019.25.1.1"
+    },
+    {
+      "id": "B080",
+      "kind": "reference",
+      "origin": "physician_verbatim",
+      "source_line_start": 179,
+      "source_line_end": 179,
+      "text": "2. Wiest IC, Ferber D, Zhu J, et al. Privacy-preserving large language models for structured medical information retrieval. npj Digital Medicine. 2024;7:257. https://doi.org/10.1038/s41746-024-01233-2"
+    },
+    {
+      "id": "B081",
+      "kind": "reference",
+      "origin": "physician_verbatim",
+      "source_line_start": 181,
+      "source_line_end": 181,
+      "text": "3. Rule A, Bedrick S, Chiang MF, Hribar MR. Length and Redundancy of Outpatient Progress Notes Across a Decade at an Academic Medical Center. JAMA Network Open. 2021;4(7):e2115334. https://doi.org/10.1001/jamanetworkopen.2021.15334"
+    },
+    {
+      "id": "B082",
+      "kind": "reference",
+      "origin": "physician_verbatim",
+      "source_line_start": 183,
+      "source_line_end": 183,
+      "text": "4. Sushil M, Kennedy VE, Mandair D, et al. CORAL: Expert-Curated Oncology Reports to Advance Language Model Inference. NEJM AI. 2024;1(4). https://doi.org/10.1056/AIdbp2300110"
+    },
+    {
+      "id": "B083",
+      "kind": "reference",
+      "origin": "physician_verbatim",
+      "source_line_start": 185,
+      "source_line_end": 185,
+      "text": "5. Huang J, Yang DM, Rong R, et al. A critical assessment of using ChatGPT for extracting structured data from clinical notes. npj Digital Medicine. 2024;7:106. https://doi.org/10.1038/s41746-024-01079-8"
+    },
+    {
+      "id": "B084",
+      "kind": "reference",
+      "origin": "physician_verbatim",
+      "source_line_start": 187,
+      "source_line_end": 187,
+      "text": "6. Hein D, Christie A, Holcomb M, et al. Iterative refinement and goal articulation to optimize large language models for clinical information extraction. npj Digital Medicine. 2025;8:301. https://doi.org/10.1038/s41746-025-01686-z"
+    },
+    {
+      "id": "B085",
+      "kind": "reference",
+      "origin": "physician_verbatim",
+      "source_line_start": 189,
+      "source_line_end": 189,
+      "text": "7. Sushil M, Kennedy VE, Mandair D, et al. CORAL: expert-Curated medical Oncology Reports to Advance Language model inference. PhysioNet. Version 1.0. 2024. https://doi.org/10.13026/v69y-xa45"
+    },
+    {
+      "id": "B086",
+      "kind": "reference",
+      "origin": "physician_verbatim",
+      "source_line_start": 191,
+      "source_line_end": 191,
+      "text": "8. Qwen, Yang A, Yang B, et al. Qwen2.5 Technical Report. arXiv:2412.15115. 2025. https://arxiv.org/abs/2412.15115"
+    },
+    {
+      "id": "B087",
+      "kind": "reference",
+      "origin": "physician_verbatim",
+      "source_line_start": 193,
+      "source_line_end": 193,
+      "text": "9. Gershon R, Ben-Shlomo Y, Yitzhaki S, Sberro A, Tausky O, Golan N, Rabinovitch M, Hasidim AAA, Arianu I, Dagan M, Balicer R, Dagan N. Large language models as judges for clinical generative AI evaluation. npj Digital Medicine. Published online September 25, 2026. https://doi.org/10.1038/s41746-026-03248-3"
+    },
+    {
+      "id": "B088",
+      "kind": "reference",
+      "origin": "physician_verbatim",
+      "source_line_start": 195,
+      "source_line_end": 195,
+      "text": "10. Williams G, Rutunda S, Nzabakira F, Mateen BA. Human evaluators vs. LLM-as-a-Judge: toward scalable evaluation of GenAI in global health. npj Digital Medicine. 2026;9(1):878. https://doi.org/10.1038/s41746-026-02992-w"
+    },
+    {
+      "id": "B089",
+      "kind": "reference",
+      "origin": "physician_verbatim",
+      "source_line_start": 197,
+      "source_line_end": 197,
+      "text": "11. Kruse M, Hu S, Derby N, Wu Y, Stonbraker S, Yao B, Wang D, Goldberg EM, Gao Y. Large Language Models with Temporal Reasoning for Longitudinal Clinical Summarization and Prediction. In: Findings of the Association for Computational Linguistics: EMNLP 2025. Association for Computational Linguistics; 2025:20715-20735. https://doi.org/10.18653/v1/2025.findings-emnlp.1128"
+    },
+    {
+      "id": "B090",
+      "kind": "reference",
+      "origin": "physician_verbatim",
+      "source_line_start": 199,
+      "source_line_end": 199,
+      "text": "12. Kougia V, Sedova A, Stephan AJ, Zaporojets K, Roth B. Analysing zero-shot temporal relation extraction on clinical notes using temporal consistency. In: Proceedings of the 23rd Workshop on Biomedical Natural Language Processing. Association for Computational Linguistics; 2024:72-84. https://doi.org/10.18653/v1/2024.bionlp-1.6"
+    },
+    {
+      "id": "B091",
+      "kind": "reference",
+      "origin": "physician_verbatim",
+      "source_line_start": 201,
+      "source_line_end": 201,
+      "text": "13. Gallifant J, Afshar M, Ameen S, et al. The TRIPOD-LLM reporting guideline for studies using large language models. Nature Medicine. 2025;31:60-69. https://doi.org/10.1038/s41591-024-03425-5"
+    },
+    {
+      "id": "B092",
+      "kind": "reference",
+      "origin": "physician_verbatim",
+      "source_line_start": 203,
+      "source_line_end": 203,
+      "text": "14. Tam TYC, Sivarajkumar S, Kapoor S, et al. A framework for human evaluation of large language models in healthcare derived from literature review. npj Digital Medicine. 2024;7:258. https://doi.org/10.1038/s41746-024-01258-7"
+    },
+    {
+      "id": "B093",
+      "kind": "reference",
+      "origin": "physician_verbatim",
+      "source_line_start": 205,
+      "source_line_end": 205,
+      "text": "15. Estevez M, Singh N, Dyson L, et al. Ensuring Reliability of Curated Electronic Health Record-Derived Data: The Validation of Accuracy for Large Language Model-/Machine Learning-Extracted Information and Data (VALID) Framework. JCO Clinical Cancer Informatics. 2026;10:e2500215. https://doi.org/10.1200/CCI-25-00215"
+    },
+    {
+      "id": "AN004",
+      "kind": "reference_recommendation",
+      "origin": "editorial_annotation",
+      "anchor_source_line": 205,
+      "text": "(Reference recommendation: References 13 and 14 are not cited in the current text and could be removed. Reference 15 could be retained if VALID is cited after \"expert reference standards.\")",
+      "reason": "Keep all physician references in this review source while recording the current citation mismatch."
+    },
+    {
+      "id": "B095",
+      "kind": "section_heading",
+      "origin": "physician_verbatim",
+      "source_line_start": 207,
+      "source_line_end": 207,
+      "text": "SUPPLEMENTARY MATERIAL",
+      "level": 1
+    },
+    {
+      "id": "B096",
+      "kind": "subheading",
+      "origin": "physician_verbatim",
+      "source_line_start": 209,
+      "source_line_end": 209,
+      "text": "Supplementary Methods",
+      "level": 2
+    },
+    {
+      "id": "B097",
+      "kind": "subheading",
+      "origin": "physician_verbatim",
+      "source_line_start": 211,
+      "source_line_end": 211,
+      "text": "Data access and holdout definition",
+      "level": 2
+    },
+    {
+      "id": "B098",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 213,
+      "source_line_end": 213,
+      "text": "CORAL access is governed by the PhysioNet credentialing and data use process specified by the dataset authors [7]. The 40 holdout note texts and their existing expert annotations were excluded from development, error analysis, prompt revision, rule development, and regression testing before the final harness was frozen. The annotations were not provided to the models, not used during harness development, and not used to calculate the primary physician preference endpoint. They were not shown in the evaluation interface."
+    },
+    {
+      "id": "B099",
+      "kind": "subheading",
+      "origin": "physician_verbatim",
+      "source_line_start": 215,
+      "source_line_end": 215,
+      "text": "Assessment and Plan identification",
+      "level": 2
+    },
+    {
+      "id": "B100",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 217,
+      "source_line_end": 217,
+      "text": "The harness first used regular expressions to locate the Assessment and Plan section. If no section was found, the model made up to three attempts to reproduce the relevant source text. Each candidate was checked against the original note. If all attempts failed, the harness skipped only the plan branch and continued extraction from the complete note."
+    },
+    {
+      "id": "B101",
+      "kind": "subheading",
+      "origin": "physician_copyedited",
+      "source_line_start": 219,
+      "source_line_end": 219,
+      "text": "Verification and post processing order",
+      "level": 2
+    },
+    {
+      "id": "B102",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 221,
+      "source_line_end": 221,
+      "text": "Each model output for a field passed through the following gates in order."
+    },
+    {
+      "id": "B103",
+      "kind": "ordered_item",
+      "origin": "physician_verbatim",
+      "source_line_start": 223,
+      "source_line_end": 223,
+      "text": "1. Gate 1 repaired JSON formatting only when parsing failed."
+    },
+    {
+      "id": "B104",
+      "kind": "ordered_item",
+      "origin": "physician_verbatim",
+      "source_line_start": 225,
+      "source_line_end": 225,
+      "text": "2. Gate 2 checked the output schema and repaired incorrect or leaked keys."
+    },
+    {
+      "id": "B105",
+      "kind": "ordered_item",
+      "origin": "physician_verbatim",
+      "source_line_start": 227,
+      "source_line_end": 227,
+      "text": "3. Gate 3 checked specificity and semantic alignment for vague answers or answers that did not address the task."
+    },
+    {
+      "id": "B106",
+      "kind": "ordered_item",
+      "origin": "physician_verbatim",
+      "source_line_start": 229,
+      "source_line_end": 229,
+      "text": "4. Gate 4 trimmed clearly unsupported or contradictory content while retaining supported information."
+    },
+    {
+      "id": "B107",
+      "kind": "ordered_item",
+      "origin": "physician_verbatim",
+      "source_line_start": 231,
+      "source_line_end": 231,
+      "text": "5. Gate 5 removed completed or historical events from fields for future plans."
+    },
+    {
+      "id": "B108",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 233,
+      "source_line_end": 233,
+      "text": "After the gates, deterministic filters for each field and clinical hooks across fields addressed repeated errors. Source attribution followed processing after extraction when enabled."
+    },
+    {
+      "id": "B109",
+      "kind": "subheading",
+      "origin": "physician_verbatim",
+      "source_line_start": 235,
+      "source_line_end": 235,
+      "text": "Insufficient source information",
+      "level": 2
+    },
+    {
+      "id": "B110",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 237,
+      "source_line_end": 237,
+      "text": "A hypothetical note may contain imaging findings or other clinical details associated with advanced disease but still lack enough confirmed information supported by the source to assign a formal cancer stage under the extraction rules. In that case, the system returns not stated or leaves the stage field empty. This example does not describe a CORAL patient."
+    },
+    {
+      "id": "B111",
+      "kind": "subheading",
+      "origin": "physician_verbatim",
+      "source_line_start": 239,
+      "source_line_end": 239,
+      "text": "Model roles during PDAC adaptation",
+      "level": 2
+    },
+    {
+      "id": "B112",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 241,
+      "source_line_end": 241,
+      "text": "ChatGPT organized the error categories and clinical distinctions from breast cancer development into a structured review rubric. A local Qwen reviewer used that rubric to compare pipeline outputs with complete pancreatic source notes and flag potential errors. Investigators decided which changes to implement and retained them only after regression testing. Neither ChatGPT nor the Qwen reviewer served as the ablation judge."
+    },
+    {
+      "id": "B113",
+      "kind": "subheading",
+      "origin": "physician_verbatim",
+      "source_line_start": 243,
+      "source_line_end": 243,
+      "text": "Physician evaluation interface",
+      "level": 2
+    },
+    {
+      "id": "B114",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 245,
+      "source_line_end": 245,
+      "text": "Physicians were blinded to system identities. Source attribution was available only with the harness output when present. Physicians reviewed the complete output packages."
+    },
+    {
+      "id": "B115",
+      "kind": "subheading",
+      "origin": "physician_verbatim",
+      "source_line_start": 247,
+      "source_line_end": 247,
+      "text": "Ablation study judge",
+      "level": 2
+    },
+    {
+      "id": "B116",
+      "kind": "paragraph",
+      "origin": "physician_verbatim",
+      "source_line_start": 249,
+      "source_line_end": 249,
+      "text": "The ablation judge was Codex using model gpt-5.6-sol, reasoning effort xhigh, and service tier default. It reviewed adjacent configuration pairs and received only the source note and two outputs. ChatGPT was used only for the PDAC review rubric role described above."
+    },
+    {
+      "id": "B117",
+      "kind": "table",
+      "origin": "physician_verbatim",
+      "source_line_start": 251,
+      "source_line_end": 259,
+      "text": "Supplementary Table S1. Prespecified core fields used in the exploratory field analysis\nCore field\tApplicability\tRating field\tEvaluation definition\nActive anticancer medications\tBreast cancer and PDAC\tCurrent_Medications.current_meds\tAnticancer drugs currently being taken or administered. Supportive or home medications, completed or stopped drugs, and drugs that are only planned are excluded.\nStage\tBreast cancer and PDAC\tCancer_Diagnosis.Stage_of_Cancer\tCancer stage, TNM, or resectability status, retaining original and current time context when both are documented.\nDistant metastasis\tBreast cancer and PDAC\tCancer_Diagnosis.Distant Metastasis\tPresence, absence, sites, and certainty of distant spread; regional nodes are not counted as distant metastasis.\nRegional or overall metastasis\tBreast cancer and PDAC\tCancer_Diagnosis.Metastasis\tRegional nodal and distant involvement, with the site and certainty of each supported finding.\nTreatment response\tBreast cancer and PDAC\tResponse_Assessment.response_assessment\tResponse to the current or most recently completed anticancer treatment, linked to the applicable regimen and supporting evidence.\nBreast cancer type and receptors\tBreast cancer only\tCancer_Diagnosis.Type_of_Cancer\tBreast histology and the individual ER, PR, and HER2 results when documented.\nCompleted molecular or genetic results\tBreast cancer and PDAC\tGenetic_Testing_Results.genetic_testing_results\tCompleted germline, somatic, or other molecular results; pending or merely ordered tests are excluded.",
+      "caption": "Supplementary Table S1. Prespecified core fields used in the exploratory field analysis",
+      "rows": [
+        [
+          "Core field",
+          "Applicability",
+          "Rating field",
+          "Evaluation definition"
+        ],
+        [
+          "Active anticancer medications",
+          "Breast cancer and PDAC",
+          "Current_Medications.current_meds",
+          "Anticancer drugs currently being taken or administered. Supportive or home medications, completed or stopped drugs, and drugs that are only planned are excluded."
+        ],
+        [
+          "Stage",
+          "Breast cancer and PDAC",
+          "Cancer_Diagnosis.Stage_of_Cancer",
+          "Cancer stage, TNM, or resectability status, retaining original and current time context when both are documented."
+        ],
+        [
+          "Distant metastasis",
+          "Breast cancer and PDAC",
+          "Cancer_Diagnosis.Distant Metastasis",
+          "Presence, absence, sites, and certainty of distant spread; regional nodes are not counted as distant metastasis."
+        ],
+        [
+          "Regional or overall metastasis",
+          "Breast cancer and PDAC",
+          "Cancer_Diagnosis.Metastasis",
+          "Regional nodal and distant involvement, with the site and certainty of each supported finding."
+        ],
+        [
+          "Treatment response",
+          "Breast cancer and PDAC",
+          "Response_Assessment.response_assessment",
+          "Response to the current or most recently completed anticancer treatment, linked to the applicable regimen and supporting evidence."
+        ],
+        [
+          "Breast cancer type and receptors",
+          "Breast cancer only",
+          "Cancer_Diagnosis.Type_of_Cancer",
+          "Breast histology and the individual ER, PR, and HER2 results when documented."
+        ],
+        [
+          "Completed molecular or genetic results",
+          "Breast cancer and PDAC",
+          "Genetic_Testing_Results.genetic_testing_results",
+          "Completed germline, somatic, or other molecular results; pending or merely ordered tests are excluded."
+        ]
+      ]
+    },
+    {
+      "id": "B118",
+      "kind": "table",
+      "origin": "physician_verbatim",
+      "source_line_start": 261,
+      "source_line_end": 274,
+      "text": "Supplementary Table S2. Pairwise exact agreement and Cohen's kappa\nCancer\tPhysician pair\tShared judgments\tExact agreement\tCohen's kappa\nBreast cancer\tPhysician 1 vs Physician 2\t280\t82.9%\t0.646\nBreast cancer\tPhysician 1 vs Physician 3\t280\t80.0%\t0.644\nBreast cancer\tPhysician 1 vs Physician 4\t280\t81.4%\t0.644\nBreast cancer\tPhysician 2 vs Physician 3\t280\t73.6%\t0.511\nBreast cancer\tPhysician 2 vs Physician 4\t280\t77.1%\t0.533\nBreast cancer\tPhysician 3 vs Physician 4\t280\t73.2%\t0.527\nPDAC\tPhysician 1 vs Physician 2\t260\t80.0%\t0.588\nPDAC\tPhysician 1 vs Physician 3\t260\t73.8%\t0.532\nPDAC\tPhysician 1 vs Physician 4\t260\t75.8%\t0.545\nPDAC\tPhysician 2 vs Physician 3\t260\t73.8%\t0.529\nPDAC\tPhysician 2 vs Physician 4\t260\t74.2%\t0.520\nPDAC\tPhysician 3 vs Physician 4\t260\t73.1%\t0.545",
+      "caption": "Supplementary Table S2. Pairwise exact agreement and Cohen's kappa",
+      "rows": [
+        [
+          "Cancer",
+          "Physician pair",
+          "Shared judgments",
+          "Exact agreement",
+          "Cohen's kappa"
+        ],
+        [
+          "Breast cancer",
+          "Physician 1 vs Physician 2",
+          "280",
+          "82.9%",
+          "0.646"
+        ],
+        [
+          "Breast cancer",
+          "Physician 1 vs Physician 3",
+          "280",
+          "80.0%",
+          "0.644"
+        ],
+        [
+          "Breast cancer",
+          "Physician 1 vs Physician 4",
+          "280",
+          "81.4%",
+          "0.644"
+        ],
+        [
+          "Breast cancer",
+          "Physician 2 vs Physician 3",
+          "280",
+          "73.6%",
+          "0.511"
+        ],
+        [
+          "Breast cancer",
+          "Physician 2 vs Physician 4",
+          "280",
+          "77.1%",
+          "0.533"
+        ],
+        [
+          "Breast cancer",
+          "Physician 3 vs Physician 4",
+          "280",
+          "73.2%",
+          "0.527"
+        ],
+        [
+          "PDAC",
+          "Physician 1 vs Physician 2",
+          "260",
+          "80.0%",
+          "0.588"
+        ],
+        [
+          "PDAC",
+          "Physician 1 vs Physician 3",
+          "260",
+          "73.8%",
+          "0.532"
+        ],
+        [
+          "PDAC",
+          "Physician 1 vs Physician 4",
+          "260",
+          "75.8%",
+          "0.545"
+        ],
+        [
+          "PDAC",
+          "Physician 2 vs Physician 3",
+          "260",
+          "73.8%",
+          "0.529"
+        ],
+        [
+          "PDAC",
+          "Physician 2 vs Physician 4",
+          "260",
+          "74.2%",
+          "0.520"
+        ],
+        [
+          "PDAC",
+          "Physician 3 vs Physician 4",
+          "260",
+          "73.1%",
+          "0.545"
+        ]
+      ]
+    },
+    {
+      "id": "B119",
+      "kind": "figure_placeholder",
+      "origin": "physician_verbatim",
+      "source_line_start": 276,
+      "source_line_end": 276,
+      "text": "[Insert Supplementary Figure S1 here]"
+    },
+    {
+      "id": "B120",
+      "kind": "figure_legend",
+      "origin": "physician_verbatim",
+      "source_line_start": 278,
+      "source_line_end": 278,
+      "text": "Supplementary Figure S1. Note level preference margins after pooling all four physicians within each cancer type. The margin is the difference between harness and baseline preferences divided by completed judgments for that note. All 20 breast cancer notes and 19 of 20 PDAC notes had positive margins. One PDAC note had a negative margin. This is a preference sensitivity analysis, not an accuracy estimate."
+    },
+    {
+      "id": "B121",
+      "kind": "figure_placeholder",
+      "origin": "physician_verbatim",
+      "source_line_start": 280,
+      "source_line_end": 280,
+      "text": "[Insert Supplementary Figure S2 here]"
+    },
+    {
+      "id": "B122",
+      "kind": "figure_legend",
+      "origin": "physician_copyedited",
+      "source_line_start": 282,
+      "source_line_end": 282,
+      "text": "Supplementary Figure S2. Panel A shows four cumulative configurations. A was the single prompt baseline with one inference request per note. B added field decomposition. C added semantic refinement, faithfulness review, and temporal verification. D added deterministic inline processing and the complete POST hook layer. Panel B reports three adjacent comparisons across 120 judgments. One blinded nonphysician OpenAI LLM judge evaluated all comparisons. Ties were excluded from two sided exact sign tests. The three unadjusted P values were 1.000, 1.05 × 10⁻⁵, and .736."
+    },
+    {
+      "id": "B123",
+      "kind": "table",
+      "origin": "physician_verbatim",
+      "source_line_start": 284,
+      "source_line_end": 289,
+      "text": "Supplementary Table S3. Sensitivity analysis of the overall directional GEE after excluding each physician\nExcluded physician\tDirectional judgments\tNotes\tAdjusted probability (95% CI)\tAdjusted odds ratio (95% CI)\tP value\nPhysician 01\t675\t40\t79.72% (75.62%-83.28%)\t3.930 (3.101-4.981)\t1.06e-29\nPhysician 02\t688\t40\t77.08% (72.19%-81.33%)\t3.363 (2.596-4.357)\t4.12e-20\nPhysician 03\t594\t40\t80.01% (75.72%-83.70%)\t4.002 (3.119-5.136)\t1.2e-27\nPhysician 04\t653\t40\t83.53% (79.37%-87.00%)\t5.073 (3.847-6.690)\t1.22e-30",
+      "caption": "Supplementary Table S3. Sensitivity analysis of the overall directional GEE after excluding each physician",
+      "rows": [
+        [
+          "Excluded physician",
+          "Directional judgments",
+          "Notes",
+          "Adjusted probability (95% CI)",
+          "Adjusted odds ratio (95% CI)",
+          "P value"
+        ],
+        [
+          "Physician 01",
+          "675",
+          "40",
+          "79.72% (75.62%-83.28%)",
+          "3.930 (3.101-4.981)",
+          "1.06e-29"
+        ],
+        [
+          "Physician 02",
+          "688",
+          "40",
+          "77.08% (72.19%-81.33%)",
+          "3.363 (2.596-4.357)",
+          "4.12e-20"
+        ],
+        [
+          "Physician 03",
+          "594",
+          "40",
+          "80.01% (75.72%-83.70%)",
+          "4.002 (3.119-5.136)",
+          "1.2e-27"
+        ],
+        [
+          "Physician 04",
+          "653",
+          "40",
+          "83.53% (79.37%-87.00%)",
+          "5.073 (3.847-6.690)",
+          "1.22e-30"
+        ]
+      ]
+    }
+  ]
+}
