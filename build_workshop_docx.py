@@ -25,6 +25,7 @@ from docx.shared import Inches, Pt, RGBColor
 
 ROOT = Path(__file__).resolve().parent
 SOURCE = ROOT / "manuscript/physician_text/2026-11-21/WORKSHOP_PAPER_WORD_SOURCE.json"
+EDITABLE_SOURCE = ROOT / "WORKSHOP_PAPER_EDITABLE.txt"
 OUTPUT = ROOT / "WORKSHOP_PAPER_PHYSICIAN_REVIEW.docx"
 SKILL_ROOT = Path(
     "/Users/yizhoucc/.codex/plugins/cache/openai-primary-runtime/"
@@ -65,6 +66,22 @@ NOTE_GRAY = RGBColor(89, 99, 110)
 HEADER_FILL = "DCE6F1"
 ALT_FILL = "F7FAFC"
 BORDER = "D9D9D9"
+
+
+def _load_abstract() -> str:
+    lines = EDITABLE_SOURCE.read_text(encoding="utf-8-sig").splitlines()
+    try:
+        start = lines.index("ABSTRACT") + 1
+        end = lines.index("INTRODUCTION", start)
+    except ValueError as error:
+        raise ValueError("Editable source must contain ABSTRACT before INTRODUCTION") from error
+    paragraphs = [line.strip() for line in lines[start:end] if line.strip()]
+    if len(paragraphs) != 1 or paragraphs[0] == "[TODO]":
+        raise ValueError("Editable source must contain one completed Abstract paragraph")
+    abstract = paragraphs[0]
+    if "\u2013" in abstract or "\u2014" in abstract:
+        raise ValueError("Abstract must not contain an en dash or em dash")
+    return abstract
 
 
 def _set_run_font(run, size: float | None = None, *, bold: bool | None = None,
@@ -435,6 +452,7 @@ def _add_text_paragraph(doc: Document, text: str, kind: str) -> None:
 
 def build(output: Path) -> None:
     data = json.loads(SOURCE.read_text(encoding="utf-8"))
+    abstract = _load_abstract()
     doc = Document()
     _configure_styles(doc)
     _configure_sections(doc)
@@ -458,6 +476,12 @@ def build(output: Path) -> None:
             run = p.add_run(text)
             _set_run_font(run, 11, bold=True)
         elif kind == "placeholder":
+            if block["id"] == "B006":
+                p = doc.add_paragraph(style="Normal")
+                _set_paragraph_spacing(p, after=10)
+                run = p.add_run(abstract)
+                _set_run_font(run, 11)
+                continue
             p = doc.add_paragraph(style="Title" if block["id"] == "B002" else "Normal")
             p.alignment = WD_ALIGN_PARAGRAPH.CENTER
             p.paragraph_format.space_after = Pt(10)

@@ -19,6 +19,7 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "manuscript/physician_text/2026-11-21/WORKSHOP_PAPER_WORD_SOURCE.json"
+EDITABLE_SOURCE = ROOT / "WORKSHOP_PAPER_EDITABLE.txt"
 DOCX = ROOT / "WORKSHOP_PAPER_PHYSICIAN_REVIEW.docx"
 FIGURE_DIR = ROOT / "results/extraction_comparison/clinician_ratings/draft_figures"
 FIGURE_FILES = [
@@ -38,6 +39,22 @@ ALT_DESCRIPTIONS = {
     "Supplementary Figure S2 cumulative ablation configurations and adjacent comparisons.",
 }
 SOURCE_SHA256 = "bcb114f6a0a510783177a836bc796c58ad48cc82b9113f5c25d278586389f090"
+EXPECTED_ABSTRACT = (
+    "Many clinical uses of large language models (LLMs) depend on reliable extraction from unstructured oncology notes, yet model outputs may omit facts, confuse temporal relationships, or include unsupported information. "
+    "We compared physician preferences for outputs from an inference harness and a single prompt baseline using the same frozen, locally deployed LLM. "
+    "Using Qwen2.5-32B-Instruct, we developed the breast cancer harness with physician review and adapted it to pancreatic ductal adenocarcinoma (PDAC) through LLM review and regression testing, without physician review of PDAC development outputs. "
+    "The harness used separate extraction for each field, verification, clinical rules, deterministic processing, and source attribution when available. "
+    "Four physicians compared the systems without disclosure of system identity on an untouched holdout set of 40 CORAL notes, 20 per cancer type. "
+    "The primary outcome was the probability of harness preference among directional judgments, estimated with a population-averaged logistic generalized estimating equation that excluded ties, adjusted for physician and cancer type, and clustered repeated judgments by note. "
+    "Across 2,160 judgments, the harness was preferred 699 times, the baseline 171 times, and 1,290 comparisons were ties. "
+    "Among 870 directional judgments, the adjusted probability of harness preference was 79.98% (95% CI, 75.75%-83.63%; adjusted odds ratio, 3.995; P = 2.67 × 10⁻²⁸). "
+    "The estimates were 81.66% for breast cancer (95% CI, 76.02%-86.21%) and 78.15% for PDAC (95% CI, 71.47%-83.62%). "
+    "In an exploratory staged ablation evaluated by one blinded nonphysician LLM, verified extraction was preferred over decomposed extraction in 24 comparisons versus 2, with 14 ties (P = 1.05 × 10⁻⁵). "
+    "Neither of the other adjacent comparisons showed a significant directional preference. "
+    "In this pilot evaluation, physicians preferred the complete harness output package across both cancer types. "
+    "Further studies should evaluate extraction accuracy against expert reference standards and include larger datasets, more physicians, other cancer types, and other open-weight models."
+)
+EXPECTED_ABSTRACT_WORD_COUNT = 298
 
 
 def reference_link_label(url: str) -> str:
@@ -82,6 +99,19 @@ def main() -> None:
         fail(f"Unexpected source counts: {source.get('counts')}")
     if not source.get("humanizer_review", {}).get("draft_audit_final_completed"):
         fail("Proposed replacement humanizer review is incomplete")
+    editable_lines = EDITABLE_SOURCE.read_text(encoding="utf-8-sig").splitlines()
+    try:
+        abstract_start = editable_lines.index("ABSTRACT") + 1
+        abstract_end = editable_lines.index("INTRODUCTION", abstract_start)
+    except ValueError as error:
+        fail(f"Editable source Abstract boundaries are invalid: {error}")
+    editable_abstracts = [line.strip() for line in editable_lines[abstract_start:abstract_end] if line.strip()]
+    if editable_abstracts != [EXPECTED_ABSTRACT]:
+        fail("Editable source Abstract does not exactly match the approved text")
+    if len(EXPECTED_ABSTRACT.split()) != EXPECTED_ABSTRACT_WORD_COUNT:
+        fail("Approved Abstract word count constant is stale")
+    if "\u2013" in EXPECTED_ABSTRACT or "\u2014" in EXPECTED_ABSTRACT:
+        fail("Approved Abstract contains an en dash or em dash")
     document = Document(DOCX)
     if len(document.tables) != 8:
         fail(f"Expected 8 tables, found {len(document.tables)}")
@@ -103,8 +133,19 @@ def main() -> None:
     if len(ordered_items) != 5 or any(p.style.name != "Normal" for p in ordered_items):
         fail("Supplement gate list must preserve five source numbers without automatic numbering")
 
-    if all_text.count("[TODO]") != 3:
-        fail(f"Expected 3 TODO placeholders, found {all_text.count('[TODO]')}")
+    if all_text.count("[TODO]") != 2:
+        fail(f"Expected 2 remaining TODO placeholders, found {all_text.count('[TODO]')}")
+    if paragraph_texts.count("ABSTRACT") != 1:
+        fail(f"Expected one ABSTRACT heading, found {paragraph_texts.count('ABSTRACT')}")
+    if paragraph_texts.count(EXPECTED_ABSTRACT) != 1:
+        fail("Approved Abstract is missing or duplicated in the DOCX")
+    abstract_heading_index = paragraph_texts.index("ABSTRACT")
+    if abstract_heading_index + 1 >= len(paragraph_texts) or paragraph_texts[abstract_heading_index + 1] != EXPECTED_ABSTRACT:
+        fail("Approved Abstract must immediately follow the ABSTRACT heading")
+    if len(paragraph_texts[abstract_heading_index + 1].split()) != EXPECTED_ABSTRACT_WORD_COUNT:
+        fail("DOCX Abstract word count mismatch")
+    if "\u2013" in paragraph_texts[abstract_heading_index + 1] or "\u2014" in paragraph_texts[abstract_heading_index + 1]:
+        fail("DOCX Abstract contains an en dash or em dash")
     if "Verification and post processing order" not in all_text:
         fail("Open compound 'post processing' heading missing")
     for forbidden in ("post-processing", "post-proccessing", "deterministric", "sinlge", "have showed"):
@@ -139,6 +180,8 @@ def main() -> None:
     for block in source["blocks"]:
         kind = block["kind"]
         text = block.get("text", "")
+        if block["id"] == "B006":
+            continue
         if kind in {"figure_placeholder", "table"}:
             continue
         if kind == "subheading" and text == "Verification and postprocessing order":
@@ -245,7 +288,8 @@ def main() -> None:
     print(
         "DOCX_VALIDATION_OK "
         f"bytes={size} paragraphs={len(document.paragraphs)} tables={len(document.tables)} "
-        f"figures={len(document.inline_shapes)} notes={len(editorial_notes)} refs=15"
+        f"figures={len(document.inline_shapes)} notes={len(editorial_notes)} refs=15 "
+        f"abstract_words={EXPECTED_ABSTRACT_WORD_COUNT}"
     )
 
 
